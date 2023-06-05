@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Appointify',
+      title: 'Appointify jello',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
