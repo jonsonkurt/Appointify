@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import '../home_page.dart';
-import '../org_chart_page.dart';
-import '../professor_page.dart';
-import '../profile_page.dart';
+import '../student/home_page.dart';
+import '../student/org_chart_page.dart';
+import '../student/professor_page.dart';
+import '../student/profile_page.dart';
 
 class BottomNavigationAdmin extends StatefulWidget {
   const BottomNavigationAdmin({super.key});

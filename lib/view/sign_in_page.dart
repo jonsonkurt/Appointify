@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:appointify/view/screen.dart';
 // import 'admin_page.dart';
-import 'bottom_navigation_bar.dart';
+import 'student/bottom_navigation_bar.dart';
 import 'sign_up_page.dart';
 import 'admin/admin_page.dart';
 import 'admin/admin_cred.dart';
@@ -75,13 +75,12 @@ class _SignInPageState extends State<SignInPage> {
 
                 if (email == getCred && password == getCred) {
                   // ignore: use_build_context_synchronously
-                  print("I/'m an admin");
+                  // print("I/'m an admin");
                   Navigator.push<void>(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const BottomNavigationAdmin()));
                 } else {
-                  
                   try {
                     // ignore: unused_local_variable
                     final credential = await FirebaseAuth.instance

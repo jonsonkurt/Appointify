@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    DatabaseReference appointmentsRef = rtdb.ref('studentAppointments/');
+    DatabaseReference appointmentsRef = rtdb.ref('appointments/');
 
     return Scaffold(
       body: Center(
