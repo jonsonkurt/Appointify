@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // import 'admin_page.dart';
 import 'bottom_navigation_bar.dart';
 import 'sign_up_page.dart';
+import 'admin/admin_page.dart';
+import 'admin/admin_cred.dart';
 // import 'forgot_password_page.dart';
 
 class SignInPage extends StatefulWidget {
@@ -69,22 +71,34 @@ class _SignInPageState extends State<SignInPage> {
                 String email = _emailController.text;
                 String password = _passwordController.text;
 
-                try {
-                  // ignore: unused_local_variable
-                  final credential = await FirebaseAuth.instance
-                      .signInWithEmailAndPassword(
-                          email: email, password: password);
+                String getCred = decodingCred();
 
+                if (email == getCred && password == getCred) {
                   // ignore: use_build_context_synchronously
+                  print("I/'m an admin");
                   Navigator.push<void>(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const BottomNavigation()));
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == 'user-not-found') {
-                    // print('No user found for that email.');
-                  } else if (e.code == 'wrong-password') {
-                    // print('Wrong password provided for that user.');
+                          builder: (context) => const BottomNavigationAdmin()));
+                } else {
+                  
+                  try {
+                    // ignore: unused_local_variable
+                    final credential = await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                            email: email, password: password);
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.push<void>(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BottomNavigation()));
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'user-not-found') {
+                      // print('No user found for that email.');
+                    } else if (e.code == 'wrong-password') {
+                      // print('Wrong password provided for that user.');
+                    }
                   }
                 }
               },

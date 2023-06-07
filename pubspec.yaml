@@ -41,6 +41,7 @@ dependencies:
   firebase_database: ^10.2.2
   salomon_bottom_bar: ^3.3.2
   logger: ^1.4.0
+  encrypt: ^5.0.1
 
 dev_dependencies:
   flutter_test:
