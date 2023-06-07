@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import '../student/home_page.dart';
-import '../student/org_chart_page.dart';
-import '../student/professor_page.dart';
-import '../student/profile_page.dart';
+import 'admin_home_page.dart';
+import 'admin_org_chart_page.dart';
+
 
 class BottomNavigationAdmin extends StatefulWidget {
   const BottomNavigationAdmin({super.key});
 
   @override
-  State<BottomNavigationAdmin> createState() => _BottomNavigationState();
+  State<BottomNavigationAdmin> createState() => _BottomNavigationStateAdmin();
 }
 
-class _BottomNavigationState extends State<BottomNavigationAdmin> {
+class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
   var currentIndex = 0;
   var pages = const [
-    HomePage(),
-    ProfessorPage(),
+    HomePageAdmin(),
     OrgChartPage(),
-    ProfilePage(),
   ];
 
   @override
@@ -35,19 +32,9 @@ class _BottomNavigationState extends State<BottomNavigationAdmin> {
               selectedColor: Colors.pink,
             ),
             SalomonBottomBarItem(
-              icon: const Icon(Icons.list),
-              title: const Text("Professor"),
-              selectedColor: Colors.purple,
-            ),
-            SalomonBottomBarItem(
               icon: const Icon(Icons.people),
               title: const Text("Org Chart"),
               selectedColor: Colors.blue,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.person),
-              title: const Text("Profile"),
-              selectedColor: Colors.teal,
             ),
           ],
           onTap: (index) {
