@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
@@ -18,21 +19,17 @@ class _HomePageState extends State<HomePage> {
   String? userID = FirebaseAuth.instance.currentUser?.uid;
   bool isLoading = true;
   String name = '';
-  String appointments = '';
-  List<String> appointmentList = [];
-  StreamSubscription<DatabaseEvent>? nameSubscription, appointmentsSubscription;
+  StreamSubscription<DatabaseEvent>? nameSubscription;
 
   @override
   void initState() {
     super.initState();
     initializeFirebase();
-    _listenToDataUpdates();
   }
 
   @override
   void dispose() {
     nameSubscription?.cancel();
-    appointmentsSubscription?.cancel();
     super.dispose();
   }
 
@@ -40,7 +37,8 @@ class _HomePageState extends State<HomePage> {
     await Firebase.initializeApp();
   }
 
-  Future<void> _listenToDataUpdates() async {
+  @override
+  Widget build(BuildContext context) {
     final firebaseApp = Firebase.app();
     final rtdb = FirebaseDatabase.instanceFor(
       app: firebaseApp,
@@ -63,48 +61,40 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    DatabaseReference appointmentsRef =
-        rtdb.ref().child('studentAppointments/$userID/');
-    appointmentsSubscription = appointmentsRef.onValue.listen((event) {
-      try {
-        if (mounted) {
-          setState(() {
-            appointments = event.snapshot.value.toString();
-            appointmentList.add(appointments);
-            isLoading = false;
-          });
-        }
-      } catch (error, stackTrace) {
-        logger.d('Error occurred: $error');
-        logger.d('Stack trace: $stackTrace');
-      }
-    });
-  }
+    DatabaseReference appointmentsRef = rtdb.ref('studentAppointments/');
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            isLoading ? const CircularProgressIndicator() : Text("Hi, $name!"),
-            isLoading ? const CircularProgressIndicator() : Text(appointments),
-            if (isLoading)
-              const CircularProgressIndicator()
-            else if (appointmentList.isNotEmpty)
-              Expanded(
-                child: ListView.builder(
-                  itemCount: appointmentList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      title: Text(appointmentList[index]),
-                    );
-                  },
-                ),
-              )
-            else
-              const Text('No appointments found.'),
+            Text("Hi, $name!"),
+            Expanded(
+              child: FirebaseAnimatedList(
+                query: appointmentsRef
+                    .orderByChild('studentUserID')
+                    .equalTo(userID),
+                itemBuilder: (context, snapshot, animation, index) {
+                  return Card(
+                      child: Column(
+                    children: [
+                      Text(
+                        snapshot.child('professorName').value.toString(),
+                      ),
+                      Text(
+                        snapshot.child('professorRole').value.toString(),
+                      ),
+                      Text(
+                        snapshot.child('date').value.toString(),
+                      ),
+                      Text(
+                        snapshot.child('time').value.toString(),
+                      ),
+                    ],
+                  ));
+                },
+              ),
+            ),
           ],
         ),
       ),
