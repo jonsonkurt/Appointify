@@ -19,6 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _conpasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final bool _isObscure = true;
 
   @override
   void dispose() {
@@ -97,6 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     const SizedBox(height: 16.0),
                     TextFormField(
                       controller: _passwordController,
+                      obscureText: _isObscure,
                       decoration: const InputDecoration(
                         labelText: 'Password',
                       ),
@@ -110,6 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     const SizedBox(height: 16.0),
                     TextFormField(
                       controller: _conpasswordController,
+                      obscureText: _isObscure,
                       decoration: const InputDecoration(
                         labelText: 'Confirm Password',
                       ),

@@ -18,11 +18,13 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final bool _isObscure = true;
 
-   @override
+  @override
   void initState() {
     super.initState();
     _emailController.addListener(() {});
+    _passwordController.addListener(() {});
   }
 
   @override
@@ -52,6 +54,7 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 16.0),
             TextField(
               controller: _passwordController,
+              obscureText: _isObscure,
               decoration: const InputDecoration(
                 labelText: 'Password',
               ),
@@ -59,7 +62,8 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 16.0),
             GestureDetector(
               onTap: () {
-                // Handle sign up navigation here
+                _emailController.clear();
+                _passwordController.clear();
               },
               child: const Text(
                 "Forgot Password",
@@ -73,6 +77,8 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () async {
+                _emailController.clear();
+                _passwordController.clear();
                 // Perform sign in logic here
                 String email = _emailController.text;
                 String password = _passwordController.text;
@@ -112,6 +118,8 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 16.0),
             GestureDetector(
               onTap: () {
+                _emailController.clear();
+                _passwordController.clear();
                 Navigator.push(
                   context,
                   PageRouteBuilder(
