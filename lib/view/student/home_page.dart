@@ -5,6 +5,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
+import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -62,37 +63,353 @@ class _HomePageState extends State<HomePage> {
     });
 
     DatabaseReference appointmentsRef = rtdb.ref('appointments/');
+    appointmentsRef.orderByChild('studentUserID').equalTo(userID);
 
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text("Hi, $name!"),
-            Expanded(
-              child: FirebaseAnimatedList(
-                query: appointmentsRef
-                    .orderByChild('studentUserID')
-                    .equalTo(userID),
-                itemBuilder: (context, snapshot, animation, index) {
-                  return Card(
-                      child: Column(
-                    children: [
-                      Text(
-                        snapshot.child('professorName').value.toString(),
-                      ),
-                      Text(
-                        snapshot.child('professorRole').value.toString(),
-                      ),
-                      Text(
-                        snapshot.child('date').value.toString(),
-                      ),
-                      Text(
-                        snapshot.child('time').value.toString(),
-                      ),
-                    ],
-                  ));
-                },
+            const SizedBox(height: 5),
+            const SizedBox(
+              width: 350,
+            ),
+            Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Hi, $name!",
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )),
+            const Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Ready to Set an Appointment?",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )),
+            const SizedBox(height: 10),
+            Container(width: 350, height: 1, color: Colors.black),
+            const SizedBox(height: 10),
+            const Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Status of Request",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )),
+            const SizedBox(height: 10),
+            Flexible(
+              child: SizedBox(
+                width: 350,
+                child: FirebaseAnimatedList(
+                  query:
+                      appointmentsRef.orderByChild('status').equalTo("PENDING"),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, snapshot, animation, index) {
+                    return GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => Theme(
+                              data: Theme.of(context).copyWith(
+                                  dialogBackgroundColor:
+                                      const Color(0xFF767676)),
+                              child: AlertDialog(
+                                content: SizedBox(
+                                  height: 380,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Professor Name:',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          snapshot
+                                              .child('professorName')
+                                              .value
+                                              .toString(),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.white),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        const Text(
+                                          'Designation:',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          snapshot
+                                              .child('professorRole')
+                                              .value
+                                              .toString(),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.white),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        const Text(
+                                          'Requested Appointment:',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          "${snapshot.child('date').value}, ${snapshot.child('time').value}",
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.white),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        if (snapshot.child('notes').value != "")
+                                          const Text(
+                                            'Notes:',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        Text(
+                                          snapshot
+                                              .child('notes')
+                                              .value
+                                              .toString(),
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        if (snapshot.child('countered').value ==
+                                            "yes")
+                                          const Text(
+                                            'Counter Proposal:',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        if (snapshot.child('countered').value ==
+                                            "yes")
+                                          Text(
+                                            "${snapshot.child('counteredDate').value}, ${snapshot.child('counteredTime').value}",
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        const SizedBox(height: 10),
+                                        if (snapshot.child('countered').value ==
+                                            "yes")
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              // Handle button press
+                                              // Add your desired functionality here
+                                            },
+                                            child: const Text('Accept'),
+                                          )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        // Status of request list
+                        child: SizedBox(
+                            width: 150,
+                            child: Card(
+                                child: Column(
+                              children: [
+                                Text(
+                                  snapshot
+                                      .child('professorName')
+                                      .value
+                                      .toString(),
+                                ),
+                                Text(
+                                  snapshot
+                                      .child('professorRole')
+                                      .value
+                                      .toString(),
+                                ),
+                                if (snapshot.child('countered').value == "yes")
+                                  const Icon(
+                                    Icons
+                                        .info_outline, // Replace with the desired icon
+                                    color: Colors
+                                        .red, // Replace with the desired color
+                                  ),
+                                Text(
+                                  snapshot.child('status').value.toString(),
+                                ),
+                              ],
+                            ))));
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Appointment",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 350,
+              width: 350,
+              child: ContainedTabBarView(
+                tabs: const [
+                  Text('Upcoming'),
+                  Text('Completed'),
+                ],
+                tabBarProperties: TabBarProperties(
+                  width: 200,
+                  height: 32,
+                  background: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(8.0)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.4),
+                          spreadRadius: 0.5,
+                          blurRadius: 2,
+                          offset: const Offset(1, -1),
+                        ),
+                      ],
+                    ),
+                  ),
+                  position: TabBarPosition.top,
+                  alignment: TabBarAlignment.center,
+                  indicatorColor: Colors.transparent,
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.grey[400],
+                ),
+                views: [
+                  // Tab for Upcoming
+                  Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: SizedBox(
+                        child: SizedBox(
+                          width: 350,
+                          height: 300,
+                          child: FirebaseAnimatedList(
+                            query: appointmentsRef
+                                .orderByChild('status')
+                                .equalTo("UPCOMING"),
+                            itemBuilder: (context, snapshot, animation, index) {
+                              return SizedBox(
+                                  height: 100,
+                                  child: Card(
+                                      child: Column(
+                                    children: [
+                                      Text(
+                                        snapshot
+                                            .child('professorName')
+                                            .value
+                                            .toString(),
+                                      ),
+                                      Text(
+                                        snapshot
+                                            .child('professorRole')
+                                            .value
+                                            .toString(),
+                                      ),
+                                      Text(
+                                        snapshot.child('date').value.toString(),
+                                      ),
+                                      Text(
+                                        snapshot.child('time').value.toString(),
+                                      ),
+                                    ],
+                                  )));
+                            },
+                          ),
+                        ),
+                      )),
+
+                  // Tab for completed
+                  Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: SizedBox(
+                        child: SizedBox(
+                          width: 350,
+                          height: 300,
+                          child: FirebaseAnimatedList(
+                            query: appointmentsRef
+                                .orderByChild('status')
+                                .equalTo("COMPLETED"),
+                            itemBuilder: (context, snapshot, animation, index) {
+                              return SizedBox(
+                                  height: 100,
+                                  child: Card(
+                                      child: Column(
+                                    children: [
+                                      Text(
+                                        snapshot
+                                            .child('professorName')
+                                            .value
+                                            .toString(),
+                                      ),
+                                      Text(
+                                        snapshot
+                                            .child('professorRole')
+                                            .value
+                                            .toString(),
+                                      ),
+                                      Text(
+                                        snapshot.child('date').value.toString(),
+                                      ),
+                                      Text(
+                                        snapshot.child('time').value.toString(),
+                                      ),
+                                    ],
+                                  )));
+                            },
+                          ),
+                        ),
+                      )),
+                ],
               ),
             ),
           ],
