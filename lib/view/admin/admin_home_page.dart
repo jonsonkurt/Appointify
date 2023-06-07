@@ -196,6 +196,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                         "status": "accepting",
                                       });
 
+                                      // ignore: use_build_context_synchronously
                                       Navigator.pop(context);
 
                                       _firstNameController.text = "";

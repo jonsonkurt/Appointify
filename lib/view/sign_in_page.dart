@@ -19,6 +19,12 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+   @override
+  void initState() {
+    super.initState();
+    _emailController.addListener(() {});
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
