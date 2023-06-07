@@ -1,4 +1,4 @@
-import 'package:appointify/view/bottom_navigation_bar.dart';
+import 'package:appointify/view/student/bottom_navigation_bar.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
