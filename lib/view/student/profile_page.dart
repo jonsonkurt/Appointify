@@ -79,7 +79,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
                 final String path = results.files.single.path.toString();
                 // final String fileName = results.files.single.name;
-
                 storage.uploadFile(path, '$userID.jpg');
               },
               child: const Text('Update Profile'),
