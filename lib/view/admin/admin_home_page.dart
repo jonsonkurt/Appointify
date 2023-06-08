@@ -81,10 +81,15 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
             FloatingActionButton.extended(
               onPressed: () {
                 showModalBottomSheet<dynamic>(
+                  shape: const RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(25.0))),
                   context: context,
                   isScrollControlled: true,
-                  builder: (BuildContext context) {
-                    return Wrap(
+                  builder: ( context) => Padding(
+                    padding: EdgeInsets.only(top: 20,  right: 20,  left: 20,
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: Wrap(
                       spacing: 8.0, // gap between adjacent chips
                       runSpacing: 4.0, // gap between lines
                       children: <Widget>[
@@ -241,9 +246,10 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                       ],
                       // ),
                       // ),
-                    );
-                  },
-                );
+                  )
+                    
+                  // },
+                ));
               },
               label: const Text('Create Account'),
               icon: const Icon(Icons.thumb_up),

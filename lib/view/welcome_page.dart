@@ -82,7 +82,7 @@ class WelcomePage extends StatelessWidget {
                           side: const BorderSide(color: Colors.white, width: 2),
                         ),
                         child: const Text(
-                          "   Press this shit   ",
+                          "   Get Started   ",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
