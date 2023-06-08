@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
     });
 
     DatabaseReference appointmentsRef = rtdb.ref('appointments/');
-    appointmentsRef.orderByChild('studentUserID').equalTo(userID);
+    // appointmentsRef.orderByChild('status').equalTo("$userID-PENDING");
 
     return Scaffold(
       body: Center(
@@ -121,8 +121,9 @@ class _HomePageState extends State<HomePage> {
               child: SizedBox(
                 width: 350,
                 child: FirebaseAnimatedList(
-                  query:
-                      appointmentsRef.orderByChild('status').equalTo("PENDING"),
+                  query: appointmentsRef
+                      .orderByChild('status')
+                      .equalTo("$userID-PENDING"),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, snapshot, animation, index) {
                     return GestureDetector(
@@ -268,7 +269,10 @@ class _HomePageState extends State<HomePage> {
                                         .red, // Replace with the desired color
                                   ),
                                 Text(
-                                  snapshot.child('status').value.toString(),
+                                  snapshot
+                                      .child('requestStatus')
+                                      .value
+                                      .toString(),
                                 ),
                               ],
                             ))));
@@ -336,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                           child: FirebaseAnimatedList(
                             query: appointmentsRef
                                 .orderByChild('status')
-                                .equalTo("UPCOMING"),
+                                .equalTo("$userID-UPCOMING"),
                             itemBuilder: (context, snapshot, animation, index) {
                               return SizedBox(
                                   height: 100,
@@ -378,7 +382,7 @@ class _HomePageState extends State<HomePage> {
                           child: FirebaseAnimatedList(
                             query: appointmentsRef
                                 .orderByChild('status')
-                                .equalTo("COMPLETED"),
+                                .equalTo("$userID-COMPLETED"),
                             itemBuilder: (context, snapshot, animation, index) {
                               return SizedBox(
                                   height: 100,
