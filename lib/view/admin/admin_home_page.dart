@@ -27,7 +27,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _conpasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool _isObscure = true;
+  final bool _isObscure = true;
 
   @override
   void initState() {
