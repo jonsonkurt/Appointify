@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:appointify/view/sign_in_page.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // final storageRef = FirebaseStorage.instance.ref("");
-  // final mountainsRef = storageRef.child("mountains.jpg");
-  // final imagesRef = storageRef.child("images");
-
   @override
   Widget build(BuildContext context) {
     final Storage storage = Storage();
@@ -95,8 +93,27 @@ class _ProfilePageState extends State<ProfilePage> {
                   return CircularProgressIndicator();
                 }
                 return Container();
-              })
+              }),
+          const Text("Profile Page"),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _logout,
+                child: const Text("Logout"),
+              ),
         ]),
+        
+  Future<void> _logout() async {
+    await FirebaseAuth.instance.signOut();
+
+    // Redirect the user to the SignInPage after logging out
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const SignInPage()),
+    );
+  }
+
+ 
       ),
     );
   }

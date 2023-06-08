@@ -18,14 +18,6 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final bool _isObscure = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _emailController.addListener(() {});
-    _passwordController.addListener(() {});
-  }
 
   @override
   void dispose() {
@@ -37,120 +29,252 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign In'),
-      ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              TextField(
-                controller: _passwordController,
-                obscureText: _isObscure,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              GestureDetector(
-                onTap: () {
-                  _emailController.clear();
-                  _passwordController.clear();
-                },
-                child: const Text(
-                  "Forgot Password",
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Colors.blue,
-                    fontSize: 16.0,
+              SizedBox(
+                height: kToolbarHeight,
+                child: PreferredSize(
+                  preferredSize: const Size.fromHeight(kToolbarHeight),
+                  child: Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(Icons.arrow_back, color: Colors.black),
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () async {
-                  
-                  // Perform sign in logic here
-                  String email = _emailController.text;
-                  String password = _passwordController.text;
-      
-                  String getCred = decodingCred();
-      
-                  if (email == getCred && password == getCred) {
-                    // ignore: use_build_context_synchronously
-                    // print("I/'m an admin");
-                    Navigator.push<void>(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const BottomNavigationAdmin()));
-                  } else {
-                    try {
-                      // ignore: unused_local_variable
-                      final credential = await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: email, password: password);
-      
-                      // ignore: use_build_context_synchronously
-                      Navigator.push<void>(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const BottomNavigation()));
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'user-not-found') {
-                        // print('No user found for that email.');
-                      } else if (e.code == 'wrong-password') {
-                        // print('Wrong password provided for that user.');
-                      }
-                    }
-                  }
-                  _emailController.clear();
-                  _passwordController.clear();
-                },
-                child: const Text('Sign In'),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/sign_in.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
-              const SizedBox(height: 16.0),
-              GestureDetector(
-                onTap: () {
-                  _emailController.clear();
-                  _passwordController.clear();
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) =>
-                          const SignUpPage(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        var begin = const Offset(0.0, 1.0);
-                        var end = Offset.zero;
-                        var curve = Curves.ease;
-      
-                        var tween = Tween(begin: begin, end: end)
-                            .chain(CurveTween(curve: curve));
-      
-                        return SlideTransition(
-                          position: animation.drive(tween),
-                          child: child,
-                        );
-                      },
-                    ),
-                  );
-                },
-                child: const Text(
-                  "I'm a new user. Sign Up",
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Colors.blue,
-                    fontSize: 16.0,
+              Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xFFF2F2F2),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Sign In",
+                        style: TextStyle(
+                          fontFamily: "GothamRnd-Bold",
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Email Address",
+                            style: TextStyle(
+                              fontFamily: "GothamRnd-Medium",
+                              color: Color(0xFF393838),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: TextField(
+                              controller: _emailController,
+                              style: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Password",
+                            style: TextStyle(
+                              fontFamily: "GothamRnd-Medium",
+                              color: Color(0xFF393838),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: TextField(
+                              obscureText: true,
+                              controller: _passwordController,
+                              style: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                suffixIcon: Align(
+                                  widthFactor: 1.0,
+                                  heightFactor: 1.0,
+                                  child: Icon(
+                                    Icons.remove_red_eye,
+                                    color: Color(0xFFFF9343),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            _emailController.clear();
+                            _passwordController
+                                .clear(); // Handle forgot password
+                          },
+                          child: const Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                              fontFamily: "GothamRnd-Medium",
+                              color: Color(0xFF393838),
+                              fontSize: 10,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            String email = _emailController.text;
+                            String password = _passwordController.text;
+
+                            String getCred = decodingCred();
+
+                            if (email == getCred && password == getCred) {
+                              // ignore: use_build_context_synchronously
+                              // print("I/'m an admin");
+                              Navigator.push<void>(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BottomNavigationAdmin()));
+                            } else {
+                              try {
+                                // ignore: unused_local_variable
+                                final credential = await FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                        email: email, password: password);
+
+                                // ignore: use_build_context_synchronously
+                                Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const BottomNavigation()));
+                              } on FirebaseAuthException catch (e) {
+                                if (e.code == 'user-not-found') {
+                                  // print('No user found for that email.');
+                                } else if (e.code == 'wrong-password') {
+                                  // print('Wrong password provided for that user.');
+                                }
+                              }
+                            }
+                            _emailController.clear();
+                            _passwordController.clear();
+                          }, // Handle sign in
+
+                          style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(203, 50),
+                            backgroundColor: const Color(0xFFFF9343),
+                          ),
+                          child: const Text(
+                            'Sign In',
+                            style: TextStyle(
+                              fontFamily: "GothamRnd-Medium.otf",
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      GestureDetector(
+                        onTap: () {
+                          _emailController.clear();
+                          _passwordController.clear();
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      const SignUpPage(),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                var begin = const Offset(0.0, 1.0);
+                                var end = Offset.zero;
+                                var curve = Curves.ease;
+
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
+
+                                return SlideTransition(
+                                  position: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
+                          ); // Handle sign up
+                        },
+                        child: RichText(
+                          text: const TextSpan(
+                            text: "I'm a new user. ",
+                            style: TextStyle(
+                              fontFamily: "GothamRnd-Medium",
+                              color: Color(0xFF393838),
+                              fontSize: 15,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: "Sign Up",
+                                style: TextStyle(
+                                  fontFamily: "GothamRnd-Medium",
+                                  color: Color(0xFFFF9343),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 25),
+                    ],
                   ),
                 ),
               ),

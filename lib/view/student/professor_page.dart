@@ -5,6 +5,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
+import 'professor_profile_page.dart';
 
 class ProfessorPage extends StatefulWidget {
   const ProfessorPage({super.key});
@@ -37,9 +38,20 @@ class _ProfessorPageState extends State<ProfessorPage> {
     await Firebase.initializeApp();
   }
 
-  void _handleButtonPress() {
-    // Handle button press logic
-    print('Button clicked!');
+  void _handleButtonPress(String firstName, String lastName,
+      String professorRole, String status, String availability) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfessorProfilePage(
+          firstName: firstName,
+          lastName: lastName,
+          professorRole: professorRole,
+          status: status,
+          availability: availability,
+        ),
+      ),
+    );
   }
 
   void _handleSearch(String value) {
@@ -74,11 +86,15 @@ class _ProfessorPageState extends State<ProfessorPage> {
               child: FirebaseAnimatedList(
             query: appointmentsRef,
             itemBuilder: (context, snapshot, animation, index) {
+              String availability =
+                  snapshot.child('availability').value.toString();
+
               String profFirstName =
                   snapshot.child('firstName').value.toString();
               String profLastName = snapshot.child('lastName').value.toString();
               String status = snapshot.child('status').value.toString();
               // Filter professors based on the entered name
+
               if (name.isNotEmpty &&
                   !profFirstName.toLowerCase().contains(name.toLowerCase()) &&
                   !profLastName.toLowerCase().contains(name.toLowerCase())) {
@@ -91,8 +107,15 @@ class _ProfessorPageState extends State<ProfessorPage> {
                   Text(snapshot.child('professorRole').value.toString()),
                   Text(snapshot.child('status').value.toString()),
                   ElevatedButton(
-                    onPressed:
-                        status == 'accepting' ? _handleButtonPress : null,
+                    onPressed: status == 'accepting'
+                        ? () => _handleButtonPress(
+                              profFirstName,
+                              profLastName,
+                              snapshot.child('professorRole').value.toString(),
+                              snapshot.child('status').value.toString(),
+                              availability,
+                            )
+                        : null,
                     child: const Text('Appointment'),
                   )
                 ],
