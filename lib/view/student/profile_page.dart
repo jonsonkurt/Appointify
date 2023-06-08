@@ -14,6 +14,18 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+Future<void> _logout() async {
+    await FirebaseAuth.instance.signOut();
+
+    // Redirect the user to the SignInPage after logging out
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const SignInPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final Storage storage = Storage();
@@ -101,19 +113,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: const Text("Logout"),
               ),
         ]),
-        
-  Future<void> _logout() async {
-    await FirebaseAuth.instance.signOut();
-
-    // Redirect the user to the SignInPage after logging out
-    // ignore: use_build_context_synchronously
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const SignInPage()),
-    );
-  }
-
- 
       ),
     );
   }
