@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class ProfessorPage extends StatefulWidget {
-  const ProfessorPage({super.key});
+class OrgChartPage extends StatefulWidget {
+  const OrgChartPage({super.key});
 
   @override
-  State<ProfessorPage> createState() => _ProfessorPageState();
+  State<OrgChartPage> createState() => _OrgChartPageState();
 }
 
-class _ProfessorPageState extends State<ProfessorPage> {
+class _OrgChartPageState extends State<OrgChartPage> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: Text("Professor Page"),
+          child: Text("Org Chart Page"),
         ),
       ),
     );
