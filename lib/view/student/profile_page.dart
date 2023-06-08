@@ -1,9 +1,9 @@
 import 'package:appointify/view/student/storage_queries.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-// import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -46,12 +46,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         3), // Change this radius for the width of the circular border
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
-                      radius: MediaQuery.of(context).size.height *
-                          .1, // This radius is the radius of the picture in the circle avatar itself.
-                      backgroundImage: NetworkImage(
-                        snapshot.data!,
-                      ),
-                    ),
+                        radius: MediaQuery.of(context).size.height *
+                            .1, // This radius is the radius of the picture in the circle avatar itself.
+                        backgroundImage: NetworkImage(
+                          snapshot.data!,
+                        )),
                   );
                 }
                 if (snapshot.connectionState == ConnectionState.waiting ||
@@ -80,8 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 }
                 final String path = results.files.single.path.toString();
                 // final String fileName = results.files.single.name;
-                
-                
+
                 storage.uploadFile(path, '$userID.jpg');
               },
               child: const Text('Update Profile'),
