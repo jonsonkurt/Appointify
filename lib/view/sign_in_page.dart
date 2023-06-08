@@ -77,8 +77,7 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () async {
-                _emailController.clear();
-                _passwordController.clear();
+                
                 // Perform sign in logic here
                 String email = _emailController.text;
                 String password = _passwordController.text;
@@ -112,6 +111,8 @@ class _SignInPageState extends State<SignInPage> {
                     }
                   }
                 }
+                _emailController.clear();
+                _passwordController.clear();
               },
               child: const Text('Sign In'),
             ),
