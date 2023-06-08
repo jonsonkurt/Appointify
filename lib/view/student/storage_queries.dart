@@ -12,8 +12,9 @@ class Storage {
     File file = File(filePath);
     try {
       await storage.ref('studentProfile/$fileName').putFile(file);
-    } on firebase_core.FirebaseException catch (e) {
-      print(e);
+    // ignore: empty_catches
+    } on firebase_core.FirebaseException {
+      
     }
   }
 
@@ -21,16 +22,23 @@ class Storage {
     firebase_storage.ListResult results =
         await storage.ref("studentProfile").listAll();
 
-    results.items.forEach((firebase_storage.Reference ref) {
-      print('Found file: $ref');
-    });
+    // ignore: unused_local_variable
+    for (var ref in results.items) {
+    }
     return results;
   }
 
   Future<String> downloadURL(String imageName) async {
-    String downloadURL =
-        await storage.ref('studentProfile/$imageName').getDownloadURL();
+    try {
+      String downloadURL =
+          await storage.ref('studentProfile/$imageName.jpg').getDownloadURL();
+          return downloadURL;
+          
+    } on firebase_core.FirebaseException {
+          String downloadURL = await storage.ref('studentProfile/default_image.png').getDownloadURL();
+          return downloadURL;
+    }
 
-    return downloadURL;
+    
   }
 }
