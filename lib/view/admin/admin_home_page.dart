@@ -202,6 +202,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                         "professorRole": "Professor",
                                         "salutation": email,
                                         "status": "accepting",
+                                        "designation": "Professor",
                                       });
 
                                       // ignore: use_build_context_synchronously
