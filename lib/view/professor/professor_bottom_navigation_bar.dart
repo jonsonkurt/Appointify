@@ -4,14 +4,15 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'professor_home_page.dart';
 import 'professor_profile_page.dart';
 
-class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({super.key});
+class ProfessorBottomNavigation extends StatefulWidget {
+  const ProfessorBottomNavigation({super.key});
 
   @override
-  State<BottomNavigation> createState() => _BottomNavigationState();
+  State<ProfessorBottomNavigation> createState() =>
+      _ProfessorBottomNavigationState();
 }
 
-class _BottomNavigationState extends State<BottomNavigation> {
+class _ProfessorBottomNavigationState extends State<ProfessorBottomNavigation> {
   var currentIndex = 0;
   var pages = const [
     HomePage(),
