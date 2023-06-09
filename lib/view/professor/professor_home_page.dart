@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Ready to Fulfill Your Appointment?",
+                    "Ready for Your Appointment?",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -202,16 +202,20 @@ class _HomePageState extends State<HomePage> {
                                                 },
                                                 child: const Text('Cancel'),
                                               ),
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 5, right: 5)),
                                               ElevatedButton(
                                                 onPressed: () {
                                                   // Handle button press
                                                   // Add your desired functionality here
                                                 },
                                                 child: const Text('Reschedule'),
-                                              )
+                                              ),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  // Handle button press
+                                                  // Add your desired functionality here
+                                                },
+                                                child: const Text('Completed'),
+                                              ),
                                             ],
                                           )
                                         ],

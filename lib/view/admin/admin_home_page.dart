@@ -81,178 +81,193 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
             FloatingActionButton.extended(
               onPressed: () {
                 showModalBottomSheet<dynamic>(
-                  shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(25.0))),
-                  context: context,
-                  isScrollControlled: true,
-                  builder: ( context) => Padding(
-                    padding: EdgeInsets.only(top: 20,  right: 20,  left: 20,
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: Wrap(
-                      spacing: 8.0, // gap between adjacent chips
-                      runSpacing: 4.0, // gap between lines
-                      children: <Widget>[
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              TextFormField(
-                                controller: _firstNameController,
-                                decoration: const InputDecoration(
-                                  labelText: 'First Name',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your first name';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                              ),
-                              const SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _lastNameController,
-                                decoration: const InputDecoration(
-                                  labelText: 'Last Name',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your last name';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                              ),
-                              const SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _emailController,
-                                decoration: const InputDecoration(
-                                  labelText: 'Email',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter a valid email';
-                                  } else if (!RegExp(
-                                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                      .hasMatch(value)) {
-                                    return 'Please enter a valid email';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                                keyboardType: TextInputType.emailAddress,
-                              ),
-                              const SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _passwordController,
-                                obscureText: _isObscure,
-                                decoration: const InputDecoration(
-                                  labelText: 'Password',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter a password';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                              ),
-                              const SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _conpasswordController,
-                                obscureText: _isObscure,
-                                decoration: const InputDecoration(
-                                  labelText: 'Confirm Password',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please confirm your password';
-                                  }
-                                  if (value != _passwordController.text) {
-                                    return 'Passwords do not match';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                              ),
-                              const SizedBox(height: 16.0),
-
-                              
-                              ElevatedButton(
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    // Perform sign in logic here
-                                    String firstName =
-                                        _firstNameController.text;
-                                    String lastName = _lastNameController.text;
-                                    String email = _emailController.text;
-                                    String password = _passwordController.text;
-
-                                    try {
-                                      // ignore: unused_local_variable
-                                      final credential = await FirebaseAuth
-                                          .instance
-                                          .createUserWithEmailAndPassword(
-                                        email: email,
-                                        password: password,
-                                      );
-
-                                      String? userID = FirebaseAuth
-                                          .instance.currentUser?.uid;
-
-                                      await rtdb.ref("professors/$userID").set({
-                                        "firstName": firstName,
-                                        "lastName": lastName,
-                                        "profUserID": userID,
-                                        "professorRole": "Professor",
-                                        "salutation": email,
-                                        "status": "accepting",
-                                        "designation": "Professor",
-                                      });
-
-                                      // ignore: use_build_context_synchronously
-                                      Navigator.pop(context);
-
-                                      _firstNameController.text = "";
-                                      _lastNameController.text = "";
-                                      _emailController.text = "";
-                                      _passwordController.text = "";
-                                      _conpasswordController.text = "";
-                                    } on FirebaseAuthException catch (e) {
-                                      if (e.code == 'weak-password') {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'The password provided is too weak.')),
-                                        );
-                                      } else if (e.code ==
-                                          'email-already-in-use') {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'The account already exists for that email.')),
-                                        );
+                    shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(25.0))),
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => Padding(
+                        padding: EdgeInsets.only(
+                            top: 20,
+                            right: 20,
+                            left: 20,
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: Wrap(
+                          spacing: 8.0, // gap between adjacent chips
+                          runSpacing: 4.0, // gap between lines
+                          children: <Widget>[
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  TextFormField(
+                                    controller: _firstNameController,
+                                    decoration: const InputDecoration(
+                                      labelText: 'First Name',
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your first name';
                                       }
-                                    } catch (e) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(content: Text('Error.')),
-                                      );
-                                    }
-                                  }
-                                },
-                                child: const Text('Create Account'),
+                                      return null; // Return null if there is no error
+                                    },
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                  TextFormField(
+                                    controller: _lastNameController,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Last Name',
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your last name';
+                                      }
+                                      return null; // Return null if there is no error
+                                    },
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                  TextFormField(
+                                    controller: _emailController,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Email',
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter a valid email';
+                                      } else if (!RegExp(
+                                              r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                          .hasMatch(value)) {
+                                        return 'Please enter a valid email';
+                                      }
+                                      return null; // Return null if there is no error
+                                    },
+                                    keyboardType: TextInputType.emailAddress,
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                  TextFormField(
+                                    controller: _passwordController,
+                                    obscureText: _isObscure,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Password',
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter a password';
+                                      }
+                                      return null; // Return null if there is no error
+                                    },
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                  TextFormField(
+                                    controller: _conpasswordController,
+                                    obscureText: _isObscure,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Confirm Password',
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please confirm your password';
+                                      }
+                                      if (value != _passwordController.text) {
+                                        return 'Passwords do not match';
+                                      }
+                                      return null; // Return null if there is no error
+                                    },
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        // Perform sign in logic here
+                                        String firstName =
+                                            _firstNameController.text;
+                                        String lastName =
+                                            _lastNameController.text;
+                                        String email = _emailController.text;
+                                        String password =
+                                            _passwordController.text;
+
+
+                                        try {
+                                          // ignore: unused_local_variable
+                                          final credential = await FirebaseAuth
+                                              .instance
+                                              .createUserWithEmailAndPassword(
+                                            email: email,
+                                            password: password,
+                                          );
+
+                                          String? userID = FirebaseAuth
+                                              .instance.currentUser?.uid;
+
+                                          await rtdb
+                                              .ref("professors/$userID")
+                                              .set({
+                                            "firstName": firstName,
+                                            "lastName": lastName,
+                                            "profUserID": userID,
+                                            "professorRole": "Professor",
+                                            "salutation": email,
+                                            "status": "accepting",
+                                            "designation": "Professor",
+                                            "availability": {
+                                              "Monday": "-",
+                                              "Tuesday": "-",
+                                              "Wednesday": "-",
+                                              "Thursday": "-",
+                                              "Friday": "-",
+                                              "Saturday": "-",
+                                            }
+                                          });
+
+                                          // ignore: use_build_context_synchronously
+                                          Navigator.pop(context);
+
+                                          _firstNameController.text = "";
+                                          _lastNameController.text = "";
+                                          _emailController.text = "";
+                                          _passwordController.text = "";
+                                          _conpasswordController.text = "";
+                                        } on FirebaseAuthException catch (e) {
+                                          if (e.code == 'weak-password') {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                  content: Text(
+                                                      'The password provided is too weak.')),
+                                            );
+                                          } else if (e.code ==
+                                              'email-already-in-use') {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                  content: Text(
+                                                      'The account already exists for that email.')),
+                                            );
+                                          }
+                                        } catch (e) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text('Error.')),
+                                          );
+                                        }
+                                      }
+                                    },
+                                    child: const Text('Create Account'),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                      ],
-                      // ),
-                      // ),
-                  )
-                    
-                  // },
-                ));
+                            ),
+                            const SizedBox(height: 15),
+                          ],
+                          // ),
+                          // ),
+                        )
+
+                        // },
+                        ));
               },
               label: const Text('Create Account'),
               icon: const Icon(Icons.thumb_up),
