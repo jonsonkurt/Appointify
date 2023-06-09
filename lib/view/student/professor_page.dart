@@ -38,8 +38,14 @@ class _ProfessorPageState extends State<ProfessorPage> {
     await Firebase.initializeApp();
   }
 
-  void _handleButtonPress(String firstName, String lastName,
-      String professorRole, String status, String availability) {
+  void _handleButtonPress(
+      String firstName,
+      String lastName,
+      String professorRole,
+      String status,
+      String availability,
+      String professorID,
+      String salutation) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -49,6 +55,8 @@ class _ProfessorPageState extends State<ProfessorPage> {
           professorRole: professorRole,
           status: status,
           availability: availability,
+          professorID: professorID,
+          salutation: salutation,
         ),
       ),
     );
@@ -114,6 +122,8 @@ class _ProfessorPageState extends State<ProfessorPage> {
                               snapshot.child('professorRole').value.toString(),
                               snapshot.child('status').value.toString(),
                               availability,
+                              snapshot.child('profUserID').value.toString(),
+                              snapshot.child('salutation').value.toString(),
                             )
                         : null,
                     child: const Text('Appointment'),
