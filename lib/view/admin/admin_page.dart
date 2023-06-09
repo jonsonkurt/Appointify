@@ -25,7 +25,8 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
       home: Scaffold(
         backgroundColor: Color(0xffFF9343),
         bottomNavigationBar: SalomonBottomBar(
-          margin: EdgeInsets.all(10),
+         margin: EdgeInsets.only(left: 50, right: 60),
+          itemPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           currentIndex: currentIndex,
 
           items: [
