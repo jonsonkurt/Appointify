@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:logger/logger.dart';
 import 'package:random_string/random_string.dart';
+import 'bottom_navigation_bar.dart';
 
 class ProfessorProfilePage extends StatefulWidget {
   final String firstName;
@@ -142,6 +143,16 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
     return Scaffold(
       body: Column(
         children: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BottomNavigation()));
+              },
+              icon: Icon(
+                Icons.arrow_back,
+              )),
           const Text('Set an appointment'),
           Image.asset('assets/images/default.jpg'),
           Text('${widget.firstName} ${widget.lastName}'),
