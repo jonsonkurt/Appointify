@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+
+import 'edit_student_details.dart';
 // import 'package:transparent_image/transparent_image.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -90,8 +92,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             String mobileNumber = map['mobileNumber'];
                             String section = map['section'];
                             String email = map['email'];
-                            String profilePicStatus = map['profilePicStatus'].toString();
-    
+                            String profilePicStatus =
+                                map['profilePicStatus'].toString();
+
                             return Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -116,39 +119,64 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(100),
-                                            child: provider.image == null ?  map['profilePicStatus'].toString() =="None" ? const Icon(Icons.person, size: 35,):
-                                                Image(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  profilePicStatus),
-                                              loadingBuilder: (context, child,
-                                                  loadingProgress) {
-                                                if (loadingProgress == null) {
-                                                  return child;
-                                                }
-                                                return const CircularProgressIndicator();
-                                              },
-                                              errorBuilder:
-                                                  (context, object, stack) {
-                                                return const Icon(
-                                                  Icons.error_outline,
-                                                  color: Color.fromARGB(
-                                                      255, 35, 35, 35),
-                                                );
-                                              },
-                                            ) :
-    
-                                            Image.file(
-                                              File(provider.image!.path).absolute
-                                            )
-    
-    
-                                            ),
+                                            child: provider.image == null
+                                                ? map['profilePicStatus']
+                                                            .toString() ==
+                                                        "None"
+                                                    ? const Icon(
+                                                        Icons.person,
+                                                        size: 35,
+                                                      )
+                                                    : Image(
+                                                        fit: BoxFit.cover,
+                                                        image: NetworkImage(
+                                                            profilePicStatus),
+                                                        loadingBuilder: (context,
+                                                            child,
+                                                            loadingProgress) {
+                                                          if (loadingProgress ==
+                                                              null) {
+                                                            return child;
+                                                          }
+                                                          return const CircularProgressIndicator();
+                                                        },
+                                                        errorBuilder: (context,
+                                                            object, stack) {
+                                                          return const Icon(
+                                                            Icons.error_outline,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    35,
+                                                                    35,
+                                                                    35),
+                                                          );
+                                                        },
+                                                      )
+                                                : Image.file(
+                                                    File(provider.image!.path)
+                                                        .absolute)),
                                       ),
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 20,
+                                  ),
+                                  Center(
+                                    // update prolife logic
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const EditStudentProfile()),
+                                        );
+                                        // provider.pickImage(context);
+                                      },
+                                      child: const Text(
+                                          'Edit Personal Information'),
+                                    ),
                                   ),
                                   ReuseableRow(
                                       title: 'Name',
@@ -166,18 +194,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                       title: 'Section',
                                       value: section,
                                       iconData: Icons.group),
-    
+
                                   //update profile button
-                                  Center(
-                                    // update prolife logic
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        provider.pickImage(context);
-                                      },
-                                      child: const Text('Update Profile Picture'),
-                                    ),
-                                  ),
-    
+
                                   const SizedBox(height: 20),
                                   ElevatedButton(
                                     onPressed: _logout,

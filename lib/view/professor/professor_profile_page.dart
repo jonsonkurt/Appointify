@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
-
 import 'admin_profile_controller.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -162,11 +160,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ReuseableRow(
                                       title: 'Position',
                                       value: professorRole,
-                                      iconData: Icons.phone),
+                                      iconData: Icons.account_box),
+                                  ReuseableRow(
+                                      title: 'Designation',
+                                      value: designation,
+                                      iconData: Icons.assignment_ind),
                                   ReuseableRow(
                                       title: 'Status',
                                       value: status,
-                                      iconData: Icons.group),
+                                      iconData: Icons.check_box),
     
                                   //update profile button
                                   Center(
