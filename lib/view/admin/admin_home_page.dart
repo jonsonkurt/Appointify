@@ -75,14 +75,10 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
 
     return Scaffold(
       body: Scaffold(
-        appBar: AppBar(
-          title: Text("List of Professors"),
-          elevation: 0,
-          backgroundColor: Colors.white12,
-          titleTextStyle: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-          ),
+        appBar: AppBar(title: Text("List of Employees"),
+        elevation: 0,
+        backgroundColor: Colors.white12,
+        titleTextStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,),
         ),
 
         body: const Column(
