@@ -1,8 +1,16 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.appointify">
+
+    <uses-permission android:name="android.premission.INTERNET"/>
+    <uses-permission android:name="android.premission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.premission.CAMERA"/>
+
+
     <application
         android:label="appointify"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
