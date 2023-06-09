@@ -213,7 +213,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                         "lastName": lastName,
                                         "profUserID": userID,
                                         "professorRole": "Professor",
-                                        "salutation": email,
+                                        "salutation": "",
                                         "status": "accepting",
                                         "designation": "Professor",
                                         "profilePicStatus": "None",
