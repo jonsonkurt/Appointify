@@ -144,15 +144,12 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
       body: Column(
         children: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const BottomNavigation()));
-              },
               icon: Icon(
                 Icons.arrow_back,
-              )),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
           const Text('Set an appointment'),
           Image.asset('assets/images/default.jpg'),
           Text('${widget.firstName} ${widget.lastName}'),
