@@ -89,6 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           String mobileNumber = map['mobileNumber'];
                           String section = map['section'];
                           String email = map['email'];
+                          String profilePicStatus = map['profilePicStatus'].toString();
 
                           return Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,8 +118,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: provider.image == null ?  map['profilePicStatus'].toString() =="None" ? const Icon(Icons.person, size: 35,):
                                               Image(
                                             fit: BoxFit.cover,
-                                            image: const NetworkImage(
-                                                "https://s3.getstickerpack.com/storage/uploads/sticker-pack/genshin-impact-eula/sticker_7.png"),
+                                            image: NetworkImage(
+                                                profilePicStatus),
                                             loadingBuilder: (context, child,
                                                 loadingProgress) {
                                               if (loadingProgress == null) {
