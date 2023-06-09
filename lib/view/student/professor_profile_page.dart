@@ -104,7 +104,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
       body: Column(
         children: [
           const Text('Set an appointment'),
-          Image.asset('assets/images/default.png'),
+          Image.asset('assets/images/default.jpg'),
           Text('${widget.firstName} ${widget.lastName}'),
           Text(widget.professorRole),
           Text(widget.status),
