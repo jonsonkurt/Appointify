@@ -75,7 +75,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
       home: Scaffold(
         body: Column(children: [
           const Text(
-            'Professors',
+            'Employees',
           ),
           const Divider(
             color: Colors.black,
