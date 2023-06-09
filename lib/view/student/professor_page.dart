@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
 import 'professor_profile_page.dart';
-import 'package:provider/provider.dart';
 import 'package:appointify/view/student/profile_controller.dart';
 
 class ProfessorPage extends StatefulWidget {
