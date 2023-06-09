@@ -1,13 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:appointify/view/screen.dart';
-// import 'admin_page.dart';
 import 'loading_page .dart';
-import 'student/bottom_navigation_bar.dart';
 import 'sign_up_page.dart';
 import 'admin/admin_page.dart';
 import 'admin/admin_cred.dart';
-// import 'forgot_password_page.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
