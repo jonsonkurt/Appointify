@@ -51,6 +51,7 @@ dependencies:
   transparent_image: ^2.0.1
   flutter_onboarding_slider: ^1.0.9
   intl: ^0.18.1
+  firebase_messaging: ^14.6.2
 
 dev_dependencies:
   flutter_test:
