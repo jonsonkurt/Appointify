@@ -232,6 +232,25 @@ class _HomePageState extends State<HomePage> {
                                             onPressed: () {
                                               // Handle button press
                                               // Add your desired functionality here
+                                              appointmentsRef
+                                                  .child(snapshot
+                                                      .child('appointID')
+                                                      .value
+                                                      .toString())
+                                                  .update({
+                                                "requestStatus": "UPCOMING",
+                                                "date": snapshot
+                                                    .child('counteredDate')
+                                                    .value
+                                                    .toString(),
+                                                "time": snapshot
+                                                    .child('counteredTime')
+                                                    .value
+                                                    .toString(),
+                                                "requestStatusProfessor":
+                                                    "${snapshot.child('professorID').value}-UPCOMING",
+                                                "status": "$userID-UPCOMING",
+                                              });
                                             },
                                             child: const Text('Accept'),
                                           )
