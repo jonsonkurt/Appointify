@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:appointify/view/screen.dart';
 // import 'admin_page.dart';
+import 'loading_page .dart';
 import 'student/bottom_navigation_bar.dart';
 import 'sign_up_page.dart';
 import 'admin/admin_page.dart';
@@ -104,8 +105,7 @@ class _SignInPageState extends State<SignInPage> {
                             width: MediaQuery.of(context).size.width,
                             child: TextField(
                               controller: _emailController,
-                              style: const TextStyle(
-                                color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
@@ -116,8 +116,7 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                               textInputAction: TextInputAction.next,
                               onEditingComplete: () =>
-                                  FocusScope.of(context)
-                                      .nextFocus(),
+                                  FocusScope.of(context).nextFocus(),
                             ),
                           ),
                         ],
@@ -141,9 +140,8 @@ class _SignInPageState extends State<SignInPage> {
                             child: TextFormField(
                               obscureText: !_passwordVisible,
                               controller: _passwordController,
-                              style: const TextStyle(
-                                color: Colors.black),
-                              decoration:  InputDecoration(
+                              style: const TextStyle(color: Colors.black),
+                              decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
@@ -153,21 +151,20 @@ class _SignInPageState extends State<SignInPage> {
                                 suffixIcon: GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      _passwordVisible =
-                                          !_passwordVisible;
+                                      _passwordVisible = !_passwordVisible;
                                     });
                                   },
                                   child: Icon(
                                     _passwordVisible
                                         ? Icons.visibility
                                         : Icons.visibility_off,
-                                        color: const Color(0xFFFF9343),
+                                    color: const Color(0xFFFF9343),
                                   ),
                                 ),
                               ),
                               textInputAction: TextInputAction.next,
                               onEditingComplete: () =>
-                                FocusScope.of(context).unfocus(),
+                                  FocusScope.of(context).unfocus(),
                             ),
                           ),
                         ],
@@ -221,12 +218,12 @@ class _SignInPageState extends State<SignInPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const BottomNavigation()));
+                                            const LoadingPage()));
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'user-not-found') {
-                                //  print('No user found for that email.');
+                                  //  print('No user found for that email.');
                                 } else if (e.code == 'wrong-password') {
-                               // print('Wrong password provided for that user.');
+                                  // print('Wrong password provided for that user.');
                                 }
                               }
                             }
@@ -236,10 +233,10 @@ class _SignInPageState extends State<SignInPage> {
 
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(203, 50),
-                            backgroundColor: 
-                                const Color(0xFFFF9343),
+                            backgroundColor: const Color(0xFFFF9343),
                             shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
+                              borderRadius: BorderRadius.circular(
+                                  10), // Adjust the radius as needed
                             ),
                           ),
                           child: const Text(
