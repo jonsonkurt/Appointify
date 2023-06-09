@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1041233032586",
+    "firebase_url": "https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "appointify-388715",
+    "storage_bucket": "appointify-388715.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041233032586:android:7972379d8225891bef0473",
+        "android_client_info": {
+          "package_name": "com.example.appointify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041233032586-cfmpt4nmv2hu3pv167lha67asku3s7ok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNSdThFPWSG3Jpn_5W1X0Qmmf_yLWWQW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041233032586-cfmpt4nmv2hu3pv167lha67asku3s7ok.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1041233032586-flk3o9731qguo4v0i8hj355p0nltiqdb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.appointify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
