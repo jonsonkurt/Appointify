@@ -1,8 +1,19 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class ProfileController with ChangeNotifier {
   final picker = ImagePicker();
+
+  String? userID = FirebaseAuth.instance.currentUser?.uid;
+  DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
 
   XFile? _image;
   XFile? get image => _image;
@@ -13,7 +24,8 @@ class ProfileController with ChangeNotifier {
 
     if (pickedFile != null) {
       _image = XFile(pickedFile.path);
-      print(_image);
+      notifyListeners();
+      updloadImage(context);
     }
   }
 
@@ -23,7 +35,8 @@ class ProfileController with ChangeNotifier {
 
     if (pickedFile != null) {
       _image = XFile(pickedFile.path);
-      print(_image);
+      notifyListeners();
+      updloadImage(context);
     }
   }
 
@@ -62,5 +75,24 @@ class ProfileController with ChangeNotifier {
                 )),
           );
         });
+  }
+
+  void updloadImage(BuildContext context) async {
+    firebase_storage.Reference storageRef =
+        firebase_storage.FirebaseStorage.instance.ref('studentProfile/$userID');
+    firebase_storage.UploadTask uploadTask =
+        storageRef.putFile(File(image!.path).absolute);
+    await Future.value(uploadTask);
+
+    final newUrl = await storageRef.getDownloadURL();
+
+    ref
+        .child(userID.toString())
+        .update({'profilePicStatus': newUrl.toString()}).then((value) {
+      print('Profile updated');
+      _image = null;
+    }).onError((error, stackTrace) {
+      print('Profile not updated');
+    });
   }
 }

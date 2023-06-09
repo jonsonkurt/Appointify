@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:appointify/view/student/profile_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 // import 'package:transparent_image/transparent_image.dart';
@@ -112,10 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(100),
-                                          child:
-
-                                              //provider.image == null ?
-                                              // map['profile'].toString() =="" ? const Icon(Icons.person, size: 35,):
+                                          child: provider.image == null ?  map['profilePicStatus'].toString() =="None" ? const Icon(Icons.person, size: 35,):
                                               Image(
                                             fit: BoxFit.cover,
                                             image: const NetworkImage(
@@ -135,7 +134,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     255, 35, 35, 35),
                                               );
                                             },
-                                          )),
+                                          ) :
+
+                                          Image.file(
+                                            File(provider.image!.path).absolute
+                                          )
+
+
+                                          ),
                                     ),
                                   ),
                                 ),
