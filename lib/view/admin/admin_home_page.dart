@@ -74,26 +74,33 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
     // DatabaseReference appointmentsRef = rtdb.ref('appointments/');
 
     return Scaffold(
-      
       body: Scaffold(
-        appBar: AppBar(title: Text("List of Professors"),
-        elevation: 0,
-        backgroundColor: Colors.white12,
-        titleTextStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,),
+        appBar: AppBar(
+          title: Text("List of Professors"),
+          elevation: 0,
+          backgroundColor: Colors.white12,
+          titleTextStyle: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
 
-        body:const Column(children:[ SearchBox()],),
-        floatingActionButton:
-            FloatingActionButton.extended(
-              onPressed: () {
-                showModalBottomSheet<dynamic>(
-                  shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(25.0))),
-                  context: context,
-                  isScrollControlled: true,
-                  builder: ( context) => Padding(
-                    padding: EdgeInsets.only(top: 20,  right: 20,  left: 20,
+        body: const Column(
+          children: [SearchBox()],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            showModalBottomSheet<dynamic>(
+                shape: const RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(25.0))),
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => Padding(
+                    padding: EdgeInsets.only(
+                        top: 20,
+                        right: 20,
+                        left: 20,
                         bottom: MediaQuery.of(context).viewInsets.bottom),
                     child: Wrap(
                       spacing: 8.0, // gap between adjacent chips
@@ -209,6 +216,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                         "salutation": email,
                                         "status": "accepting",
                                         "designation": "Professor",
+                                        "profilePicStatus": "None",
                                       });
 
                                       // ignore: use_build_context_synchronously
@@ -244,7 +252,6 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                     }
                                   }
                                 },
-                                
                                 child: const Text('Create Account'),
                               ),
                             ],
@@ -254,53 +261,52 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                       ],
                       // ),
                       // ),
-                  )
-                    
-                  // },
-                ));
-              },
-              
-              label: const Text('Create Account'),
-              icon: const Icon(Icons.add),
-              backgroundColor: Color(0xFFFF9343),
-            ),
+                    )
 
-            // Text("Hi, I'm Admin"),
-            // Expanded(
-            //   child: FirebaseAnimatedList(
-            //     query: appointmentsRef
-            //         .orderByChild('studentUserID')
-            //         .equalTo(userID),
-            //     itemBuilder: (context, snapshot, animation, index) {
-            //       return Card(
-            //           child: Column(
-            //         children: [
-            //           Text(
-            //             snapshot.child('professorName').value.toString(),
-            //           ),
-            //           Text(
-            //             snapshot.child('professorRole').value.toString(),
-            //           ),
-            //           Text(
-            //             snapshot.child('date').value.toString(),
-            //           ),
-            //           Text(
-            //             snapshot.child('time').value.toString(),
-            //           ),
-            //         ],
-            //       ));
-            //     },
-            //   ),
-            // ),
-        
+                    // },
+                    ));
+          },
+          label: const Text('Create Account'),
+          icon: const Icon(Icons.add),
+          backgroundColor: Color(0xFFFF9343),
+        ),
+
+        // Text("Hi, I'm Admin"),
+        // Expanded(
+        //   child: FirebaseAnimatedList(
+        //     query: appointmentsRef
+        //         .orderByChild('studentUserID')
+        //         .equalTo(userID),
+        //     itemBuilder: (context, snapshot, animation, index) {
+        //       return Card(
+        //           child: Column(
+        //         children: [
+        //           Text(
+        //             snapshot.child('professorName').value.toString(),
+        //           ),
+        //           Text(
+        //             snapshot.child('professorRole').value.toString(),
+        //           ),
+        //           Text(
+        //             snapshot.child('date').value.toString(),
+        //           ),
+        //           Text(
+        //             snapshot.child('time').value.toString(),
+        //           ),
+        //         ],
+        //       ));
+        //     },
+        //   ),
+        // ),
       ),
     );
   }
 }
+
 class SearchBox extends StatefulWidget {
   // final ValueChanged<String> onSearch;
 
-  const SearchBox({ Key? key}) : super(key: key);
+  const SearchBox({Key? key}) : super(key: key);
 
   @override
   _SearchBoxState createState() => _SearchBoxState();
@@ -319,19 +325,22 @@ class _SearchBoxState extends State<SearchBox> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-          width: 500,
-          child: TextField(
-            controller: _searchController,
-            decoration: const InputDecoration(
+        width: 500,
+        child: TextField(
+          controller: _searchController,
+          decoration: const InputDecoration(
             labelText: 'Search...',
-            prefixIcon: Icon(Icons.search, color: Color(0xffFF9343),),
-            border: OutlineInputBorder( borderRadius: BorderRadius.all(Radius.circular(20),
-          )
-        ),
-        ),  
+            prefixIcon: Icon(
+              Icons.search,
+              color: Color(0xffFF9343),
+            ),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            )),
           ),
+        ),
       ),
     );
   }
 }
-

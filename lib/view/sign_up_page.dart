@@ -89,7 +89,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter a valid email';
-                          } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                          } else if (!RegExp(
+                                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                               .hasMatch(value)) {
                             return 'Please enter a valid email';
                           }
@@ -137,7 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             String lastName = _lastNameController.text;
                             String email = _emailController.text;
                             String password = _passwordController.text;
-      
+
                             try {
                               // ignore: unused_local_variable
                               final credential = await FirebaseAuth.instance
@@ -145,10 +146,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                 email: email,
                                 password: password,
                               );
-      
+
                               String? userID =
                                   FirebaseAuth.instance.currentUser?.uid;
-      
+
                               await rtdb.ref("students/$userID").set({
                                 "firstName": firstName,
                                 "lastName": lastName,
@@ -196,16 +197,15 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: const Text('Sign Up'),
                       ),
                     ],
-                    
                   ),
-                  
                 ),
                 const SizedBox(height: 15),
                 InkWell(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SignInPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const SignInPage()),
                     );
                   },
                   child: const Align(
