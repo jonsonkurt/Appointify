@@ -13,6 +13,7 @@ class ProfileController with ChangeNotifier {
 
     if (pickedFile != null) {
       _image = XFile(pickedFile.path);
+      print(_image);
     }
   }
 
@@ -22,6 +23,7 @@ class ProfileController with ChangeNotifier {
 
     if (pickedFile != null) {
       _image = XFile(pickedFile.path);
+      print(_image);
     }
   }
 

@@ -1,11 +1,12 @@
 import 'dart:async';
-
+import 'package:appointify/view/student/profile_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 // import 'package:transparent_image/transparent_image.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -65,101 +66,136 @@ class _ProfilePageState extends State<ProfilePage> {
 
     // final Storage storage = Storage();
     return Scaffold(
-        body: SafeArea(
-            child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: StreamBuilder(
-          stream: studentsRef.child(userID!).onValue,
-          builder: (context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasData) {
-              Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
-              String firstName = map['firstName'];
-              String lastName = map['lastName'];
-              String mobileNumber = map['mobileNumber'];
-              String section = map['section'];
-              String email = map['email'];
+        body: ChangeNotifierProvider(
+            create: (_) => ProfileController(),
+            child: Consumer<ProfileController>(
+              builder: (context, provider, child) {
+                return SafeArea(
+                    child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: StreamBuilder(
+                      stream: studentsRef.child(userID!).onValue,
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (snapshot.hasData) {
+                          Map<dynamic, dynamic> map =
+                              snapshot.data.snapshot.value;
+                          String firstName = map['firstName'];
+                          String lastName = map['lastName'];
+                          String mobileNumber = map['mobileNumber'];
+                          String section = map['section'];
+                          String email = map['email'];
 
-              return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    //Profile page Text
-                    const Text("Profile"),
-                    SizedBox(
-                      child: Center(
-                        child: Container(
-                          height: 130,
-                          width: 130,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: const Color.fromARGB(255, 35, 35, 35),
-                                width: 2,
-                              )),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child:
+                          return Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                //Profile page Text
+                                const Text("Profile"),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                SizedBox(
+                                  child: Center(
+                                    child: Container(
+                                      height: 130,
+                                      width: 130,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: const Color.fromARGB(
+                                                255, 35, 35, 35),
+                                            width: 2,
+                                          )),
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          child:
 
-                                  //provider.image == null ?
-                                  // map['profile'].toString() =="" ? const Icon(Icons.person, size: 35,):
-                                  Image(
-                                fit: BoxFit.cover,
-                                image: const NetworkImage(
-                                    "https://s3.getstickerpack.com/storage/uploads/sticker-pack/genshin-impact-eula/sticker_7.png"),
-                                loadingBuilder:
-                                    (context, child, loadingProgress) {
-                                  if (loadingProgress == null) {
-                                    return child;
-                                  }
-                                  return const CircularProgressIndicator();
-                                },
-                                errorBuilder: (context, object, stack) {
-                                  return const Icon(
-                                    Icons.error_outline,
-                                    color: Color.fromARGB(255, 35, 35, 35),
-                                  );
-                                },
-                              )),
-                        ),
-                      ),
-                    ),
-                    ReuseableRow(title: 'Name', value: '$firstName $lastName', iconData: Icons.person_outline),
-                    ReuseableRow(title: 'Email', value: email, iconData: Icons.email),
-                    ReuseableRow(title: 'Phone', value: mobileNumber, iconData: Icons.phone),
-                    ReuseableRow(title: 'Section', value: section, iconData: Icons.group),
+                                              //provider.image == null ?
+                                              // map['profile'].toString() =="" ? const Icon(Icons.person, size: 35,):
+                                              Image(
+                                            fit: BoxFit.cover,
+                                            image: const NetworkImage(
+                                                "https://s3.getstickerpack.com/storage/uploads/sticker-pack/genshin-impact-eula/sticker_7.png"),
+                                            loadingBuilder: (context, child,
+                                                loadingProgress) {
+                                              if (loadingProgress == null) {
+                                                return child;
+                                              }
+                                              return const CircularProgressIndicator();
+                                            },
+                                            errorBuilder:
+                                                (context, object, stack) {
+                                              return const Icon(
+                                                Icons.error_outline,
+                                                color: Color.fromARGB(
+                                                    255, 35, 35, 35),
+                                              );
+                                            },
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                ReuseableRow(
+                                    title: 'Name',
+                                    value: '$firstName $lastName',
+                                    iconData: Icons.person_outline),
+                                ReuseableRow(
+                                    title: 'Email',
+                                    value: email,
+                                    iconData: Icons.email),
+                                ReuseableRow(
+                                    title: 'Phone',
+                                    value: mobileNumber,
+                                    iconData: Icons.phone),
+                                ReuseableRow(
+                                    title: 'Section',
+                                    value: section,
+                                    iconData: Icons.group),
 
-                    //update profile button
-                    Center(
-                      // update prolife logic
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // provider.pickImage(context);
-                        },
-                        child: const Text('Update Profile'),
-                      ),
-                    ),
+                                //update profile button
+                                Center(
+                                  // update prolife logic
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      provider.pickImage(context);
+                                    },
+                                    child: const Text('Update Profile Picture'),
+                                  ),
+                                ),
 
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _logout,
-                      child: const Text("Logout"),
-                    ),
-                  ]);
-            } else {
-              print('else');
-              return const Center(child: Text('Something went wrong.'));
-            }
-          }),
-    )));
+                                const SizedBox(height: 20),
+                                ElevatedButton(
+                                  onPressed: _logout,
+                                  child: const Text("Logout"),
+                                ),
+                              ]);
+                        } else {
+                          print('else');
+                          return const Center(
+                              child: Text('Something went wrong.'));
+                        }
+                      }),
+                ));
+              },
+            )));
   }
 }
 
 class ReuseableRow extends StatelessWidget {
   final String title, value;
   final IconData iconData;
-  const ReuseableRow({super.key, required this.title, required this.value, required this.iconData});
+  const ReuseableRow(
+      {super.key,
+      required this.title,
+      required this.value,
+      required this.iconData});
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +205,10 @@ class ReuseableRow extends StatelessWidget {
           title: Text(title),
           leading: Icon(iconData),
           trailing: Text(value),
-        )
+        ),
+        const Divider(
+          color: const Color.fromARGB(255, 35, 35, 35),
+        ),
       ],
     );
   }
