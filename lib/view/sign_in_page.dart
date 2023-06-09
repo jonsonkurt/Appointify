@@ -18,6 +18,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _passwordVisible = false;
 
   @override
   void dispose() {
@@ -103,11 +104,20 @@ class _SignInPageState extends State<SignInPage> {
                             width: MediaQuery.of(context).size.width,
                             child: TextField(
                               controller: _emailController,
-                              style: const TextStyle(color: Colors.black),
-                              decoration: const InputDecoration(
+                              style: const TextStyle(
+                                color: Colors.black),
+                              decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide.none,
+                                ),
                               ),
+                              textInputAction: TextInputAction.next,
+                              onEditingComplete: () =>
+                                  FocusScope.of(context)
+                                      .nextFocus(),
                             ),
                           ),
                         ],
@@ -128,22 +138,36 @@ class _SignInPageState extends State<SignInPage> {
                           const SizedBox(height: 8),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            child: TextField(
-                              obscureText: true,
+                            child: TextFormField(
+                              obscureText: !_passwordVisible,
                               controller: _passwordController,
-                              style: const TextStyle(color: Colors.black),
-                              decoration: const InputDecoration(
+                              style: const TextStyle(
+                                color: Colors.black),
+                              decoration:  InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
-                                suffixIcon: Align(
-                                  widthFactor: 1.0,
-                                  heightFactor: 1.0,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide.none,
+                                ),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _passwordVisible =
+                                          !_passwordVisible;
+                                    });
+                                  },
                                   child: Icon(
-                                    Icons.remove_red_eye,
-                                    color: Color(0xFFFF9343),
+                                    _passwordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                        color: const Color(0xFFFF9343),
                                   ),
                                 ),
                               ),
+                              textInputAction: TextInputAction.next,
+                              onEditingComplete: () =>
+                                FocusScope.of(context).unfocus(),
                             ),
                           ),
                         ],
@@ -163,7 +187,7 @@ class _SignInPageState extends State<SignInPage> {
                               fontFamily: "GothamRnd-Medium",
                               color: Color(0xFF393838),
                               fontSize: 10,
-                              fontWeight: FontWeight.normal,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ),
@@ -200,9 +224,9 @@ class _SignInPageState extends State<SignInPage> {
                                             const BottomNavigation()));
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'user-not-found') {
-                                  // print('No user found for that email.');
+                                //  print('No user found for that email.');
                                 } else if (e.code == 'wrong-password') {
-                                  // print('Wrong password provided for that user.');
+                               // print('Wrong password provided for that user.');
                                 }
                               }
                             }
@@ -212,7 +236,11 @@ class _SignInPageState extends State<SignInPage> {
 
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(203, 50),
-                            backgroundColor: const Color(0xFFFF9343),
+                            backgroundColor: 
+                                const Color(0xFFFF9343),
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
+                            ),
                           ),
                           child: const Text(
                             'Sign In',
