@@ -36,7 +36,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
             ),
             SalomonBottomBarItem(
               icon: const Icon(Icons.list),
-              title: const Text("Professor"),
+              title: const Text("Employee"),
               selectedColor: Colors.purple,
             ),
             SalomonBottomBarItem(
