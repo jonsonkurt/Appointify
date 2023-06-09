@@ -66,131 +66,133 @@ class _ProfilePageState extends State<ProfilePage> {
     DatabaseReference studentsRef = rtdb.ref('students');
 
     // final Storage storage = Storage();
-    return Scaffold(
-        body: ChangeNotifierProvider(
-            create: (_) => ProfileController(),
-            child: Consumer<ProfileController>(
-              builder: (context, provider, child) {
-                return SafeArea(
-                    child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: StreamBuilder(
-                      stream: studentsRef.child(userID!).onValue,
-                      builder: (context, AsyncSnapshot snapshot) {
-                        if (!snapshot.hasData) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        } else if (snapshot.hasData) {
-                          Map<dynamic, dynamic> map =
-                              snapshot.data.snapshot.value;
-                          String firstName = map['firstName'];
-                          String lastName = map['lastName'];
-                          String mobileNumber = map['mobileNumber'];
-                          String section = map['section'];
-                          String email = map['email'];
-                          String profilePicStatus = map['profilePicStatus'].toString();
-
-                          return Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                //Profile page Text
-                                const Text("Profile"),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                SizedBox(
-                                  child: Center(
-                                    child: Container(
-                                      height: 130,
-                                      width: 130,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: const Color.fromARGB(
-                                                255, 35, 35, 35),
-                                            width: 2,
-                                          )),
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          child: provider.image == null ?  map['profilePicStatus'].toString() =="None" ? const Icon(Icons.person, size: 35,):
-                                              Image(
-                                            fit: BoxFit.cover,
-                                            image: NetworkImage(
-                                                profilePicStatus),
-                                            loadingBuilder: (context, child,
-                                                loadingProgress) {
-                                              if (loadingProgress == null) {
-                                                return child;
-                                              }
-                                              return const CircularProgressIndicator();
-                                            },
-                                            errorBuilder:
-                                                (context, object, stack) {
-                                              return const Icon(
-                                                Icons.error_outline,
-                                                color: Color.fromARGB(
-                                                    255, 35, 35, 35),
-                                              );
-                                            },
-                                          ) :
-
-                                          Image.file(
-                                            File(provider.image!.path).absolute
-                                          )
-
-
-                                          ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+          body: ChangeNotifierProvider(
+              create: (_) => ProfileController(),
+              child: Consumer<ProfileController>(
+                builder: (context, provider, child) {
+                  return SafeArea(
+                      child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: StreamBuilder(
+                        stream: studentsRef.child(userID!).onValue,
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (!snapshot.hasData) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (snapshot.hasData) {
+                            Map<dynamic, dynamic> map =
+                                snapshot.data.snapshot.value;
+                            String firstName = map['firstName'];
+                            String lastName = map['lastName'];
+                            String mobileNumber = map['mobileNumber'];
+                            String section = map['section'];
+                            String email = map['email'];
+                            String profilePicStatus = map['profilePicStatus'].toString();
+    
+                            return Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  //Profile page Text
+                                  const Text("Profile"),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  SizedBox(
+                                    child: Center(
+                                      child: Container(
+                                        height: 130,
+                                        width: 130,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  255, 35, 35, 35),
+                                              width: 2,
+                                            )),
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            child: provider.image == null ?  map['profilePicStatus'].toString() =="None" ? const Icon(Icons.person, size: 35,):
+                                                Image(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                  profilePicStatus),
+                                              loadingBuilder: (context, child,
+                                                  loadingProgress) {
+                                                if (loadingProgress == null) {
+                                                  return child;
+                                                }
+                                                return const CircularProgressIndicator();
+                                              },
+                                              errorBuilder:
+                                                  (context, object, stack) {
+                                                return const Icon(
+                                                  Icons.error_outline,
+                                                  color: Color.fromARGB(
+                                                      255, 35, 35, 35),
+                                                );
+                                              },
+                                            ) :
+    
+                                            Image.file(
+                                              File(provider.image!.path).absolute
+                                            )
+    
+    
+                                            ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                ReuseableRow(
-                                    title: 'Name',
-                                    value: '$firstName $lastName',
-                                    iconData: Icons.person_outline),
-                                ReuseableRow(
-                                    title: 'Email',
-                                    value: email,
-                                    iconData: Icons.email),
-                                ReuseableRow(
-                                    title: 'Phone',
-                                    value: mobileNumber,
-                                    iconData: Icons.phone),
-                                ReuseableRow(
-                                    title: 'Section',
-                                    value: section,
-                                    iconData: Icons.group),
-
-                                //update profile button
-                                Center(
-                                  // update prolife logic
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      provider.pickImage(context);
-                                    },
-                                    child: const Text('Update Profile Picture'),
+                                  const SizedBox(
+                                    height: 20,
                                   ),
-                                ),
-
-                                const SizedBox(height: 20),
-                                ElevatedButton(
-                                  onPressed: _logout,
-                                  child: const Text("Logout"),
-                                ),
-                              ]);
-                        } else {
-                          print('else');
-                          return const Center(
-                              child: Text('Something went wrong.'));
-                        }
-                      }),
-                ));
-              },
-            )));
+                                  ReuseableRow(
+                                      title: 'Name',
+                                      value: '$firstName $lastName',
+                                      iconData: Icons.person_outline),
+                                  ReuseableRow(
+                                      title: 'Email',
+                                      value: email,
+                                      iconData: Icons.email),
+                                  ReuseableRow(
+                                      title: 'Phone',
+                                      value: mobileNumber,
+                                      iconData: Icons.phone),
+                                  ReuseableRow(
+                                      title: 'Section',
+                                      value: section,
+                                      iconData: Icons.group),
+    
+                                  //update profile button
+                                  Center(
+                                    // update prolife logic
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        provider.pickImage(context);
+                                      },
+                                      child: const Text('Update Profile Picture'),
+                                    ),
+                                  ),
+    
+                                  const SizedBox(height: 20),
+                                  ElevatedButton(
+                                    onPressed: _logout,
+                                    child: const Text("Logout"),
+                                  ),
+                                ]);
+                          } else {
+                            return const Center(
+                                child: Text('Something went wrong.'));
+                          }
+                        }),
+                  ));
+                },
+              ))),
+    );
   }
 }
 
@@ -213,7 +215,7 @@ class ReuseableRow extends StatelessWidget {
           trailing: Text(value),
         ),
         const Divider(
-          color: const Color.fromARGB(255, 35, 35, 35),
+          color: Color.fromARGB(255, 35, 35, 35),
         ),
       ],
     );
