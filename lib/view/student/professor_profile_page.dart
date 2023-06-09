@@ -218,6 +218,10 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         "time": selectedTime,
                       });
                       break;
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Not part of the schedule time"),
+                      ));
                     }
                   }
                 }
