@@ -222,7 +222,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         "status": "$userID-PENDING",
                         "studentID": userID,
                         "studentName": "$studname $studLastName",
-                        "studSection": studSection,
+                        "section": studSection,
                         "time": selectedTime,
                       });
                       break;
