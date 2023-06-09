@@ -156,6 +156,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 "email": email,
                                 "mobileNumber": "-",
                                 "section": "-",
+                                "profilePicStatus": "None",
+                                "UID": userID,
                                 // "address": {"line1": "100 Mountain View"}
                               });
                               // ignore: use_build_context_synchronously
