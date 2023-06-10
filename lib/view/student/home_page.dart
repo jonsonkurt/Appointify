@@ -286,7 +286,8 @@ class _HomePageState extends State<HomePage> {
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(100),
-                                          child: ProfileController().image ==
+                                          child: ProfileController()
+                                                      .image ==
                                                   null
                                               ? snapshot
                                                           .child(
