@@ -177,7 +177,14 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                       child: const Text('Confirm'),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ProfilePage()),
+                                          );
+                                      },
                                       child: const Text('Cancel'),
                                     ),
                                   ],
