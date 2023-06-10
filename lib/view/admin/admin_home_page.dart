@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
+import 'package:appointify/view/student/profile_controller.dart';
+import 'dart:collection';
 
 class HomePageAdmin extends StatefulWidget {
   const HomePageAdmin({Key? key}) : super(key: key);
@@ -28,6 +31,13 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
   final TextEditingController _conpasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final bool _isObscure = true;
+  String name = '';
+
+  void _handleSearch(String value) {
+    setState(() {
+      name = value;
+    });
+  }
 
   @override
   void initState() {
@@ -72,17 +82,109 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
     // });
 
     // DatabaseReference appointmentsRef = rtdb.ref('appointments/');
+    DatabaseReference professorRef = rtdb.ref('professors/');
 
     return Scaffold(
       body: Scaffold(
-        appBar: AppBar(title: Text("List of Employees"),
-        elevation: 0,
-        backgroundColor: Colors.white12,
-        titleTextStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,),
+        appBar: AppBar(
+          title: const Text("List of Employees"),
+          elevation: 0,
+          backgroundColor: Colors.white12,
+          titleTextStyle: const TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        body: Column(
+          children: [
+            SearchBox(
+              onSearch: _handleSearch,
+            ),
+            Expanded(
+                child: FirebaseAnimatedList(
+                    query: professorRef,
+                    itemBuilder: (context, snapshot, animation, index) {
+                      String profFirstName =
+                          snapshot.child('firstName').value.toString();
+                      String profLastName =
+                          snapshot.child('lastName').value.toString();
 
-        body: const Column(
-          children: [SearchBox()],
+                      // Filter professors based on the entered name
+
+                      if (name.isNotEmpty &&
+                          !profFirstName
+                              .toLowerCase()
+                              .contains(name.toLowerCase()) &&
+                          !profLastName
+                              .toLowerCase()
+                              .contains(name.toLowerCase())) {
+                        return Container(); // Hide the professor card if it doesn't match the search criteria
+                      }
+                      return Card(
+                        child: Column(
+                          children: [
+                            Center(
+                              child: Container(
+                                height: 130,
+                                width: 130,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color:
+                                          const Color.fromARGB(255, 35, 35, 35),
+                                      width: 2,
+                                    )),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: ProfileController().image == null
+                                        ? snapshot
+                                                    .child('profilePicStatus')
+                                                    .value
+                                                    .toString() ==
+                                                "None"
+                                            ? const Icon(
+                                                Icons.person,
+                                                size: 35,
+                                              )
+                                            : Image(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(snapshot
+                                                    .child('profilePicStatus')
+                                                    .value
+                                                    .toString()),
+                                                loadingBuilder: (context, child,
+                                                    loadingProgress) {
+                                                  if (loadingProgress == null) {
+                                                    return child;
+                                                  }
+                                                  return const CircularProgressIndicator();
+                                                },
+                                                errorBuilder:
+                                                    (context, object, stack) {
+                                                  return const Icon(
+                                                    Icons.error_outline,
+                                                    color: Color.fromARGB(
+                                                        255, 35, 35, 35),
+                                                  );
+                                                },
+                                              )
+                                        : Image.file(File(
+                                                ProfileController().image!.path)
+                                            .absolute)),
+                              ),
+                            ),
+                            Text("$profFirstName $profLastName"),
+                            Text(snapshot
+                                .child('professorRole')
+                                .value
+                                .toString()),
+                            const Text("HINDI KO ALAM ANO NEED DITO"),
+                            const Text("Status: Employee"),
+                          ],
+                        ),
+                      );
+                    }))
+          ],
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
@@ -300,9 +402,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
 }
 
 class SearchBox extends StatefulWidget {
-  // final ValueChanged<String> onSearch;
+  final ValueChanged<String> onSearch;
 
-  const SearchBox({Key? key}) : super(key: key);
+  const SearchBox({required this.onSearch, Key? key}) : super(key: key);
 
   @override
   _SearchBoxState createState() => _SearchBoxState();
@@ -335,6 +437,7 @@ class _SearchBoxState extends State<SearchBox> {
               Radius.circular(20),
             )),
           ),
+          onChanged: widget.onSearch,
         ),
       ),
     );
