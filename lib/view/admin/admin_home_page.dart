@@ -315,6 +315,15 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                         "status": "accepting",
                                         "designation": "Professor",
                                         "profilePicStatus": "None",
+                                        "availability": {
+                                          "Monday": "-",
+                                          "Tuesday": "-",
+                                          "Wednesday": "-",
+                                          "Thursday": "-",
+                                          "Friday": "-",
+                                          "Saturday": "-",
+                                          "Sunday": "-",
+                                        }
                                       });
 
                                       // ignore: use_build_context_synchronously
