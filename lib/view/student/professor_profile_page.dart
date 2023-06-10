@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:logger/logger.dart';
 import 'package:random_string/random_string.dart';
-import 'bottom_navigation_bar.dart';
 
 class ProfessorProfilePage extends StatefulWidget {
   final String firstName;
