@@ -143,7 +143,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
       body: Column(
         children: [
           IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
               ),
               onPressed: () {
