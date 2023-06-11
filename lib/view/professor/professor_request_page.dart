@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
 class RequestPage extends StatefulWidget {
@@ -20,6 +21,8 @@ class _RequestPageState extends State<RequestPage> {
   bool isLoading = true;
   String name = '';
   StreamSubscription<DatabaseEvent>? nameSubscription;
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
 
   @override
   void initState() {
@@ -30,6 +33,8 @@ class _RequestPageState extends State<RequestPage> {
   @override
   void dispose() {
     nameSubscription?.cancel();
+    _dateController.dispose();
+    _timeController.dispose();
     super.dispose();
   }
 
@@ -37,21 +42,28 @@ class _RequestPageState extends State<RequestPage> {
     await Firebase.initializeApp();
   }
 
-  void _handleButtonPress(String firstName, String lastName,
-      String professorRole, String status, String availability) {
-    // INSERT CODE FOR NEW PAGE
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => ProfessorProfilePage(
-    //       firstName: firstName,
-    //       lastName: lastName,
-    //       professorRole: professorRole,
-    //       status: status,
-    //       availability: availability,
-    //     ),
-    //   ),
-    // );
+  void _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    ).then((selectedDate) {
+      if (selectedDate != null) {
+        _dateController.text = DateFormat.yMMMd('en_US').format(selectedDate);
+      }
+    });
+  }
+
+  void _showTimePicker() {
+    showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    ).then((selectedTime) {
+      if (selectedTime != null) {
+        _timeController.text = selectedTime.format(context);
+      }
+    });
   }
 
   void _handleSearch(String value) {
@@ -91,7 +103,8 @@ class _RequestPageState extends State<RequestPage> {
               // Modify strings based on your needs
               String studentName =
                   snapshot.child('studentName').value.toString();
-
+              String profID = snapshot.child('professorID').value.toString();
+              String appointID = snapshot.child('appointID').value.toString();
               // Filter professors based on the entered name
               if (name.isNotEmpty &&
                   !studentName.toLowerCase().contains(name.toLowerCase())) {
@@ -108,25 +121,139 @@ class _RequestPageState extends State<RequestPage> {
 
                   // Modify button based on what you need
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle button press
-                      // Add your desired functionality here
-                    },
                     child: const Text('Accept'),
+                    onPressed: () async {
+                      await appointmentsRef.child(appointID.toString()).update({
+                        'requestStatusProfessor': "$profID-UPCOMING",
+                        'status': "$userID-UPCOMING",
+                        'requestStatus': "UPCOMING",
+                        // 'profilePicStatus':
+                      });
+                    },
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle button press
-                      // Add your desired functionality here
-                    },
                     child: const Text('Reschedule'),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Reschedule'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Expanded(
+                                      child: TextField(
+                                        controller: _dateController,
+                                        onTap: _showDatePicker,
+                                        readOnly: true,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Select appointment date',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Expanded(
+                                      child: TextField(
+                                        controller: _timeController,
+                                        onTap: _showTimePicker,
+                                        readOnly: true,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Select appointment time',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () async {
+                                  await appointmentsRef
+                                      .child(appointID.toString())
+                                      .update({
+                                    "countered": "yes",
+                                    "counteredDate": _dateController.text,
+                                    "counteredTime": _timeController.text,
+                                  });
+
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: const Text('Cancel'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle button press
-                      // Add your desired functionality here
-                    },
                     child: const Text('Reject'),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            String profNotes = '';
+
+                            return AlertDialog(
+                              title: const Text('State your reason.'),
+                              content: TextField(
+                                onChanged: (value) {
+                                  profNotes = value;
+                                },
+                                maxLines: null,
+                                keyboardType: TextInputType.multiline,
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter your paragraph',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  child: const Text('OK'),
+                                  onPressed: () async {
+                                    await appointmentsRef
+                                        .child(appointID.toString())
+                                        .update({
+                                      'notes': profNotes,
+                                      'requestStatusProfessor':
+                                          "$profID-CANCELED",
+                                      'status': "$userID-CANCELED",
+                                      'requestStatus': "CANCELED",
+                                    });
+                                    // ignore: use_build_context_synchronously
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text('Cancel'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          });
+                    },
                   )
                 ],
               ));
