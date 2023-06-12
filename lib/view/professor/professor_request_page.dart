@@ -115,7 +115,7 @@ class _RequestPageState extends State<RequestPage> {
                   child: Column(
                 children: [
                   Text(snapshot.child('studentName').value.toString()),
-                  Text(snapshot.child('studentSection').value.toString()),
+                  Text(snapshot.child('section').value.toString()),
                   Text(snapshot.child('date').value.toString()),
                   Text(snapshot.child('time').value.toString()),
 
