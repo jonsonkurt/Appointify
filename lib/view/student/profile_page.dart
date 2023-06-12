@@ -20,27 +20,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  var logger = Logger();
-  String realTimeValue = "";
   String? userID = FirebaseAuth.instance.currentUser?.uid;
-  bool isLoading = true;
-  String name = '';
-  StreamSubscription<DatabaseEvent>? nameSubscription;
+  DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
 
   @override
   void initState() {
     super.initState();
-    initializeFirebase();
-  }
-
-  @override
-  void dispose() {
-    nameSubscription?.cancel();
-    super.dispose();
-  }
-
-  Future<void> initializeFirebase() async {
-    await Firebase.initializeApp();
   }
 
   Future<void> _logout() async {
@@ -54,19 +39,8 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  final ref = FirebaseDatabase.instance.ref('students');
-
   @override
   Widget build(BuildContext context) {
-    final firebaseApp = Firebase.app();
-    final rtdb = FirebaseDatabase.instanceFor(
-      app: firebaseApp,
-      databaseURL:
-          'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    );
-
-    DatabaseReference studentsRef = rtdb.ref('students');
-
     // final Storage storage = Storage();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -79,7 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: StreamBuilder(
-                        stream: studentsRef.child(userID!).onValue,
+                        stream: ref.child(userID!).onValue,
                         builder: (context, AsyncSnapshot snapshot) {
                           if (!snapshot.hasData) {
                             return const Center(
@@ -122,7 +96,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   )),
                                               child: ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(100),
+                                                      BorderRadius.circular(
+                                                          100),
                                                   child: provider.image == null
                                                       ? map['profilePicStatus']
                                                                   .toString() ==
@@ -136,7 +111,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                               image: NetworkImage(
                                                                   profilePicStatus),
                                                               loadingBuilder:
-                                                                  (context, child,
+                                                                  (context,
+                                                                      child,
                                                                       loadingProgress) {
                                                                 if (loadingProgress ==
                                                                     null) {
@@ -166,15 +142,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                             ),
                                           ),
                                         ),
-                                      InkWell(
-                                        onTap: () {
-                                          provider.pickImage(context);
-                                        },
-                                        child: const CircleAvatar(
-                                          radius: 15,
-                                          child: Icon(Icons.edit, size:15),
-                                        ),
-                                      )]),
+                                        InkWell(
+                                          onTap: () {
+                                            provider.pickImage(context);
+                                          },
+                                          child: const CircleAvatar(
+                                            radius: 15,
+                                            child: Icon(Icons.edit, size: 15),
+                                          ),
+                                        )
+                                      ]),
                                   const SizedBox(
                                     height: 20,
                                   ),

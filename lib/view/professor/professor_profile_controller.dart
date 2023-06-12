@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class AdminProfileController with ChangeNotifier {
+class ProfessorProfileController with ChangeNotifier {
   final picker = ImagePicker();
 
   String? userID = FirebaseAuth.instance.currentUser?.uid;
