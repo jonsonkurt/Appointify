@@ -9,12 +9,13 @@ class ProfessorProfileController with ChangeNotifier {
   final picker = ImagePicker();
 
   String? userID = FirebaseAuth.instance.currentUser?.uid;
-  DatabaseReference ref = FirebaseDatabase.instance.ref().child('professors');
+  DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
   XFile? _image;
   XFile? get image => _image;
+  String imgURL = '';
 
   Future pickGalleryImage(BuildContext context) async {
     final pickedFile =
@@ -79,19 +80,19 @@ class ProfessorProfileController with ChangeNotifier {
 
   void updloadImage(BuildContext context) async {
     firebase_storage.Reference storageRef =
-        firebase_storage.FirebaseStorage.instance.ref('employeeProfile/$userID');
+        firebase_storage.FirebaseStorage.instance.ref('studentProfile/$userID');
     firebase_storage.UploadTask uploadTask =
         storageRef.putFile(File(image!.path).absolute);
     await Future.value(uploadTask);
 
-    final newUrl = await storageRef.getDownloadURL();
+    imgURL = await storageRef.getDownloadURL();
 
-    ref
-        .child(userID.toString())
-        .update({'profilePicStatus': newUrl.toString()}).then((value) {
-      _image = null;
-    }).onError((error, stackTrace) {
-      //insert toast here
-    });
+    // ref
+    //     .child(userID.toString())
+    //     .update({'profilePicStatus': newUrl.toString()}).then((value) {
+    //   _image = null;
+    // }).onError((error, stackTrace) {
+    //   //insert toast here
+    // });
   }
 }
