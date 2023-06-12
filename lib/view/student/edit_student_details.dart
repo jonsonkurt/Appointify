@@ -14,6 +14,8 @@ class EditStudentProfile extends StatefulWidget {
 }
 
 class _EditStudentProfileState extends State<EditStudentProfile> {
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _phone = TextEditingController();
   final TextEditingController _section = TextEditingController();
 
@@ -24,6 +26,8 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
 
   @override
   void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     _phone.dispose();
     _section.dispose();
     super.dispose();
@@ -127,7 +131,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                     Text('$firstName $lastName'),
                                     const SizedBox(height: 16.0),
                                     TextFormField(
-                                      controller: TextEditingController(text: mobileNumber),
+                                      controller: _phone,
                                       decoration: const InputDecoration(
                                         labelText: 'Phone',
                                       ),
@@ -140,7 +144,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                     ),
                                     const SizedBox(height: 16.0),
                                     TextFormField(
-                                      controller: TextEditingController(text: section),
+                                      controller: _section,
                                       decoration: const InputDecoration(
                                         labelText: 'Section',
                                       ),
