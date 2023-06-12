@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:provider/provider.dart';
 
 import 'professor_profile_controller.dart';
@@ -88,7 +90,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                           )),
                                       child: ClipRRect(
                                           borderRadius: BorderRadius.circular(100),
-                                          child: map['profilePicStatus']
+                                          child: provider.image == null
+                                                    ? map['profilePicStatus']
                                                           .toString() ==
                                                       "None"
                                                   ? const Icon(
@@ -116,7 +119,9 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                         );
                                                       },
                                                     )
-                                             ),
+                                             : Image.file(File(provider
+                                                            .image!.path)
+                                                        .absolute)),
                                     ),
                                   ),
                                 ),

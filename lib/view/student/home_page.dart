@@ -4,6 +4,7 @@ import 'package:appointify/view/student/profile_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
@@ -39,6 +40,8 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
+
+    
   }
 
   @override
@@ -67,6 +70,7 @@ class _HomePageState extends State<HomePage> {
 
     DatabaseReference appointmentsRef = rtdb.ref('appointments/');
     // appointmentsRef.orderByChild('status').equalTo("$userID-PENDING");
+    
 
     return Scaffold(
       body: Center(

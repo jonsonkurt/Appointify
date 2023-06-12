@@ -3,6 +3,7 @@ import 'package:appointify/view/sign_in_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -303,7 +304,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                               String? userID =
                                   FirebaseAuth.instance.currentUser?.uid;
-
+                              final fcmToken = await FirebaseMessaging.instance.getToken();
                               await rtdb.ref("students/$userID").set({
                                 "firstName": firstName,
                                 "lastName": lastName,
@@ -313,6 +314,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 "section": "-",
                                 "profilePicStatus": "None",
                                 "UID": userID,
+                                "fcmToken": fcmToken,
+                                "notifState" : "no"
                                 // "address": {"line1": "100 Mountain View"}
                               });
                               // ignore: use_build_context_synchronously
