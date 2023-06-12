@@ -17,7 +17,7 @@ class _ProfessorBottomNavigationState extends State<ProfessorBottomNavigation> {
   var pages = const [
     HomePage(),
     RequestPage(),
-    ProfilePage(),
+    ProfessorProfilePage(),
   ];
 
   @override
@@ -26,10 +26,10 @@ class _ProfessorBottomNavigationState extends State<ProfessorBottomNavigation> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: SalomonBottomBar(
-          margin: EdgeInsets.only(left: 50, right: 60),
-          itemPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          margin: const EdgeInsets.only(left: 50, right: 60),
+          itemPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           currentIndex: currentIndex,
-          backgroundColor: Color(0xFFFF9343),
+          backgroundColor: const Color(0xFFFF9343),
           items: [
             SalomonBottomBarItem(
               icon: const Icon(Icons.home),

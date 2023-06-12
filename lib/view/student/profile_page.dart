@@ -1,13 +1,8 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:appointify/view/student/profile_controller.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
-import 'package:logger/logger.dart';
-import 'package:provider/provider.dart';
 
 import 'edit_student_details.dart';
 // import 'package:transparent_image/transparent_image.dart';
@@ -20,27 +15,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  var logger = Logger();
-  String realTimeValue = "";
   String? userID = FirebaseAuth.instance.currentUser?.uid;
-  bool isLoading = true;
-  String name = '';
-  StreamSubscription<DatabaseEvent>? nameSubscription;
+  DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
 
   @override
   void initState() {
     super.initState();
-    initializeFirebase();
-  }
-
-  @override
-  void dispose() {
-    nameSubscription?.cancel();
-    super.dispose();
-  }
-
-  Future<void> initializeFirebase() async {
-    await Firebase.initializeApp();
   }
 
   Future<void> _logout() async {
@@ -54,180 +34,135 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  final ref = FirebaseDatabase.instance.ref('students');
-
   @override
   Widget build(BuildContext context) {
-    final firebaseApp = Firebase.app();
-    final rtdb = FirebaseDatabase.instanceFor(
-      app: firebaseApp,
-      databaseURL:
-          'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    );
-
-    DatabaseReference studentsRef = rtdb.ref('students');
-
     // final Storage storage = Storage();
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          body: ChangeNotifierProvider(
-              create: (_) => ProfileController(),
-              child: Consumer<ProfileController>(
-                builder: (context, provider, child) {
-                  return SafeArea(
-                      child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: StreamBuilder(
-                        stream: studentsRef.child(userID!).onValue,
-                        builder: (context, AsyncSnapshot snapshot) {
-                          if (!snapshot.hasData) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          } else if (snapshot.hasData) {
-                            Map<dynamic, dynamic> map =
-                                snapshot.data.snapshot.value;
-                            String firstName = map['firstName'];
-                            String lastName = map['lastName'];
-                            String mobileNumber = map['mobileNumber'];
-                            String section = map['section'];
-                            String email = map['email'];
-                            String profilePicStatus =
-                                map['profilePicStatus'].toString();
-
-                            return Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  //Profile page Text
-                                  const Text("Profile"),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Stack(
-                                      alignment: Alignment.bottomCenter,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: Center(
-                                            child: Container(
-                                              height: 130,
-                                              width: 130,
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                    color: const Color.fromARGB(
-                                                        255, 35, 35, 35),
-                                                    width: 2,
-                                                  )),
-                                              child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(100),
-                                                  child: provider.image == null
-                                                      ? map['profilePicStatus']
-                                                                  .toString() ==
-                                                              "None"
-                                                          ? const Icon(
-                                                              Icons.person,
-                                                              size: 35,
-                                                            )
-                                                          : Image(
-                                                              fit: BoxFit.cover,
-                                                              image: NetworkImage(
-                                                                  profilePicStatus),
-                                                              loadingBuilder:
-                                                                  (context, child,
-                                                                      loadingProgress) {
-                                                                if (loadingProgress ==
-                                                                    null) {
-                                                                  return child;
-                                                                }
-                                                                return const CircularProgressIndicator();
-                                                              },
-                                                              errorBuilder:
-                                                                  (context,
-                                                                      object,
-                                                                      stack) {
-                                                                return const Icon(
-                                                                  Icons
-                                                                      .error_outline,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          35,
-                                                                          35,
-                                                                          35),
-                                                                );
-                                                              },
-                                                            )
-                                                      : Image.file(File(provider
-                                                              .image!.path)
-                                                          .absolute)),
-                                            ),
+        debugShowCheckedModeBanner: false,
+        home: SafeArea(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: StreamBuilder(
+                stream: ref.child(userID!).onValue,
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
+                    String firstName = map['firstName'];
+                    String lastName = map['lastName'];
+                    String mobileNumber = map['mobileNumber'];
+                    String section = map['section'];
+                    String email = map['email'];
+                    String profilePicStatus = map['profilePicStatus'].toString();
+            
+                    return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          //Profile page Text
+                          const Text("Profile"),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Stack(alignment: Alignment.bottomCenter, children: [
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Center(
+                                child: Container(
+                                  height: 130,
+                                  width: 130,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color:
+                                            const Color.fromARGB(255, 35, 35, 35),
+                                        width: 2,
+                                      )),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: map['profilePicStatus'].toString() ==
+                                                  "None"
+                                              ? const Icon(
+                                                  Icons.person,
+                                                  size: 35,
+                                                )
+                                              : Image(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(
+                                                      profilePicStatus),
+                                                  loadingBuilder: (context, child,
+                                                      loadingProgress) {
+                                                    if (loadingProgress == null) {
+                                                      return child;
+                                                    }
+                                                    return const CircularProgressIndicator();
+                                                  },
+                                                  errorBuilder:
+                                                      (context, object, stack) {
+                                                    return const Icon(
+                                                      Icons.error_outline,
+                                                      color: Color.fromARGB(
+                                                          255, 35, 35, 35),
+                                                    );
+                                                  },
+                                                )
                                           ),
-                                        ),
-                                      InkWell(
-                                        onTap: () {
-                                          provider.pickImage(context);
-                                        },
-                                        child: const CircleAvatar(
-                                          radius: 15,
-                                          child: Icon(Icons.edit, size:15),
-                                        ),
-                                      )]),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Center(
-                                    // update prolife logic
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const EditStudentProfile()),
-                                        );
-                                        // provider.pickImage(context);
-                                      },
-                                      child: const Text(
-                                          'Edit Personal Information'),
-                                    ),
-                                  ),
-                                  ReuseableRow(
-                                      title: 'Name',
-                                      value: '$firstName $lastName',
-                                      iconData: Icons.person_outline),
-                                  ReuseableRow(
-                                      title: 'Email',
-                                      value: email,
-                                      iconData: Icons.email),
-                                  ReuseableRow(
-                                      title: 'Phone',
-                                      value: mobileNumber,
-                                      iconData: Icons.phone),
-                                  ReuseableRow(
-                                      title: 'Section',
-                                      value: section,
-                                      iconData: Icons.group),
-
-                                  //update profile button
-
-                                  const SizedBox(height: 20),
-                                  ElevatedButton(
-                                    onPressed: _logout,
-                                    child: const Text("Logout"),
-                                  ),
-                                ]);
-                          } else {
-                            return const Center(
-                                child: Text('Something went wrong.'));
-                          }
-                        }),
-                  ));
-                },
-              ))),
-    );
+                                ),
+                              ),
+                            ),
+                          ]),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Center(
+                            // update prolife logic
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EditStudentProfile()),
+                                );
+                                // provider.pickImage(context);
+                              },
+                              child: const Text('Edit Personal Information'),
+                            ),
+                          ),
+                          ReuseableRow(
+                              title: 'Name',
+                              value: '$firstName $lastName',
+                              iconData: Icons.person_outline),
+                          ReuseableRow(
+                              title: 'Email',
+                              value: email,
+                              iconData: Icons.email),
+                          ReuseableRow(
+                              title: 'Phone',
+                              value: mobileNumber,
+                              iconData: Icons.phone),
+                          ReuseableRow(
+                              title: 'Section',
+                              value: section,
+                              iconData: Icons.group),
+            
+                          //update profile button
+            
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: _logout,
+                            child: const Text("Logout"),
+                          ),
+                        ]);
+                  } else {
+                    return const Center(child: Text('Something went wrong.'));
+                  }
+                }),
+                    ),
+            )));
   }
 }
 
