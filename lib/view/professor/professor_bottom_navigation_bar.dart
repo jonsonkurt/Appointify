@@ -26,22 +26,25 @@ class _ProfessorBottomNavigationState extends State<ProfessorBottomNavigation> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: SalomonBottomBar(
+          margin: EdgeInsets.only(left: 50, right: 60),
+          itemPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           currentIndex: currentIndex,
+          backgroundColor: Color(0xFFFF9343),
           items: [
             SalomonBottomBarItem(
               icon: const Icon(Icons.home),
               title: const Text("Home"),
-              selectedColor: Colors.pink,
+              selectedColor: Colors.white,
             ),
             SalomonBottomBarItem(
               icon: const Icon(Icons.inbox),
               title: const Text("Requests"),
-              selectedColor: Colors.blue,
+              selectedColor: Colors.white,
             ),
             SalomonBottomBarItem(
               icon: const Icon(Icons.person),
               title: const Text("Profile"),
-              selectedColor: Colors.teal,
+              selectedColor: Colors.white,
             ),
           ],
           onTap: (index) {

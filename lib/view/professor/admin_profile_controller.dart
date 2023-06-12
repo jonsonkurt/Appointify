@@ -5,18 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class ProfileController with ChangeNotifier {
+class AdminProfileController with ChangeNotifier {
   final picker = ImagePicker();
 
   String? userID = FirebaseAuth.instance.currentUser?.uid;
-  DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
+  DatabaseReference ref = FirebaseDatabase.instance.ref().child('professors');
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
   XFile? _image;
   XFile? get image => _image;
-
-  dynamic cont = null;
 
   Future pickGalleryImage(BuildContext context) async {
     final pickedFile =
@@ -81,7 +79,7 @@ class ProfileController with ChangeNotifier {
 
   void updloadImage(BuildContext context) async {
     firebase_storage.Reference storageRef =
-        firebase_storage.FirebaseStorage.instance.ref('studentProfile/$userID');
+        firebase_storage.FirebaseStorage.instance.ref('employeeProfile/$userID');
     firebase_storage.UploadTask uploadTask =
         storageRef.putFile(File(image!.path).absolute);
     await Future.value(uploadTask);

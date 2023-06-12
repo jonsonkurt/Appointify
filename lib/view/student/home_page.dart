@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:appointify/view/student/profile_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -20,7 +22,8 @@ class _HomePageState extends State<HomePage> {
   String? userID = FirebaseAuth.instance.currentUser?.uid;
   bool isLoading = true;
   String name = '';
-  StreamSubscription<DatabaseEvent>? nameSubscription;
+  String picRef = '';
+  StreamSubscription<DatabaseEvent>? nameSubscription, picSubscription;
 
   @override
   void initState() {
@@ -268,6 +271,67 @@ class _HomePageState extends State<HomePage> {
                             child: Card(
                                 child: Column(
                               children: [
+                                SizedBox(
+                                  child: Center(
+                                    child: Container(
+                                      height: 100,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: const Color.fromARGB(
+                                                255, 35, 35, 35),
+                                            width: 2,
+                                          )),
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          child: ProfileController()
+                                                      .image ==
+                                                  null
+                                              ? snapshot
+                                                          .child(
+                                                              'profilePicStatus')
+                                                          .value
+                                                          .toString() ==
+                                                      "None"
+                                                  ? const Icon(
+                                                      Icons.person,
+                                                      size: 35,
+                                                    )
+                                                  : Image(
+                                                      fit: BoxFit.cover,
+                                                      image: NetworkImage(snapshot
+                                                          .child(
+                                                              'profilePicStatus')
+                                                          .value
+                                                          .toString()),
+                                                      loadingBuilder: (context,
+                                                          child,
+                                                          loadingProgress) {
+                                                        if (loadingProgress ==
+                                                            null) {
+                                                          return child;
+                                                        }
+                                                        return const CircularProgressIndicator();
+                                                      },
+                                                      errorBuilder: (context,
+                                                          object, stack) {
+                                                        return const Icon(
+                                                          Icons.error_outline,
+                                                          color: Color.fromARGB(
+                                                              255, 35, 35, 35),
+                                                        );
+                                                      },
+                                                    )
+                                              : Image.file(File(
+                                                      ProfileController()
+                                                          .image!
+                                                          .path)
+                                                  .absolute)),
+                                    ),
+                                  ),
+                                ),
                                 Text(
                                   snapshot
                                       .child('professorName')

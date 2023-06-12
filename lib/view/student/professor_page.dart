@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
 import 'professor_profile_page.dart';
+import 'package:appointify/view/student/profile_controller.dart';
 
 class ProfessorPage extends StatefulWidget {
   const ProfessorPage({super.key});
@@ -38,8 +40,14 @@ class _ProfessorPageState extends State<ProfessorPage> {
     await Firebase.initializeApp();
   }
 
-  void _handleButtonPress(String firstName, String lastName,
-      String professorRole, String status, String availability) {
+  void _handleButtonPress(
+      String firstName,
+      String lastName,
+      String professorRole,
+      String status,
+      String availability,
+      String professorID,
+      String salutation) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -49,6 +57,8 @@ class _ProfessorPageState extends State<ProfessorPage> {
           professorRole: professorRole,
           status: status,
           availability: availability,
+          professorID: professorID,
+          salutation: salutation,
         ),
       ),
     );
@@ -75,7 +85,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
       home: Scaffold(
         body: Column(children: [
           const Text(
-            'Professors',
+            'Employees',
           ),
           const Divider(
             color: Colors.black,
@@ -103,6 +113,56 @@ class _ProfessorPageState extends State<ProfessorPage> {
               return Card(
                   child: Column(
                 children: [
+                  SizedBox(
+                    child: Center(
+                      child: Container(
+                        height: 130,
+                        width: 130,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 35, 35, 35),
+                              width: 2,
+                            )),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: ProfileController().image == null
+                                ? snapshot
+                                            .child('profilePicStatus')
+                                            .value
+                                            .toString() ==
+                                        "None"
+                                    ? const Icon(
+                                        Icons.person,
+                                        size: 35,
+                                      )
+                                    : Image(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(snapshot
+                                            .child('profilePicStatus')
+                                            .value
+                                            .toString()),
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress == null) {
+                                            return child;
+                                          }
+                                          return const CircularProgressIndicator();
+                                        },
+                                        errorBuilder: (context, object, stack) {
+                                          return const Icon(
+                                            Icons.error_outline,
+                                            color:
+                                                Color.fromARGB(255, 35, 35, 35),
+                                          );
+                                        },
+                                      )
+                                : Image.file(
+                                    File(ProfileController().image!.path)
+                                        .absolute)),
+                      ),
+                    ),
+                  ),
                   Text('$profFirstName $profLastName'),
                   Text(snapshot.child('professorRole').value.toString()),
                   Text(snapshot.child('status').value.toString()),
@@ -114,6 +174,8 @@ class _ProfessorPageState extends State<ProfessorPage> {
                               snapshot.child('professorRole').value.toString(),
                               snapshot.child('status').value.toString(),
                               availability,
+                              snapshot.child('profUserID').value.toString(),
+                              snapshot.child('salutation').value.toString(),
                             )
                         : null,
                     child: const Text('Appointment'),

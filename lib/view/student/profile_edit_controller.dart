@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class ProfileController with ChangeNotifier {
+class ProfileEditController with ChangeNotifier {
   final picker = ImagePicker();
 
   String? userID = FirebaseAuth.instance.currentUser?.uid;
@@ -15,6 +15,7 @@ class ProfileController with ChangeNotifier {
 
   XFile? _image;
   XFile? get image => _image;
+  String imgURL = '';
 
   dynamic cont = null;
 
@@ -79,21 +80,22 @@ class ProfileController with ChangeNotifier {
         });
   }
 
-  void updloadImage(BuildContext context) async {
+  Future updloadImage(BuildContext context) async {
     firebase_storage.Reference storageRef =
         firebase_storage.FirebaseStorage.instance.ref('studentProfile/$userID');
     firebase_storage.UploadTask uploadTask =
         storageRef.putFile(File(image!.path).absolute);
     await Future.value(uploadTask);
 
-    final newUrl = await storageRef.getDownloadURL();
+    imgURL = await storageRef.getDownloadURL();
 
-    ref
-        .child(userID.toString())
-        .update({'profilePicStatus': newUrl.toString()}).then((value) {
-      _image = null;
-    }).onError((error, stackTrace) {
-      //insert toast here
-    });
+    // ref
+    //     .child(userID.toString())
+    //     .update({'profilePicStatus': newUrl.toString()}).then((value) {
+    //   _image = null;
+    // }).onError((error, stackTrace) {
+    //   //insert toast here
+    // });
+    
   }
 }

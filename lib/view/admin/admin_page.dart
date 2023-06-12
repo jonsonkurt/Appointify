@@ -23,18 +23,22 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Color(0xffFF9343),
         bottomNavigationBar: SalomonBottomBar(
+         margin: EdgeInsets.only(left: 50, right: 60),
+          itemPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           currentIndex: currentIndex,
+
           items: [
             SalomonBottomBarItem(
               icon: const Icon(Icons.home),
               title: const Text("Home"),
-              selectedColor: Colors.pink,
+              selectedColor: Colors.white,
             ),
             SalomonBottomBarItem(
               icon: const Icon(Icons.people),
-              title: const Text("Org Chart"),
-              selectedColor: Colors.blue,
+              title: const Text("Organization chart"),
+              selectedColor: Colors.white,
             ),
           ],
           onTap: (index) {
@@ -45,6 +49,6 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
         ),
         body: pages[currentIndex],
       ),
-    );
+      );
   }
 }

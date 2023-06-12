@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 )),
             const SizedBox(height: 10),
-            Container(width: 350, height: 1, color: Colors.black),
+            Container(width: 600, height: 1, color: Colors.black),
             const SizedBox(height: 10),
             const Padding(
                 padding: EdgeInsets.only(left: 20),
@@ -120,21 +120,21 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 10),
             SizedBox(
               height: 350,
-              width: 350,
+              width: 700,
               child: ContainedTabBarView(
                 tabs: const [
-                  Text('Upcoming'),
-                  Text('Completed'),
-                  Text('Canceled'),
+                  Text('Upcoming', style: TextStyle(fontSize: 20),),
+                  Text('Completed',  style: TextStyle(fontSize: 20),),
+                  Text('Canceled',  style: TextStyle(fontSize: 20),),
                 ],
                 tabBarProperties: TabBarProperties(
-                  width: 300,
-                  height: 32,
+                  width: 550,
+                  height: 50,
                   background: Container(
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: const Color(0xFFFF9343),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0)),
+                          const BorderRadius.all(Radius.circular(20.0)),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.4),
@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       Text(
                                         snapshot
-                                            .child('studentSection')
+                                            .child('section')
                                             .value
                                             .toString(),
                                       ),
@@ -188,28 +188,64 @@ class _HomePageState extends State<HomePage> {
                                         snapshot.child('time').value.toString(),
                                       ),
                                       Column(
+                                        mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
                                         children: [
                                           Row(
+                                            
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               ElevatedButton(
-                                                onPressed: () {
-                                                  // Handle button press
-                                                  // Add your desired functionality here
-                                                },
-                                                child: const Text('Cancel'),
-                                              ),
-                                              ElevatedButton(
+                                                style: const ButtonStyle(
+                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.all(
+                                                    Radius.circular(20)
+                                                  ),
+                                                  )
+                                                  ),
+                                                  backgroundColor: MaterialStatePropertyAll(
+                                                  Color(0xFFFF9343), // card button color
+                                                  ),
+                                                ),
                                                 onPressed: () {
                                                   // Handle button press
                                                   // Add your desired functionality here
                                                 },
                                                 child: const Text('Reschedule'),
                                               ),
+                                              const SizedBox(
+                                                width: 40,
+                                                height: 75, // gap between the button and the info
+                                              ),
                                               ElevatedButton(
+                                                style: const ButtonStyle(
+                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.all(
+                                                    Radius.circular(20)
+                                                  ),
+                                                  )
+                                                  ),
+                                                  ),
+                                                onPressed: () {
+                                                  // Handle button press
+                                                  // Add your desired functionality here
+                                                },
+                                                child: const Text('Cancel'),
+                                              ),
+                                              const SizedBox(
+                                                width: 40,
+                                              ),
+                                              ElevatedButton(
+                                                style: const ButtonStyle(
+                                                  fixedSize: MaterialStatePropertyAll(Size(100, 50)),
+                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.all(
+                                                    Radius.circular(20)
+                                                  ),
+                                                  )
+                                                  ),
+                                                  ),
                                                 onPressed: () {
                                                   // Handle button press
                                                   // Add your desired functionality here
@@ -246,13 +282,13 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Text(
                                         snapshot
-                                            .child('professorName')
+                                            .child('studentName')
                                             .value
                                             .toString(),
                                       ),
                                       Text(
                                         snapshot
-                                            .child('professorRole')
+                                            .child('section')
                                             .value
                                             .toString(),
                                       ),
@@ -288,13 +324,13 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Text(
                                         snapshot
-                                            .child('professorName')
+                                            .child('studentName')
                                             .value
                                             .toString(),
                                       ),
                                       Text(
                                         snapshot
-                                            .child('professorRole')
+                                            .child('section')
                                             .value
                                             .toString(),
                                       ),
