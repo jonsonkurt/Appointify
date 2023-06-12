@@ -116,12 +116,12 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                                   .absolute)),
                                 ),
                               ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  provider.pickImage(context);
-                                },
-                                child: const Text('Select photo'),
-                              ),
+                              // ElevatedButton(
+                              //   onPressed: () {
+                              //     provider.pickImage(context);
+                              //   },
+                              //   child: const Text('Select photo'),
+                              // ),
                               Form(
                                 key: _formKey,
                                 child: Column(
