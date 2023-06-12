@@ -15,8 +15,7 @@ class ProfileController with ChangeNotifier {
 
   XFile? _image;
   XFile? get image => _image;
-
-  dynamic cont = null;
+  String imgURL = '';
 
   Future pickGalleryImage(BuildContext context) async {
     final pickedFile =
@@ -86,14 +85,14 @@ class ProfileController with ChangeNotifier {
         storageRef.putFile(File(image!.path).absolute);
     await Future.value(uploadTask);
 
-    final newUrl = await storageRef.getDownloadURL();
+    imgURL = await storageRef.getDownloadURL();
 
-    ref
-        .child(userID.toString())
-        .update({'profilePicStatus': newUrl.toString()}).then((value) {
-      _image = null;
-    }).onError((error, stackTrace) {
-      //insert toast here
-    });
+    // ref
+    //     .child(userID.toString())
+    //     .update({'profilePicStatus': newUrl.toString()}).then((value) {
+    //   _image = null;
+    // }).onError((error, stackTrace) {
+    //   //insert toast here
+    // });
   }
 }
