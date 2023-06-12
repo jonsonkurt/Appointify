@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+import '../student/profile_controller.dart';
+import 'professor_profile_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -64,6 +67,7 @@ class _HomePageState extends State<HomePage> {
     });
 
     DatabaseReference appointmentsRef = rtdb.ref('appointments/');
+    DatabaseReference studentsRef = rtdb.ref('students/');
     // appointmentsRef.orderByChild('status').equalTo("$userID-PENDING");
 
     return Scaffold(
@@ -118,14 +122,23 @@ class _HomePageState extends State<HomePage> {
                   ),
                 )),
             const SizedBox(height: 10),
-            SizedBox(
-              height: 350,
-              width: 500,
+            Flexible(
+              // height: 350,
+              // width: 500,
               child: ContainedTabBarView(
                 tabs: const [
-                  Text('Upcoming', style: TextStyle(fontSize: 15),),
-                  Text('Completed',  style: TextStyle(fontSize: 15),),
-                  Text('Canceled',  style: TextStyle(fontSize: 15),),
+                  Text(
+                    'Upcoming',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    'Completed',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    'Canceled',
+                    style: TextStyle(fontSize: 15),
+                  ),
                 ],
                 tabBarProperties: TabBarProperties(
                   width: 360,
@@ -154,162 +167,233 @@ class _HomePageState extends State<HomePage> {
                 views: [
                   // Tab for Upcoming
                   Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: SizedBox(
-                        child: SizedBox(
-                          width: 350,
-                          height: 300,
-                          child: FirebaseAnimatedList(
-                            query: appointmentsRef
-                                .orderByChild('requestStatusProfessor')
-                                .equalTo("$userID-UPCOMING"),
-                            itemBuilder: (context, snapshot, animation, index) {
-                              return SizedBox(
-                                  height: 185,
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                    color: Colors.grey,
-                                    margin: EdgeInsets.only(left: 17,right: 17),
-                                      child: Column(
-                                        mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                    padding: const EdgeInsets.only(top: 10),
+                    child: SizedBox(
+                      width: 350,
+                      height: 600,
+                      child: FirebaseAnimatedList(
+                        query: appointmentsRef
+                            .orderByChild('requestStatusProfessor')
+                            .equalTo("$userID-UPCOMING"),
+                        itemBuilder: (context, snapshot, animation, index) {
+                          return SizedBox(
+                              height: 185,
+                              child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  color: Colors.grey,
+                                  margin: EdgeInsets.only(left: 17, right: 17),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            child: Padding(
-                                              padding: EdgeInsets.all(10),
-                                              child: Container(
-                                              height: 60,
-                                              width: 60,
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                    color: const Color.fromARGB(
-                                                        255, 35, 35, 35),
-                                                    width: 2,
-                                                  )),
-                                              child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(100),
-                                                  child: Image(
-                                                              fit: BoxFit.cover,
-                                                              image: NetworkImage(
-                                                                  "https://imageio.forbes.com/specials-images/imageserve/609a78f59ba171be93705854/Genshin-Impact/960x0.jpg?format=jpg&width=960"),
-                                                              loadingBuilder:
-                                                                  (context, child,
-                                                                      loadingProgress) {
-                                                                if (loadingProgress ==
-                                                                    null) {
-                                                                  return child;
-                                                                }
-                                                                return const CircularProgressIndicator();
-                                                              },
-                                                              errorBuilder:
-                                                                  (context,
-                                                                      object,
-                                                                      stack) {
-                                                                return const Icon(
-                                                                  Icons
-                                                                      .error_outline,
-                                                                  color: Color
-                                                                      .fromARGB(
+                                      Flexible(
+                                        child: FirebaseAnimatedList(
+                                          query: studentsRef
+                                              .orderByChild('UID')
+                                              .equalTo(snapshot
+                                                  .child('studentID')
+                                                  .value
+                                                  .toString()),
+                                          scrollDirection: Axis.vertical,
+                                          itemBuilder: (context, snapshot,
+                                              animation, index) {
+                                            return SizedBox(
+                                              child: Center(
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 30,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: const Color
+                                                                .fromARGB(
+                                                            255, 35, 35, 35),
+                                                        width: 2,
+                                                      )),
+                                                  child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      child: ProfileController()
+                                                                  .image ==
+                                                              null
+                                                          ? snapshot
+                                                                      .child(
+                                                                          'profilePicStatus')
+                                                                      .value
+                                                                      .toString() ==
+                                                                  "None"
+                                                              ? const Icon(
+                                                                  Icons.person,
+                                                                  size: 35,
+                                                                )
+                                                              : Image(
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  image: NetworkImage(snapshot
+                                                                      .child(
+                                                                          'profilePicStatus')
+                                                                      .value
+                                                                      .toString()),
+                                                                  loadingBuilder:
+                                                                      (context,
+                                                                          child,
+                                                                          loadingProgress) {
+                                                                    if (loadingProgress ==
+                                                                        null) {
+                                                                      return child;
+                                                                    }
+                                                                    return const CircularProgressIndicator();
+                                                                  },
+                                                                  errorBuilder:
+                                                                      (context,
+                                                                          object,
+                                                                          stack) {
+                                                                    return const Icon(
+                                                                      Icons
+                                                                          .error_outline,
+                                                                      color: Color.fromARGB(
                                                                           255,
                                                                           35,
                                                                           35,
                                                                           35),
-                                                                );
-                                                              },
-                                                            )
-                                                       ),
-                                            ),
-                                            ),
-                                          ),
+                                                                    );
+                                                                  },
+                                                                )
+                                                          : Image.file(File(
+                                                                  ProfileController()
+                                                                      .image!
+                                                                      .path)
+                                                              .absolute)),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
                                           // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
                                           Column(
-                                            mainAxisSize:MainAxisSize.max,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 snapshot
-                                                .child('studentName')
-                                                .value
-                                                .toString(), style: TextStyle(fontSize: 20, color: Colors.black),
-                                           ),
+                                                    .child('studentName')
+                                                    .value
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    color: Colors.black),
+                                              ),
                                               Text(
-                                              snapshot
-                                            .child('section')
-                                            .value
-                                            .toString(), style: TextStyle(fontSize: 15, color: Colors.black),
-                                      ),
+                                                snapshot
+                                                    .child('section')
+                                                    .value
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.black),
+                                              ),
                                             ],
                                           ),
-                                      
                                         ],
                                       ),
-                                
                                       Container(
-                                        
                                         width: 340,
                                         height: 30,
-                                        decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)
-                                        ),
-                                        color: Colors.white, 
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          color: Colors.white,
                                         ),
                                         child: Row(
-                                          
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            
                                             Container(
-                                              padding: EdgeInsets.only(right:30, left: 20),
+                                              padding: EdgeInsets.only(
+                                                  right: 30, left: 20),
                                               child: Row(
-                                                
                                                 children: [
-                                                  Icon(Icons.calendar_month_outlined, color: Colors.black,),
+                                                  Icon(
+                                                    Icons
+                                                        .calendar_month_outlined,
+                                                    color: Colors.black,
+                                                  ),
                                                   Text(
-                                                    snapshot.child('date').value.toString(), style: TextStyle(color: Colors.black),
+                                                    snapshot
+                                                        .child('date')
+                                                        .value
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        color: Colors.black),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                             Container(
-                                              padding: EdgeInsets.only(right:30, left: 20),
-                                               child: Row(
-                                                 children: [
-                                                  Icon(Icons.watch_later_outlined, color: Colors.black,),
-                                                   Text(
-                                                    snapshot.child('time').value.toString(), style: TextStyle(color: Colors.black),
+                                            Container(
+                                              padding: EdgeInsets.only(
+                                                  right: 30, left: 20),
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.watch_later_outlined,
+                                                    color: Colors.black,
                                                   ),
-                                                 ],
-                                               ),
-                                             ),
+                                                  Text(
+                                                    snapshot
+                                                        .child('time')
+                                                        .value
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                     
                                       Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           Row(
-                                            
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
-                                              
                                               ElevatedButton.icon(
-                                                icon: const Icon(Icons.calendar_month,size: 15,color: Colors.white),
-                                                label: const Text('Reschedule',style: TextStyle(fontSize: 9),),
+                                                icon: const Icon(
+                                                    Icons.calendar_month,
+                                                    size: 15,
+                                                    color: Colors.white),
+                                                label: const Text(
+                                                  'Reschedule',
+                                                  style: TextStyle(fontSize: 9),
+                                                ),
                                                 style: const ButtonStyle(
-                                                  fixedSize: MaterialStatePropertyAll(Size(100, 20)
-                                                  ),
-                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)),)),
-                                                  backgroundColor: MaterialStatePropertyAll(
-                                                  Color(0xFFFF9343), // card button color
+                                                  fixedSize:
+                                                      MaterialStatePropertyAll(
+                                                          Size(100, 20)),
+                                                  shape:
+                                                      MaterialStatePropertyAll(
+                                                          RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                20)),
+                                                  )),
+                                                  backgroundColor:
+                                                      MaterialStatePropertyAll(
+                                                    Color(
+                                                        0xFFFF9343), // card button color
                                                   ),
                                                 ),
                                                 onPressed: () {
@@ -320,24 +404,35 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                               const SizedBox(
                                                 width: 20,
-                                                height: 75, // gap between the button and the info
+                                                height:
+                                                    75, // gap between the button and the info
                                               ),
                                               ElevatedButton.icon(
-                                                icon: const Icon(Icons.cancel_outlined,size: 15, color: Colors.white),
-                                                label: const Text('Cancel',style: TextStyle(fontSize: 9)),
+                                                icon: const Icon(
+                                                    Icons.cancel_outlined,
+                                                    size: 15,
+                                                    color: Colors.white),
+                                                label: const Text('Cancel',
+                                                    style:
+                                                        TextStyle(fontSize: 9)),
                                                 style: const ButtonStyle(
-                                                  fixedSize: MaterialStatePropertyAll(Size(90, 20)
+                                                  fixedSize:
+                                                      MaterialStatePropertyAll(
+                                                          Size(90, 20)),
+                                                  shape:
+                                                      MaterialStatePropertyAll(
+                                                          RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                20)),
+                                                  )),
+                                                  backgroundColor:
+                                                      MaterialStatePropertyAll(
+                                                    Color(
+                                                        0xFFFF9343), // card button color
                                                   ),
-                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)
-                                                  ),
-                                                  )
-                                                  ),
-                                                  backgroundColor: MaterialStatePropertyAll(
-                                                  Color(0xFFFF9343), // card button color
-                                                  ),
-                                                  ),
+                                                ),
                                                 onPressed: () {
                                                   // Handle button press
                                                   // Add your desired functionality here
@@ -348,21 +443,30 @@ class _HomePageState extends State<HomePage> {
                                                 width: 20,
                                               ),
                                               ElevatedButton.icon(
-                                                icon: const Icon(Icons.check,size: 15, color: Colors.white),
-                                                label: const Text('Complete',style: TextStyle(fontSize: 9)),
+                                                icon: const Icon(Icons.check,
+                                                    size: 15,
+                                                    color: Colors.white),
+                                                label: const Text('Complete',
+                                                    style:
+                                                        TextStyle(fontSize: 9)),
                                                 style: const ButtonStyle(
-                                                  fixedSize: MaterialStatePropertyAll(Size(100, 20)
+                                                  fixedSize:
+                                                      MaterialStatePropertyAll(
+                                                          Size(100, 20)),
+                                                  shape:
+                                                      MaterialStatePropertyAll(
+                                                          RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                20)),
+                                                  )),
+                                                  backgroundColor:
+                                                      MaterialStatePropertyAll(
+                                                    Color(
+                                                        0xFFFF9343), // card button color
                                                   ),
-                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)
-                                                  ),
-                                                  )
-                                                  ),
-                                                  backgroundColor: MaterialStatePropertyAll(
-                                                  Color(0xFFFF9343), // card button color
-                                                  ),
-                                                  ),
+                                                ),
                                                 onPressed: () {
                                                   // Handle button press
                                                   // Add your desired functionality here
@@ -374,18 +478,14 @@ class _HomePageState extends State<HomePage> {
                                         ],
                                       )
                                     ],
-                                  )
-                                  
-                                  )
-
-                                  );
-                            },
-                          ),
-                        ),
-                      )),
+                                  )));
+                        },
+                      ),
+                    ),
+                  ),
 
                   // Tab for completed
-                 Padding(
+                  Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: SizedBox(
                         child: SizedBox(
@@ -399,145 +499,218 @@ class _HomePageState extends State<HomePage> {
                               return SizedBox(
                                   height: 150,
                                   child: Card(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                    color: Colors.grey,
-                                    margin: EdgeInsets.only(left: 17,right: 17),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      color: Colors.grey,
+                                      margin:
+                                          EdgeInsets.only(left: 17, right: 17),
                                       child: Column(
-                                        mainAxisAlignment:MainAxisAlignment.spaceEvenly,
-                                    children: [
-
-                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          SizedBox(
-                                            child: Padding(
-                                              padding: EdgeInsets.all(10),
-                                              child: Container(
-                                              height: 60,
-                                              width: 60,
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                    color: const Color.fromARGB(
-                                                        255, 35, 35, 35),
-                                                    width: 2,
-                                                  )),
-                                              child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(100),
-                                                  child: Image(
-                                                              fit: BoxFit.cover,
-                                                              image: NetworkImage(
-                                                                  "https://imageio.forbes.com/specials-images/imageserve/609a78f59ba171be93705854/Genshin-Impact/960x0.jpg?format=jpg&width=960"),
-                                                              loadingBuilder:
-                                                                  (context, child,
-                                                                      loadingProgress) {
-                                                                if (loadingProgress ==
-                                                                    null) {
-                                                                  return child;
-                                                                }
-                                                                return const CircularProgressIndicator();
-                                                              },
-                                                              errorBuilder:
-                                                                  (context,
-                                                                      object,
-                                                                      stack) {
-                                                                return const Icon(
-                                                                  Icons
-                                                                      .error_outline,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          35,
-                                                                          35,
-                                                                          35),
-                                                                );
-                                                              },
-                                                            )
-                                                       ),
-                                            ),
+                                          Flexible(
+                                            child: FirebaseAnimatedList(
+                                              query: studentsRef
+                                                  .orderByChild('UID')
+                                                  .equalTo(snapshot
+                                                      .child('studentID')
+                                                      .value
+                                                      .toString()),
+                                              scrollDirection: Axis.vertical,
+                                              itemBuilder: (context, snapshot,
+                                                  animation, index) {
+                                                return SizedBox(
+                                                  child: Center(
+                                                    child: Container(
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          border: Border.all(
+                                                            color: const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                35,
+                                                                35,
+                                                                35),
+                                                            width: 2,
+                                                          )),
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100),
+                                                          child: ProfileController()
+                                                                      .image ==
+                                                                  null
+                                                              ? snapshot
+                                                                          .child(
+                                                                              'profilePicStatus')
+                                                                          .value
+                                                                          .toString() ==
+                                                                      "None"
+                                                                  ? const Icon(
+                                                                      Icons
+                                                                          .person,
+                                                                      size: 35,
+                                                                    )
+                                                                  : Image(
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                      image: NetworkImage(snapshot
+                                                                          .child(
+                                                                              'profilePicStatus')
+                                                                          .value
+                                                                          .toString()),
+                                                                      loadingBuilder: (context,
+                                                                          child,
+                                                                          loadingProgress) {
+                                                                        if (loadingProgress ==
+                                                                            null) {
+                                                                          return child;
+                                                                        }
+                                                                        return const CircularProgressIndicator();
+                                                                      },
+                                                                      errorBuilder: (context,
+                                                                          object,
+                                                                          stack) {
+                                                                        return const Icon(
+                                                                          Icons
+                                                                              .error_outline,
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              35,
+                                                                              35,
+                                                                              35),
+                                                                        );
+                                                                      },
+                                                                    )
+                                                              : Image.file(File(
+                                                                      ProfileController()
+                                                                          .image!
+                                                                          .path)
+                                                                  .absolute)),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           ),
-                                          // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
-                                          Column(
-                                            mainAxisSize:MainAxisSize.max,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                          Row(
                                             children: [
-                                              Text(
-                                                snapshot
-                                                .child('studentName')
-                                                .value
-                                                .toString(), style: TextStyle(fontSize: 20, color: Colors.black),
-                                           ),
-                                              Text(
-                                              snapshot
-                                            .child('section')
-                                            .value
-                                            .toString(), style: TextStyle(fontSize: 15, color: Colors.black),
-                                      ),
-                                            ],
-                                          ),
-                                      
-                                        ],
-                                      ),
-                                
-                                      Container(
-                                        
-                                        width: 340,
-                                        height: 40,
-                                        decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)
-                                        ),
-                                        color: Colors.white, 
-                                        ),
-                                        child: Row(
-                                          
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            
-                                            Container(
-                                              margin: EdgeInsets.only(right: 50),
-                                              // padding: EdgeInsets.only(right:30, left: 20),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
+                                              // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  const Icon(Icons.calendar_month_outlined, color: Colors.black,),
-                                                  Padding(padding: EdgeInsets.only(left:20)),
                                                   Text(
-                                                    snapshot.child('date').value.toString(), style: TextStyle(color: Colors.black),
+                                                    snapshot
+                                                        .child('studentName')
+                                                        .value
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        color: Colors.black),
+                                                  ),
+                                                  Text(
+                                                    snapshot
+                                                        .child('section')
+                                                        .value
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.black),
                                                   ),
                                                 ],
                                               ),
+                                            ],
+                                          ),
+                                          Container(
+                                            width: 340,
+                                            height: 40,
+                                            decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              color: Colors.white,
                                             ),
-                                             Container(
-                                              // padding: EdgeInsets.only(right:30, left: 20),
-                                               child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                 children: [
-                                                  const Icon(Icons.watch_later_outlined, color: Colors.black,),
-                                                   Padding(padding: EdgeInsets.only(left:20)),
-                                                   Text(
-                                                    snapshot.child('time').value.toString(), style: TextStyle(color: Colors.black),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      right: 50),
+                                                  // padding: EdgeInsets.only(right:30, left: 20),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      const Icon(
+                                                        Icons
+                                                            .calendar_month_outlined,
+                                                        color: Colors.black,
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 20)),
+                                                      Text(
+                                                        snapshot
+                                                            .child('date')
+                                                            .value
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ],
                                                   ),
-                                                 ],
-                                               ),
-                                             ),
-                                          ],
-                                        ),
-                                      ),
-
-                                    ],
-                                  )
-                                  
-                                  )
-
-                                  );
+                                                ),
+                                                Container(
+                                                  // padding: EdgeInsets.only(right:30, left: 20),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      const Icon(
+                                                        Icons
+                                                            .watch_later_outlined,
+                                                        color: Colors.black,
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 20)),
+                                                      Text(
+                                                        snapshot
+                                                            .child('time')
+                                                            .value
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )));
                             },
                           ),
                         ),
                       )),
 
                   // Tab for Canceled
-                 Padding(
+                  Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: SizedBox(
                         child: SizedBox(
@@ -551,174 +724,248 @@ class _HomePageState extends State<HomePage> {
                               return SizedBox(
                                   height: 185,
                                   child: Card(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                    color: Colors.grey,
-                                    margin: EdgeInsets.only(left: 17,right: 17),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      color: Colors.grey,
+                                      margin:
+                                          EdgeInsets.only(left: 17, right: 17),
                                       child: Column(
-                                        mainAxisAlignment:MainAxisAlignment.spaceEvenly,
-                                    children: [
-
-                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          SizedBox(
-                                            child: Padding(
-                                              padding: EdgeInsets.all(10),
-                                              child: Container(
-                                              height: 60,
-                                              width: 60,
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                    color: const Color.fromARGB(
-                                                        255, 35, 35, 35),
-                                                    width: 2,
-                                                  )),
-                                              child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(100),
-                                                  child: Image(
-                                                              fit: BoxFit.cover,
-                                                              image: NetworkImage(
-                                                                  "https://imageio.forbes.com/specials-images/imageserve/609a78f59ba171be93705854/Genshin-Impact/960x0.jpg?format=jpg&width=960"),
-                                                              loadingBuilder:
-                                                                  (context, child,
-                                                                      loadingProgress) {
-                                                                if (loadingProgress ==
-                                                                    null) {
-                                                                  return child;
-                                                                }
-                                                                return const CircularProgressIndicator();
-                                                              },
-                                                              errorBuilder:
-                                                                  (context,
-                                                                      object,
-                                                                      stack) {
-                                                                return const Icon(
-                                                                  Icons
-                                                                      .error_outline,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          35,
-                                                                          35,
-                                                                          35),
-                                                                );
-                                                              },
-                                                            )
-                                                       ),
-                                            ),
+                                          Flexible(
+                                            child: FirebaseAnimatedList(
+                                              query: studentsRef
+                                                  .orderByChild('UID')
+                                                  .equalTo(snapshot
+                                                      .child('studentID')
+                                                      .value
+                                                      .toString()),
+                                              scrollDirection: Axis.vertical,
+                                              itemBuilder: (context, snapshot,
+                                                  animation, index) {
+                                                return SizedBox(
+                                                  child: Center(
+                                                    child: Container(
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          border: Border.all(
+                                                            color: const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                35,
+                                                                35,
+                                                                35),
+                                                            width: 2,
+                                                          )),
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100),
+                                                          child: ProfileController()
+                                                                      .image ==
+                                                                  null
+                                                              ? snapshot
+                                                                          .child(
+                                                                              'profilePicStatus')
+                                                                          .value
+                                                                          .toString() ==
+                                                                      "None"
+                                                                  ? const Icon(
+                                                                      Icons
+                                                                          .person,
+                                                                      size: 35,
+                                                                    )
+                                                                  : Image(
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                      image: NetworkImage(snapshot
+                                                                          .child(
+                                                                              'profilePicStatus')
+                                                                          .value
+                                                                          .toString()),
+                                                                      loadingBuilder: (context,
+                                                                          child,
+                                                                          loadingProgress) {
+                                                                        if (loadingProgress ==
+                                                                            null) {
+                                                                          return child;
+                                                                        }
+                                                                        return const CircularProgressIndicator();
+                                                                      },
+                                                                      errorBuilder: (context,
+                                                                          object,
+                                                                          stack) {
+                                                                        return const Icon(
+                                                                          Icons
+                                                                              .error_outline,
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              35,
+                                                                              35,
+                                                                              35),
+                                                                        );
+                                                                      },
+                                                                    )
+                                                              : Image.file(File(
+                                                                      ProfileController()
+                                                                          .image!
+                                                                          .path)
+                                                                  .absolute)),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           ),
-                                          // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
-                                          Column(
-                                            mainAxisSize:MainAxisSize.max,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                          Row(
                                             children: [
-                                              Text(
-                                                snapshot
-                                                .child('studentName')
-                                                .value
-                                                .toString(), style: TextStyle(fontSize: 20, color: Colors.black),
-                                           ),
-                                              Text(
-                                              snapshot
-                                            .child('section')
-                                            .value
-                                            .toString(), style: TextStyle(fontSize: 15, color: Colors.black),
-                                      ),
-                                            ],
-                                          ),
-                                      
-                                        ],
-                                      ),
-                                
-                                      Container(
-                                        
-                                        width: 340,
-                                        height: 30,
-                                        decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)
-                                        ),
-                                        color: Colors.white, 
-                                        ),
-                                        child: Row(
-                                          
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            
-                                            Container(
-                                              padding: EdgeInsets.only(right:30, left: 20),
-                                              child: Row(
-                                                
+                                              // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  Icon(Icons.calendar_month_outlined, color: Colors.black,),
                                                   Text(
-                                                    snapshot.child('date').value.toString(), style: TextStyle(color: Colors.black),
+                                                    snapshot
+                                                        .child('studentName')
+                                                        .value
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        color: Colors.black),
+                                                  ),
+                                                  Text(
+                                                    snapshot
+                                                        .child('section')
+                                                        .value
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.black),
                                                   ),
                                                 ],
                                               ),
+                                            ],
+                                          ),
+                                          Container(
+                                            width: 340,
+                                            height: 30,
+                                            decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              color: Colors.white,
                                             ),
-                                             Container(
-                                              padding: EdgeInsets.only(right:30, left: 20),
-                                               child: Row(
-                                                 children: [
-                                                  Icon(Icons.watch_later_outlined, color: Colors.black,),
-                                                   Text(
-                                                    snapshot.child('time').value.toString(), style: TextStyle(color: Colors.black),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.only(
+                                                      right: 30, left: 20),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons
+                                                            .calendar_month_outlined,
+                                                        color: Colors.black,
+                                                      ),
+                                                      Text(
+                                                        snapshot
+                                                            .child('date')
+                                                            .value
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ],
                                                   ),
-                                                 ],
-                                               ),
-                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                     
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.only(
+                                                      right: 30, left: 20),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons
+                                                            .watch_later_outlined,
+                                                        color: Colors.black,
+                                                      ),
+                                                      Text(
+                                                        snapshot
+                                                            .child('time')
+                                                            .value
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
-                                              const SizedBox(
-                                                width: 20,
-                                                height: 75, // gap between the button and the info
-                                              ),
-                                              ElevatedButton.icon(
-                                                icon: const Icon(Icons.edit_note,size: 15, color: Colors.white),
-                                                label: const Text('View notes',style: TextStyle(fontSize: 9)),
-                                                style: const ButtonStyle(
-                                                  fixedSize: MaterialStatePropertyAll(Size(110, 20)
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  const SizedBox(
+                                                    width: 20,
+                                                    height:
+                                                        75, // gap between the button and the info
                                                   ),
-                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)
+                                                  ElevatedButton.icon(
+                                                    icon: const Icon(
+                                                        Icons.edit_note,
+                                                        size: 15,
+                                                        color: Colors.white),
+                                                    label: const Text(
+                                                        'View notes',
+                                                        style: TextStyle(
+                                                            fontSize: 9)),
+                                                    style: const ButtonStyle(
+                                                      fixedSize:
+                                                          MaterialStatePropertyAll(
+                                                              Size(110, 20)),
+                                                      shape: MaterialStatePropertyAll(
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    20)),
+                                                      )),
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                        Color(
+                                                            0xFFFF9343), // card button color
+                                                      ),
+                                                    ),
+                                                    onPressed: () {
+                                                      // Handle button press
+                                                      // Add your desired functionality here
+                                                    },
+                                                    // child: const Text('Cancel'),
                                                   ),
-                                                  )
-                                                  ),
-                                                  backgroundColor: MaterialStatePropertyAll(
-                                                  Color(0xFFFF9343), // card button color
-                                                  ),
-                                                  ),
-                                                onPressed: () {
-                                                  // Handle button press
-                                                  // Add your desired functionality here
-                                                },
-                                                // child: const Text('Cancel'),
-                                              ),
-                                              
+                                                ],
+                                              )
                                             ],
                                           )
                                         ],
-                                      )
-                                    ],
-                                  )
-                                  
-                                  )
-
-                                  );
+                                      )));
                             },
                           ),
                         ),
