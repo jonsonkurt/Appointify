@@ -120,15 +120,15 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 10),
             SizedBox(
               height: 350,
-              width: 700,
+              width: 500,
               child: ContainedTabBarView(
                 tabs: const [
-                  Text('Upcoming', style: TextStyle(fontSize: 20),),
-                  Text('Completed',  style: TextStyle(fontSize: 20),),
-                  Text('Canceled',  style: TextStyle(fontSize: 20),),
+                  Text('Upcoming', style: TextStyle(fontSize: 15),),
+                  Text('Completed',  style: TextStyle(fontSize: 15),),
+                  Text('Canceled',  style: TextStyle(fontSize: 15),),
                 ],
                 tabBarProperties: TabBarProperties(
-                  width: 550,
+                  width: 360,
                   height: 50,
                   background: Container(
                     decoration: BoxDecoration(
@@ -165,28 +165,130 @@ class _HomePageState extends State<HomePage> {
                                 .equalTo("$userID-UPCOMING"),
                             itemBuilder: (context, snapshot, animation, index) {
                               return SizedBox(
-                                  height: 150,
+                                  height: 185,
                                   child: Card(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                    color: Colors.grey,
+                                    margin: EdgeInsets.only(left: 17,right: 17),
                                       child: Column(
+                                        mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        snapshot
-                                            .child('studentName')
-                                            .value
-                                            .toString(),
-                                      ),
-                                      Text(
-                                        snapshot
+
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Container(
+                                              height: 60,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  border: Border.all(
+                                                    color: const Color.fromARGB(
+                                                        255, 35, 35, 35),
+                                                    width: 2,
+                                                  )),
+                                              child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(100),
+                                                  child: Image(
+                                                              fit: BoxFit.cover,
+                                                              image: NetworkImage(
+                                                                  "https://imageio.forbes.com/specials-images/imageserve/609a78f59ba171be93705854/Genshin-Impact/960x0.jpg?format=jpg&width=960"),
+                                                              loadingBuilder:
+                                                                  (context, child,
+                                                                      loadingProgress) {
+                                                                if (loadingProgress ==
+                                                                    null) {
+                                                                  return child;
+                                                                }
+                                                                return const CircularProgressIndicator();
+                                                              },
+                                                              errorBuilder:
+                                                                  (context,
+                                                                      object,
+                                                                      stack) {
+                                                                return const Icon(
+                                                                  Icons
+                                                                      .error_outline,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          35,
+                                                                          35,
+                                                                          35),
+                                                                );
+                                                              },
+                                                            )
+                                                       ),
+                                            ),
+                                            ),
+                                          ),
+                                          // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
+                                          Column(
+                                            mainAxisSize:MainAxisSize.max,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                snapshot
+                                                .child('studentName')
+                                                .value
+                                                .toString(), style: TextStyle(fontSize: 20, color: Colors.black),
+                                           ),
+                                              Text(
+                                              snapshot
                                             .child('section')
                                             .value
-                                            .toString(),
+                                            .toString(), style: TextStyle(fontSize: 15, color: Colors.black),
                                       ),
-                                      Text(
-                                        snapshot.child('date').value.toString(),
+                                            ],
+                                          ),
+                                      
+                                        ],
                                       ),
-                                      Text(
-                                        snapshot.child('time').value.toString(),
+                                
+                                      Container(
+                                        
+                                        width: 340,
+                                        height: 30,
+                                        decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)
+                                        ),
+                                        color: Colors.white, 
+                                        ),
+                                        child: Row(
+                                          
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            
+                                            Container(
+                                              padding: EdgeInsets.only(right:30, left: 20),
+                                              child: Row(
+                                                
+                                                children: [
+                                                  Icon(Icons.calendar_month_outlined, color: Colors.black,),
+                                                  Text(
+                                                    snapshot.child('date').value.toString(), style: TextStyle(color: Colors.black),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                             Container(
+                                              padding: EdgeInsets.only(right:30, left: 20),
+                                               child: Row(
+                                                 children: [
+                                                  Icon(Icons.watch_later_outlined, color: Colors.black,),
+                                                   Text(
+                                                    snapshot.child('time').value.toString(), style: TextStyle(color: Colors.black),
+                                                  ),
+                                                 ],
+                                               ),
+                                             ),
+                                          ],
+                                        ),
                                       ),
+                                     
                                       Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -196,8 +298,36 @@ class _HomePageState extends State<HomePage> {
                                             
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              ElevatedButton(
+                                              
+                                              ElevatedButton.icon(
+                                                icon: const Icon(Icons.calendar_month,size: 15,color: Colors.white),
+                                                label: const Text('Reschedule',style: TextStyle(fontSize: 9),),
                                                 style: const ButtonStyle(
+                                                  fixedSize: MaterialStatePropertyAll(Size(100, 20)
+                                                  ),
+                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.all(
+                                                    Radius.circular(20)),)),
+                                                  backgroundColor: MaterialStatePropertyAll(
+                                                  Color(0xFFFF9343), // card button color
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  // Handle button press
+                                                  // Add your desired functionality here
+                                                },
+                                                // child: const Text('Reschedule'),
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                                height: 75, // gap between the button and the info
+                                              ),
+                                              ElevatedButton.icon(
+                                                icon: const Icon(Icons.cancel_outlined,size: 15, color: Colors.white),
+                                                label: const Text('Cancel',style: TextStyle(fontSize: 9)),
+                                                style: const ButtonStyle(
+                                                  fixedSize: MaterialStatePropertyAll(Size(90, 20)
+                                                  ),
                                                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                                                     borderRadius: BorderRadius.all(
                                                     Radius.circular(20)
@@ -207,64 +337,55 @@ class _HomePageState extends State<HomePage> {
                                                   backgroundColor: MaterialStatePropertyAll(
                                                   Color(0xFFFF9343), // card button color
                                                   ),
-                                                ),
+                                                  ),
                                                 onPressed: () {
                                                   // Handle button press
                                                   // Add your desired functionality here
                                                 },
-                                                child: const Text('Reschedule'),
+                                                // child: const Text('Cancel'),
                                               ),
                                               const SizedBox(
-                                                width: 40,
-                                                height: 75, // gap between the button and the info
+                                                width: 20,
                                               ),
-                                              ElevatedButton(
+                                              ElevatedButton.icon(
+                                                icon: const Icon(Icons.check,size: 15, color: Colors.white),
+                                                label: const Text('Complete',style: TextStyle(fontSize: 9)),
                                                 style: const ButtonStyle(
+                                                  fixedSize: MaterialStatePropertyAll(Size(100, 20)
+                                                  ),
                                                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                                                     borderRadius: BorderRadius.all(
                                                     Radius.circular(20)
                                                   ),
                                                   )
                                                   ),
-                                                  ),
-                                                onPressed: () {
-                                                  // Handle button press
-                                                  // Add your desired functionality here
-                                                },
-                                                child: const Text('Cancel'),
-                                              ),
-                                              const SizedBox(
-                                                width: 40,
-                                              ),
-                                              ElevatedButton(
-                                                style: const ButtonStyle(
-                                                  fixedSize: MaterialStatePropertyAll(Size(100, 50)),
-                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)
-                                                  ),
-                                                  )
+                                                  backgroundColor: MaterialStatePropertyAll(
+                                                  Color(0xFFFF9343), // card button color
                                                   ),
                                                   ),
                                                 onPressed: () {
                                                   // Handle button press
                                                   // Add your desired functionality here
                                                 },
-                                                child: const Text('Completed'),
+                                                // child: const Text('Completed'),
                                               ),
                                             ],
                                           )
                                         ],
                                       )
                                     ],
-                                  )));
+                                  )
+                                  
+                                  )
+
+                                  );
                             },
                           ),
                         ),
                       )),
 
                   // Tab for completed
-                  Padding(
+                 Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: SizedBox(
                         child: SizedBox(
@@ -276,37 +397,147 @@ class _HomePageState extends State<HomePage> {
                                 .equalTo("$userID-COMPLETED"),
                             itemBuilder: (context, snapshot, animation, index) {
                               return SizedBox(
-                                  height: 100,
+                                  height: 150,
                                   child: Card(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                    color: Colors.grey,
+                                    margin: EdgeInsets.only(left: 17,right: 17),
                                       child: Column(
+                                        mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        snapshot
-                                            .child('studentName')
-                                            .value
-                                            .toString(),
-                                      ),
-                                      Text(
-                                        snapshot
+
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Container(
+                                              height: 60,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  border: Border.all(
+                                                    color: const Color.fromARGB(
+                                                        255, 35, 35, 35),
+                                                    width: 2,
+                                                  )),
+                                              child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(100),
+                                                  child: Image(
+                                                              fit: BoxFit.cover,
+                                                              image: NetworkImage(
+                                                                  "https://imageio.forbes.com/specials-images/imageserve/609a78f59ba171be93705854/Genshin-Impact/960x0.jpg?format=jpg&width=960"),
+                                                              loadingBuilder:
+                                                                  (context, child,
+                                                                      loadingProgress) {
+                                                                if (loadingProgress ==
+                                                                    null) {
+                                                                  return child;
+                                                                }
+                                                                return const CircularProgressIndicator();
+                                                              },
+                                                              errorBuilder:
+                                                                  (context,
+                                                                      object,
+                                                                      stack) {
+                                                                return const Icon(
+                                                                  Icons
+                                                                      .error_outline,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          35,
+                                                                          35,
+                                                                          35),
+                                                                );
+                                                              },
+                                                            )
+                                                       ),
+                                            ),
+                                            ),
+                                          ),
+                                          // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
+                                          Column(
+                                            mainAxisSize:MainAxisSize.max,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                snapshot
+                                                .child('studentName')
+                                                .value
+                                                .toString(), style: TextStyle(fontSize: 20, color: Colors.black),
+                                           ),
+                                              Text(
+                                              snapshot
                                             .child('section')
                                             .value
-                                            .toString(),
+                                            .toString(), style: TextStyle(fontSize: 15, color: Colors.black),
                                       ),
-                                      Text(
-                                        snapshot.child('date').value.toString(),
+                                            ],
+                                          ),
+                                      
+                                        ],
                                       ),
-                                      Text(
-                                        snapshot.child('time').value.toString(),
+                                
+                                      Container(
+                                        
+                                        width: 340,
+                                        height: 40,
+                                        decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)
+                                        ),
+                                        color: Colors.white, 
+                                        ),
+                                        child: Row(
+                                          
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            
+                                            Container(
+                                              margin: EdgeInsets.only(right: 50),
+                                              // padding: EdgeInsets.only(right:30, left: 20),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  const Icon(Icons.calendar_month_outlined, color: Colors.black,),
+                                                  Padding(padding: EdgeInsets.only(left:20)),
+                                                  Text(
+                                                    snapshot.child('date').value.toString(), style: TextStyle(color: Colors.black),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                             Container(
+                                              // padding: EdgeInsets.only(right:30, left: 20),
+                                               child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                 children: [
+                                                  const Icon(Icons.watch_later_outlined, color: Colors.black,),
+                                                   Padding(padding: EdgeInsets.only(left:20)),
+                                                   Text(
+                                                    snapshot.child('time').value.toString(), style: TextStyle(color: Colors.black),
+                                                  ),
+                                                 ],
+                                               ),
+                                             ),
+                                          ],
+                                        ),
                                       ),
+
                                     ],
-                                  )));
+                                  )
+                                  
+                                  )
+
+                                  );
                             },
                           ),
                         ),
                       )),
 
                   // Tab for Canceled
-                  Padding(
+                 Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: SizedBox(
                         child: SizedBox(
@@ -318,30 +549,176 @@ class _HomePageState extends State<HomePage> {
                                 .equalTo("$userID-CANCELED"),
                             itemBuilder: (context, snapshot, animation, index) {
                               return SizedBox(
-                                  height: 100,
+                                  height: 185,
                                   child: Card(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                    color: Colors.grey,
+                                    margin: EdgeInsets.only(left: 17,right: 17),
                                       child: Column(
+                                        mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        snapshot
-                                            .child('studentName')
-                                            .value
-                                            .toString(),
-                                      ),
-                                      Text(
-                                        snapshot
+
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Container(
+                                              height: 60,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  border: Border.all(
+                                                    color: const Color.fromARGB(
+                                                        255, 35, 35, 35),
+                                                    width: 2,
+                                                  )),
+                                              child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(100),
+                                                  child: Image(
+                                                              fit: BoxFit.cover,
+                                                              image: NetworkImage(
+                                                                  "https://imageio.forbes.com/specials-images/imageserve/609a78f59ba171be93705854/Genshin-Impact/960x0.jpg?format=jpg&width=960"),
+                                                              loadingBuilder:
+                                                                  (context, child,
+                                                                      loadingProgress) {
+                                                                if (loadingProgress ==
+                                                                    null) {
+                                                                  return child;
+                                                                }
+                                                                return const CircularProgressIndicator();
+                                                              },
+                                                              errorBuilder:
+                                                                  (context,
+                                                                      object,
+                                                                      stack) {
+                                                                return const Icon(
+                                                                  Icons
+                                                                      .error_outline,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          35,
+                                                                          35,
+                                                                          35),
+                                                                );
+                                                              },
+                                                            )
+                                                       ),
+                                            ),
+                                            ),
+                                          ),
+                                          // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
+                                          Column(
+                                            mainAxisSize:MainAxisSize.max,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                snapshot
+                                                .child('studentName')
+                                                .value
+                                                .toString(), style: TextStyle(fontSize: 20, color: Colors.black),
+                                           ),
+                                              Text(
+                                              snapshot
                                             .child('section')
                                             .value
-                                            .toString(),
+                                            .toString(), style: TextStyle(fontSize: 15, color: Colors.black),
                                       ),
-                                      Text(
-                                        snapshot.child('date').value.toString(),
+                                            ],
+                                          ),
+                                      
+                                        ],
                                       ),
-                                      Text(
-                                        snapshot.child('time').value.toString(),
+                                
+                                      Container(
+                                        
+                                        width: 340,
+                                        height: 30,
+                                        decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)
+                                        ),
+                                        color: Colors.white, 
+                                        ),
+                                        child: Row(
+                                          
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            
+                                            Container(
+                                              padding: EdgeInsets.only(right:30, left: 20),
+                                              child: Row(
+                                                
+                                                children: [
+                                                  Icon(Icons.calendar_month_outlined, color: Colors.black,),
+                                                  Text(
+                                                    snapshot.child('date').value.toString(), style: TextStyle(color: Colors.black),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                             Container(
+                                              padding: EdgeInsets.only(right:30, left: 20),
+                                               child: Row(
+                                                 children: [
+                                                  Icon(Icons.watch_later_outlined, color: Colors.black,),
+                                                   Text(
+                                                    snapshot.child('time').value.toString(), style: TextStyle(color: Colors.black),
+                                                  ),
+                                                 ],
+                                               ),
+                                             ),
+                                          ],
+                                        ),
                                       ),
+                                     
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              const SizedBox(
+                                                width: 20,
+                                                height: 75, // gap between the button and the info
+                                              ),
+                                              ElevatedButton.icon(
+                                                icon: const Icon(Icons.edit_note,size: 15, color: Colors.white),
+                                                label: const Text('View notes',style: TextStyle(fontSize: 9)),
+                                                style: const ButtonStyle(
+                                                  fixedSize: MaterialStatePropertyAll(Size(110, 20)
+                                                  ),
+                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.all(
+                                                    Radius.circular(20)
+                                                  ),
+                                                  )
+                                                  ),
+                                                  backgroundColor: MaterialStatePropertyAll(
+                                                  Color(0xFFFF9343), // card button color
+                                                  ),
+                                                  ),
+                                                onPressed: () {
+                                                  // Handle button press
+                                                  // Add your desired functionality here
+                                                },
+                                                // child: const Text('Cancel'),
+                                              ),
+                                              
+                                            ],
+                                          )
+                                        ],
+                                      )
                                     ],
-                                  )));
+                                  )
+                                  
+                                  )
+
+                                  );
                             },
                           ),
                         ),

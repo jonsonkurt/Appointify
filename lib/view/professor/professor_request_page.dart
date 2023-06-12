@@ -105,6 +105,7 @@ class _RequestPageState extends State<RequestPage> {
                   snapshot.child('studentName').value.toString();
               String profID = snapshot.child('professorID').value.toString();
               String appointID = snapshot.child('appointID').value.toString();
+              String studID = snapshot.child("studentID").value.toString();
               // Filter professors based on the entered name
               if (name.isNotEmpty &&
                   !studentName.toLowerCase().contains(name.toLowerCase())) {
@@ -125,7 +126,7 @@ class _RequestPageState extends State<RequestPage> {
                     onPressed: () async {
                       await appointmentsRef.child(appointID.toString()).update({
                         'requestStatusProfessor': "$profID-UPCOMING",
-                        'status': "$userID-UPCOMING",
+                        'status': "$studID-UPCOMING",
                         'requestStatus': "UPCOMING",
                         // 'profilePicStatus':
                       });
@@ -237,7 +238,7 @@ class _RequestPageState extends State<RequestPage> {
                                       'notes': profNotes,
                                       'requestStatusProfessor':
                                           "$profID-CANCELED",
-                                      'status': "$userID-CANCELED",
+                                      'status': "$studID-CANCELED",
                                       'requestStatus': "CANCELED",
                                     });
                                     // ignore: use_build_context_synchronously
