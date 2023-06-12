@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -44,6 +45,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   String? userID = FirebaseAuth.instance.currentUser?.uid;
   bool isLoading = true;
   var logger = Logger();
+  
 
   @override
   void initState() {
@@ -203,7 +205,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Set Appointment Done"),
                       ));
-
+                      final fcmToken = await FirebaseMessaging.instance.getToken();
                       await appointmentsRef.set({
                         "appointID": appointKey,
                         "countered": 'no',
@@ -223,6 +225,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         "studentName": "$studname $studLastName",
                         "section": studSection,
                         "time": selectedTime,
+                        "notifState" : 'no',
+                        "fcmToken" : fcmToken,
                       });
                       break;
                     } else {
