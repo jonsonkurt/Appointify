@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:appointify/view/student/profile_controller.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
-import 'package:provider/provider.dart';
 
 import 'edit_student_details.dart';
 // import 'package:transparent_image/transparent_image.dart';
