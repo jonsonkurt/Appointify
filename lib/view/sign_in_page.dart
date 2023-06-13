@@ -1,5 +1,6 @@
 import 'package:appointify/view/forgot_password_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'loading_page.dart';
 import 'sign_up_page.dart';
@@ -331,3 +332,5 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
+
+
