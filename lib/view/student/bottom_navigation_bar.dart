@@ -27,27 +27,32 @@ class _BottomNavigationState extends State<BottomNavigation> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         bottomNavigationBar: SalomonBottomBar(
+          backgroundColor: const Color(0xFFFF9343),
           currentIndex: currentIndex,
           items: [
             SalomonBottomBarItem(
               icon: const Icon(Icons.home),
               title: const Text("Home"),
-              selectedColor: Colors.pink,
+              selectedColor: Colors.white,
+              unselectedColor: Colors.white,
             ),
             SalomonBottomBarItem(
-              icon: const Icon(Icons.list),
+              icon: const Icon(Icons.list_alt),
               title: const Text("Employee"),
-              selectedColor: Colors.purple,
+              selectedColor: Colors.white,
+              unselectedColor: Colors.white,
             ),
             SalomonBottomBarItem(
-              icon: const Icon(Icons.people),
+              icon: const Icon(Icons.groups),
               title: const Text("Org Chart"),
-              selectedColor: Colors.blue,
+              selectedColor: Colors.white,
+              unselectedColor: Colors.white,
             ),
             SalomonBottomBarItem(
               icon: const Icon(Icons.person),
               title: const Text("Profile"),
-              selectedColor: Colors.teal,
+              selectedColor: Colors.white,
+              unselectedColor: Colors.white,
             ),
           ],
           onTap: (index) {

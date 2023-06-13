@@ -1,4 +1,6 @@
+import 'package:appointify/view/forgot_password_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'loading_page.dart';
 import 'sign_up_page.dart';
@@ -170,9 +172,33 @@ class _SignInPageState extends State<SignInPage> {
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
                           onTap: () {
-                            _emailController.clear();
-                            _passwordController
-                                .clear(); // Handle forgot password
+                            // _emailController.clear();
+                            // _passwordController
+                            //     .clear(); // Handle forgot password
+                            // ignore: use_build_context_synchronously
+                            print("Forgot");
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        const ForgotPasswordPage(),
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                  var begin = const Offset(0.0, 1.0);
+                                  var end = Offset.zero;
+                                  var curve = Curves.ease;
+
+                                  var tween = Tween(begin: begin, end: end)
+                                      .chain(CurveTween(curve: curve));
+
+                                  return SlideTransition(
+                                    position: animation.drive(tween),
+                                    child: child,
+                                  );
+                                },
+                              ),
+                            ); // Handle sign up
                           },
                           child: const Text(
                             "Forgot Password?",
@@ -306,3 +332,5 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
+
+

@@ -177,8 +177,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                 .child('professorRole')
                                 .value
                                 .toString()),
-                            const Text("HINDI KO ALAM ANO NEED DITO"),
-                            const Text("Status: Employee"),
+                            const Text("Designation: Employee"),
                           ],
                         ),
                       );
