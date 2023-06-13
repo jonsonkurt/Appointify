@@ -191,6 +191,8 @@ class _RequestPageState extends State<RequestPage> {
                                       "countered": "yes",
                                       "counteredDate": _dateController.text,
                                       "counteredTime": _timeController.text,
+                                      "requestStatusProfessor":
+                                          "$profID-RESCHEDULE"
                                     });
 
                                     // ignore: use_build_context_synchronously
