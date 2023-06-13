@@ -95,138 +95,91 @@ class _RequestPageState extends State<RequestPage> {
           ),
           SearchBox(onSearch: _handleSearch),
           Expanded(
-              child: FirebaseAnimatedList(
-            query: appointmentsRef
-                .orderByChild('requestStatusProfessor')
-                .equalTo("$userID-PENDING"),
-            itemBuilder: (context, snapshot, animation, index) {
-              // Modify strings based on your needs
-              String studentName =
-                  snapshot.child('studentName').value.toString();
-              String profID = snapshot.child('professorID').value.toString();
-              String appointID = snapshot.child('appointID').value.toString();
-              String studID = snapshot.child("studentID").value.toString();
-              // Filter professors based on the entered name
-              if (name.isNotEmpty &&
-                  !studentName.toLowerCase().contains(name.toLowerCase())) {
-                return Container(); // Hide the professor card if it doesn't match the search criteria
-              }
+            child: FirebaseAnimatedList(
+              query: appointmentsRef
+                  .orderByChild('requestStatusProfessor')
+                  .equalTo("$userID-PENDING"),
+              itemBuilder: (context, snapshot, animation, index) {
+                // Modify strings based on your needs
+                String studentName =
+                    snapshot.child('studentName').value.toString();
+                String profID = snapshot.child('professorID').value.toString();
+                String appointID = snapshot.child('appointID').value.toString();
+                String studID = snapshot.child("studentID").value.toString();
+                // Filter professors based on the entered name
+                if (name.isNotEmpty &&
+                    !studentName.toLowerCase().contains(name.toLowerCase())) {
+                  return Container(); // Hide the professor card if it doesn't match the search criteria
+                }
 
-              return Card(
-                  child: Column(
-                children: [
-                  Text(snapshot.child('studentName').value.toString()),
-                  Text(snapshot.child('section').value.toString()),
-                  Text(snapshot.child('date').value.toString()),
-                  Text(snapshot.child('time').value.toString()),
+                return Card(
+                    child: Column(
+                  children: [
+                    Text(snapshot.child('studentName').value.toString()),
+                    Text(snapshot.child('section').value.toString()),
+                    Text(snapshot.child('date').value.toString()),
+                    Text(snapshot.child('time').value.toString()),
 
-                  // Modify button based on what you need
-                  ElevatedButton(
-                    child: const Text('Accept'),
-                    onPressed: () async {
-                      await appointmentsRef.child(appointID.toString()).update({
-                        'requestStatusProfessor': "$profID-UPCOMING",
-                        'status': "$studID-UPCOMING",
-                        'requestStatus': "UPCOMING",
-                        // 'profilePicStatus':
-                      });
-                    },
-                  ),
-                  ElevatedButton(
-                    child: const Text('Reschedule'),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Reschedule'),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Expanded(
-                                      child: TextField(
-                                        controller: _dateController,
-                                        onTap: _showDatePicker,
-                                        readOnly: true,
-                                        decoration: const InputDecoration(
-                                          labelText: 'Select appointment date',
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Expanded(
-                                      child: TextField(
-                                        controller: _timeController,
-                                        onTap: _showTimePicker,
-                                        readOnly: true,
-                                        decoration: const InputDecoration(
-                                          labelText: 'Select appointment time',
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            actions: [
-                              TextButton(
-                                child: const Text('OK'),
-                                onPressed: () async {
-                                  await appointmentsRef
-                                      .child(appointID.toString())
-                                      .update({
-                                    "countered": "yes",
-                                    "counteredDate": _dateController.text,
-                                    "counteredTime": _timeController.text,
-                                  });
-
-                                  // ignore: use_build_context_synchronously
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: const Text('Cancel'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  ElevatedButton(
-                    child: const Text('Reject'),
-                    onPressed: () {
-                      showDialog(
+                    // Modify button based on what you need
+                    ElevatedButton(
+                      child: const Text('Accept'),
+                      onPressed: () async {
+                        await appointmentsRef.child(appointID).update({
+                          'requestStatusProfessor': "$profID-UPCOMING",
+                          'status': "$studID-UPCOMING",
+                          'requestStatus': "UPCOMING",
+                          // 'profilePicStatus':
+                        });
+                      },
+                    ),
+                    ElevatedButton(
+                      child: const Text('Reschedule'),
+                      onPressed: () {
+                        showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            String profNotes = '';
-
                             return AlertDialog(
-                              title: const Text('State your reason.'),
-                              content: TextField(
-                                onChanged: (value) {
-                                  profNotes = value;
-                                },
-                                maxLines: null,
-                                keyboardType: TextInputType.multiline,
-                                decoration: const InputDecoration(
-                                  hintText: 'Enter your paragraph',
-                                  border: OutlineInputBorder(),
-                                ),
+                              title: const Text('Reschedule'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Expanded(
+                                        child: TextField(
+                                          controller: _dateController,
+                                          onTap: _showDatePicker,
+                                          readOnly: true,
+                                          decoration: const InputDecoration(
+                                            labelText:
+                                                'Select appointment date',
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Expanded(
+                                        child: TextField(
+                                          controller: _timeController,
+                                          onTap: _showTimePicker,
+                                          readOnly: true,
+                                          decoration: const InputDecoration(
+                                            labelText:
+                                                'Select appointment time',
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                               actions: [
                                 TextButton(
@@ -235,12 +188,11 @@ class _RequestPageState extends State<RequestPage> {
                                     await appointmentsRef
                                         .child(appointID.toString())
                                         .update({
-                                      'notes': profNotes,
-                                      'requestStatusProfessor':
-                                          "$profID-CANCELED",
-                                      'status': "$studID-CANCELED",
-                                      'requestStatus': "CANCELED",
+                                      "countered": "yes",
+                                      "counteredDate": _dateController.text,
+                                      "counteredTime": _timeController.text,
                                     });
+
                                     // ignore: use_build_context_synchronously
                                     Navigator.of(context).pop();
                                   },
@@ -253,13 +205,64 @@ class _RequestPageState extends State<RequestPage> {
                                 ),
                               ],
                             );
-                          });
-                    },
-                  )
-                ],
-              ));
-            },
-          ))
+                          },
+                        );
+                      },
+                    ),
+                    ElevatedButton(
+                      child: const Text('Reject'),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              String profNotes = '';
+
+                              return AlertDialog(
+                                title: const Text('State your reason.'),
+                                content: TextField(
+                                  onChanged: (value) {
+                                    profNotes = value;
+                                  },
+                                  maxLines: null,
+                                  keyboardType: TextInputType.multiline,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Enter your paragraph',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () async {
+                                      await appointmentsRef
+                                          .child(appointID.toString())
+                                          .update({
+                                        'notes': profNotes,
+                                        'requestStatusProfessor':
+                                            "$profID-CANCELED",
+                                        'status': "$studID-CANCELED",
+                                        'requestStatus': "CANCELED",
+                                      });
+                                      // ignore: use_build_context_synchronously
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text('Cancel'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                    )
+                  ],
+                ));
+              },
+            ),
+          )
         ]),
       ),
     );
