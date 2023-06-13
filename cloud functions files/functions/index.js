@@ -31,7 +31,7 @@ exports.sendNotificationOnStatusChange = functions
                     token: deviceToken,
                     notification: {
                         title: 'Appointment Status',
-                        body: `Your appointment is approved by ${profName}`,
+                        body: `Your appointment with ${profName} has been set`,
                     },
                 };
 
@@ -70,7 +70,7 @@ exports.sendNotificationOnStatusChange = functions
                     token: deviceToken,
                     notification: {
                         title: 'Appointment Status',
-                        body: `Your appointment is cancelled by ${profName}`,
+                        body: `Your appointment is canceled by ${profName}`,
                     },
                 };
 
@@ -85,7 +85,7 @@ exports.sendNotificationOnStatusChange = functions
                         console.error('Error sending notification:', error);
                     });
             } catch (error) {
-                console.error(`Error sending push notification (${differentID}) 2:`, error);
+                console.error('Error sending push notification:', error);
             }
 
             //approved to cancel
@@ -124,7 +124,59 @@ exports.sendNotificationOnStatusChange = functions
                         console.error('Error sending notification:', error);
                     });
             } catch (error) {
-                console.error(`Error sending push notification ${differentID} 3:`, error);
+                console.error('Error sending push notification:', error);
             }
         }
     });
+
+exports.onReschedulesChangeFunction = functions
+    .region('asia-southeast1')
+    .database.ref('/appointments/{differentId}/countered')
+    .onUpdate(async (change, context) => {
+        const newStatus = change.after.val();
+        const previousStatus = change.before.val();
+
+        if (previousStatus === 'no' && newStatus === 'yes') {
+            const differentId = context.params.differentId;
+
+            try {
+                // Get the device token or user ID associated with the differentId
+                // Student Token
+                const snapshot = await admin.database()
+                    .ref(`/appointments/${differentId}/fcmToken`)
+                    .once('value');
+                const deviceToken = snapshot.val();
+
+                //Prof FName
+                const snapshot2 = await admin.database()
+                    .ref(`/appointments/${differentId}/professorName`)
+                    .once('value');
+                const profName = snapshot2.val();
+
+                const message = {
+                    token: deviceToken,
+                    notification: {
+                        title: 'Appointment Status',
+                        body: `${profName} has requested an appointment reschedule`,
+                    },
+                };
+
+                // Send the message
+                admin.messaging().send(message)
+                    .then((response) => {
+                        // Handle the response
+                        console.log('Successfully sent notification:', response);
+                    })
+                    .catch((error) => {
+                        // Handle the error
+                        console.error('Error sending notification:', error);
+                    });
+            } catch (error) {
+                console.error('Error sending push notification:', error);
+            }
+
+            // pending to cancel
+        }
+
+    })
+

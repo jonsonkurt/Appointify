@@ -24,6 +24,7 @@ class WelcomePage extends StatelessWidget {
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({Key? key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {

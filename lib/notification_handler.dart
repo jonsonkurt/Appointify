@@ -15,6 +15,20 @@ Future<void> initFcm() async {
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
 
   final fcmToken = await FirebaseMessaging.instance.getToken();
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  print('User granted permission: ${settings.authorizationStatus}');
+
   FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
     // TODO: If necessary send token to application server.
 
@@ -48,7 +62,8 @@ Future<void> initFcm() async {
         notification.title,
         notification.body,
         const NotificationDetails(
-            android: AndroidNotificationDetails('channel.id', 'channel.name')),
+            android: AndroidNotificationDetails('channel.id', 'channel.name',
+                styleInformation: BigTextStyleInformation(''))),
         payload: json.encode(message?.data),
       );
     }
