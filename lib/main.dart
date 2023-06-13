@@ -6,15 +6,12 @@ import 'view/welcome_page.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initFcm();
 
   runApp(const MyApp());
 }
-
-DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
