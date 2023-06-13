@@ -189,10 +189,10 @@ class _RequestPageState extends State<RequestPage> {
                                         .child(appointID.toString())
                                         .update({
                                       "countered": "yes",
+                                      "requestStatusProfessor":
+                                          "$profID-RESCHEDULE",
                                       "counteredDate": _dateController.text,
                                       "counteredTime": _timeController.text,
-                                      "requestStatusProfessor":
-                                          "$profID-RESCHEDULE"
                                     });
 
                                     // ignore: use_build_context_synchronously
