@@ -4,6 +4,7 @@ import 'package:appointify/view/student/bottom_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
@@ -38,11 +39,18 @@ class OnBoarding extends StatelessWidget {
 
       DatabaseReference nameRef =
           rtdb.ref().child('students/$userID/designation');
-      nameSubscription = nameRef.onValue.listen((event) {
+      DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
+      nameSubscription = nameRef.onValue.listen((event) async {
         try {
           name = event.snapshot.value.toString();
           // ignore: unnecessary_null_comparison
           if (name == "Student") {
+            final fcmToken = await FirebaseMessaging.instance.getToken();
+
+            await ref.child(userID.toString()).update({
+              'fcmToken': fcmToken,
+            });
+            // ignore: use_build_context_synchronously
             Navigator.push(
               context,
               PageRouteBuilder(
