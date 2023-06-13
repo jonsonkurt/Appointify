@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'admin_home_page.dart';
 import 'admin_org_chart_page.dart';
-
+import 'admin_profile_page.dart';
 
 class BottomNavigationAdmin extends StatefulWidget {
   const BottomNavigationAdmin({super.key});
@@ -16,6 +16,7 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
   var pages = const [
     HomePageAdmin(),
     OrgChartPage(),
+    AdminProfilePage(),
   ];
 
   @override
@@ -25,10 +26,9 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
       home: Scaffold(
         backgroundColor: const Color(0xffFF9343),
         bottomNavigationBar: SalomonBottomBar(
-         margin: const EdgeInsets.only(left: 50, right: 60),
+          margin: const EdgeInsets.only(left: 30, right: 30),
           itemPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           currentIndex: currentIndex,
-
           items: [
             SalomonBottomBarItem(
               icon: const Icon(Icons.home),
@@ -36,8 +36,13 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
               selectedColor: Colors.white,
             ),
             SalomonBottomBarItem(
-              icon: const Icon(Icons.people),
+              icon: const Icon(Icons.list_alt),
               title: const Text("Organization chart"),
+              selectedColor: Colors.white,
+            ),
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.people),
+              title: const Text("Profile"),
               selectedColor: Colors.white,
             ),
           ],
@@ -49,6 +54,6 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
         ),
         body: pages[currentIndex],
       ),
-      );
+    );
   }
 }
