@@ -224,7 +224,6 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         "studentName": "$studname $studLastName",
                         "section": studSection,
                         "time": selectedTime,
-                        "notifState": 'noNotification',
                         "fcmToken": fcmToken,
                       });
                       break;
