@@ -39,7 +39,7 @@ class OnBoarding extends StatelessWidget {
 
       DatabaseReference nameRef =
           rtdb.ref().child('students/$userID/designation');
-      DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
+      DatabaseReference ref = rtdb.ref().child('students');
       nameSubscription = nameRef.onValue.listen((event) async {
         try {
           name = event.snapshot.value.toString();
