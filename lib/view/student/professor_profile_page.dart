@@ -37,7 +37,6 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
   String resultText = '';
-  String appointKey = '';
   String studname = "";
   String studLastName = '';
   String studSection = '';
@@ -45,7 +44,6 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   String? userID = FirebaseAuth.instance.currentUser?.uid;
   bool isLoading = true;
   var logger = Logger();
-  
 
   @override
   void initState() {
@@ -139,7 +137,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
         logger.d('Stack trace: $stackTrace');
       }
     });
-    appointKey = randomAlphaNumeric(10);
+    final String appointKey = randomAlphaNumeric(10);
     DatabaseReference appointmentsRef = rtdb.ref('appointments/$appointKey');
     return Scaffold(
       body: Column(
@@ -205,7 +203,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Set Appointment Done"),
                       ));
-                      final fcmToken = await FirebaseMessaging.instance.getToken();
+                      final fcmToken =
+                          await FirebaseMessaging.instance.getToken();
                       await appointmentsRef.set({
                         "appointID": appointKey,
                         "countered": 'no',
@@ -225,8 +224,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         "studentName": "$studname $studLastName",
                         "section": studSection,
                         "time": selectedTime,
-                        "notifState" : 'noNotification',
-                        "fcmToken" : fcmToken,
+                        "notifState": 'noNotification',
+                        "fcmToken": fcmToken,
                       });
                       break;
                     } else {
