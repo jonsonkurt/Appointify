@@ -273,6 +273,8 @@ class _HomePageState extends State<HomePage> {
                       child: SizedBox(
                         width: 150,
                         child: Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          color: Color(0xffFF9343),
                           child: Column(
                             children: [
                               Flexible(
@@ -289,6 +291,7 @@ class _HomePageState extends State<HomePage> {
                                     return SizedBox(
                                       child: Center(
                                         child: Container(
+                                          
                                           height: 100,
                                           width: 100,
                                           decoration: BoxDecoration(
@@ -357,11 +360,18 @@ class _HomePageState extends State<HomePage> {
                                   },
                                 ),
                               ),
-                              Text(
-                                snapshot
-                                    .child('professorName')
-                                    .value
-                                    .toString(),
+                              Container(
+                                height: 20,
+                                child: Text(
+                                  snapshot
+                                      .child('professorName')
+                                      .value
+                                      .toString(),
+                                      style: TextStyle(color: Colors.black, 
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      ),
+                                ),
                               ),
                               Text(
                                 snapshot
@@ -376,11 +386,21 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors
                                       .red, // Replace with the desired color
                                 ),
-                              Text(
-                                snapshot
-                                    .child('requestStatus')
-                                    .value
-                                    .toString(),
+                              Container(
+                                
+                                alignment: Alignment.center,
+                                height: 20,
+                                width: 150,
+                                decoration: BoxDecoration(color: Color(0xff7778EE),
+                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
+                                margin: EdgeInsets.only(top: 20),
+                                child: Text(
+                                  snapshot
+                                      .child('requestStatus')
+                                      .value
+                                      .toString(),
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
@@ -413,17 +433,17 @@ class _HomePageState extends State<HomePage> {
               width: 350,
               child: ContainedTabBarView(
                 tabs: const [
-                  Text('Upcoming'),
-                  Text('Completed'),
+                  Text('Upcoming', style: TextStyle(fontSize: 20),),
+                  Text('Completed', style: TextStyle(fontSize: 20),),
                 ],
                 tabBarProperties: TabBarProperties(
-                  width: 200,
-                  height: 32,
+                  width: 360,
+                  height: 50,
                   background: Container(
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: const Color(0xFFFF9343),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0)),
+                          const BorderRadius.all(Radius.circular(20.0)),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.4),

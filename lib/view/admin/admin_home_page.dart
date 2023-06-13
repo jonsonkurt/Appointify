@@ -86,7 +86,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
     return Scaffold(
       body: Scaffold(
         appBar: AppBar(
-          title: const Text("List of Employees"),
+          title: const Text("List of Employees", style: TextStyle(color: Colors.black),),
           elevation: 0,
           backgroundColor: Colors.white12,
           titleTextStyle: const TextStyle(
@@ -431,7 +431,7 @@ class _SearchBoxState extends State<SearchBox> {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: 500,
+        width: 350,
         child: TextField(
           controller: _searchController,
           decoration: const InputDecoration(
