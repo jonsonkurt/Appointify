@@ -86,7 +86,10 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
     return Scaffold(
       body: Scaffold(
         appBar: AppBar(
-          title: const Text("List of Employees", style: TextStyle(color: Colors.black),),
+          title: const Text(
+            "List of Employees",
+            style: TextStyle(color: Colors.black),
+          ),
           elevation: 0,
           backgroundColor: Colors.white12,
           titleTextStyle: const TextStyle(
@@ -313,6 +316,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                         "status": "accepting",
                                         "designation": "Professor",
                                         "profilePicStatus": "None",
+                                        "fcmProfToken": "-",
                                         "availability": {
                                           "Monday": "-",
                                           "Tuesday": "-",

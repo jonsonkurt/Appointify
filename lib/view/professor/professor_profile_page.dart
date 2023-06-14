@@ -138,13 +138,11 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                           "None"
                                       ? const Icon(
                                           Icons.person,
-                                          size: 35,
+                                          size: 40,
                                         )
                                       : Stack(
                                           children: [
                                             Image(
-                                              width: 100,
-                                              height: 100,
                                               fit: BoxFit.cover,
                                               image: NetworkImage(
                                                   profilePicStatus),
