@@ -92,8 +92,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                               size: 35,
                                             )
                                           : Image(
-                                              width: 100,
-                                              height: 100,
                                               fit: BoxFit.cover,
                                               image: NetworkImage(
                                                   profilePicStatus),

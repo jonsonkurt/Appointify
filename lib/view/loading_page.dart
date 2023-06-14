@@ -39,7 +39,9 @@ class OnBoarding extends StatelessWidget {
 
       DatabaseReference nameRef =
           rtdb.ref().child('students/$userID/designation');
-      DatabaseReference ref = rtdb.ref().child('students');
+      DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
+      DatabaseReference profRef =
+          FirebaseDatabase.instance.ref().child('professors');
       nameSubscription = nameRef.onValue.listen((event) async {
         try {
           name = event.snapshot.value.toString();
@@ -74,6 +76,14 @@ class OnBoarding extends StatelessWidget {
               ),
             );
           } else {
+            final fcmToken = await FirebaseMessaging.instance.getToken();
+            print('loafing');
+            await profRef.child(userID!).update({
+              'fcmProfToken': fcmToken,
+            });
+            print(fcmToken);
+
+            // ignore: use_build_context_synchronously
             Navigator.push(
               context,
               PageRouteBuilder(
