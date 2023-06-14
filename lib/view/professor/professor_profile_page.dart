@@ -207,15 +207,15 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               width: 55,
                               borderRadius: 30.0,
                               onToggle: (val) {
-                                setState(() async {
+                                setState(() {
                                   if (val == true) {
                                     status1 = val;
-                                    await ref.child(userID.toString()).update({
+                                    ref.child(userID.toString()).update({
                                       "status": "accepting",
                                     });
                                   } else {
                                     status1 = val;
-                                    await ref.child(userID.toString()).update({
+                                    ref.child(userID.toString()).update({
                                       "status": "not accepting",
                                     });
                                   }
