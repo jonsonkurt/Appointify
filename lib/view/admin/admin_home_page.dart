@@ -124,8 +124,8 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                       }
                       return Card(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        margin: EdgeInsets.only(top: 10, left: 10, right: 10,),
-                        color: Colors.purple,
+                        margin: EdgeInsets.only(top: 10, left: 20, right: 20,),
+                        color: Color(0xFFDCDAD8),
                         child: Column(
                           children: [
                             Center(

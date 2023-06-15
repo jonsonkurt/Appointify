@@ -93,7 +93,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           //Profile page Text
-                          const Text("Profile"),
+                          Container(
+                            margin: EdgeInsets.all(15),
+                            alignment: Alignment.centerLeft,
+                            child: const Text("Profile",style: TextStyle(fontSize: 30,
+                             color: Colors.black, decoration: TextDecoration.none),)
+                            ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -147,20 +152,28 @@ class _ProfilePageState extends State<ProfilePage> {
                           const SizedBox(
                             height: 20,
                           ),
-                          Center(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             // update prolife logic
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const EditStudentProfile()),
-                                );
-                                // provider.pickImage(context);
-                              },
-                              child: const Text('Edit Personal Information'),
-                            ),
+                            children:[ 
+                              Text("Edit Information", style: TextStyle(decoration: TextDecoration.none, 
+                              color: Colors.black, fontSize: 20),
+                              ),
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration:BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                color: Color(0xFFFF9343),),
+                                child: IconButton(onPressed: (){
+                                 Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const EditStudentProfile()),
+                                  );
+                                                          }, icon: Icon(Icons.edit)),
+                              )
+                            ]
                           ),
                           ReuseableRow(
                               title: 'Name',
@@ -180,11 +193,13 @@ class _ProfilePageState extends State<ProfilePage> {
                               iconData: Icons.group),
 
                           //update profile button
-
-                          const SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: _logout,
-                            child: const Text("Logout"),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: ElevatedButton(
+                              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343)),shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)))),
+                              onPressed: _logout,
+                              child: const Text("Logout",  style: TextStyle(fontSize: 20,),),
+                            ),
                           ),
                         ]);
                   } else {

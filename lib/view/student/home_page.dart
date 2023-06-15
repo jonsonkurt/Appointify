@@ -359,19 +359,23 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
+                                margin: EdgeInsets.only(top: 3,),
                                 child: Text(
                                   snapshot
                                       .child('professorName')
                                       .value
                                       .toString(),
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,
                                   ),
                                 ),
                               ),
                               Text(
+                                style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 snapshot
                                     .child('professorRole')
                                     .value
@@ -389,7 +393,7 @@ class _HomePageState extends State<HomePage> {
                                 height: 20,
                                 width: 150,
                                 decoration: BoxDecoration(
-                                    color: Color(0xff7778EE),
+                                    color: Color(0xFF4394FF),
                                     borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(20),
                                         bottomRight: Radius.circular(20))),
