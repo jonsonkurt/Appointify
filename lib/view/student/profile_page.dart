@@ -41,10 +41,10 @@ class _ProfilePageState extends State<ProfilePage> {
         debugShowCheckedModeBanner: false,
         home: SafeArea(
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: StreamBuilder(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: StreamBuilder(
                 stream: ref.child(userID!).onValue,
                 builder: (context, AsyncSnapshot snapshot) {
                   if (!snapshot.hasData) {
@@ -56,8 +56,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     String mobileNumber = map['mobileNumber'];
                     String section = map['section'];
                     String email = map['email'];
-                    String profilePicStatus = map['profilePicStatus'].toString();
-            
+                    String profilePicStatus =
+                        map['profilePicStatus'].toString();
+
                     return Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -77,39 +78,39 @@ class _ProfilePageState extends State<ProfilePage> {
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color:
-                                            const Color.fromARGB(255, 35, 35, 35),
+                                        color: const Color.fromARGB(
+                                            255, 35, 35, 35),
                                         width: 2,
                                       )),
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(100),
-                                      child: map['profilePicStatus'].toString() ==
-                                                  "None"
-                                              ? const Icon(
-                                                  Icons.person,
-                                                  size: 35,
-                                                )
-                                              : Image(
-                                                  fit: BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      profilePicStatus),
-                                                  loadingBuilder: (context, child,
-                                                      loadingProgress) {
-                                                    if (loadingProgress == null) {
-                                                      return child;
-                                                    }
-                                                    return const CircularProgressIndicator();
-                                                  },
-                                                  errorBuilder:
-                                                      (context, object, stack) {
-                                                    return const Icon(
-                                                      Icons.error_outline,
-                                                      color: Color.fromARGB(
-                                                          255, 35, 35, 35),
-                                                    );
-                                                  },
-                                                )
-                                          ),
+                                      child: map['profilePicStatus']
+                                                  .toString() ==
+                                              "None"
+                                          ? const Icon(
+                                              Icons.person,
+                                              size: 35,
+                                            )
+                                          : Image(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                  profilePicStatus),
+                                              loadingBuilder: (context, child,
+                                                  loadingProgress) {
+                                                if (loadingProgress == null) {
+                                                  return child;
+                                                }
+                                                return const CircularProgressIndicator();
+                                              },
+                                              errorBuilder:
+                                                  (context, object, stack) {
+                                                return const Icon(
+                                                  Icons.error_outline,
+                                                  color: Color.fromARGB(
+                                                      255, 35, 35, 35),
+                                                );
+                                              },
+                                            )),
                                 ),
                               ),
                             ),
@@ -148,9 +149,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               title: 'Section',
                               value: section,
                               iconData: Icons.group),
-            
+
                           //update profile button
-            
+
                           const SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: _logout,
@@ -161,8 +162,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     return const Center(child: Text('Something went wrong.'));
                   }
                 }),
-                    ),
-            )));
+          ),
+        )));
   }
 }
 

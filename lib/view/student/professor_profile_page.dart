@@ -41,7 +41,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   String studLastName = '';
   String studSection = '';
   StreamSubscription<DatabaseEvent>? nameSubscription;
+  StreamSubscription<DatabaseEvent>? getProfSnap;
   String? userID = FirebaseAuth.instance.currentUser?.uid;
+  String fcmProfToken = '';
   bool isLoading = true;
   var logger = Logger();
 
@@ -113,6 +115,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
     super.dispose();
   }
 
+  DatabaseReference refProf =
+      FirebaseDatabase.instance.ref().child('professors');
+
   @override
   Widget build(BuildContext context) {
     final firebaseApp = Firebase.app();
@@ -121,7 +126,10 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
       databaseURL:
           'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
     );
+    DatabaseReference refProf =
+        FirebaseDatabase.instance.ref().child('professors');
     DatabaseReference nameRef = rtdb.ref().child('students/$userID/');
+
     nameSubscription = nameRef.onValue.listen((event) {
       try {
         if (mounted) {
@@ -129,6 +137,22 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
             studname = event.snapshot.child("firstName").value.toString();
             studLastName = event.snapshot.child("lastName").value.toString();
             studSection = event.snapshot.child("section").value.toString();
+            isLoading = false;
+          });
+        }
+      } catch (error, stackTrace) {
+        logger.d('Error occurred: $error');
+        logger.d('Stack trace: $stackTrace');
+      }
+    });
+
+    getProfSnap = refProf.child(widget.professorID).onValue.listen((event) {
+      try {
+        if (mounted) {
+          setState(() {
+            fcmProfToken =
+                event.snapshot.child("fcmProfToken").value.toString();
+            print(fcmProfToken);
             isLoading = false;
           });
         }
@@ -225,6 +249,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         "section": studSection,
                         "time": selectedTime,
                         "fcmToken": fcmToken,
+                        "fcmProfToken": fcmProfToken,
                       });
                       break;
                     } else {

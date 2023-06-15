@@ -317,6 +317,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                         "status": "accepting",
                                         "designation": "Professor",
                                         "profilePicStatus": "None",
+                                        "fcmProfToken": "-",
                                         "availability": {
                                           "Monday": "-",
                                           "Tuesday": "-",
