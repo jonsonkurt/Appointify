@@ -8,7 +8,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import '../student/profile_controller.dart';
-import 'professor_profile_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -167,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                 views: [
                   // Tab for Upcoming
                   Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 15),
                     child: SizedBox(
                       width: 350,
                       height: 600,
@@ -177,16 +176,20 @@ class _HomePageState extends State<HomePage> {
                             .equalTo("$userID-UPCOMING"),
                         itemBuilder: (context, snapshot, animation, index) {
                           return SizedBox(
-                              height: 185,
-                              child: Card(
+                              height: 250,
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 30),
+                                child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   color: Colors.grey,
-                                  margin: EdgeInsets.only(left: 17, right: 17),
+                                  margin: const EdgeInsets.only(
+                                      left: 17, right: 17),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
+                                      const SizedBox(height: 10),
                                       Flexible(
                                         child: FirebaseAnimatedList(
                                           query: studentsRef
@@ -201,8 +204,8 @@ class _HomePageState extends State<HomePage> {
                                             return SizedBox(
                                               child: Center(
                                                 child: Container(
-                                                  height: 30,
-                                                  width: 30,
+                                                  height: 60,
+                                                  width: 60,
                                                   decoration: BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       border: Border.all(
@@ -272,37 +275,35 @@ class _HomePageState extends State<HomePage> {
                                           },
                                         ),
                                       ),
-                                      Row(
-                                        children: [
-                                          // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                snapshot
-                                                    .child('studentName')
-                                                    .value
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.black),
-                                              ),
-                                              Text(
-                                                snapshot
-                                                    .child('section')
-                                                    .value
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.black),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                      Center(
+                                        child:
+                                            // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
+                                            Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              snapshot
+                                                  .child('studentName')
+                                                  .value
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.black),
+                                            ),
+                                            Text(
+                                              snapshot
+                                                  .child('section')
+                                                  .value
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       Container(
                                         width: 340,
@@ -317,11 +318,11 @@ class _HomePageState extends State<HomePage> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Container(
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   right: 30, left: 20),
                                               child: Row(
                                                 children: [
-                                                  Icon(
+                                                  const Icon(
                                                     Icons
                                                         .calendar_month_outlined,
                                                     color: Colors.black,
@@ -331,18 +332,18 @@ class _HomePageState extends State<HomePage> {
                                                         .child('date')
                                                         .value
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color: Colors.black),
                                                   ),
                                                 ],
                                               ),
                                             ),
                                             Container(
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   right: 30, left: 20),
                                               child: Row(
                                                 children: [
-                                                  Icon(
+                                                  const Icon(
                                                     Icons.watch_later_outlined,
                                                     color: Colors.black,
                                                   ),
@@ -351,7 +352,7 @@ class _HomePageState extends State<HomePage> {
                                                         .child('time')
                                                         .value
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         color: Colors.black),
                                                   ),
                                                 ],
@@ -478,7 +479,9 @@ class _HomePageState extends State<HomePage> {
                                         ],
                                       )
                                     ],
-                                  )));
+                                  ),
+                                ),
+                              ));
                         },
                       ),
                     ),
@@ -503,8 +506,8 @@ class _HomePageState extends State<HomePage> {
                                           borderRadius:
                                               BorderRadius.circular(20)),
                                       color: Colors.grey,
-                                      margin:
-                                          EdgeInsets.only(left: 17, right: 17),
+                                      margin: const EdgeInsets.only(
+                                          left: 17, right: 17),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
@@ -613,7 +616,7 @@ class _HomePageState extends State<HomePage> {
                                                         .child('studentName')
                                                         .value
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 20,
                                                         color: Colors.black),
                                                   ),
@@ -622,7 +625,7 @@ class _HomePageState extends State<HomePage> {
                                                         .child('section')
                                                         .value
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 15,
                                                         color: Colors.black),
                                                   ),
@@ -643,7 +646,7 @@ class _HomePageState extends State<HomePage> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Container(
-                                                  margin: EdgeInsets.only(
+                                                  margin: const EdgeInsets.only(
                                                       right: 50),
                                                   // padding: EdgeInsets.only(right:30, left: 20),
                                                   child: Row(
@@ -655,7 +658,7 @@ class _HomePageState extends State<HomePage> {
                                                             .calendar_month_outlined,
                                                         color: Colors.black,
                                                       ),
-                                                      Padding(
+                                                      const Padding(
                                                           padding:
                                                               EdgeInsets.only(
                                                                   left: 20)),
@@ -664,7 +667,7 @@ class _HomePageState extends State<HomePage> {
                                                             .child('date')
                                                             .value
                                                             .toString(),
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color:
                                                                 Colors.black),
                                                       ),
@@ -683,7 +686,7 @@ class _HomePageState extends State<HomePage> {
                                                             .watch_later_outlined,
                                                         color: Colors.black,
                                                       ),
-                                                      Padding(
+                                                      const Padding(
                                                           padding:
                                                               EdgeInsets.only(
                                                                   left: 20)),
@@ -692,7 +695,7 @@ class _HomePageState extends State<HomePage> {
                                                             .child('time')
                                                             .value
                                                             .toString(),
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color:
                                                                 Colors.black),
                                                       ),
@@ -728,8 +731,8 @@ class _HomePageState extends State<HomePage> {
                                           borderRadius:
                                               BorderRadius.circular(20)),
                                       color: Colors.grey,
-                                      margin:
-                                          EdgeInsets.only(left: 17, right: 17),
+                                      margin: const EdgeInsets.only(
+                                          left: 17, right: 17),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
@@ -838,7 +841,7 @@ class _HomePageState extends State<HomePage> {
                                                         .child('studentName')
                                                         .value
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 20,
                                                         color: Colors.black),
                                                   ),
@@ -847,7 +850,7 @@ class _HomePageState extends State<HomePage> {
                                                         .child('section')
                                                         .value
                                                         .toString(),
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontSize: 15,
                                                         color: Colors.black),
                                                   ),
@@ -868,11 +871,12 @@ class _HomePageState extends State<HomePage> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Container(
-                                                  padding: EdgeInsets.only(
-                                                      right: 30, left: 20),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 30, left: 20),
                                                   child: Row(
                                                     children: [
-                                                      Icon(
+                                                      const Icon(
                                                         Icons
                                                             .calendar_month_outlined,
                                                         color: Colors.black,
@@ -882,7 +886,7 @@ class _HomePageState extends State<HomePage> {
                                                             .child('date')
                                                             .value
                                                             .toString(),
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color:
                                                                 Colors.black),
                                                       ),
@@ -890,11 +894,12 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                                 Container(
-                                                  padding: EdgeInsets.only(
-                                                      right: 30, left: 20),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 30, left: 20),
                                                   child: Row(
                                                     children: [
-                                                      Icon(
+                                                      const Icon(
                                                         Icons
                                                             .watch_later_outlined,
                                                         color: Colors.black,
@@ -904,7 +909,7 @@ class _HomePageState extends State<HomePage> {
                                                             .child('time')
                                                             .value
                                                             .toString(),
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color:
                                                                 Colors.black),
                                                       ),
