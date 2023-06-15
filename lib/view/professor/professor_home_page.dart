@@ -42,15 +42,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final firebaseApp = Firebase.app();
-    final rtdb = FirebaseDatabase.instanceFor(
-      app: firebaseApp,
-      databaseURL:
-          'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    );
-
     DatabaseReference nameRef =
-        rtdb.ref().child('professors/$userID/firstName');
+        FirebaseDatabase.instance.ref().child('professors/$userID/firstName');
     nameSubscription = nameRef.onValue.listen((event) {
       try {
         if (mounted) {
@@ -65,8 +58,9 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    DatabaseReference appointmentsRef = rtdb.ref('appointments/');
-    DatabaseReference studentsRef = rtdb.ref('students/');
+    DatabaseReference appointmentsRef =
+        FirebaseDatabase.instance.ref('appointments/');
+    DatabaseReference studentsRef = FirebaseDatabase.instance.ref('students/');
     // appointmentsRef.orderByChild('status').equalTo("$userID-PENDING");
 
     return Scaffold(
@@ -175,8 +169,12 @@ class _HomePageState extends State<HomePage> {
                             .orderByChild('requestStatusProfessor')
                             .equalTo("$userID-UPCOMING"),
                         itemBuilder: (context, snapshot, animation, index) {
+                          String studentName =
+                              snapshot.child('studentName').value.toString();
+                          String studentSection =
+                              snapshot.child('section').value.toString();
                           return SizedBox(
-                              height: 250,
+                              height: 225,
                               child: Padding(
                                 padding: EdgeInsets.only(bottom: 30),
                                 child: Card(
@@ -189,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      const SizedBox(height: 10),
+                                      const SizedBox(height: 15),
                                       Flexible(
                                         child: FirebaseAnimatedList(
                                           query: studentsRef
@@ -198,111 +196,110 @@ class _HomePageState extends State<HomePage> {
                                                   .child('studentID')
                                                   .value
                                                   .toString()),
-                                          scrollDirection: Axis.vertical,
                                           itemBuilder: (context, snapshot,
                                               animation, index) {
                                             return SizedBox(
-                                              child: Center(
-                                                child: Container(
-                                                  height: 60,
-                                                  width: 60,
-                                                  decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(
-                                                        color: const Color
-                                                                .fromARGB(
-                                                            255, 35, 35, 35),
-                                                        width: 2,
-                                                      )),
-                                                  child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              100),
-                                                      child: ProfileController()
-                                                                  .image ==
-                                                              null
-                                                          ? snapshot
-                                                                      .child(
-                                                                          'profilePicStatus')
-                                                                      .value
-                                                                      .toString() ==
-                                                                  "None"
-                                                              ? const Icon(
-                                                                  Icons.person,
-                                                                  size: 35,
-                                                                )
-                                                              : Image(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  image: NetworkImage(snapshot
-                                                                      .child(
-                                                                          'profilePicStatus')
-                                                                      .value
-                                                                      .toString()),
-                                                                  loadingBuilder:
-                                                                      (context,
-                                                                          child,
-                                                                          loadingProgress) {
-                                                                    if (loadingProgress ==
-                                                                        null) {
-                                                                      return child;
-                                                                    }
-                                                                    return const CircularProgressIndicator();
-                                                                  },
-                                                                  errorBuilder:
-                                                                      (context,
-                                                                          object,
-                                                                          stack) {
-                                                                    return const Icon(
-                                                                      Icons
-                                                                          .error_outline,
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          35,
-                                                                          35,
-                                                                          35),
-                                                                    );
-                                                                  },
-                                                                )
-                                                          : Image.file(File(
-                                                                  ProfileController()
-                                                                      .image!
-                                                                      .path)
-                                                              .absolute)),
-                                                ),
+                                              child: Row(
+                                                children: [
+                                                  const SizedBox(width: 10),
+                                                  Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                          color: const Color
+                                                                  .fromARGB(
+                                                              255, 35, 35, 35),
+                                                          width: 2,
+                                                        )),
+                                                    child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
+                                                        child: ProfileController()
+                                                                    .image ==
+                                                                null
+                                                            ? snapshot
+                                                                        .child(
+                                                                            'profilePicStatus')
+                                                                        .value
+                                                                        .toString() ==
+                                                                    "None"
+                                                                ? const Icon(
+                                                                    Icons
+                                                                        .person,
+                                                                    size: 35,
+                                                                  )
+                                                                : Image(
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    image: NetworkImage(snapshot
+                                                                        .child(
+                                                                            'profilePicStatus')
+                                                                        .value
+                                                                        .toString()),
+                                                                    loadingBuilder:
+                                                                        (context,
+                                                                            child,
+                                                                            loadingProgress) {
+                                                                      if (loadingProgress ==
+                                                                          null) {
+                                                                        return child;
+                                                                      }
+                                                                      return const CircularProgressIndicator();
+                                                                    },
+                                                                    errorBuilder:
+                                                                        (context,
+                                                                            object,
+                                                                            stack) {
+                                                                      return const Icon(
+                                                                        Icons
+                                                                            .error_outline,
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            35,
+                                                                            35,
+                                                                            35),
+                                                                      );
+                                                                    },
+                                                                  )
+                                                            : Image.file(File(
+                                                                    ProfileController()
+                                                                        .image!
+                                                                        .path)
+                                                                .absolute)),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        studentName,
+                                                        style: const TextStyle(
+                                                            fontSize: 20,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      Text(
+                                                        studentSection,
+                                                        style: const TextStyle(
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
                                             );
                                           },
-                                        ),
-                                      ),
-                                      Center(
-                                        child:
-                                            // Icon(Icons.account_circle_outlined, color: Colors.white,size: 80,),
-                                            Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              snapshot
-                                                  .child('studentName')
-                                                  .value
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.black),
-                                            ),
-                                            Text(
-                                              snapshot
-                                                  .child('section')
-                                                  .value
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.black),
-                                            ),
-                                          ],
                                         ),
                                       ),
                                       Container(
