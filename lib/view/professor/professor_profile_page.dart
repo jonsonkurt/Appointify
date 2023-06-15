@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:logger/logger.dart';
 
 import 'package:provider/provider.dart';
 import 'package:recase/recase.dart';
@@ -24,6 +25,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   String? userID = FirebaseAuth.instance.currentUser?.uid;
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('professors');
   bool status1 = true;
+  StreamSubscription<DatabaseEvent>? nameSubscription;
+  String name = '';
+  var logger = Logger();
 
   @override
   void initState() {
@@ -32,6 +36,31 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
 
   Future<void> _logout() async {
     await FirebaseAuth.instance.signOut();
+    DatabaseReference studRef =
+        FirebaseDatabase.instance.ref().child('students');
+    DatabaseReference profRef =
+        FirebaseDatabase.instance.ref().child('professors');
+    DatabaseReference desigRef =
+        FirebaseDatabase.instance.ref().child('students/$userID/designation');
+
+    nameSubscription = desigRef.onValue.listen((event) async {
+      try {
+        name = event.snapshot.value.toString();
+        // ignore: unnecessary_null_comparison
+        if (name == "Student") {
+          await studRef.child(userID!).update({
+            'fcmToken': "-",
+          });
+        } else {
+          await profRef.child(userID!).update({
+            'fcmProfToken': '-',
+          });
+        }
+      } catch (error, stackTrace) {
+        logger.d('Error occurred: $error');
+        logger.d('Stack trace: $stackTrace');
+      }
+    });
 
     // Redirect the user to the SignInPage after logging out
     // ignore: use_build_context_synchronously
@@ -115,7 +144,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           ),
                         ),
                         Positioned(
-                          left: MediaQuery.of(context).size.width / 3,
+                          left: MediaQuery.of(context).size.width /2.7,
                           bottom: -50,
                           child: Container(
                               alignment: Alignment.bottomCenter,
@@ -196,24 +225,32 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               fontSize: 25,
                               decoration: TextDecoration.none),
                         ),
-                        Text(
-                          designation,
-                          style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                              decoration: TextDecoration.none),
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          child: Text(
+                            designation,
+                            style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 15,
+                                decoration: TextDecoration.none),
+                          ),
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            const Text(
-                              "Availability Status:",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  decoration: TextDecoration.none),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              
+                              child: const Text(
+                                "Availability Status:",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    decoration: TextDecoration.none),
+                              ),
                             ),
                             FlutterSwitch(
+                              activeColor: Colors.green,
                               value: status1,
                               height: 25.0,
                               width: 55,
@@ -236,28 +273,87 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             ),
                           ],
                         ),
-                        const Text(
-                          "Email:",
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
-                              decoration: TextDecoration.none),
+                        Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          margin: EdgeInsets.only(left: 15, right: 15, bottom: 10, top: 10),
+                          child: Column(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              alignment: Alignment.centerLeft,
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft:Radius.circular(10), 
+                                  topRight: Radius.circular(10)),
+                              color: Colors.green,
+                              ),
+                              child: const Text(
+                                "Email:",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    decoration: TextDecoration.none),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              alignment: Alignment.centerLeft,
+                              child: Text("Dream",
+                                style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                decoration: TextDecoration.none),
+                                                    ),
+                            ),
+                          ],
                         ),
-                        const Text(
-                          "Contact Number:",
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
-                              decoration: TextDecoration.none),
                         ),
+                        
+                        Card(
+                          margin: EdgeInsets.only(left: 15, right: 15, bottom: 10, top: 10),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft:Radius.circular(10), 
+                                  topRight: Radius.circular(10)),
+                              color: Colors.green,
+                              ),
+                              padding: EdgeInsets.all(5),
+                              child: const Text(
+                                "Contact Number:",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    decoration: TextDecoration.none),
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              padding: EdgeInsets.all(5),
+                              child: Text("0908070605040",
+                              style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    decoration: TextDecoration.none),
+                              ),
+                            )
+                          ],
+                        ),
+                        )
+
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      "Weekly Schedule",
-                      style: TextStyle(fontSize: 25, color: Colors.black),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
+                      child: const Text(
+                        "Weekly Schedule",
+                        style: TextStyle(fontSize: 20, color: Colors.black, decoration:TextDecoration.none),
+                      ),
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -267,11 +363,38 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             ..sort((a, b) => _getWeekdayNumber(a.key)
                                 .compareTo(_getWeekdayNumber(b.key))))
                             if (entry.value != '-')
-                              Card(
-                                child: Column(
-                                  children: [
-                                    Text('${entry.key} ${entry.value}'),
-                                  ],
+                              SizedBox(
+                                child: Card(
+                                  elevation: 8,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                                  color: Colors.white30,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        width: 140,
+                                        height:50,
+                                        decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))
+                                        ),
+                                        child: Text("${entry.key}",)
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(10),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                        "${entry.value.split(' to ').join('\nto\n')}",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      ),                   
+                                      // Container(
+                                      //   padding: EdgeInsets.all(10),
+                                      //   alignment: Alignment.center,
+                                      //   child: Text("${entry.value}")
+                                      //   ),
+                                    ],
+                                  ),
                                 ),
                               ),
                         ],

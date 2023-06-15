@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
+import 'package:logger/logger.dart';
 
 import 'edit_student_details.dart';
 // import 'package:transparent_image/transparent_image.dart';
@@ -17,6 +18,9 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String? userID = FirebaseAuth.instance.currentUser?.uid;
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
+  StreamSubscription<DatabaseEvent>? nameSubscription;
+  String name = '';
+  var logger = Logger();
 
   @override
   void initState() {
@@ -25,6 +29,31 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> _logout() async {
     await FirebaseAuth.instance.signOut();
+    DatabaseReference studRef =
+        FirebaseDatabase.instance.ref().child('students');
+    DatabaseReference profRef =
+        FirebaseDatabase.instance.ref().child('professors');
+    DatabaseReference desigRef =
+        FirebaseDatabase.instance.ref().child('students/$userID/designation');
+
+    nameSubscription = desigRef.onValue.listen((event) async {
+      try {
+        name = event.snapshot.value.toString();
+        // ignore: unnecessary_null_comparison
+        if (name == "Student") {
+          await studRef.child(userID!).update({
+            'fcmToken': "-",
+          });
+        } else {
+          await profRef.child(userID!).update({
+            'fcmProfToken': '-',
+          });
+        }
+      } catch (error, stackTrace) {
+        logger.d('Error occurred: $error');
+        logger.d('Stack trace: $stackTrace');
+      }
+    });
 
     // Redirect the user to the SignInPage after logging out
     // ignore: use_build_context_synchronously

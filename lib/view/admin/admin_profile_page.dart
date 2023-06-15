@@ -25,12 +25,20 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Column(children: [
-          const Text("Profile Page"),
-          const SizedBox(height: 20),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          Container(
+            alignment: Alignment.topCenter,
+            child: Icon(Icons.account_box_rounded, size: 100,),
+          
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            child: const Text("Admin", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
           ElevatedButton(
             onPressed: _logout,
-            child: const Text("Logout"),
+            child: const Text("Logout", style: TextStyle(fontSize: 20),),
           ),
         ]),
       ),

@@ -40,8 +40,6 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
-
-    
   }
 
   @override
@@ -71,7 +69,6 @@ class _HomePageState extends State<HomePage> {
     DatabaseReference appointmentsRef = rtdb.ref('appointments/');
     DatabaseReference employeesRef = rtdb.ref('professors/');
     // appointmentsRef.orderByChild('status').equalTo("$userID-PENDING");
-    
 
     return Scaffold(
       body: Center(
@@ -273,7 +270,8 @@ class _HomePageState extends State<HomePage> {
                       child: SizedBox(
                         width: 150,
                         child: Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
                           color: Color(0xffFF9343),
                           child: Column(
                             children: [
@@ -288,10 +286,10 @@ class _HomePageState extends State<HomePage> {
                                   scrollDirection: Axis.vertical,
                                   itemBuilder:
                                       (context, snapshot, animation, index) {
-                                    return SizedBox(
+                                    return Padding(
+                                      padding: EdgeInsets.only(top: 10),
                                       child: Center(
                                         child: Container(
-                                          
                                           height: 100,
                                           width: 100,
                                           decoration: BoxDecoration(
@@ -315,7 +313,7 @@ class _HomePageState extends State<HomePage> {
                                                           "None"
                                                       ? const Icon(
                                                           Icons.person,
-                                                          size: 35,
+                                                          size: 20,
                                                         )
                                                       : Image(
                                                           fit: BoxFit.cover,
@@ -361,16 +359,16 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                height: 20,
                                 child: Text(
                                   snapshot
                                       .child('professorName')
                                       .value
                                       .toString(),
-                                      style: TextStyle(color: Colors.black, 
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                      ),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ),
                               Text(
@@ -387,19 +385,23 @@ class _HomePageState extends State<HomePage> {
                                       .red, // Replace with the desired color
                                 ),
                               Container(
-                                
                                 alignment: Alignment.center,
                                 height: 20,
                                 width: 150,
-                                decoration: BoxDecoration(color: Color(0xff7778EE),
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
+                                decoration: BoxDecoration(
+                                    color: Color(0xff7778EE),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(20),
+                                        bottomRight: Radius.circular(20))),
                                 margin: EdgeInsets.only(top: 20),
                                 child: Text(
                                   snapshot
                                       .child('requestStatus')
                                       .value
                                       .toString(),
-                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -433,8 +435,18 @@ class _HomePageState extends State<HomePage> {
               width: 350,
               child: ContainedTabBarView(
                 tabs: const [
-                  Text('Upcoming', style: TextStyle(fontSize: 20),),
-                  Text('Completed', style: TextStyle(fontSize: 20),),
+                  Text(
+                    'Upcoming',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    'Completed',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    'Canceled',
+                    style: TextStyle(fontSize: 15),
+                  ),
                 ],
                 tabBarProperties: TabBarProperties(
                   width: 360,
@@ -463,257 +475,483 @@ class _HomePageState extends State<HomePage> {
                 views: [
                   // Tab for Upcoming
                   Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
+                    child: SizedBox(
                       child: SizedBox(
-                        child: SizedBox(
-                          width: 350,
-                          height: 300,
-                          child: FirebaseAnimatedList(
-                            query: appointmentsRef
-                                .orderByChild('status')
-                                .equalTo("$userID-UPCOMING"),
-                            itemBuilder: (context, snapshot, animation, index) {
-                              return SizedBox(
-                                  height: 100,
-                                  child: Card(
-                                      child: Column(
-                                    children: [
-                                      Flexible(
-                                        child: FirebaseAnimatedList(
-                                          query: employeesRef
-                                              .orderByChild('profUserID')
-                                              .equalTo(snapshot
-                                                  .child('professorID')
-                                                  .value
-                                                  .toString()),
-                                          scrollDirection: Axis.vertical,
-                                          itemBuilder: (context, snapshot,
-                                              animation, index) {
-                                            return SizedBox(
-                                              child: Center(
-                                                child: Container(
-                                                  height: 30,
-                                                  width: 30,
-                                                  decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(
-                                                        color: const Color
-                                                                .fromARGB(
-                                                            255, 35, 35, 35),
-                                                        width: 2,
-                                                      )),
-                                                  child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              100),
-                                                      child: ProfileController()
-                                                                  .image ==
-                                                              null
-                                                          ? snapshot
-                                                                      .child(
-                                                                          'profilePicStatus')
-                                                                      .value
-                                                                      .toString() ==
-                                                                  "None"
-                                                              ? const Icon(
-                                                                  Icons.person,
-                                                                  size: 35,
-                                                                )
-                                                              : Image(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  image: NetworkImage(snapshot
-                                                                      .child(
-                                                                          'profilePicStatus')
-                                                                      .value
-                                                                      .toString()),
-                                                                  loadingBuilder:
-                                                                      (context,
-                                                                          child,
-                                                                          loadingProgress) {
-                                                                    if (loadingProgress ==
-                                                                        null) {
-                                                                      return child;
-                                                                    }
-                                                                    return const CircularProgressIndicator();
-                                                                  },
-                                                                  errorBuilder:
-                                                                      (context,
-                                                                          object,
-                                                                          stack) {
-                                                                    return const Icon(
-                                                                      Icons
-                                                                          .error_outline,
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          35,
-                                                                          35,
-                                                                          35),
-                                                                    );
-                                                                  },
-                                                                )
-                                                          : Image.file(File(
-                                                                  ProfileController()
-                                                                      .image!
-                                                                      .path)
-                                                              .absolute)),
+                        width: 350,
+                        height: 300,
+                        child: FirebaseAnimatedList(
+                          query: appointmentsRef
+                              .orderByChild('status')
+                              .equalTo("$userID-UPCOMING"),
+                          itemBuilder: (context, snapshot, animation, index) {
+                            String employeeName = snapshot
+                                .child('professorName')
+                                .value
+                                .toString();
+                            String employeePosition = snapshot
+                                .child('professorRole')
+                                .value
+                                .toString();
+                            String schedDate =
+                                snapshot.child('date').value.toString();
+                            String schedTime =
+                                snapshot.child('time').value.toString();
+                            return SizedBox(
+                                height: 100,
+                                child: Card(
+                                    child: Row(
+                                  children: [
+                                    Flexible(
+                                      child: FirebaseAnimatedList(
+                                        query: employeesRef
+                                            .orderByChild('profUserID')
+                                            .equalTo(snapshot
+                                                .child('professorID')
+                                                .value
+                                                .toString()),
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, snapshot,
+                                            animation, index) {
+                                          return SizedBox(
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15, top: 15),
+                                                  child: Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                          color: const Color
+                                                                  .fromARGB(
+                                                              255, 35, 35, 35),
+                                                          width: 2,
+                                                        )),
+                                                    child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
+                                                        child: ProfileController()
+                                                                    .image ==
+                                                                null
+                                                            ? snapshot
+                                                                        .child(
+                                                                            'profilePicStatus')
+                                                                        .value
+                                                                        .toString() ==
+                                                                    "None"
+                                                                ? const Icon(
+                                                                    Icons
+                                                                        .person,
+                                                                    size: 35,
+                                                                  )
+                                                                : Image(
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    image: NetworkImage(snapshot
+                                                                        .child(
+                                                                            'profilePicStatus')
+                                                                        .value
+                                                                        .toString()),
+                                                                    loadingBuilder:
+                                                                        (context,
+                                                                            child,
+                                                                            loadingProgress) {
+                                                                      if (loadingProgress ==
+                                                                          null) {
+                                                                        return child;
+                                                                      }
+                                                                      return const CircularProgressIndicator();
+                                                                    },
+                                                                    errorBuilder:
+                                                                        (context,
+                                                                            object,
+                                                                            stack) {
+                                                                      return const Icon(
+                                                                        Icons
+                                                                            .error_outline,
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            35,
+                                                                            35,
+                                                                            35),
+                                                                      );
+                                                                    },
+                                                                  )
+                                                            : Image.file(File(
+                                                                    ProfileController()
+                                                                        .image!
+                                                                        .path)
+                                                                .absolute)),
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                                const SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      employeeName,
+                                                    ),
+                                                    Text(
+                                                      employeePosition,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          schedDate,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Text(
+                                                          schedTime,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        },
                                       ),
-                                      Text(
-                                        snapshot
-                                            .child('professorName')
-                                            .value
-                                            .toString(),
-                                      ),
-                                      Text(
-                                        snapshot
-                                            .child('professorRole')
-                                            .value
-                                            .toString(),
-                                      ),
-                                      Text(
-                                        snapshot.child('date').value.toString(),
-                                      ),
-                                      Text(
-                                        snapshot.child('time').value.toString(),
-                                      ),
-                                    ],
-                                  )));
-                            },
-                          ),
+                                    ),
+                                  ],
+                                )));
+                          },
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
 
-                  // Tab for completed
+                  // Tab for Completed
                   Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
+                    child: SizedBox(
                       child: SizedBox(
-                        child: SizedBox(
-                          width: 350,
-                          height: 300,
-                          child: FirebaseAnimatedList(
-                            query: appointmentsRef
-                                .orderByChild('status')
-                                .equalTo("$userID-COMPLETED"),
-                            itemBuilder: (context, snapshot, animation, index) {
-                              return SizedBox(
-                                  height: 100,
-                                  child: Card(
-                                      child: Column(
-                                    children: [
-                                      Flexible(
-                                        child: FirebaseAnimatedList(
-                                          query: employeesRef
-                                              .orderByChild('profUserID')
-                                              .equalTo(snapshot
-                                                  .child('professorID')
-                                                  .value
-                                                  .toString()),
-                                          scrollDirection: Axis.vertical,
-                                          itemBuilder: (context, snapshot,
-                                              animation, index) {
-                                            return SizedBox(
-                                              child: Center(
-                                                child: Container(
-                                                  height: 30,
-                                                  width: 30,
-                                                  decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(
-                                                        color: const Color
-                                                                .fromARGB(
-                                                            255, 35, 35, 35),
-                                                        width: 2,
-                                                      )),
-                                                  child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              100),
-                                                      child: ProfileController()
-                                                                  .image ==
-                                                              null
-                                                          ? snapshot
-                                                                      .child(
-                                                                          'profilePicStatus')
-                                                                      .value
-                                                                      .toString() ==
-                                                                  "None"
-                                                              ? const Icon(
-                                                                  Icons.person,
-                                                                  size: 35,
-                                                                )
-                                                              : Image(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  image: NetworkImage(snapshot
-                                                                      .child(
-                                                                          'profilePicStatus')
-                                                                      .value
-                                                                      .toString()),
-                                                                  loadingBuilder:
-                                                                      (context,
-                                                                          child,
-                                                                          loadingProgress) {
-                                                                    if (loadingProgress ==
-                                                                        null) {
-                                                                      return child;
-                                                                    }
-                                                                    return const CircularProgressIndicator();
-                                                                  },
-                                                                  errorBuilder:
-                                                                      (context,
-                                                                          object,
-                                                                          stack) {
-                                                                    return const Icon(
-                                                                      Icons
-                                                                          .error_outline,
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          35,
-                                                                          35,
-                                                                          35),
-                                                                    );
-                                                                  },
-                                                                )
-                                                          : Image.file(File(
-                                                                  ProfileController()
-                                                                      .image!
-                                                                      .path)
-                                                              .absolute)),
+                        width: 350,
+                        height: 300,
+                        child: FirebaseAnimatedList(
+                          query: appointmentsRef
+                              .orderByChild('status')
+                              .equalTo("$userID-COMPLETED"),
+                          itemBuilder: (context, snapshot, animation, index) {
+                            String employeeName = snapshot
+                                .child('professorName')
+                                .value
+                                .toString();
+                            String employeePosition = snapshot
+                                .child('professorRole')
+                                .value
+                                .toString();
+                            String schedDate =
+                                snapshot.child('date').value.toString();
+                            String schedTime =
+                                snapshot.child('time').value.toString();
+                            return SizedBox(
+                                height: 100,
+                                child: Card(
+                                    child: Row(
+                                  children: [
+                                    Flexible(
+                                      child: FirebaseAnimatedList(
+                                        query: employeesRef
+                                            .orderByChild('profUserID')
+                                            .equalTo(snapshot
+                                                .child('professorID')
+                                                .value
+                                                .toString()),
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, snapshot,
+                                            animation, index) {
+                                          return SizedBox(
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15, top: 15),
+                                                  child: Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                          color: const Color
+                                                                  .fromARGB(
+                                                              255, 35, 35, 35),
+                                                          width: 2,
+                                                        )),
+                                                    child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
+                                                        child: ProfileController()
+                                                                    .image ==
+                                                                null
+                                                            ? snapshot
+                                                                        .child(
+                                                                            'profilePicStatus')
+                                                                        .value
+                                                                        .toString() ==
+                                                                    "None"
+                                                                ? const Icon(
+                                                                    Icons
+                                                                        .person,
+                                                                    size: 35,
+                                                                  )
+                                                                : Image(
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    image: NetworkImage(snapshot
+                                                                        .child(
+                                                                            'profilePicStatus')
+                                                                        .value
+                                                                        .toString()),
+                                                                    loadingBuilder:
+                                                                        (context,
+                                                                            child,
+                                                                            loadingProgress) {
+                                                                      if (loadingProgress ==
+                                                                          null) {
+                                                                        return child;
+                                                                      }
+                                                                      return const CircularProgressIndicator();
+                                                                    },
+                                                                    errorBuilder:
+                                                                        (context,
+                                                                            object,
+                                                                            stack) {
+                                                                      return const Icon(
+                                                                        Icons
+                                                                            .error_outline,
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            35,
+                                                                            35,
+                                                                            35),
+                                                                      );
+                                                                    },
+                                                                  )
+                                                            : Image.file(File(
+                                                                    ProfileController()
+                                                                        .image!
+                                                                        .path)
+                                                                .absolute)),
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                                const SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      employeeName,
+                                                    ),
+                                                    Text(
+                                                      employeePosition,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          schedDate,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Text(
+                                                          schedTime,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        },
                                       ),
-                                      Text(
-                                        snapshot
-                                            .child('professorName')
-                                            .value
-                                            .toString(),
-                                      ),
-                                      Text(
-                                        snapshot
-                                            .child('professorRole')
-                                            .value
-                                            .toString(),
-                                      ),
-                                      Text(
-                                        snapshot.child('date').value.toString(),
-                                      ),
-                                      Text(
-                                        snapshot.child('time').value.toString(),
-                                      ),
-                                    ],
-                                  )));
-                            },
-                          ),
+                                    ),
+                                  ],
+                                )));
+                          },
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
+
+                  // Tab for Canceled
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: SizedBox(
+                      child: SizedBox(
+                        width: 350,
+                        height: 300,
+                        child: FirebaseAnimatedList(
+                          query: appointmentsRef
+                              .orderByChild('status')
+                              .equalTo("$userID-CANCELED"),
+                          itemBuilder: (context, snapshot, animation, index) {
+                            String employeeName = snapshot
+                                .child('professorName')
+                                .value
+                                .toString();
+                            String employeePosition = snapshot
+                                .child('professorRole')
+                                .value
+                                .toString();
+                            String schedDate =
+                                snapshot.child('date').value.toString();
+                            String schedTime =
+                                snapshot.child('time').value.toString();
+                            return SizedBox(
+                                height: 100,
+                                child: Card(
+                                    child: Row(
+                                  children: [
+                                    Flexible(
+                                      child: FirebaseAnimatedList(
+                                        query: employeesRef
+                                            .orderByChild('profUserID')
+                                            .equalTo(snapshot
+                                                .child('professorID')
+                                                .value
+                                                .toString()),
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, snapshot,
+                                            animation, index) {
+                                          return SizedBox(
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15, top: 15),
+                                                  child: Container(
+                                                    height: 60,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                          color: const Color
+                                                                  .fromARGB(
+                                                              255, 35, 35, 35),
+                                                          width: 2,
+                                                        )),
+                                                    child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
+                                                        child: ProfileController()
+                                                                    .image ==
+                                                                null
+                                                            ? snapshot
+                                                                        .child(
+                                                                            'profilePicStatus')
+                                                                        .value
+                                                                        .toString() ==
+                                                                    "None"
+                                                                ? const Icon(
+                                                                    Icons
+                                                                        .person,
+                                                                    size: 35,
+                                                                  )
+                                                                : Image(
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    image: NetworkImage(snapshot
+                                                                        .child(
+                                                                            'profilePicStatus')
+                                                                        .value
+                                                                        .toString()),
+                                                                    loadingBuilder:
+                                                                        (context,
+                                                                            child,
+                                                                            loadingProgress) {
+                                                                      if (loadingProgress ==
+                                                                          null) {
+                                                                        return child;
+                                                                      }
+                                                                      return const CircularProgressIndicator();
+                                                                    },
+                                                                    errorBuilder:
+                                                                        (context,
+                                                                            object,
+                                                                            stack) {
+                                                                      return const Icon(
+                                                                        Icons
+                                                                            .error_outline,
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            35,
+                                                                            35,
+                                                                            35),
+                                                                      );
+                                                                    },
+                                                                  )
+                                                            : Image.file(File(
+                                                                    ProfileController()
+                                                                        .image!
+                                                                        .path)
+                                                                .absolute)),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      employeeName,
+                                                    ),
+                                                    Text(
+                                                      employeePosition,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          schedDate,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Text(
+                                                          schedTime,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                )));
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

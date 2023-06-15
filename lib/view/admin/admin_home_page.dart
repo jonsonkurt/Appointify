@@ -123,10 +123,14 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                         return Container(); // Hide the professor card if it doesn't match the search criteria
                       }
                       return Card(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        margin: EdgeInsets.only(top: 10, left: 10, right: 10,),
+                        color: Colors.purple,
                         child: Column(
                           children: [
                             Center(
                               child: Container(
+                                margin: EdgeInsets.only(top: 10),
                                 height: 130,
                                 width: 130,
                                 decoration: BoxDecoration(
@@ -175,12 +179,18 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                             .absolute)),
                               ),
                             ),
-                            Text("$profFirstName $profLastName"),
+                            Container(
+                              padding: EdgeInsets.only(top: 10, bottom: 5),
+                              child: Text("$profFirstName $profLastName", style: TextStyle(fontSize: 17,),),
+                            ),
                             Text(snapshot
                                 .child('professorRole')
                                 .value
                                 .toString()),
-                            const Text("Designation: Employee"),
+                            Container(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: const Text("Designation: Employee")
+                            ),
                           ],
                         ),
                       );
@@ -311,6 +321,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                         "firstName": firstName,
                                         "lastName": lastName,
                                         "profUserID": userID,
+                                        "mobileNumber": "-",
                                         "professorRole": "Professor",
                                         "salutation": "",
                                         "status": "accepting",
