@@ -288,10 +288,10 @@ class _HomePageState extends State<HomePage> {
                                   scrollDirection: Axis.vertical,
                                   itemBuilder:
                                       (context, snapshot, animation, index) {
-                                    return SizedBox(
+                                    return Padding(
+                                      padding:EdgeInsets.only(top: 10),
                                       child: Center(
                                         child: Container(
-                                          
                                           height: 100,
                                           width: 100,
                                           decoration: BoxDecoration(
@@ -315,7 +315,7 @@ class _HomePageState extends State<HomePage> {
                                                           "None"
                                                       ? const Icon(
                                                           Icons.person,
-                                                          size: 35,
+                                                          size: 20,
                                                         )
                                                       : Image(
                                                           fit: BoxFit.cover,
@@ -361,7 +361,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                height: 20,
                                 child: Text(
                                   snapshot
                                       .child('professorName')
@@ -461,6 +460,7 @@ class _HomePageState extends State<HomePage> {
                   unselectedLabelColor: Colors.grey[400],
                 ),
                 views: [
+                  
                   // Tab for Upcoming
                   Padding(
                       padding: const EdgeInsets.only(top: 10),
@@ -476,7 +476,7 @@ class _HomePageState extends State<HomePage> {
                               return SizedBox(
                                   height: 100,
                                   child: Card(
-                                      child: Column(
+                                      child: Row(
                                     children: [
                                       Flexible(
                                         child: FirebaseAnimatedList(
@@ -490,10 +490,10 @@ class _HomePageState extends State<HomePage> {
                                           itemBuilder: (context, snapshot,
                                               animation, index) {
                                             return SizedBox(
-                                              child: Center(
+                                              child:Center(
                                                 child: Container(
-                                                  height: 30,
-                                                  width: 30,
+                                                  height: 50,
+                                                  width: 50,
                                                   decoration: BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       border: Border.all(
@@ -563,30 +563,34 @@ class _HomePageState extends State<HomePage> {
                                           },
                                         ),
                                       ),
-                                      Text(
-                                        snapshot
-                                            .child('professorName')
-                                            .value
-                                            .toString(),
-                                      ),
-                                      Text(
+                                    Text(
+                                                snapshot
+                                                    .child('professorName')
+                                                    .value
+                                                    .toString(),
+                                              ),
+                                              Text(
                                         snapshot
                                             .child('professorRole')
                                             .value
                                             .toString(),
                                       ),
-                                      Text(
-                                        snapshot.child('date').value.toString(),
-                                      ),
-                                      Text(
+
+                                          Text(
+                                            snapshot.child('date').value.toString(),
+                                          ),
+                                           Text(
                                         snapshot.child('time').value.toString(),
                                       ),
                                     ],
-                                  )));
+                                  )
+                                  )
+                                  );
                             },
                           ),
                         ),
-                      )),
+                      )
+                      ),
 
                   // Tab for completed
                   Padding(
