@@ -113,124 +113,156 @@ class _RequestPageState extends State<RequestPage> {
                 }
 
                 return Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    color: Colors.grey,
+                    margin: const EdgeInsets.only(top: 20,
+                    left: 17, right: 17),
                     child: Column(
                   children: [
-                    Text(snapshot.child('studentName').value.toString()),
-                    Text(snapshot.child('section').value.toString()),
-                    Text(snapshot.child('date').value.toString()),
-                    Text(snapshot.child('time').value.toString()),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(snapshot.child('studentName').value.toString()),
+                          Text(snapshot.child('section').value.toString()),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(top: 10),
+                      width: 340,
+                      height: 30,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                        Radius.circular(10)),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.calendar_month_outlined,
+                                color: Colors.black,
+                              ),
+                              Text(snapshot.child('date').value.toString()),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.watch_later_outlined,
+                                color: Colors.black,
+                              ),
+                              Text(snapshot.child('time').value.toString()),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
 
                     // Modify button based on what you need
-                    ElevatedButton(
-                      child: const Text('Accept'),
-                      onPressed: () async {
-                        await appointmentsRef.child(appointID).update({
-                          'requestStatusProfessor': "$profID-UPCOMING",
-                          'status': "$studID-UPCOMING",
-                          'requestStatus': "UPCOMING",
-                          // 'profilePicStatus':
-                        });
-                      },
-                    ),
-                    ElevatedButton(
-                      child: const Text('Reschedule'),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Reschedule'),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Expanded(
-                                        child: TextField(
-                                          controller: _dateController,
-                                          onTap: _showDatePicker,
-                                          readOnly: true,
-                                          decoration: const InputDecoration(
-                                            labelText:
-                                                'Select appointment date',
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Expanded(
-                                        child: TextField(
-                                          controller: _timeController,
-                                          onTap: _showTimePicker,
-                                          readOnly: true,
-                                          decoration: const InputDecoration(
-                                            labelText:
-                                                'Select appointment time',
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () async {
-                                    await appointmentsRef
-                                        .child(appointID.toString())
-                                        .update({
-                                      "countered": "yes",
-                                      "requestStatusProfessor":
-                                          "$profID-RESCHEDULE",
-                                      "counteredDate": _dateController.text,
-                                      "counteredTime": _timeController.text,
-                                    });
-
-                                    // ignore: use_build_context_synchronously
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                TextButton(
-                                  child: const Text('Cancel'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    ),
-                    ElevatedButton(
-                      child: const Text('Reject'),
-                      onPressed: () {
-                        showDialog(
+                    
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          // Accept button
+                          ElevatedButton.icon(
+                            style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                            Color(0xFFFF9343)
+                            ),
+                          fixedSize:MaterialStatePropertyAll(Size(100, 20)),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(20))
+                          )),
+                        ),
+                            icon: const Icon(
+                              Icons.check,size: 17,
+                              color: Colors.white),
+                            label: const Text('Accept',
+                            style: TextStyle(fontSize: 9),
+                            ),
+                            onPressed: () async {
+                              await appointmentsRef.child(appointID).update({
+                                'requestStatusProfessor': "$profID-UPCOMING",
+                                'status': "$studID-UPCOMING",
+                                'requestStatus': "UPCOMING",
+                                // 'profilePicStatus':
+                              });
+                            },
+                          ),
+                          // Reschedule button
+                         ElevatedButton.icon(
+                          style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                            Color(0xFFFF9343)
+                            ),
+                          fixedSize:MaterialStatePropertyAll(Size(100, 20)),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(20))
+                          )),
+                        ),
+                          icon: const Icon(
+                            Icons.calendar_month,size: 17,
+                            color: Colors.white),
+                        label: const Text('Reschedule',
+                        style: TextStyle(fontSize: 9),
+                        ),
+                        onPressed: () {
+                          showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              String profNotes = '';
-
                               return AlertDialog(
-                                title: const Text('State your reason.'),
-                                content: TextField(
-                                  onChanged: (value) {
-                                    profNotes = value;
-                                  },
-                                  maxLines: null,
-                                  keyboardType: TextInputType.multiline,
-                                  decoration: const InputDecoration(
-                                    hintText: 'Enter your paragraph',
-                                    border: OutlineInputBorder(),
-                                  ),
+                                title: const Text('Reschedule'),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: TextField(
+                                            controller: _dateController,
+                                            onTap: _showDatePicker,
+                                            readOnly: true,
+                                            decoration: const InputDecoration(
+                                              labelText:
+                                                  'Select appointment date',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: TextField(
+                                            controller: _timeController,
+                                            onTap: _showTimePicker,
+                                            readOnly: true,
+                                            decoration: const InputDecoration(
+                                              labelText:
+                                                  'Select appointment time',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                                 actions: [
                                   TextButton(
@@ -239,12 +271,13 @@ class _RequestPageState extends State<RequestPage> {
                                       await appointmentsRef
                                           .child(appointID.toString())
                                           .update({
-                                        'notes': profNotes,
-                                        'requestStatusProfessor':
-                                            "$profID-CANCELED",
-                                        'status': "$studID-CANCELED",
-                                        'requestStatus': "CANCELED",
+                                        "countered": "yes",
+                                        "requestStatusProfessor":
+                                            "$profID-RESCHEDULE",
+                                        "counteredDate": _dateController.text,
+                                        "counteredTime": _timeController.text,
                                       });
+                    
                                       // ignore: use_build_context_synchronously
                                       Navigator.of(context).pop();
                                     },
@@ -257,9 +290,83 @@ class _RequestPageState extends State<RequestPage> {
                                   ),
                                 ],
                               );
-                            });
-                      },
-                    )
+                            },
+                          );
+                        },
+                      ),
+                      // Reject button
+                      ElevatedButton.icon(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Color(0xFFFF9343)
+                            ),
+                          fixedSize:MaterialStatePropertyAll(Size(80, 20)),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(20))
+                          )),
+                        ),
+                        icon: const Icon(
+                              Icons.clear_rounded,size: 17,
+                              color: Colors.white),
+                        label: const Text('Reject',
+                        style: TextStyle(fontSize: 9),
+                        ),
+                        
+                        
+                        
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                String profNotes = '';
+                    
+                                return AlertDialog(
+                                  title: const Text('State your reason.'),
+                                  content: TextField(
+                                    onChanged: (value) {
+                                      profNotes = value;
+                                    },
+                                    maxLines: null,
+                                    keyboardType: TextInputType.multiline,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Enter your paragraph',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('OK'),
+                                      onPressed: () async {
+                                        await appointmentsRef
+                                            .child(appointID.toString())
+                                            .update({
+                                          'notes': profNotes,
+                                          'requestStatusProfessor':
+                                              "$profID-CANCELED",
+                                          'status': "$studID-CANCELED",
+                                          'requestStatus': "CANCELED",
+                                        });
+                                        // ignore: use_build_context_synchronously
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text('Cancel'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                      )
+                        ],
+                      ),
+                    ),
+                   
+                    
                   ],
                 ));
               },
