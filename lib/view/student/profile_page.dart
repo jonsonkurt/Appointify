@@ -6,7 +6,6 @@ import 'package:appointify/view/sign_in_page.dart';
 import 'package:logger/logger.dart';
 
 import 'edit_student_details.dart';
-// import 'package:transparent_image/transparent_image.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -94,87 +93,96 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           //Profile page Text
                           Container(
-                            margin: EdgeInsets.all(15),
-                            alignment: Alignment.centerLeft,
-                            child: const Text("Profile",style: TextStyle(fontSize: 30,
-                             color: Colors.black, decoration: TextDecoration.none),)
-                            ),
+                              margin: const EdgeInsets.all(15),
+                              alignment: Alignment.centerLeft,
+                              child: const Text(
+                                "Profile",
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.black,
+                                    decoration: TextDecoration.none),
+                              )),
                           const SizedBox(
                             height: 20,
                           ),
-                          Stack(alignment: Alignment.bottomCenter, children: [
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Center(
-                                child: Container(
-                                  height: 130,
-                                  width: 130,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 35, 35, 35),
-                                        width: 2,
-                                      )),
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: map['profilePicStatus']
-                                                  .toString() ==
-                                              "None"
-                                          ? const Icon(
-                                              Icons.person,
-                                              size: 35,
-                                            )
-                                          : Image(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  profilePicStatus),
-                                              loadingBuilder: (context, child,
-                                                  loadingProgress) {
-                                                if (loadingProgress == null) {
-                                                  return child;
-                                                }
-                                                return const CircularProgressIndicator();
-                                              },
-                                              errorBuilder:
-                                                  (context, object, stack) {
-                                                return const Icon(
-                                                  Icons.error_outline,
-                                                  color: Color.fromARGB(
-                                                      255, 35, 35, 35),
-                                                );
-                                              },
-                                            )),
-                                ),
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Center(
+                              child: Container(
+                                height: 130,
+                                width: 130,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color:
+                                          const Color.fromARGB(255, 35, 35, 35),
+                                      width: 2,
+                                    )),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: map['profilePicStatus'].toString() ==
+                                            "None"
+                                        ? const Icon(
+                                            Icons.person,
+                                            size: 35,
+                                          )
+                                        : Image(
+                                            fit: BoxFit.cover,
+                                            image:
+                                                NetworkImage(profilePicStatus),
+                                            loadingBuilder: (context, child,
+                                                loadingProgress) {
+                                              if (loadingProgress == null) {
+                                                return child;
+                                              }
+                                              return const CircularProgressIndicator();
+                                            },
+                                            errorBuilder:
+                                                (context, object, stack) {
+                                              return const Icon(
+                                                Icons.error_outline,
+                                                color: Color.fromARGB(
+                                                    255, 35, 35, 35),
+                                              );
+                                            },
+                                          )),
                               ),
                             ),
-                          ]),
+                          ),
+
                           const SizedBox(
                             height: 20,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            // update prolife logic
-                            children:[ 
-                              Text("Edit Information", style: TextStyle(decoration: TextDecoration.none, 
-                              color: Colors.black, fontSize: 20),
-                              ),
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration:BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                color: Color(0xFFFF9343),),
-                                child: IconButton(onPressed: (){
-                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const EditStudentProfile()),
-                                  );
-                                                          }, icon: Icon(Icons.edit)),
-                              )
-                            ]
-                          ),
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              // update prolife logic
+                              children: [
+                                const Text(
+                                  "Edit Information",
+                                  style: TextStyle(
+                                      decoration: TextDecoration.none,
+                                      color: Colors.black,
+                                      fontSize: 20),
+                                ),
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: const Color(0xFFFF9343),
+                                  ),
+                                  child: IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const EditStudentProfile()),
+                                        );
+                                      },
+                                      icon: const Icon(Icons.edit)),
+                                )
+                              ]),
                           ReuseableRow(
                               title: 'Name',
                               value: '$firstName $lastName',
@@ -196,9 +204,21 @@ class _ProfilePageState extends State<ProfilePage> {
                           Padding(
                             padding: const EdgeInsets.only(top: 20),
                             child: ElevatedButton(
-                              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343)),shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)))),
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      const MaterialStatePropertyAll(
+                                          Color(0xFFFF9343)),
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)))),
                               onPressed: _logout,
-                              child: const Text("Logout",  style: TextStyle(fontSize: 20,),),
+                              child: const Text(
+                                "Logout",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
                             ),
                           ),
                         ]);
