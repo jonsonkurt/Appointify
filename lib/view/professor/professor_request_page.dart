@@ -84,13 +84,16 @@ class _RequestPageState extends State<RequestPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Column(children: [
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           const Text(
-            'Requests',
+            'Requests', style: TextStyle(fontSize: 30, fontFamily: "GothamRnd"),
           ),
           const Divider(
             color: Colors.black,
-            thickness: 3,
+            thickness: 2,
           ),
           SearchBox(onSearch: _handleSearch),
           Expanded(
@@ -528,14 +531,19 @@ class _SearchBoxState extends State<SearchBox> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: _searchController,
-      decoration: const InputDecoration(
-        labelText: 'Search',
-        prefixIcon: Icon(Icons.search),
-        border: OutlineInputBorder(),
+    return Padding(
+      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/30,
+      right:MediaQuery.of(context).size.width/30
       ),
-      onChanged: widget.onSearch,
+      child: TextField(
+        controller: _searchController,
+        decoration: const InputDecoration(
+          labelText: 'Search',
+          prefixIcon: Icon(Icons.search, color: Color(0xFFFF9343),),
+          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+        ),
+        onChanged: widget.onSearch,
+      ),
     );
   }
 }

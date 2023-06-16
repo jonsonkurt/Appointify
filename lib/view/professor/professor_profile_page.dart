@@ -240,7 +240,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               ),
                             ),
                             FlutterSwitch(
-                              activeColor: Colors.green,
+                              activeColor: Color(0xFFFF9343),
                               value: status1,
                               height: 25.0,
                               width: 55,
@@ -266,8 +266,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          margin: const EdgeInsets.only(
-                              left: 15, right: 15, bottom: 10, top: 10),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/18, 
+                          right: MediaQuery.of(context).size.width/18, top: MediaQuery.of(context).size.width/20),
                           child: Column(
                             children: [
                               Container(
@@ -277,7 +277,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10)),
-                                  color: Colors.green,
+                                  color: Color(0xFFFF9343),
                                 ),
                                 child: const Text(
                                   "Email:",
@@ -302,8 +302,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           ),
                         ),
                         Card(
-                          margin: const EdgeInsets.only(
-                              left: 15, right: 15, bottom: 10, top: 10),
+                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/18, 
+                          right: MediaQuery.of(context).size.width/18,top: MediaQuery.of(context).size.width/20),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                           child: Column(
@@ -314,7 +314,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10)),
-                                  color: Colors.green,
+                                  color: Color(0xFFFF9343),
                                 ),
                                 padding: const EdgeInsets.all(5),
                                 child: const Text(
@@ -362,6 +362,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             if (entry.value != '-')
                               SizedBox(
                                 child: Card(
+                                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/30),
                                   elevation: 8,
                                   shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
@@ -374,7 +375,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                           width: 140,
                                           height: 50,
                                           decoration: const BoxDecoration(
-                                              color: Colors.green,
+                                              color: Color(0xFFFF9343),
                                               borderRadius: BorderRadius.only(
                                                   topLeft: Radius.circular(10),
                                                   topRight:
@@ -405,9 +406,15 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     const SizedBox(
                       height: 50,
                     ),
-                    ElevatedButton(
-                      onPressed: _logout,
-                      child: const Text("Logout"),
+                    Padding(
+                      padding: EdgeInsets.all(MediaQuery.of(context).size.height/35),
+                      child: ElevatedButton(
+                        style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343))),
+                        onPressed: _logout,
+                        child: const Text("Logout",
+                        
+                        ),
+                      ),
                     ),
                   ],
                 );

@@ -161,8 +161,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
                 tabBarProperties: TabBarProperties(
-                  width: 360,
-                  height: 50,
+                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/30,
+                  right: MediaQuery.of(context).size.width/30
+                  ),
                   background: Container(
                     decoration: BoxDecoration(
                       color: const Color(0xFFFF9343),
