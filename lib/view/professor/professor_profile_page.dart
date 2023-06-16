@@ -133,7 +133,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             ),
                           ),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(30),
                               bottomRight: Radius.circular(30),
                             ),
@@ -160,72 +160,49 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                 size: 40,
                               )),
                         ),
-                        Positioned(
-                          left: MediaQuery.of(context).size.width / 2.7,
-                          bottom: -50,
-                          child: Container(
-                              alignment: Alignment.bottomCenter,
-                              child: Center(
-                                  child: Container(
-                                height: 130,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 255, 255, 255),
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color:
-                                          const Color.fromARGB(255, 35, 35, 35),
-                                      width: 2,
-                                    )),
-                                child: ClipRRect(
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * .15),
+                          child: Center(
+                            child: Container(
+                              height: 130,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromARGB(255, 35, 35, 35),
+                                    width: 2,
+                                  )),
+                              child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
                                   child: map['profilePicStatus'].toString() ==
                                           "None"
                                       ? const Icon(
                                           Icons.person,
-                                          size: 40,
+                                          size: 35,
                                         )
-                                      : Stack(
-                                          children: [
-                                            Image(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  profilePicStatus),
-                                              loadingBuilder: (context, child,
-                                                  loadingProgress) {
-                                                if (loadingProgress == null) {
-                                                  return child;
-                                                }
-                                                return const CircularProgressIndicator();
-                                              },
-                                              errorBuilder:
-                                                  (context, object, stack) {
-                                                return const Icon(
-                                                  Icons.error_outline,
-                                                  color: Color.fromARGB(
-                                                      255, 35, 35, 35),
-                                                );
-                                              },
-                                            ),
-                                            Positioned.fill(
-                                              child: Container(
-                                                width: 100,
-                                                height: 100,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: const Color.fromARGB(
-                                                        255, 2, 85, 5),
-                                                    width: 4.0,
-                                                  ),
-                                                  shape: BoxShape.circle,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                ),
-                              ))),
+                                      : Image(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(profilePicStatus),
+                                          loadingBuilder: (context, child,
+                                              loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              return child;
+                                            }
+                                            return const CircularProgressIndicator();
+                                          },
+                                          errorBuilder:
+                                              (context, object, stack) {
+                                            return const Icon(
+                                              Icons.error_outline,
+                                              color: Color.fromARGB(
+                                                  255, 35, 35, 35),
+                                            );
+                                          },
+                                        )),
+                            ),
+                          ),
                         ),
                       ],
                     ),
