@@ -163,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 width: 40,
                                 height: 40,
                                 decoration:BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                color: Color(0xFFFF9343),),
+                                color: const Color(0xFFFF9343),),
                                 child: IconButton(onPressed: (){
                                  Navigator.push(
                                     context,
@@ -171,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         builder: (context) =>
                                             const EditStudentProfile()),
                                   );
-                                                          }, icon: Icon(Icons.edit)),
+                                  }, icon:  const Icon(Icons.edit, color: Colors.white,)),
                               )
                             ]
                           ),
@@ -196,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           Padding(
                             padding: const EdgeInsets.only(top: 20),
                             child: ElevatedButton(
-                              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343)),shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)))),
+                              style: ButtonStyle(backgroundColor: const MaterialStatePropertyAll(Color(0xFFFF9343)),shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)))),
                               onPressed: _logout,
                               child: const Text("Logout",  style: TextStyle(fontSize: 20,),),
                             ),

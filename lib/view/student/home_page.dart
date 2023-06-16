@@ -504,6 +504,8 @@ class _HomePageState extends State<HomePage> {
                             return SizedBox(
                                 height: 100,
                                 child: Card(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  color: Colors.white12,
                                     child: Row(
                                   children: [
                                     Flexible(
@@ -604,22 +606,33 @@ class _HomePageState extends State<HomePage> {
                                                   children: [
                                                     Text(
                                                       employeeName,
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     ),
                                                     Text(
                                                       employeePosition,
+                                                      style: TextStyle(fontSize: 15),
                                                     ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          schedDate,
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          schedTime,
-                                                        ),
-                                                      ],
+                                                    Container(
+                                                      height: 20,
+                                                      margin: EdgeInsets.only(top: 10),
+                                                      padding: EdgeInsets.only(left: 10, right: 10),
+                                                      alignment: Alignment.center,
+                                                      decoration: BoxDecoration(color: Colors.white,
+                                                      borderRadius:BorderRadius.circular(5) ,
+                                                      ),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            schedDate, style: TextStyle(fontSize: 15),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text(
+                                                            schedTime, style: TextStyle(fontSize: 15),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ],
                                                 )
@@ -768,18 +781,26 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       employeePosition,
                                                     ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          schedDate,
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          schedTime,
-                                                        ),
-                                                      ],
+                                                    Container(
+                                                      height: 20,
+                                                      margin: EdgeInsets.only(top: 10),
+                                                      padding: EdgeInsets.only(left: 10, right: 10),
+                                                      alignment: Alignment.center,
+                                                      decoration: BoxDecoration(color: Colors.white,
+                                                      borderRadius:BorderRadius.circular(5)),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            schedDate,
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text(
+                                                            schedTime,
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ],
                                                 )
@@ -824,6 +845,7 @@ class _HomePageState extends State<HomePage> {
                             return SizedBox(
                                 height: 100,
                                 child: Card(
+                                  color: Colors.white12,
                                     child: Row(
                                   children: [
                                     Flexible(
@@ -928,18 +950,26 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       employeePosition,
                                                     ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          schedDate,
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          schedTime,
-                                                        ),
-                                                      ],
+                                                    Container(
+                                                      height: 20,
+                                                      margin: EdgeInsets.only(top: 10),
+                                                      padding: EdgeInsets.only(left: 10, right: 10),
+                                                      alignment: Alignment.center,
+                                                      decoration: BoxDecoration(color: Colors.white,
+                                                      borderRadius:BorderRadius.circular(5)),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            schedDate,
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text(
+                                                            schedTime,
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ],
                                                 )

@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                 views: [
                   // Tab for Upcoming
                   Padding(
-                    padding: const EdgeInsets.only(top: 15),
+                    padding: const EdgeInsets.only(top: 5),
                     child: SizedBox(
                       width: 350,
                       height: 600,
@@ -174,15 +174,15 @@ class _HomePageState extends State<HomePage> {
                           String studentSection =
                               snapshot.child('section').value.toString();
                           return SizedBox(
-                              height: 225,
+                              height: MediaQuery.of(context).size.height/3.5,
                               child: Padding(
                                 padding: EdgeInsets.only(bottom: 30),
                                 child: Card(
+
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   color: Colors.grey,
-                                  margin: const EdgeInsets.only(
-                                      left: 17, right: 17),
+                                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/20, right: MediaQuery.of(context).size.width/20),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -501,11 +501,11 @@ class _HomePageState extends State<HomePage> {
                               child: Padding(
                                 padding: EdgeInsets.only(bottom: 20),
                                 child: Card(
+                                  
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   color: Colors.grey,
-                                  margin: const EdgeInsets.only(
-                                      left: 17, right: 17),
+                                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/20, right: MediaQuery.of(context).size.width/20),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -711,13 +711,12 @@ class _HomePageState extends State<HomePage> {
                           return SizedBox(
                               height: 225,
                               child: Padding(
-                                padding: EdgeInsets.only(bottom: 30),
+                                padding: const EdgeInsets.only(bottom: 30),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
                                   color: Colors.grey,
-                                  margin: const EdgeInsets.only(
-                                      left: 17, right: 17),
+                                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/20, right: MediaQuery.of(context).size.width/20),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
