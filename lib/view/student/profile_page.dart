@@ -6,7 +6,6 @@ import 'package:appointify/view/sign_in_page.dart';
 import 'package:logger/logger.dart';
 
 import 'edit_student_details.dart';
-// import 'package:transparent_image/transparent_image.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);

@@ -134,135 +134,122 @@ class _HomePageState extends State<HomePage> {
                       onTap: () {
                         showDialog(
                           context: context,
-                          builder: (_) => Theme(
-                            data: Theme.of(context).copyWith(
-                                dialogBackgroundColor: const Color(0xFF767676)),
-                            child: AlertDialog(
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text(
+                                snapshot.child('countered').value.toString() ==
+                                        "no"
+                                    ? snapshot
+                                        .child('requestStatus')
+                                        .value
+                                        .toString()
+                                    : "Reschedule",
+                                style: const TextStyle(fontSize: 20),
+                              ),
                               content: SizedBox(
-                                height: 380,
-                                child: Container(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        'Professor Name:',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                      Text(
+                                height: 200, // Set the desired height here
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    const Text(
+                                      'Professor name:',
+                                    ),
+                                    Center(
+                                      child: Text(
                                         snapshot
                                             .child('professorName')
                                             .value
                                             .toString(),
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.white),
                                       ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Designation:',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                      Text(
+                                    ),
+                                    const Text(
+                                      'Designation:',
+                                    ),
+                                    Center(
+                                      child: Text(
                                         snapshot
                                             .child('professorRole')
                                             .value
                                             .toString(),
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.white),
                                       ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Requested Appointment:',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                      Text(
-                                        "${snapshot.child('date').value}, ${snapshot.child('time').value}",
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.white),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      if (snapshot.child('notes').value != "")
-                                        const Text(
-                                          'Notes:',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
+                                    ),
+                                    const Text('Requested Appointment:'),
+                                    Center(
+                                      child: Text(
+                                          '${snapshot.child('date').value} - ${snapshot.child('time').value}'),
+                                    ),
+                                    if (snapshot.child('countered').value ==
+                                        "yes")
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Counter Proposal:',
                                           ),
-                                        ),
-                                      Text(
-                                        snapshot
-                                            .child('notes')
-                                            .value
-                                            .toString(),
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.white,
-                                        ),
+                                          Center(
+                                            child: Text(
+                                              '${snapshot.child('counteredDate').value} - ${snapshot.child('counteredTime').value}',
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(height: 10),
-                                      if (snapshot.child('countered').value ==
-                                          "yes")
-                                        const Text(
-                                          'Counter Proposal:',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      if (snapshot.child('countered').value ==
-                                          "yes")
-                                        Text(
-                                          "${snapshot.child('counteredDate').value}, ${snapshot.child('counteredTime').value}",
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      const SizedBox(height: 10),
-                                      if (snapshot.child('countered').value ==
-                                          "yes")
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            // Handle button press
-                                            // Add your desired functionality here
-                                            appointmentsRef
-                                                .child(snapshot
-                                                    .child('appointID')
-                                                    .value
-                                                    .toString())
-                                                .update({
-                                              "requestStatus": "UPCOMING",
-                                              "date": snapshot
-                                                  .child('counteredDate')
-                                                  .value
-                                                  .toString(),
-                                              "time": snapshot
-                                                  .child('counteredTime')
-                                                  .value
-                                                  .toString(),
-                                              "requestStatusProfessor":
-                                                  "${snapshot.child('professorID').value}-UPCOMING",
-                                              "status": "$userID-UPCOMING",
-                                            });
-                                          },
-                                          child: const Text('Accept'),
-                                        )
-                                    ],
-                                  ),
+                                  ],
                                 ),
                               ),
-                            ),
-                          ),
+                              actions: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton(
+                                        child: const Text("Accept"),
+                                        onPressed: () async {
+                                          appointmentsRef
+                                              .child(snapshot
+                                                  .child('appointID')
+                                                  .value
+                                                  .toString())
+                                              .update({
+                                            "requestStatus": "UPCOMING",
+                                            "date": snapshot
+                                                .child('counteredDate')
+                                                .value
+                                                .toString(),
+                                            "time": snapshot
+                                                .child('counteredTime')
+                                                .value
+                                                .toString(),
+                                            "requestStatusProfessor":
+                                                "${snapshot.child('professorID').value}-UPCOMING",
+                                            "status": "$userID-UPCOMING",
+                                            "contered": "no",
+                                          });
+                                        }),
+                                    ElevatedButton(
+                                        child: const Text("Reject"),
+                                        onPressed: () {
+                                          appointmentsRef
+                                              .child(snapshot
+                                                  .child('appointID')
+                                                  .value
+                                                  .toString())
+                                              .update({
+                                            "requestStatus": "CANCELED",
+                                            "requestStatusProfessor":
+                                                "${snapshot.child('professorID').value}-CANCELED",
+                                            "status": "$userID-CANCELED",
+                                          });
+                                        })
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
                         );
                       },
                       // Status of request list
@@ -401,9 +388,15 @@ class _HomePageState extends State<HomePage> {
                                 margin: const EdgeInsets.only(top: 20),
                                 child: Text(
                                   snapshot
-                                      .child('requestStatus')
-                                      .value
-                                      .toString(),
+                                              .child('countered')
+                                              .value
+                                              .toString() ==
+                                          "no"
+                                      ? snapshot
+                                          .child('requestStatus')
+                                          .value
+                                          .toString()
+                                      : "RESCHDULE",
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
@@ -509,6 +502,8 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Flexible(
                                       child: FirebaseAnimatedList(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         query: employeesRef
                                             .orderByChild('profUserID')
                                             .equalTo(snapshot
@@ -532,7 +527,7 @@ class _HomePageState extends State<HomePage> {
                                                         shape: BoxShape.circle,
                                                         border: Border.all(
                                                           color: const Color
-                                                                  .fromARGB(
+                                                              .fromARGB(
                                                               255, 35, 35, 35),
                                                           width: 2,
                                                         )),
@@ -692,7 +687,7 @@ class _HomePageState extends State<HomePage> {
                                                         shape: BoxShape.circle,
                                                         border: Border.all(
                                                           color: const Color
-                                                                  .fromARGB(
+                                                              .fromARGB(
                                                               255, 35, 35, 35),
                                                           width: 2,
                                                         )),
@@ -824,134 +819,167 @@ class _HomePageState extends State<HomePage> {
                                 snapshot.child('time').value.toString();
                             return SizedBox(
                                 height: 100,
-                                child: Card(
-                                    child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: FirebaseAnimatedList(
-                                        query: employeesRef
-                                            .orderByChild('profUserID')
-                                            .equalTo(snapshot
-                                                .child('professorID')
-                                                .value
-                                                .toString()),
-                                        scrollDirection: Axis.vertical,
-                                        itemBuilder: (context, snapshot,
-                                            animation, index) {
-                                          return SizedBox(
-                                            child: Row(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text("Professor Note"),
+                                          content: Text(snapshot
+                                              .child("notes")
+                                              .value
+                                              .toString()),
+                                          actions: <Widget>[
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 15, top: 15),
-                                                  child: Container(
-                                                    height: 60,
-                                                    width: 60,
-                                                    decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        border: Border.all(
-                                                          color: const Color
-                                                                  .fromARGB(
-                                                              255, 35, 35, 35),
-                                                          width: 2,
-                                                        )),
-                                                    child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
-                                                        child: ProfileController()
-                                                                    .image ==
-                                                                null
-                                                            ? snapshot
-                                                                        .child(
-                                                                            'profilePicStatus')
-                                                                        .value
-                                                                        .toString() ==
-                                                                    "None"
-                                                                ? const Icon(
-                                                                    Icons
-                                                                        .person,
-                                                                    size: 35,
-                                                                  )
-                                                                : Image(
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    image: NetworkImage(snapshot
-                                                                        .child(
-                                                                            'profilePicStatus')
-                                                                        .value
-                                                                        .toString()),
-                                                                    loadingBuilder:
-                                                                        (context,
-                                                                            child,
-                                                                            loadingProgress) {
-                                                                      if (loadingProgress ==
-                                                                          null) {
-                                                                        return child;
-                                                                      }
-                                                                      return const CircularProgressIndicator();
-                                                                    },
-                                                                    errorBuilder:
-                                                                        (context,
-                                                                            object,
-                                                                            stack) {
-                                                                      return const Icon(
-                                                                        Icons
-                                                                            .error_outline,
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            35,
-                                                                            35,
-                                                                            35),
-                                                                      );
-                                                                    },
-                                                                  )
-                                                            : Image.file(File(
-                                                                    ProfileController()
-                                                                        .image!
-                                                                        .path)
-                                                                .absolute)),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      employeeName,
-                                                    ),
-                                                    Text(
-                                                      employeePosition,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          schedDate,
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Text(
-                                                          schedTime,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                )
+                                                ElevatedButton(
+                                                    child: const Text("Okay"),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    }),
                                               ],
                                             ),
-                                          );
-                                        },
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Card(
+                                      child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: FirebaseAnimatedList(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          query: employeesRef
+                                              .orderByChild('profUserID')
+                                              .equalTo(snapshot
+                                                  .child('professorID')
+                                                  .value
+                                                  .toString()),
+                                          scrollDirection: Axis.vertical,
+                                          itemBuilder: (context, snapshot,
+                                              animation, index) {
+                                            return SizedBox(
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 15, top: 15),
+                                                    child: Container(
+                                                      height: 60,
+                                                      width: 60,
+                                                      decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          border: Border.all(
+                                                            color: const Color
+                                                                .fromARGB(255,
+                                                                35, 35, 35),
+                                                            width: 2,
+                                                          )),
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100),
+                                                          child: ProfileController()
+                                                                      .image ==
+                                                                  null
+                                                              ? snapshot
+                                                                          .child(
+                                                                              'profilePicStatus')
+                                                                          .value
+                                                                          .toString() ==
+                                                                      "None"
+                                                                  ? const Icon(
+                                                                      Icons
+                                                                          .person,
+                                                                      size: 35,
+                                                                    )
+                                                                  : Image(
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                      image: NetworkImage(snapshot
+                                                                          .child(
+                                                                              'profilePicStatus')
+                                                                          .value
+                                                                          .toString()),
+                                                                      loadingBuilder: (context,
+                                                                          child,
+                                                                          loadingProgress) {
+                                                                        if (loadingProgress ==
+                                                                            null) {
+                                                                          return child;
+                                                                        }
+                                                                        return const CircularProgressIndicator();
+                                                                      },
+                                                                      errorBuilder: (context,
+                                                                          object,
+                                                                          stack) {
+                                                                        return const Icon(
+                                                                          Icons
+                                                                              .error_outline,
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              35,
+                                                                              35,
+                                                                              35),
+                                                                        );
+                                                                      },
+                                                                    )
+                                                              : Image.file(File(
+                                                                      ProfileController()
+                                                                          .image!
+                                                                          .path)
+                                                                  .absolute)),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        employeeName,
+                                                      ),
+                                                      Text(
+                                                        employeePosition,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            schedDate,
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text(
+                                                            schedTime,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                )));
+                                    ],
+                                  )),
+                                ));
                           },
                         ),
                       ),
