@@ -24,7 +24,7 @@ exports.sendNotificationOnStatusChange = functions
 
                 //Prof FName
                 const snapshot2 = await admin.database()
-                    .ref(`/appointments/${appointmentId}/professorName`)
+                    .ref(`/appointments/${appointmentId}/professorName.`)
                     .once('value');
                 const profName = snapshot2.val();
 
@@ -32,7 +32,7 @@ exports.sendNotificationOnStatusChange = functions
                     token: deviceToken,
                     notification: {
                         title: 'Appointment Status',
-                        body: `Your appointment with ${profName} has been set`,
+                        body: `Your appointment with ${profName} has been set.`,
                     },
                 };
 
@@ -71,7 +71,7 @@ exports.sendNotificationOnStatusChange = functions
                     token: deviceToken,
                     notification: {
                         title: 'Appointment Status',
-                        body: `Your appointment is canceled by ${profName}`,
+                        body: `Your appointment has been canceled.`,
                     },
                 };
 
@@ -110,7 +110,7 @@ exports.sendNotificationOnStatusChange = functions
                     token: deviceToken,
                     notification: {
                         title: 'Appointment Status',
-                        body: `Your appointment is canceled by ${profName}`,
+                        body: `Your appointment has been canceled.`,
                     },
                 };
 
@@ -158,7 +158,7 @@ exports.onReschedulesChangeFunction = functions
                     token: deviceToken,
                     notification: {
                         title: 'Appointment Status',
-                        body: `${profName} has requested an appointment reschedule`,
+                        body: `${profName} has requested an appointment reschedule.`,
                     },
                 };
 
@@ -175,8 +175,6 @@ exports.onReschedulesChangeFunction = functions
             } catch (error) {
                 console.error('Error sending push notification 4:', error);
             }
-
-            // pending to cancel
         }
 
     })
