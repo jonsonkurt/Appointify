@@ -79,6 +79,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
       setState(() {
         _selectedFromTimes[index] = picked;
       });
+    } else {
+      print('Canceled');
     }
   }
 
@@ -111,7 +113,6 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
 
       return '$formattedFromTime $fromTimePeriod to $formattedToTime $toTimePeriod';
     } else {
-    
       return '${schedStartTime[index]} to ${schedEndTime[index]}';
     }
   }
@@ -350,17 +351,24 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Text(
-                                                _getWeekdayNumber(index + 1)),
+                                            Text(_getWeekdayNumber(index + 1)),
                                             GestureDetector(
                                               onTap: () {
                                                 _selectFromTime(context, index);
                                                 setState(() {
                                                   final format =
                                                       DateFormat.jm();
-                                                  final parsedTime = format
-                                                      .parse(schedStartTime[
-                                                          index]);
+                                                  String test = DateFormat.jm()
+                                                      .format(DateTime.now());
+                                                  String timeString =
+                                                      schedStartTime[index] ==
+                                                              "-"
+                                                          ? test
+                                                          : schedStartTime[
+                                                              index];
+
+                                                  final parsedTime =
+                                                      format.parse(timeString);
                                                   final timeOfDay =
                                                       TimeOfDay.fromDateTime(
                                                           parsedTime);
@@ -427,9 +435,16 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                 setState(() {
                                                   final format =
                                                       DateFormat.jm();
+                                                  String test = DateFormat.jm()
+                                                      .format(DateTime.now());
+                                                  String timeString =
+                                                      schedStartTime[index] ==
+                                                              "-"
+                                                          ? test
+                                                          : schedStartTime[
+                                                              index];
                                                   final parsedTime =
-                                                      format.parse(
-                                                          schedEndTime[index]);
+                                                      format.parse(timeString);
                                                   final timeOfDay =
                                                       TimeOfDay.fromDateTime(
                                                           parsedTime);
