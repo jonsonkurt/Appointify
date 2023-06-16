@@ -647,6 +647,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           "section": studSection,
                           "time": selectedTime,
                           "fcmToken": fcmToken,
+                          "fcmProfToken": fcmProfToken,
                         });
                         break;
                       } else {
