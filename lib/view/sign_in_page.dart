@@ -1,6 +1,6 @@
 import 'package:appointify/view/forgot_password_page.dart';
+import 'package:appointify/view/welcome_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'loading_page.dart';
 import 'sign_up_page.dart';
@@ -46,7 +46,11 @@ class _SignInPageState extends State<SignInPage> {
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const WelcomePage()),
+                        );
                       },
                       child: const Icon(Icons.arrow_back, color: Colors.black),
                     ),
@@ -176,7 +180,7 @@ class _SignInPageState extends State<SignInPage> {
                             // _passwordController
                             //     .clear(); // Handle forgot password
                             // ignore: use_build_context_synchronously
-                            print("Forgot");
+
                             Navigator.push(
                               context,
                               PageRouteBuilder(
@@ -320,7 +324,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 55),
                     ],
                   ),
                 ),
@@ -332,5 +336,3 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
-
-
