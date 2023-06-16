@@ -24,7 +24,7 @@ exports.sendNotificationOnStatusChange = functions
 
                 //Prof FName
                 const snapshot2 = await admin.database()
-                    .ref(`/appointments/${appointmentId}/professorName.`)
+                    .ref(`/appointments/${appointmentId}/professorName`)
                     .once('value');
                 const profName = snapshot2.val();
 
