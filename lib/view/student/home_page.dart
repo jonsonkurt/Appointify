@@ -4,7 +4,6 @@ import 'package:appointify/view/student/profile_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
@@ -272,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                         child: Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
-                          color: Color(0xffFF9343),
+                          color: const Color(0xffFF9343),
                           child: Column(
                             children: [
                               Flexible(
@@ -287,7 +286,7 @@ class _HomePageState extends State<HomePage> {
                                   itemBuilder:
                                       (context, snapshot, animation, index) {
                                     return Padding(
-                                      padding: EdgeInsets.only(top: 10),
+                                      padding: const EdgeInsets.only(top: 10),
                                       child: Center(
                                         child: Container(
                                           height: 100,
@@ -359,13 +358,15 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: 3,),
+                                margin: const EdgeInsets.only(
+                                  top: 3,
+                                ),
                                 child: Text(
                                   snapshot
                                       .child('professorName')
                                       .value
                                       .toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,
@@ -373,9 +374,9 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Text(
-                                style: TextStyle(
-                                    color: Colors.white,
-                                  ),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 snapshot
                                     .child('professorRole')
                                     .value
@@ -392,18 +393,18 @@ class _HomePageState extends State<HomePage> {
                                 alignment: Alignment.center,
                                 height: 20,
                                 width: 150,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     color: Color(0xFF4394FF),
                                     borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(20),
                                         bottomRight: Radius.circular(20))),
-                                margin: EdgeInsets.only(top: 20),
+                                margin: const EdgeInsets.only(top: 20),
                                 child: Text(
                                   snapshot
                                       .child('requestStatus')
                                       .value
                                       .toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 ),

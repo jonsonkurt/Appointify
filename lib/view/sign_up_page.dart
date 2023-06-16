@@ -20,7 +20,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _conpasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final bool _isObscure = true;
   bool _passwordVisible = false;
   bool _conpasswordVisible = false;
 

@@ -210,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                           return SizedBox(
                               height: 225,
                               child: Padding(
-                                padding: EdgeInsets.only(bottom: 30),
+                                padding: const EdgeInsets.only(bottom: 30),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
@@ -674,7 +674,6 @@ class _HomePageState extends State<HomePage> {
                                                       context: context,
                                                       builder: (BuildContext
                                                           context) {
-                                                        String profNotes = '';
 
                                                         return AlertDialog(
                                                           title: const Text(
