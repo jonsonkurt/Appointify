@@ -127,6 +127,48 @@ exports.sendNotificationOnStatusChange = functions
             } catch (error) {
                 console.error('Error sending push notification 3:', error);
             }
+        } else if
+            // pending to completed
+            (previousStatus === 'UPCOMING' && newStatus === 'COMPLETED') {
+            const appointmentId = context.params.appointmentId;
+
+            try {
+                // Get the device token or user ID associated with the appointmentId
+                // Student Token
+                const snapshot = await admin.database()
+                    .ref(`/appointments/${appointmentId}/fcmToken`)
+                    .once('value');
+                const deviceToken = snapshot.val();
+
+                //Prof FName
+                const snapshot2 = await admin.database()
+                    .ref(`/appointments/${appointmentId}/professorName`)
+                    .once('value');
+                const profName = snapshot2.val();
+
+                const message = {
+                    token: deviceToken,
+                    notification: {
+                        title: 'Appointment Status',
+                        body: `Your appointment with ${profName} has been completed.`,
+                    },
+                };
+
+                // Send the message
+                admin.messaging().send(message)
+                    .then((response) => {
+                        // Handle the response
+                        console.log('Successfully sent notification 1:', response);
+                    })
+                    .catch((error) => {
+                        // Handle the error
+                        console.error('Error sending notification 1:', error);
+                    });
+            } catch (error) {
+                console.error('Error sending push notification 1:', error);
+            }
+
+            // pending to cancel
         }
     });
 
