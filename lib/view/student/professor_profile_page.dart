@@ -42,7 +42,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   String studLastName = '';
   String studSection = '';
   StreamSubscription<DatabaseEvent>? nameSubscription;
+  StreamSubscription<DatabaseEvent>? getProfSnap;
   String? userID = FirebaseAuth.instance.currentUser?.uid;
+  String fcmProfToken = '';
   bool isLoading = true;
   var logger = Logger();
 
@@ -158,6 +160,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
     _timeController.dispose();
     super.dispose();
   }
+
+  DatabaseReference refProf =
+      FirebaseDatabase.instance.ref().child('professors');
 
   @override
   Widget build(BuildContext context) {
