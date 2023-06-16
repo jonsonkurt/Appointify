@@ -210,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                           return SizedBox(
                               height: 225,
                               child: Padding(
-                                padding: EdgeInsets.only(bottom: 30),
+                                padding: const EdgeInsets.only(bottom: 30),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
@@ -674,7 +674,6 @@ class _HomePageState extends State<HomePage> {
                                                       context: context,
                                                       builder: (BuildContext
                                                           context) {
-                                                        String profNotes = '';
 
                                                         return AlertDialog(
                                                           title: const Text(
@@ -958,9 +957,9 @@ class _HomePageState extends State<HomePage> {
                           String studentSection =
                               snapshot.child('section').value.toString();
                           return SizedBox(
-                              height: 225,
+                              height: 140,
                               child: Padding(
-                                padding: const EdgeInsets.only(bottom: 30),
+                                padding: const EdgeInsets.only(bottom: 20),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
@@ -975,7 +974,7 @@ class _HomePageState extends State<HomePage> {
                                       Flexible(
                                         child: FirebaseAnimatedList(
                                           query: studentsRef
-                                              .orderByChild('$userID-CANCELED')
+                                              .orderByChild('UID')
                                               .equalTo(snapshot
                                                   .child('studentID')
                                                   .value
@@ -1087,6 +1086,8 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       Container(
+                                        margin:
+                                            const EdgeInsets.only(bottom: 10),
                                         width: 340,
                                         height: 30,
                                         decoration: const BoxDecoration(
@@ -1120,6 +1121,7 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             Container(
+                                              alignment: Alignment.center,
                                               padding: const EdgeInsets.only(
                                                   right: 30, left: 20),
                                               child: Row(
@@ -1142,58 +1144,6 @@ class _HomePageState extends State<HomePage> {
                                           ],
                                         ),
                                       ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const SizedBox(
-                                                width: 20,
-                                                height:
-                                                    75, // gap between the button and the info
-                                              ),
-                                              ElevatedButton.icon(
-                                                icon: const Icon(Icons.notes,
-                                                    size: 15,
-                                                    color: Colors.white),
-                                                label: const Text('View notes',
-                                                    style:
-                                                        TextStyle(fontSize: 9)),
-                                                style: const ButtonStyle(
-                                                  fixedSize:
-                                                      MaterialStatePropertyAll(
-                                                          Size(100, 20)),
-                                                  shape:
-                                                      MaterialStatePropertyAll(
-                                                          RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                20)),
-                                                  )),
-                                                  backgroundColor:
-                                                      MaterialStatePropertyAll(
-                                                    Color(
-                                                        0xFFFF9343), // card button color
-                                                  ),
-                                                ),
-                                                onPressed: () {
-                                                  // Handle button press
-                                                  // Add your desired functionality here
-                                                },
-                                                // child: const Text('Cancel'),
-                                              ),
-                                              const SizedBox(
-                                                width: 20,
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
                                     ],
                                   ),
                                 ),

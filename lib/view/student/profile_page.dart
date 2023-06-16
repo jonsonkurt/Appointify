@@ -6,7 +6,6 @@ import 'package:appointify/view/sign_in_page.dart';
 import 'package:logger/logger.dart';
 
 import 'edit_student_details.dart';
-// import 'package:transparent_image/transparent_image.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -94,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           //Profile page Text
                           Container(
-                              margin: EdgeInsets.all(15),
+                              margin: const EdgeInsets.all(15),
                               alignment: Alignment.centerLeft,
                               child: const Text(
                                 "Profile",
@@ -158,7 +157,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               // update prolife logic
                               children: [
-                                Text(
+                                const Text(
                                   "Edit Information",
                                   style: TextStyle(
                                       decoration: TextDecoration.none,
@@ -170,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   height: 40,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Color(0xFFFF9343),
+                                    color: const Color(0xFFFF9343),
                                   ),
                                   child: IconButton(
                                       onPressed: () {
@@ -181,7 +180,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   const EditStudentProfile()),
                                         );
                                       },
-                                      icon: Icon(Icons.edit)),
+                                      icon: const Icon(Icons.edit)),
                                 )
                               ]),
                           ReuseableRow(
@@ -206,8 +205,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: const EdgeInsets.only(top: 20),
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStatePropertyAll(
-                                      Color(0xFFFF9343)),
+                                  backgroundColor:
+                                      const MaterialStatePropertyAll(
+                                          Color(0xFFFF9343)),
                                   shape: MaterialStatePropertyAll(
                                       RoundedRectangleBorder(
                                           borderRadius:

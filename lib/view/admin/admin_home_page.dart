@@ -124,13 +124,13 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                       }
                       return Card(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        margin: EdgeInsets.only(top: 10, left: 20, right: 20,),
-                        color: Color(0xFFDCDAD8),
+                        margin: const EdgeInsets.only(top: 10, left: 20, right: 20,),
+                        color: const  Color(0xFFDCDAD8),
                         child: Column(
                           children: [
                             Center(
                               child: Container(
-                                margin: EdgeInsets.only(top: 10),
+                                margin: const  EdgeInsets.only(top: 10),
                                 height: 130,
                                 width: 130,
                                 decoration: BoxDecoration(
@@ -180,15 +180,15 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(top: 10, bottom: 5),
-                              child: Text("$profFirstName $profLastName", style: TextStyle(fontSize: 17,),),
+                              padding: const  EdgeInsets.only(top: 10, bottom: 5),
+                              child: Text("$profFirstName $profLastName", style: const  TextStyle(fontSize: 17,),),
                             ),
                             Text(snapshot
                                 .child('professorRole')
                                 .value
                                 .toString()),
                             Container(
-                              padding: EdgeInsets.only(bottom: 10),
+                              padding: const  EdgeInsets.only(bottom: 10),
                               child: const Text("Designation: Employee")
                             ),
                           ],
@@ -388,7 +388,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
           },
           label: const Text('Create Account'),
           icon: const Icon(Icons.add),
-          backgroundColor: Color(0xFFFF9343),
+          backgroundColor: const  Color(0xFFFF9343),
         ),
 
         // Text("Hi, I'm Admin"),
@@ -429,6 +429,7 @@ class SearchBox extends StatefulWidget {
   const SearchBox({required this.onSearch, Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SearchBoxState createState() => _SearchBoxState();
 }
 

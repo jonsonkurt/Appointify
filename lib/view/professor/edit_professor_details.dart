@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -18,14 +16,14 @@ class EditProfessorProfile extends StatefulWidget {
 }
 
 class _EditProfessorProfileState extends State<EditProfessorProfile> {
-  TextEditingController _firstNameController = TextEditingController();
-  TextEditingController _lastNameController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _professionController = TextEditingController();
-  List<TimeOfDay?> _selectedFromTimes = List<TimeOfDay?>.filled(6, null);
-  List<TimeOfDay?> _selectedToTimes = List<TimeOfDay?>.filled(6, null);
-  bool val1 = true;
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _professionController = TextEditingController();
+  final List<TimeOfDay?> _selectedFromTimes = List<TimeOfDay?>.filled(6, null);
+  final List<TimeOfDay?> _selectedToTimes = List<TimeOfDay?>.filled(6, null);
+  final bool val1 = true;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -113,7 +111,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
 
       return '$formattedFromTime $fromTimePeriod to $formattedToTime $toTimePeriod';
     } else {
-      print('ELSEEEE  ${schedStartTime[index]} to ${schedEndTime[index]}');
+    
       return '${schedStartTime[index]} to ${schedEndTime[index]}';
     }
   }
@@ -353,7 +351,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             Text(
-                                                "${_getWeekdayNumber(index + 1)}"),
+                                                _getWeekdayNumber(index + 1)),
                                             GestureDetector(
                                               onTap: () {
                                                 _selectFromTime(context, index);
@@ -387,7 +385,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                       ? _selectedFromTimes[
                                                               index]!
                                                           .format(context)
-                                                      : "${schedStartTime[index]}",
+                                                      : schedStartTime[index],
                                                   style: const TextStyle(
                                                       fontSize: 16),
                                                 ),

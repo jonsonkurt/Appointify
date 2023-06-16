@@ -77,11 +77,9 @@ class OnBoarding extends StatelessWidget {
             );
           } else {
             final fcmToken = await FirebaseMessaging.instance.getToken();
-            print('loafing');
             await profRef.child(userID!).update({
               'fcmProfToken': fcmToken,
             });
-            print(fcmToken);
 
             // ignore: use_build_context_synchronously
             Navigator.push(

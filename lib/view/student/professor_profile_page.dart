@@ -29,6 +29,7 @@ class ProfessorProfilePage extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProfessorProfilePageState createState() => _ProfessorProfilePageState();
 }
 
@@ -174,6 +175,21 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
             studname = event.snapshot.child("firstName").value.toString();
             studLastName = event.snapshot.child("lastName").value.toString();
             studSection = event.snapshot.child("section").value.toString();
+            isLoading = false;
+          });
+        }
+      } catch (error, stackTrace) {
+        logger.d('Error occurred: $error');
+        logger.d('Stack trace: $stackTrace');
+      }
+    });
+
+    getProfSnap = refProf.child(widget.professorID).onValue.listen((event) {
+      try {
+        if (mounted) {
+          setState(() {
+            fcmProfToken =
+                event.snapshot.child("fcmProfToken").value.toString();
             isLoading = false;
           });
         }
