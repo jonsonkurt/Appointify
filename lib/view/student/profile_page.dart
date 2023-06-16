@@ -94,63 +94,61 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           //Profile page Text
                           Container(
-                              margin: EdgeInsets.all(15),
-                              alignment: Alignment.centerLeft,
-                              child: const Text(
-                                "Profile",
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none),
-                              )),
+                            margin: EdgeInsets.all(15),
+                            alignment: Alignment.centerLeft,
+                            child: const Text("Profile",style: TextStyle(fontSize: 30,
+                             color: Colors.black, decoration: TextDecoration.none),)
+                            ),
                           const SizedBox(
                             height: 20,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Center(
-                              child: Container(
-                                height: 130,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color:
-                                          const Color.fromARGB(255, 35, 35, 35),
-                                      width: 2,
-                                    )),
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: map['profilePicStatus'].toString() ==
-                                            "None"
-                                        ? const Icon(
-                                            Icons.person,
-                                            size: 35,
-                                          )
-                                        : Image(
-                                            fit: BoxFit.cover,
-                                            image:
-                                                NetworkImage(profilePicStatus),
-                                            loadingBuilder: (context, child,
-                                                loadingProgress) {
-                                              if (loadingProgress == null) {
-                                                return child;
-                                              }
-                                              return const CircularProgressIndicator();
-                                            },
-                                            errorBuilder:
-                                                (context, object, stack) {
-                                              return const Icon(
-                                                Icons.error_outline,
-                                                color: Color.fromARGB(
-                                                    255, 35, 35, 35),
-                                              );
-                                            },
-                                          )),
+                          Stack(alignment: Alignment.bottomCenter, children: [
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Center(
+                                child: Container(
+                                  height: 130,
+                                  width: 130,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: const Color.fromARGB(
+                                            255, 35, 35, 35),
+                                        width: 2,
+                                      )),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: map['profilePicStatus']
+                                                  .toString() ==
+                                              "None"
+                                          ? const Icon(
+                                              Icons.person,
+                                              size: 35,
+                                            )
+                                          : Image(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                  profilePicStatus),
+                                              loadingBuilder: (context, child,
+                                                  loadingProgress) {
+                                                if (loadingProgress == null) {
+                                                  return child;
+                                                }
+                                                return const CircularProgressIndicator();
+                                              },
+                                              errorBuilder:
+                                                  (context, object, stack) {
+                                                return const Icon(
+                                                  Icons.error_outline,
+                                                  color: Color.fromARGB(
+                                                      255, 35, 35, 35),
+                                                );
+                                              },
+                                            )),
+                                ),
                               ),
                             ),
-                          ),
-
+                          ]),
                           const SizedBox(
                             height: 20,
                           ),
@@ -198,14 +196,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           Padding(
                             padding: const EdgeInsets.only(top: 20),
                             child: ElevatedButton(
-                              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343)),shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)))),
+                              style: ButtonStyle(backgroundColor: const MaterialStatePropertyAll(Color(0xFFFF9343)),shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)))),
                               onPressed: _logout,
-                              child: const Text(
-                                "Logout",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
+                              child: const Text("Logout",  style: TextStyle(fontSize: 20,),),
                             ),
                           ),
                         ]);

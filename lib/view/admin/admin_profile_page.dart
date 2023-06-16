@@ -30,11 +30,11 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
           children: [
           Container(
             alignment: Alignment.topCenter,
-            child: Icon(Icons.account_box_rounded, size: 100,),
+            child: const  Icon(Icons.account_box_rounded, size: 100,),
           
           ),
           Container(
-            padding: EdgeInsets.only(top: 10, bottom: 10),
+            padding: const  EdgeInsets.only(top: 10, bottom: 10),
             child: const Text("Admin", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
           ElevatedButton(
             onPressed: _logout,

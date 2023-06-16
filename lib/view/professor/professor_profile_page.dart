@@ -1,17 +1,11 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-//import 'package:glass/glass.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:logger/logger.dart';
-
-import 'package:provider/provider.dart';
-import 'package:recase/recase.dart';
 import 'edit_professor_details.dart';
-import 'professor_profile_controller.dart';
 
 class ProfessorProfilePage extends StatefulWidget {
   const ProfessorProfilePage({Key? key}) : super(key: key);
@@ -111,10 +105,10 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                 String lastName = map['lastName'];
                 String mobileNumber = map['mobileNumber'];
                 String designation = map['designation'];
-                String professorRole = map['professorRole'];
-                String salutation = map['salutation'];
-                ReCase status = ReCase(map['status']);
-                String statusProf = map["status"];
+                // String professorRole = map['professorRole'];
+                // String salutation = map['salutation'];
+                // ReCase status = ReCase(map['status']);
+                // String statusProf = map["status"];
                 String profilePicStatus = map['profilePicStatus'].toString();
                 String profSched = map['availability'].toString();
                 profFullSched = parseStringToMap(profSched);
@@ -146,8 +140,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           ),
                         ),
                         Positioned(
-                          right: MediaQuery.of(context).size.width / 10,
-                          bottom: MediaQuery.of(context).size.height / 6,
+                          right: MediaQuery.of(context).size.width * .01,
+                          top: MediaQuery.of(context).size.height * .008,
                           child: IconButton(
                               onPressed: () {
                                 Navigator.push(
@@ -170,6 +164,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               height: 130,
                               width: 130,
                               decoration: BoxDecoration(
+                                  color: Colors.white,
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     color:
@@ -222,7 +217,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               decoration: TextDecoration.none),
                         ),
                         Container(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           child: Text(
                             designation,
                             style: const TextStyle(
@@ -271,7 +266,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                               left: 15, right: 15, bottom: 10, top: 10),
                           child: Column(
                             children: [
@@ -293,11 +288,11 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   userEmail!,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 15,
                                       color: Colors.black,
                                       decoration: TextDecoration.none),
@@ -307,7 +302,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           ),
                         ),
                         Card(
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                               left: 15, right: 15, bottom: 10, top: 10),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -321,7 +316,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                       topRight: Radius.circular(10)),
                                   color: Colors.green,
                                 ),
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 child: const Text(
                                   "Contact Number:",
                                   style: TextStyle(
@@ -332,10 +327,10 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               ),
                               Container(
                                 alignment: Alignment.centerLeft,
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 child: Text(
                                   mobileNumber,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 15,
                                       color: Colors.black,
                                       decoration: TextDecoration.none),
@@ -348,7 +343,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
+                      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
                       child: const Text(
                         "Weekly Schedule",
                         style: TextStyle(
@@ -368,7 +363,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               SizedBox(
                                 child: Card(
                                   elevation: 8,
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10))),
                                   color: Colors.white30,
@@ -378,17 +373,17 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                           alignment: Alignment.center,
                                           width: 140,
                                           height: 50,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               color: Colors.green,
                                               borderRadius: BorderRadius.only(
                                                   topLeft: Radius.circular(10),
                                                   topRight:
                                                       Radius.circular(10))),
                                           child: Text(
-                                            "${entry.key}",
+                                            entry.key,
                                           )),
                                       Container(
-                                        padding: EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: Text(
                                           "${entry.value.split(' to ').join('\nto\n')}",
