@@ -4,7 +4,6 @@ import 'package:appointify/view/professor/professor_bottom_navigation_bar.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:appointify/view/student/bottom_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,15 +34,15 @@ class OnBoarding extends StatelessWidget {
 
     if (FirebaseAuth.instance.currentUser != null) {
       // Redirect the user to the homepage
-      final firebaseApp = Firebase.app();
-      final rtdb = FirebaseDatabase.instanceFor(
-        app: firebaseApp,
-        databaseURL:
-            'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
-      );
+      // final firebaseApp = Firebase.app();
+      // final rtdb = FirebaseDatabase.instanceFor(
+      //   app: firebaseApp,
+      //   databaseURL:
+      //       'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
+      // );
 
       DatabaseReference nameRef =
-          rtdb.ref().child('students/$userID/designation');
+          FirebaseDatabase.instance.ref().child('students/$userID/designation');
       DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
       DatabaseReference profRef =
           FirebaseDatabase.instance.ref().child('professors');
@@ -83,11 +82,9 @@ class OnBoarding extends StatelessWidget {
             );
           } else {
             final fcmToken = await FirebaseMessaging.instance.getToken();
-            print('welcum');
             await profRef.child(userID!).update({
               'fcmProfToken': fcmToken,
             });
-            print(fcmToken);
             // ignore: use_build_context_synchronously
             Navigator.push(
               context,

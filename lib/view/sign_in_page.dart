@@ -180,7 +180,7 @@ class _SignInPageState extends State<SignInPage> {
                             // _passwordController
                             //     .clear(); // Handle forgot password
                             // ignore: use_build_context_synchronously
-
+                           
                             Navigator.push(
                               context,
                               PageRouteBuilder(

@@ -225,7 +225,7 @@ class _RequestPageState extends State<RequestPage> {
                             ),
                           ),
 
-                          // TODO: Add this inside Firebase animated list
+                          
                           // Padding(
                           //   padding: const EdgeInsets.only(top: 10),
                           //   child: Column(
@@ -242,7 +242,7 @@ class _RequestPageState extends State<RequestPage> {
                           // ),
                           Container(
                             alignment: Alignment.center,
-                            margin: EdgeInsets.only(top: 10),
+                            margin: const  EdgeInsets.only(top: 10),
                             width: 340,
                             height: 30,
                             decoration: const BoxDecoration(

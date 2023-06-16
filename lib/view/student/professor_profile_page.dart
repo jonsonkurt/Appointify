@@ -29,6 +29,7 @@ class ProfessorProfilePage extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProfessorProfilePageState createState() => _ProfessorProfilePageState();
 }
 
@@ -152,7 +153,6 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
           setState(() {
             fcmProfToken =
                 event.snapshot.child("fcmProfToken").value.toString();
-            print(fcmProfToken);
             isLoading = false;
           });
         }

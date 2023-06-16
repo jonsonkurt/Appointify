@@ -105,6 +105,10 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                 String lastName = map['lastName'];
                 String mobileNumber = map['mobileNumber'];
                 String designation = map['designation'];
+                // String professorRole = map['professorRole'];
+                // String salutation = map['salutation'];
+                // ReCase status = ReCase(map['status']);
+                // String statusProf = map["status"];
                 String profilePicStatus = map['profilePicStatus'].toString();
                 String profSched = map['availability'].toString();
                 profFullSched = parseStringToMap(profSched);
@@ -339,8 +343,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
-                      padding:
-                          const EdgeInsets.only(top: 10, bottom: 10, left: 20),
+                      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
                       child: const Text(
                         "Weekly Schedule",
                         style: TextStyle(
