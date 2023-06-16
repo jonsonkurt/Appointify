@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import '../student/profile_controller.dart';
@@ -23,6 +24,8 @@ class _HomePageState extends State<HomePage> {
   bool isLoading = true;
   String name = '';
   StreamSubscription<DatabaseEvent>? nameSubscription;
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
 
   @override
   void initState() {
@@ -38,6 +41,30 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
+  }
+
+  void _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    ).then((selectedDate) {
+      if (selectedDate != null) {
+        _dateController.text = DateFormat.yMMMd('en_US').format(selectedDate);
+      }
+    });
+  }
+
+  void _showTimePicker() {
+    showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    ).then((selectedTime) {
+      if (selectedTime != null) {
+        _timeController.text = selectedTime.format(context);
+      }
+    });
   }
 
   @override
@@ -173,6 +200,13 @@ class _HomePageState extends State<HomePage> {
                               snapshot.child('studentName').value.toString();
                           String studentSection =
                               snapshot.child('section').value.toString();
+                          String appointID =
+                              snapshot.child('appointID').value.toString();
+                          String professorID =
+                              snapshot.child('professorID').value.toString();
+                          String studentID =
+                              snapshot.child('studentID').value.toString();
+
                           return SizedBox(
                               height: 225,
                               child: Padding(
@@ -320,7 +354,8 @@ class _HomePageState extends State<HomePage> {
                                               child: Row(
                                                 children: [
                                                   const Icon(
-                                                    Icons.calendar_month_outlined,
+                                                    Icons
+                                                        .calendar_month_outlined,
                                                     color: Colors.black,
                                                   ),
                                                   Text(
@@ -380,7 +415,8 @@ class _HomePageState extends State<HomePage> {
                                                       MaterialStatePropertyAll(
                                                           Size(100, 20)),
                                                   shape:
-                                                      MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                      MaterialStatePropertyAll(
+                                                          RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
@@ -388,12 +424,121 @@ class _HomePageState extends State<HomePage> {
                                                   )),
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                    Color(0xFFFF9343), // card button color
+                                                    Color(
+                                                        0xFFFF9343), // card button color
                                                   ),
                                                 ),
                                                 onPressed: () {
                                                   // Handle button press
                                                   // Add your desired functionality here
+                                                  showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title: const Text(
+                                                            'Reschedule'),
+                                                        content: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: [
+                                                            const SizedBox(
+                                                                height: 10),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceAround,
+                                                              children: [
+                                                                Expanded(
+                                                                  child:
+                                                                      TextField(
+                                                                    controller:
+                                                                        _dateController,
+                                                                    onTap:
+                                                                        _showDatePicker,
+                                                                    readOnly:
+                                                                        true,
+                                                                    decoration:
+                                                                        const InputDecoration(
+                                                                      labelText:
+                                                                          'Select appointment date',
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const SizedBox(
+                                                                height: 10),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceAround,
+                                                              children: [
+                                                                Expanded(
+                                                                  child:
+                                                                      TextField(
+                                                                    controller:
+                                                                        _timeController,
+                                                                    onTap:
+                                                                        _showTimePicker,
+                                                                    readOnly:
+                                                                        true,
+                                                                    decoration:
+                                                                        const InputDecoration(
+                                                                      labelText:
+                                                                          'Select appointment time',
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        actions: [
+                                                          TextButton(
+                                                            child: const Text(
+                                                                'OK'),
+                                                            onPressed:
+                                                                () async {
+                                                              await appointmentsRef
+                                                                  .child(appointID
+                                                                      .toString())
+                                                                  .update({
+                                                                "countered":
+                                                                    "yes",
+                                                                "requestStatusProfessor":
+                                                                    "$professorID-RESCHEDULE",
+                                                                "counteredDate":
+                                                                    _dateController
+                                                                        .text,
+                                                                "counteredTime":
+                                                                    _timeController
+                                                                        .text,
+                                                                "status":
+                                                                    '$studentID-PENDING',
+                                                                "requestStatus":
+                                                                    'PENDING'
+                                                              });
+
+                                                              // ignore: use_build_context_synchronously
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                          ),
+                                                          TextButton(
+                                                            child: const Text(
+                                                                'Cancel'),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
                                                 },
                                                 // child: const Text('Reschedule'),
                                               ),
@@ -429,8 +574,68 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                                 onPressed: () {
-                                                  // Handle button press
-                                                  // Add your desired functionality here
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        String profNotes = '';
+
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                              'State your reason.'),
+                                                          content: TextField(
+                                                            onChanged: (value) {
+                                                              profNotes = value;
+                                                            },
+                                                            maxLines: null,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .multiline,
+                                                            decoration:
+                                                                const InputDecoration(
+                                                              hintText:
+                                                                  'Enter your paragraph',
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                            ),
+                                                          ),
+                                                          actions: [
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  'OK'),
+                                                              onPressed:
+                                                                  () async {
+                                                                await appointmentsRef
+                                                                    .child(appointID
+                                                                        .toString())
+                                                                    .update({
+                                                                  'notes':
+                                                                      profNotes,
+                                                                  'requestStatusProfessor':
+                                                                      "$professorID-CANCELED",
+                                                                  'status':
+                                                                      "$studentID-CANCELED",
+                                                                  'requestStatus':
+                                                                      "CANCELED",
+                                                                });
+                                                                // ignore: use_build_context_synchronously
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  'Cancel'),
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      });
                                                 },
                                                 // child: const Text('Cancel'),
                                               ),
@@ -465,6 +670,50 @@ class _HomePageState extends State<HomePage> {
                                                 onPressed: () {
                                                   // Handle button press
                                                   // Add your desired functionality here
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        String profNotes = '';
+
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                              'Are you sure you want to mark this appointment as completed?'),
+                                                          actions: [
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  'Confirm'),
+                                                              onPressed:
+                                                                  () async {
+                                                                await appointmentsRef
+                                                                    .child(appointID
+                                                                        .toString())
+                                                                    .update({
+                                                                  'requestStatusProfessor':
+                                                                      "$professorID-COMPLETED",
+                                                                  'status':
+                                                                      "$studentID-COMPLETED",
+                                                                  'requestStatus':
+                                                                      "COMPLETED",
+                                                                });
+                                                                // ignore: use_build_context_synchronously
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  'Cancel'),
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      });
                                                 },
                                                 // child: const Text('Completed'),
                                               ),
@@ -482,7 +731,7 @@ class _HomePageState extends State<HomePage> {
                   ),
 
                   // Tab for completed
-                   Padding(
+                  Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: SizedBox(
                       width: 350,
@@ -499,7 +748,7 @@ class _HomePageState extends State<HomePage> {
                           return SizedBox(
                               height: 140,
                               child: Padding(
-                                padding: EdgeInsets.only(bottom: 20),
+                                padding: const EdgeInsets.only(bottom: 20),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
@@ -626,7 +875,8 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.only(bottom: 10),
+                                        margin:
+                                            const EdgeInsets.only(bottom: 10),
                                         width: 340,
                                         height: 30,
                                         decoration: const BoxDecoration(
@@ -683,7 +933,6 @@ class _HomePageState extends State<HomePage> {
                                           ],
                                         ),
                                       ),
-                                      
                                     ],
                                   ),
                                 ),
@@ -702,7 +951,7 @@ class _HomePageState extends State<HomePage> {
                       child: FirebaseAnimatedList(
                         query: appointmentsRef
                             .orderByChild('requestStatusProfessor')
-                            .equalTo("$userID-"),
+                            .equalTo("$userID-CANCELED"),
                         itemBuilder: (context, snapshot, animation, index) {
                           String studentName =
                               snapshot.child('studentName').value.toString();
@@ -711,7 +960,7 @@ class _HomePageState extends State<HomePage> {
                           return SizedBox(
                               height: 225,
                               child: Padding(
-                                padding: EdgeInsets.only(bottom: 30),
+                                padding: const EdgeInsets.only(bottom: 30),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)),
@@ -726,7 +975,7 @@ class _HomePageState extends State<HomePage> {
                                       Flexible(
                                         child: FirebaseAnimatedList(
                                           query: studentsRef
-                                              .orderByChild('UID')
+                                              .orderByChild('$userID-CANCELED')
                                               .equalTo(snapshot
                                                   .child('studentID')
                                                   .value
@@ -904,11 +1153,11 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               const SizedBox(
                                                 width: 20,
-                                                height: 75, // gap between the button and the info
+                                                height:
+                                                    75, // gap between the button and the info
                                               ),
                                               ElevatedButton.icon(
-                                                icon: const Icon(
-                                                    Icons.notes,
+                                                icon: const Icon(Icons.notes,
                                                     size: 15,
                                                     color: Colors.white),
                                                 label: const Text('View notes',
@@ -916,7 +1165,8 @@ class _HomePageState extends State<HomePage> {
                                                         TextStyle(fontSize: 9)),
                                                 style: const ButtonStyle(
                                                   fixedSize:
-                                                      MaterialStatePropertyAll(Size(100, 20)),
+                                                      MaterialStatePropertyAll(
+                                                          Size(100, 20)),
                                                   shape:
                                                       MaterialStatePropertyAll(
                                                           RoundedRectangleBorder(
