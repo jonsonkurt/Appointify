@@ -146,6 +146,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                       Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
                       _firstNameController.text = map['firstName'];
                       _lastNameController.text = map['lastName'];
+                      _phoneController.text = map['mobileNumber'];
                       _emailController.text = userEmail!;
                       _professionController.text = map['designation'];
                       Map<dynamic, dynamic> availability = map['availability'];
