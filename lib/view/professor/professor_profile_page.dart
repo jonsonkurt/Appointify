@@ -8,10 +8,8 @@ import 'package:appointify/view/sign_in_page.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:logger/logger.dart';
 
-import 'package:provider/provider.dart';
 import 'package:recase/recase.dart';
 import 'edit_professor_details.dart';
-import 'professor_profile_controller.dart';
 
 class ProfessorProfilePage extends StatefulWidget {
   const ProfessorProfilePage({Key? key}) : super(key: key);
@@ -23,6 +21,7 @@ class ProfessorProfilePage extends StatefulWidget {
 class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   late Map<String, dynamic> profFullSched;
   String? userID = FirebaseAuth.instance.currentUser?.uid;
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('professors');
   bool status1 = true;
   StreamSubscription<DatabaseEvent>? nameSubscription;
@@ -108,11 +107,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                 Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
                 String firstName = map['firstName'];
                 String lastName = map['lastName'];
+                String mobileNumber = map['mobileNumber'];
                 String designation = map['designation'];
-                String professorRole = map['professorRole'];
-                String salutation = map['salutation'];
-                ReCase status = ReCase(map['status']);
-                String statusProf = map["status"];
                 String profilePicStatus = map['profilePicStatus'].toString();
                 String profSched = map['availability'].toString();
                 profFullSched = parseStringToMap(profSched);
@@ -133,7 +129,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             ),
                           ),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(30),
                               bottomRight: Radius.circular(30),
                             ),
@@ -144,8 +140,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           ),
                         ),
                         Positioned(
-                          right: MediaQuery.of(context).size.width / 10,
-                          bottom: MediaQuery.of(context).size.height / 6,
+                          right: MediaQuery.of(context).size.width * .01,
+                          top: MediaQuery.of(context).size.height * .008,
                           child: IconButton(
                               onPressed: () {
                                 Navigator.push(
@@ -160,72 +156,50 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                 size: 40,
                               )),
                         ),
-                        Positioned(
-                          left: MediaQuery.of(context).size.width / 2.7,
-                          bottom: -50,
-                          child: Container(
-                              alignment: Alignment.bottomCenter,
-                              child: Center(
-                                  child: Container(
-                                height: 130,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 255, 255, 255),
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color:
-                                          const Color.fromARGB(255, 35, 35, 35),
-                                      width: 2,
-                                    )),
-                                child: ClipRRect(
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * .15),
+                          child: Center(
+                            child: Container(
+                              height: 130,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromARGB(255, 35, 35, 35),
+                                    width: 2,
+                                  )),
+                              child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
                                   child: map['profilePicStatus'].toString() ==
                                           "None"
                                       ? const Icon(
                                           Icons.person,
-                                          size: 40,
+                                          size: 35,
                                         )
-                                      : Stack(
-                                          children: [
-                                            Image(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  profilePicStatus),
-                                              loadingBuilder: (context, child,
-                                                  loadingProgress) {
-                                                if (loadingProgress == null) {
-                                                  return child;
-                                                }
-                                                return const CircularProgressIndicator();
-                                              },
-                                              errorBuilder:
-                                                  (context, object, stack) {
-                                                return const Icon(
-                                                  Icons.error_outline,
-                                                  color: Color.fromARGB(
-                                                      255, 35, 35, 35),
-                                                );
-                                              },
-                                            ),
-                                            Positioned.fill(
-                                              child: Container(
-                                                width: 100,
-                                                height: 100,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: const Color.fromARGB(
-                                                        255, 2, 85, 5),
-                                                    width: 4.0,
-                                                  ),
-                                                  shape: BoxShape.circle,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                ),
-                              ))),
+                                      : Image(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(profilePicStatus),
+                                          loadingBuilder: (context, child,
+                                              loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              return child;
+                                            }
+                                            return const CircularProgressIndicator();
+                                          },
+                                          errorBuilder:
+                                              (context, object, stack) {
+                                            return const Icon(
+                                              Icons.error_outline,
+                                              color: Color.fromARGB(
+                                                  255, 35, 35, 35),
+                                            );
+                                          },
+                                        )),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -243,7 +217,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               decoration: TextDecoration.none),
                         ),
                         Container(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           child: Text(
                             designation,
                             style: const TextStyle(
@@ -292,7 +266,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                               left: 15, right: 15, bottom: 10, top: 10),
                           child: Column(
                             children: [
@@ -314,11 +288,11 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "Dream",
-                                  style: TextStyle(
+                                  userEmail!,
+                                  style: const TextStyle(
                                       fontSize: 15,
                                       color: Colors.black,
                                       decoration: TextDecoration.none),
@@ -328,7 +302,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           ),
                         ),
                         Card(
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                               left: 15, right: 15, bottom: 10, top: 10),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -342,7 +316,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                       topRight: Radius.circular(10)),
                                   color: Colors.green,
                                 ),
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 child: const Text(
                                   "Contact Number:",
                                   style: TextStyle(
@@ -353,10 +327,10 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               ),
                               Container(
                                 alignment: Alignment.centerLeft,
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 child: Text(
-                                  "0908070605040",
-                                  style: TextStyle(
+                                  mobileNumber,
+                                  style: const TextStyle(
                                       fontSize: 15,
                                       color: Colors.black,
                                       decoration: TextDecoration.none),
@@ -369,7 +343,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
+                      padding:
+                          const EdgeInsets.only(top: 10, bottom: 10, left: 20),
                       child: const Text(
                         "Weekly Schedule",
                         style: TextStyle(
@@ -389,7 +364,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               SizedBox(
                                 child: Card(
                                   elevation: 8,
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10))),
                                   color: Colors.white30,
@@ -399,17 +374,17 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                           alignment: Alignment.center,
                                           width: 140,
                                           height: 50,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               color: Colors.green,
                                               borderRadius: BorderRadius.only(
                                                   topLeft: Radius.circular(10),
                                                   topRight:
                                                       Radius.circular(10))),
                                           child: Text(
-                                            "${entry.key}",
+                                            entry.key,
                                           )),
                                       Container(
-                                        padding: EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(10),
                                         alignment: Alignment.center,
                                         child: Text(
                                           "${entry.value.split(' to ').join('\nto\n')}",
