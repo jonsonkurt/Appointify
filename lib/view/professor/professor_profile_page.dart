@@ -146,8 +146,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           ),
                         ),
                         Positioned(
-                          right: MediaQuery.of(context).size.width / 10,
-                          bottom: MediaQuery.of(context).size.height / 6,
+                          right: MediaQuery.of(context).size.width * .01,
+                          top: MediaQuery.of(context).size.height * .008,
                           child: IconButton(
                               onPressed: () {
                                 Navigator.push(
@@ -170,6 +170,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               height: 130,
                               width: 130,
                               decoration: BoxDecoration(
+                                  color: Colors.white,
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     color:
