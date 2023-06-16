@@ -1,14 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-//import 'package:glass/glass.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:logger/logger.dart';
-
-import 'package:recase/recase.dart';
 import 'edit_professor_details.dart';
 
 class ProfessorProfilePage extends StatefulWidget {
