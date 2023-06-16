@@ -23,6 +23,7 @@ class ProfessorProfilePage extends StatefulWidget {
 class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   late Map<String, dynamic> profFullSched;
   String? userID = FirebaseAuth.instance.currentUser?.uid;
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('professors');
   bool status1 = true;
   StreamSubscription<DatabaseEvent>? nameSubscription;
@@ -108,6 +109,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                 Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
                 String firstName = map['firstName'];
                 String lastName = map['lastName'];
+                String mobileNumber = map['mobileNumber'];
                 String designation = map['designation'];
                 String professorRole = map['professorRole'];
                 String salutation = map['salutation'];
@@ -294,7 +296,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                 padding: EdgeInsets.all(5),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "Dream",
+                                  userEmail!,
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.black,
@@ -332,7 +334,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                 alignment: Alignment.centerLeft,
                                 padding: EdgeInsets.all(5),
                                 child: Text(
-                                  "0908070605040",
+                                  mobileNumber,
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.black,
