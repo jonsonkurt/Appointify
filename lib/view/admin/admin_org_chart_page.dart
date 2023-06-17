@@ -13,8 +13,10 @@ class _OrgChartPageState extends State<OrgChartPage> {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Center(
-          child: Text("Org Chart Page"),
+        body: SafeArea(
+          child: Center(
+            child: Text("Org Chart Page"),
+          ),
         ),
       ),
     );

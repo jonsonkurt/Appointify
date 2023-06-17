@@ -25,33 +25,35 @@ class _ProfessorBottomNavigationState extends State<ProfessorBottomNavigation> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: SalomonBottomBar(
-          margin: const EdgeInsets.only(left: 50, right: 60),
-          itemPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          currentIndex: currentIndex,
-          backgroundColor: const Color(0xFFFF9343),
-          items: [
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.home),
-              title: const Text("Home"),
-              selectedColor: Colors.white,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.inbox),
-              title: const Text("Requests"),
-              selectedColor: Colors.white,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.person),
-              title: const Text("Profile"),
-              selectedColor: Colors.white,
-            ),
-          ],
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
+        bottomNavigationBar: SafeArea(
+          child: SalomonBottomBar(
+            margin: const EdgeInsets.only(left: 50, right: 60),
+            itemPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            currentIndex: currentIndex,
+            backgroundColor: const Color(0xFFFF9343),
+            items: [
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.home),
+                title: const Text("Home"),
+                selectedColor: Colors.white,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.inbox),
+                title: const Text("Requests"),
+                selectedColor: Colors.white,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.person),
+                title: const Text("Profile"),
+                selectedColor: Colors.white,
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+          ),
         ),
         body: pages[currentIndex],
       ),

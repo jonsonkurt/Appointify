@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 
-
 class OrgChartPage extends StatefulWidget {
   const OrgChartPage({super.key});
 
@@ -35,91 +34,96 @@ class _OrgChartPage extends State<OrgChartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Org Chart"),
-          backgroundColor: Colors.orange,
-        ),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Wrap(
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Org Chart"),
+            backgroundColor: Colors.orange,
+          ),
+          body: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
               children: [
-                SizedBox(
-                  width: 100,
-                  child: TextFormField(
-                    initialValue: builder.siblingSeparation.toString(),
-                    decoration:
-                        const InputDecoration(labelText: 'Sibling Separation'),
-                    onChanged: (text) {
-                      builder.siblingSeparation = int.tryParse(text) ?? 100;
-                      setState(() {});
-                    },
-                  ),
+                Wrap(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: TextFormField(
+                        initialValue: builder.siblingSeparation.toString(),
+                        decoration: const InputDecoration(
+                            labelText: 'Sibling Separation'),
+                        onChanged: (text) {
+                          builder.siblingSeparation = int.tryParse(text) ?? 100;
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: 100,
+                      child: TextFormField(
+                        initialValue: builder.levelSeparation.toString(),
+                        decoration: const InputDecoration(
+                            labelText: 'Level Separation'),
+                        onChanged: (text) {
+                          builder.levelSeparation = int.tryParse(text) ?? 100;
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: 100,
+                      child: TextFormField(
+                        initialValue: builder.subtreeSeparation.toString(),
+                        decoration: const InputDecoration(
+                            labelText: 'Subtree separation'),
+                        onChanged: (text) {
+                          builder.subtreeSeparation = int.tryParse(text) ?? 100;
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: 100,
+                      child: TextFormField(
+                        initialValue: builder.orientation.toString(),
+                        decoration:
+                            const InputDecoration(labelText: 'Orientation'),
+                        onChanged: (text) {
+                          builder.orientation = int.tryParse(text) ?? 100;
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 100,
-                  child: TextFormField(
-                    initialValue: builder.levelSeparation.toString(),
-                    decoration:
-                        const InputDecoration(labelText: 'Level Separation'),
-                    onChanged: (text) {
-                      builder.levelSeparation = int.tryParse(text) ?? 100;
-                      setState(() {});
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: 100,
-                  child: TextFormField(
-                    initialValue: builder.subtreeSeparation.toString(),
-                    decoration:
-                        const InputDecoration(labelText: 'Subtree separation'),
-                    onChanged: (text) {
-                      builder.subtreeSeparation = int.tryParse(text) ?? 100;
-                      setState(() {});
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: 100,
-                  child: TextFormField(
-                    initialValue: builder.orientation.toString(),
-                    decoration: const InputDecoration(labelText: 'Orientation'),
-                    onChanged: (text) {
-                      builder.orientation = int.tryParse(text) ?? 100;
-                      setState(() {});
-                    },
-                  ),
+                Expanded(
+                  child: InteractiveViewer(
+                      constrained: false,
+                      boundaryMargin: const EdgeInsets.all(100),
+                      minScale: 0.01,
+                      maxScale: 5.6,
+                      child: GraphView(
+                        graph: graph,
+                        algorithm: BuchheimWalkerAlgorithm(
+                            builder, TreeEdgeRenderer(builder)),
+                        paint: Paint()
+                          ..color = Colors.black
+                          ..strokeWidth = 1
+                          ..style = PaintingStyle.stroke,
+                        builder: (Node node) {
+                          // I can decide what widget should be shown here based on the id
+                          var a = node.key!.value as int?;
+                          var nodes = json['nodes']!;
+                          var nodeValue =
+                              nodes.firstWhere((element) => element['id'] == a);
+                          return rectangleWidget(nodeValue['label'] as String?);
+                        },
+                      )),
                 ),
               ],
             ),
-            Expanded(
-              child: InteractiveViewer(
-                  constrained: false,
-                  boundaryMargin: const EdgeInsets.all(100),
-                  minScale: 0.01,
-                  maxScale: 5.6,
-                  child: GraphView(
-                    graph: graph,
-                    algorithm: BuchheimWalkerAlgorithm(
-                        builder, TreeEdgeRenderer(builder)),
-                    paint: Paint()
-                      ..color = Colors.black
-                      ..strokeWidth = 1
-                      ..style = PaintingStyle.stroke,
-                    builder: (Node node) {
-                      // I can decide what widget should be shown here based on the id
-                      var a = node.key!.value as int?;
-                      var nodes = json['nodes']!;
-                      var nodeValue =
-                          nodes.firstWhere((element) => element['id'] == a);
-                      return rectangleWidget(nodeValue['label'] as String?);
-                    },
-                  )),
-            ),
-          ],
-        ));
+          )),
+    );
   }
 
   Widget rectangleWidget(String? a) {

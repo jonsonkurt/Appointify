@@ -445,22 +445,24 @@ class _SearchBoxState extends State<SearchBox> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        width: 350,
-        child: TextField(
-          controller: _searchController,
-          decoration: const InputDecoration(
-            labelText: 'Search...',
-            prefixIcon: Icon(
-              Icons.search,
-              color: Color(0xffFF9343),
+      child: SafeArea(
+        child: SizedBox(
+          width: 350,
+          child: TextField(
+            controller: _searchController,
+            decoration: const InputDecoration(
+              labelText: 'Search...',
+              prefixIcon: Icon(
+                Icons.search,
+                color: Color(0xffFF9343),
+              ),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              )),
             ),
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-              Radius.circular(20),
-            )),
+            onChanged: widget.onSearch,
           ),
-          onChanged: widget.onSearch,
         ),
       ),
     );

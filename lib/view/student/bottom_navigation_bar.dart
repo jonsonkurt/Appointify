@@ -26,40 +26,42 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: SalomonBottomBar(
-          backgroundColor: const Color(0xFFFF9343),
-          currentIndex: currentIndex,
-          items: [
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.home),
-              title: const Text("Home"),
-              selectedColor: Colors.white,
-              unselectedColor: Colors.white,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.list_alt),
-              title: const Text("Employee"),
-              selectedColor: Colors.white,
-              unselectedColor: Colors.white,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.groups),
-              title: const Text("Org Chart"),
-              selectedColor: Colors.white,
-              unselectedColor: Colors.white,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.person),
-              title: const Text("Profile"),
-              selectedColor: Colors.white,
-              unselectedColor: Colors.white,
-            ),
-          ],
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
+        bottomNavigationBar: SafeArea(
+          child: SalomonBottomBar(
+            backgroundColor: const Color(0xFFFF9343),
+            currentIndex: currentIndex,
+            items: [
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.home),
+                title: const Text("Home"),
+                selectedColor: Colors.white,
+                unselectedColor: Colors.white,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.list_alt),
+                title: const Text("Employee"),
+                selectedColor: Colors.white,
+                unselectedColor: Colors.white,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.groups),
+                title: const Text("Org Chart"),
+                selectedColor: Colors.white,
+                unselectedColor: Colors.white,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.person),
+                title: const Text("Profile"),
+                selectedColor: Colors.white,
+                unselectedColor: Colors.white,
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+          ),
         ),
         body: pages[currentIndex],
       ),

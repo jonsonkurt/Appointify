@@ -25,32 +25,34 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: const Color(0xffFF9343),
-        bottomNavigationBar: SalomonBottomBar(
-          margin: const EdgeInsets.only(left: 30, right: 30),
-          itemPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          currentIndex: currentIndex,
-          items: [
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.home),
-              title: const Text("Home"),
-              selectedColor: Colors.white,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.list_alt),
-              title: const Text("Organization chart"),
-              selectedColor: Colors.white,
-            ),
-            SalomonBottomBarItem(
-              icon: const Icon(Icons.people),
-              title: const Text("Profile"),
-              selectedColor: Colors.white,
-            ),
-          ],
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
+        bottomNavigationBar: SafeArea(
+          child: SalomonBottomBar(
+            margin: const EdgeInsets.only(left: 30, right: 30),
+            itemPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            currentIndex: currentIndex,
+            items: [
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.home),
+                title: const Text("Home"),
+                selectedColor: Colors.white,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.list_alt),
+                title: const Text("Organization chart"),
+                selectedColor: Colors.white,
+              ),
+              SalomonBottomBarItem(
+                icon: const Icon(Icons.people),
+                title: const Text("Profile"),
+                selectedColor: Colors.white,
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+          ),
         ),
         body: pages[currentIndex],
       ),
