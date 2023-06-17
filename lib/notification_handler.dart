@@ -15,10 +15,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 Future<void> initFcm(context) async {
   await Firebase.initializeApp();
   String? userID = FirebaseAuth.instance.currentUser?.uid;
-  DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
   var logger = Logger();
-
-  final fcmToken = await FirebaseMessaging.instance.getToken();
 
   FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
     if (FirebaseAuth.instance.currentUser != null) {
