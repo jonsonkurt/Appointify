@@ -200,7 +200,8 @@ class _HomePageState extends State<HomePage> {
                         child: FirebaseAnimatedList(
                           query: appointmentsRef
                               .orderByChild('requestStatusProfessor')
-                              .startAt("$userID-UPCOMING"),
+                              .startAt("$userID-UPCOMING")
+                              .endAt("$userID-UPCOMING\uf8ff"),
                           itemBuilder: (context, snapshot, animation, index) {
                             String studentName =
                                 snapshot.child('studentName').value.toString();
@@ -548,7 +549,7 @@ class _HomePageState extends State<HomePage> {
                                                                       _timeController
                                                                           .text,
                                                                   "status":
-                                                                      '$studentID-PENDING',
+                                                                      '$studentID-PENDING-$outputDate:$outputTime',
                                                                   "requestStatus":
                                                                       'PENDING'
                                                                 });

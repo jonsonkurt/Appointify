@@ -102,7 +102,8 @@ class _RequestPageState extends State<RequestPage> {
                   child: FirebaseAnimatedList(
                     query: appointmentsRef
                         .orderByChild('requestStatusProfessor')
-                        .startAt("$userID-PENDING"),
+                        .startAt("$userID-PENDING")
+                        .endAt("$userID-PENDING\uf8ff"),
                     itemBuilder: (context, snapshot, animation, index) {
                       // Modify strings based on your needs
                       String studentName =
