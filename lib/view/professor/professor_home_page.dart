@@ -774,10 +774,8 @@ class _HomePageState extends State<HomePage> {
                               .startAt("$userID-COMPLETED")
                               .endAt("$userID-COMPLETED\uf8ff"),
                           itemBuilder: (context, snapshot, animation, index) {
-                            String studentName = snapshot
-                                .child('requestStatusProfessor')
-                                .value
-                                .toString();
+                            String studentName =
+                                snapshot.child('studentName').value.toString();
                             String studentSection =
                                 snapshot.child('section').value.toString();
                             return SizedBox(
@@ -901,7 +899,7 @@ class _HomePageState extends State<HomePage> {
                                                           studentName,
                                                           style:
                                                               const TextStyle(
-                                                                  fontSize: 7,
+                                                                  fontSize: 20,
                                                                   color: Colors
                                                                       .black),
                                                         ),
@@ -1002,10 +1000,8 @@ class _HomePageState extends State<HomePage> {
                               .startAt("$userID-CANCELED")
                               .endAt("$userID-CANCELED\uf8ff"),
                           itemBuilder: (context, snapshot, animation, index) {
-                            String studentName = snapshot
-                                .child('requestStatusProfessor')
-                                .value
-                                .toString();
+                            String studentName =
+                                snapshot.child('studentName').value.toString();
                             String studentSection =
                                 snapshot.child('section').value.toString();
                             return SizedBox(
@@ -1129,7 +1125,7 @@ class _HomePageState extends State<HomePage> {
                                                           studentName,
                                                           style:
                                                               const TextStyle(
-                                                                  fontSize: 7,
+                                                                  fontSize: 20,
                                                                   color: Colors
                                                                       .black),
                                                         ),
