@@ -229,6 +229,7 @@ class _HomePageState extends State<HomePage> {
                                             "status": "$userID-UPCOMING",
                                             "contered": "no",
                                           });
+                                          Navigator.of(context).pop();
                                         }),
                                     ElevatedButton(
                                         child: const Text("Reject"),
@@ -244,6 +245,7 @@ class _HomePageState extends State<HomePage> {
                                                 "${snapshot.child('professorID').value}-CANCELED",
                                             "status": "$userID-CANCELED",
                                           });
+                                          Navigator.of(context).pop();
                                         })
                                   ],
                                 ),
@@ -498,148 +500,179 @@ class _HomePageState extends State<HomePage> {
                             return SizedBox(
                                 height: 100,
                                 child: Card(
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                  color: Colors.white12,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    color: Colors.white12,
                                     child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: FirebaseAnimatedList(
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        query: employeesRef
-                                            .orderByChild('profUserID')
-                                            .equalTo(snapshot
-                                                .child('professorID')
-                                                .value
-                                                .toString()),
-                                        scrollDirection: Axis.vertical,
-                                        itemBuilder: (context, snapshot,
-                                            animation, index) {
-                                          return SizedBox(
-                                            child: Row(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 15, top: 15),
-                                                  child: Container(
-                                                    height: 60,
-                                                    width: 60,
-                                                    decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        border: Border.all(
-                                                          color: const Color
-                                                              .fromARGB(
-                                                              255, 35, 35, 35),
-                                                          width: 2,
-                                                        )),
-                                                    child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
-                                                        child: ProfileController()
-                                                                    .image ==
-                                                                null
-                                                            ? snapshot
-                                                                        .child(
-                                                                            'profilePicStatus')
-                                                                        .value
-                                                                        .toString() ==
-                                                                    "None"
-                                                                ? const Icon(
-                                                                    Icons
-                                                                        .person,
-                                                                    size: 35,
-                                                                  )
-                                                                : Image(
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    image: NetworkImage(snapshot
-                                                                        .child(
-                                                                            'profilePicStatus')
-                                                                        .value
-                                                                        .toString()),
-                                                                    loadingBuilder:
-                                                                        (context,
+                                      children: [
+                                        Flexible(
+                                          child: FirebaseAnimatedList(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            query: employeesRef
+                                                .orderByChild('profUserID')
+                                                .equalTo(snapshot
+                                                    .child('professorID')
+                                                    .value
+                                                    .toString()),
+                                            scrollDirection: Axis.vertical,
+                                            itemBuilder: (context, snapshot,
+                                                animation, index) {
+                                              return SizedBox(
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 15,
+                                                              top: 15),
+                                                      child: Container(
+                                                        height: 60,
+                                                        width: 60,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                border:
+                                                                    Border.all(
+                                                                  color: const Color
+                                                                          .fromARGB(
+                                                                      255,
+                                                                      35,
+                                                                      35,
+                                                                      35),
+                                                                  width: 2,
+                                                                )),
+                                                        child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        100),
+                                                            child: ProfileController()
+                                                                        .image ==
+                                                                    null
+                                                                ? snapshot
+                                                                            .child(
+                                                                                'profilePicStatus')
+                                                                            .value
+                                                                            .toString() ==
+                                                                        "None"
+                                                                    ? const Icon(
+                                                                        Icons
+                                                                            .person,
+                                                                        size:
+                                                                            35,
+                                                                      )
+                                                                    : Image(
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                        image: NetworkImage(snapshot
+                                                                            .child('profilePicStatus')
+                                                                            .value
+                                                                            .toString()),
+                                                                        loadingBuilder: (context,
                                                                             child,
                                                                             loadingProgress) {
-                                                                      if (loadingProgress ==
-                                                                          null) {
-                                                                        return child;
-                                                                      }
-                                                                      return const CircularProgressIndicator();
-                                                                    },
-                                                                    errorBuilder:
-                                                                        (context,
+                                                                          if (loadingProgress ==
+                                                                              null) {
+                                                                            return child;
+                                                                          }
+                                                                          return const CircularProgressIndicator();
+                                                                        },
+                                                                        errorBuilder: (context,
                                                                             object,
                                                                             stack) {
-                                                                      return const Icon(
-                                                                        Icons
-                                                                            .error_outline,
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            35,
-                                                                            35,
-                                                                            35),
-                                                                      );
-                                                                    },
-                                                                  )
-                                                            : Image.file(File(
-                                                                    ProfileController()
-                                                                        .image!
-                                                                        .path)
-                                                                .absolute)),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      employeeName,
-                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                    ),
-                                                    Text(
-                                                      employeePosition,
-                                                      style: TextStyle(fontSize: 15),
-                                                    ),
-                                                    Container(
-                                                      height: 20,
-                                                      margin: EdgeInsets.only(top: 10),
-                                                      padding: EdgeInsets.only(left: 10, right: 10),
-                                                      alignment: Alignment.center,
-                                                      decoration: BoxDecoration(color: Colors.white,
-                                                      borderRadius:BorderRadius.circular(5) ,
-                                                      ),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            schedDate, style: TextStyle(fontSize: 15),
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          Text(
-                                                            schedTime, style: TextStyle(fontSize: 15),
-                                                          ),
-                                                        ],
+                                                                          return const Icon(
+                                                                            Icons.error_outline,
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                35,
+                                                                                35,
+                                                                                35),
+                                                                          );
+                                                                        },
+                                                                      )
+                                                                : Image.file(File(
+                                                                        ProfileController()
+                                                                            .image!
+                                                                            .path)
+                                                                    .absolute)),
                                                       ),
                                                     ),
+                                                    const SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          employeeName,
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          employeePosition,
+                                                          style: TextStyle(
+                                                              fontSize: 15),
+                                                        ),
+                                                        Container(
+                                                          height: 20,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  top: 10),
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 10,
+                                                                  right: 10),
+                                                          alignment:
+                                                              Alignment.center,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                          ),
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                schedDate,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        15),
+                                                              ),
+                                                              const SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
+                                                                schedTime,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        15),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
                                                   ],
-                                                )
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                )));
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    )));
                           },
                         ),
                       ),
@@ -700,7 +733,7 @@ class _HomePageState extends State<HomePage> {
                                                         shape: BoxShape.circle,
                                                         border: Border.all(
                                                           color: const Color
-                                                              .fromARGB(
+                                                                  .fromARGB(
                                                               255, 35, 35, 35),
                                                           width: 2,
                                                         )),
@@ -779,11 +812,17 @@ class _HomePageState extends State<HomePage> {
                                                     ),
                                                     Container(
                                                       height: 20,
-                                                      margin: EdgeInsets.only(top: 10),
-                                                      padding: EdgeInsets.only(left: 10, right: 10),
-                                                      alignment: Alignment.center,
-                                                      decoration: BoxDecoration(color: Colors.white,
-                                                      borderRadius:BorderRadius.circular(5)),
+                                                      margin: EdgeInsets.only(
+                                                          top: 10),
+                                                      padding: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                      alignment:
+                                                          Alignment.center,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5)),
                                                       child: Row(
                                                         children: [
                                                           Text(
