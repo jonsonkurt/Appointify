@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:appointify/view/loading_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,8 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 Future<void> initFcm(context) async {
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
+
   String? userID = FirebaseAuth.instance.currentUser?.uid;
   var logger = Logger();
 

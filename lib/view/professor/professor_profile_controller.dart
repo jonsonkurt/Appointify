@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:appointify/permission_handler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:permission_handler/permission_handler.dart';
 
 class ProfessorProfileController with ChangeNotifier {
   final picker = ImagePicker();
@@ -51,8 +53,15 @@ class ProfessorProfileController with ChangeNotifier {
                 child: Column(
                   children: [
                     ListTile(
-                      onTap: () {
-                        pickCameraImage(context);
+                      onTap: () async {
+                        if (await Permission.camera.request().isGranted) {
+                          // ignore: use_build_context_synchronously
+                          pickCameraImage(context);
+                        } else {
+                          await cameraPermission();
+                        }
+
+                        // ignore: use_build_context_synchronously
                         Navigator.pop(context);
                       },
                       leading: const Icon(
@@ -62,8 +71,13 @@ class ProfessorProfileController with ChangeNotifier {
                       title: const Text('Camera'),
                     ),
                     ListTile(
-                      onTap: () {
-                        pickGalleryImage(context);
+                      onTap: () async {
+                        if (await Permission.storage.request().isGranted) {
+                          // ignore: use_build_context_synchronously
+                          pickGalleryImage(context);
+                        } else {
+                          await storagePermission();
+                        }
                         Navigator.pop(context);
                       },
                       leading: const Icon(

@@ -47,6 +47,7 @@ class OnBoarding extends StatelessWidget {
           FirebaseDatabase.instance.ref().child('professors');
       nameSubscription = nameRef.onValue.listen((event) async {
         try {
+          
           name = event.snapshot.value.toString();
           // ignore: unnecessary_null_comparison
           if (name == "Student") {
