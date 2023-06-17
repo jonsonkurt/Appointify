@@ -613,7 +613,7 @@ class _HomePageState extends State<HomePage> {
                                                       children: [
                                                         Text(
                                                           employeeName,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 15,
                                                               fontWeight:
                                                                   FontWeight
@@ -621,16 +621,16 @@ class _HomePageState extends State<HomePage> {
                                                         ),
                                                         Text(
                                                           employeePosition,
-                                                          style: TextStyle(
+                                                          style: const  TextStyle(
                                                               fontSize: 15),
                                                         ),
                                                         Container(
                                                           height: 20,
                                                           margin:
-                                                              EdgeInsets.only(
+                                                             const EdgeInsets.only(
                                                                   top: 10),
                                                           padding:
-                                                              EdgeInsets.only(
+                                                             const EdgeInsets.only(
                                                                   left: 10,
                                                                   right: 10),
                                                           alignment:
@@ -647,7 +647,7 @@ class _HomePageState extends State<HomePage> {
                                                             children: [
                                                               Text(
                                                                 schedDate,
-                                                                style: TextStyle(
+                                                                style: const  TextStyle(
                                                                     fontSize:
                                                                         15),
                                                               ),
@@ -656,7 +656,7 @@ class _HomePageState extends State<HomePage> {
                                                               ),
                                                               Text(
                                                                 schedTime,
-                                                                style: TextStyle(
+                                                                style: const TextStyle(
                                                                     fontSize:
                                                                         15),
                                                               ),
@@ -812,9 +812,9 @@ class _HomePageState extends State<HomePage> {
                                                     ),
                                                     Container(
                                                       height: 20,
-                                                      margin: EdgeInsets.only(
+                                                      margin: const EdgeInsets.only(
                                                           top: 10),
-                                                      padding: EdgeInsets.only(
+                                                      padding: const EdgeInsets.only(
                                                           left: 10, right: 10),
                                                       alignment:
                                                           Alignment.center,

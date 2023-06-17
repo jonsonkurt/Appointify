@@ -81,7 +81,6 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
         _selectedFromTimes[index] = picked;
       });
     } else {
-      print('Canceled');
     }
   }
 

@@ -240,7 +240,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               ),
                             ),
                             FlutterSwitch(
-                              activeColor: Color(0xFFFF9343),
+                              activeColor: const Color(0xFFFF9343),
                               value: status1,
                               height: 25.0,
                               width: 55,
@@ -409,7 +409,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     Padding(
                       padding: EdgeInsets.all(MediaQuery.of(context).size.height/35),
                       child: ElevatedButton(
-                        style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343))),
+                        style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343))),
                         onPressed: _logout,
                         child: const Text("Logout",
                         

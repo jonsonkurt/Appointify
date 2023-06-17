@@ -106,8 +106,6 @@ Future<void> handleNotification(RemoteMessage? message, context) async {
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // Handle the background message here
-  print('Handling a background message: ${message.messageId}');
-
   // You can perform custom logic here, such as saving the message to a local database,
   // scheduling a local notification, or updating the UI in some way.
 

@@ -357,7 +357,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                 color: Color(0xFF7778EE),
                               ),
                               child: Text(
-                                '${entry.key}',
+                                entry.key,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,

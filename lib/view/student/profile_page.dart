@@ -94,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           //Profile page Text
                           Container(
-                            margin: EdgeInsets.all(15),
+                            margin: const EdgeInsets.all(15),
                             alignment: Alignment.centerLeft,
                             child: const Text("Profile",style: TextStyle(fontSize: 30,
                              color: Colors.black, decoration: TextDecoration.none),)
@@ -156,7 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             // update prolife logic
                             children:[ 
-                              Text("Edit Information", style: TextStyle(decoration: TextDecoration.none, 
+                              const Text("Edit Information", style: TextStyle(decoration: TextDecoration.none, 
                               color: Colors.black, fontSize: 20),
                               ),
                               Container(
