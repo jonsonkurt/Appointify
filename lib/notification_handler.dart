@@ -104,8 +104,8 @@ Future<void> handleNotification(RemoteMessage? message, context) async {
     // WidgetsFlutterBinding.ensureInitialized();
     // await Firebase.initializeApp();
     // Extract the payload data
-    var payloadData = json.decode(message!.data['data']);
-    print(payloadData);
+    // var payloadData = json.decode(message!.data['data']);
+    // print(payloadData);
 
     // Example: Navigate to a screen named 'DetailScreen' with the payload data
     Navigator.push(

@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:appointify/view/professor/professor_bottom_navigation_bar.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:appointify/view/student/bottom_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
