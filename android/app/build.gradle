@@ -29,9 +29,13 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     namespace "com.example.appointify"
-    compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
-
+    compileSdkVersion 33
+    ndkVersion "25.2.9519653"
+    
+    lintOptions {
+        warning 'deprecation'
+        warning 'unchecked'
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
