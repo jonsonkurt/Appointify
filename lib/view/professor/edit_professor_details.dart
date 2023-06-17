@@ -495,6 +495,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                           .child(userID.toString())
                                           .update({
                                         'profilePicStatus': provider.imgURL,
+                                        "mobileNumber": _phoneController.text,
                                         "availability": {
                                           "Monday": _getTime(0),
                                           "Tuesday": _getTime(1),
