@@ -24,6 +24,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
   final List<TimeOfDay?> _selectedFromTimes = List<TimeOfDay?>.filled(6, null);
   final List<TimeOfDay?> _selectedToTimes = List<TimeOfDay?>.filled(6, null);
   final bool val1 = true;
+  String imagePath = 'None';
 
   final _formKey = GlobalKey<FormState>();
 
@@ -267,6 +268,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                             InkWell(
                               onTap: () {
                                 provider.pickImage(context);
+                                imagePath = provider.imgURL;
                               },
                               child: const CircleAvatar(
                                 radius: 15,
@@ -360,15 +362,9 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                       DateFormat.jm();
                                                   String test = DateFormat.jm()
                                                       .format(DateTime.now());
-                                                  String timeString =
-                                                      schedStartTime[index] ==
-                                                              "-"
-                                                          ? test
-                                                          : schedStartTime[
-                                                              index];
 
                                                   final parsedTime =
-                                                      format.parse(timeString);
+                                                      format.parse(test);
                                                   final timeOfDay =
                                                       TimeOfDay.fromDateTime(
                                                           parsedTime);
@@ -437,14 +433,9 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                       DateFormat.jm();
                                                   String test = DateFormat.jm()
                                                       .format(DateTime.now());
-                                                  String timeString =
-                                                      schedStartTime[index] ==
-                                                              "-"
-                                                          ? test
-                                                          : schedStartTime[
-                                                              index];
+
                                                   final parsedTime =
-                                                      format.parse(timeString);
+                                                      format.parse(test);
                                                   final timeOfDay =
                                                       TimeOfDay.fromDateTime(
                                                           parsedTime);
@@ -494,7 +485,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                       await ref
                                           .child(userID.toString())
                                           .update({
-                                        'profilePicStatus': provider.imgURL,
+                                        'profilePicStatus': imagePath,
                                         "mobileNumber": _phoneController.text,
                                         "availability": {
                                           "Monday": _getTime(0),

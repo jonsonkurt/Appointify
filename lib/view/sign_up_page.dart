@@ -13,7 +13,7 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {  
+class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -92,199 +92,200 @@ class _SignUpPageState extends State<SignUpPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                            "First Name",
-                            style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
-                              color: Color(0xFF393838),
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        controller: _firstNameController,
-                        style: const TextStyle(color: Colors.black),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(10.0),
-                                           ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your first name';
-                          }
-                          return null; // Return null if there is no error
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                            "Surname",
-                            style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
-                              color: Color(0xFF393838),
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                      const SizedBox(height: 8.0),
-                      TextFormField(
-                        controller: _lastNameController,
-                        style: const TextStyle(color: Colors.black),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(10.0),
-                                           ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your last name';
-                          }
-                          return null; // Return null if there is no error
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                            "Email Address",
-                            style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
-                              color: Color(0xFF393838),
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                      const SizedBox(height: 8.0),
-                      TextFormField(
-                        controller: _emailController,
-                        style: const TextStyle(color: Colors.black),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(10.0),
-                                           ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a valid email';
-                          } else if (!RegExp(
-                                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                              .hasMatch(value)) {
-                            return 'Please enter a valid email';
-                          }
-                          return null; // Return null if there is no error
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      const SizedBox(height: 8.0),
-                      const Text(
-                            "Password",
-                            style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
-                              color: Color(0xFF393838),
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        controller: _passwordController,
-                        obscureText: !_passwordVisible,
-                        style: const TextStyle(color: Colors.black),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(10.0),
-                                           ),
-                                suffixIcon: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _passwordVisible = !_passwordVisible;
-                                    });
-                                  },
-                                  child: Icon(
-                                    _passwordVisible
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: const Color(0xFFFF9343),
-                                  ),
-                                ),                                          
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a password';
-                          }
-                          return null; // Return null if there is no error
-                        },
-                      ),
-                      const SizedBox(height: 8.0),
-                      const Text(
-                            "Confirm Password",
-                            style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
-                              color: Color(0xFF393838),
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        controller: _conpasswordController,
-                        obscureText: !_passwordVisible,
-                        style: const TextStyle(color: Colors.black),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(10.0),
-                                           ),
-                                suffixIcon: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _conpasswordVisible = !_conpasswordVisible;
-                                    });
-                                  },
-                                  child: Icon(
-                                    _conpasswordVisible
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: const Color(0xFFFF9343),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "First Name",
+                                  style: TextStyle(
+                                    fontFamily: "GothamRnd-Medium",
+                                    color: Color(0xFF393838),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please confirm your password';
-                          }
-                          if (value != _passwordController.text) {
-                            return 'Passwords do not match';
-                          }
-                          return null; // Return null if there is no error
-                        },
-                      ),
-                      const SizedBox(height: 30.0),
-                    ],
-                  ),
-                ),
+                                const SizedBox(height: 8),
+                                TextFormField(
+                                  controller: _firstNameController,
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your first name';
+                                    }
+                                    return null; // Return null if there is no error
+                                  },
+                                ),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  "Surname",
+                                  style: TextStyle(
+                                    fontFamily: "GothamRnd-Medium",
+                                    color: Color(0xFF393838),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                TextFormField(
+                                  controller: _lastNameController,
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your last name';
+                                    }
+                                    return null; // Return null if there is no error
+                                  },
+                                ),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  "Email Address",
+                                  style: TextStyle(
+                                    fontFamily: "GothamRnd-Medium",
+                                    color: Color(0xFF393838),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                TextFormField(
+                                  controller: _emailController,
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter a valid email';
+                                    } else if (!RegExp(
+                                            r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                        .hasMatch(value)) {
+                                      return 'Please enter a valid email';
+                                    }
+                                    return null; // Return null if there is no error
+                                  },
+                                  keyboardType: TextInputType.emailAddress,
+                                ),
+                                const SizedBox(height: 8.0),
+                                const Text(
+                                  "Password",
+                                  style: TextStyle(
+                                    fontFamily: "GothamRnd-Medium",
+                                    color: Color(0xFF393838),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                TextFormField(
+                                  controller: _passwordController,
+                                  obscureText: !_passwordVisible,
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _passwordVisible = !_passwordVisible;
+                                        });
+                                      },
+                                      child: Icon(
+                                        _passwordVisible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: const Color(0xFFFF9343),
+                                      ),
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter a password';
+                                    }
+                                    return null; // Return null if there is no error
+                                  },
+                                ),
+                                const SizedBox(height: 8.0),
+                                const Text(
+                                  "Confirm Password",
+                                  style: TextStyle(
+                                    fontFamily: "GothamRnd-Medium",
+                                    color: Color(0xFF393838),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                TextFormField(
+                                  controller: _conpasswordController,
+                                  obscureText: !_passwordVisible,
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _conpasswordVisible =
+                                              !_conpasswordVisible;
+                                        });
+                                      },
+                                      child: Icon(
+                                        _conpasswordVisible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: const Color(0xFFFF9343),
+                                      ),
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please confirm your password';
+                                    }
+                                    if (value != _passwordController.text) {
+                                      return 'Passwords do not match';
+                                    }
+                                    return null; // Return null if there is no error
+                                  },
+                                ),
+                                const SizedBox(height: 30.0),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                                            ElevatedButton(
+                      ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             // Perform sign in logic here
@@ -303,7 +304,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
                               String? userID =
                                   FirebaseAuth.instance.currentUser?.uid;
-                              final fcmToken = await FirebaseMessaging.instance.getToken();
+                              final fcmToken =
+                                  await FirebaseMessaging.instance.getToken();
                               await rtdb.ref("students/$userID").set({
                                 "firstName": firstName,
                                 "lastName": lastName,
@@ -314,7 +316,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 "profilePicStatus": "None",
                                 "UID": userID,
                                 "fcmToken": fcmToken,
-                                "notifState" : "no"
+                                "notifState": "no"
                                 // "address": {"line1": "100 Mountain View"}
                               });
                               // ignore: use_build_context_synchronously
@@ -351,12 +353,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(203, 50),
-                            backgroundColor: const Color(0xFFFF9343),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
-                            ),
+                          fixedSize: const Size(203, 50),
+                          backgroundColor: const Color(0xFFFF9343),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                10), // Adjust the radius as needed
                           ),
+                        ),
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(

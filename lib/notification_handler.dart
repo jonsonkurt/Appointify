@@ -1,44 +1,27 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:appointify/view/loading_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-Future<void> initFcm() async {
+Future<void> initFcm(context) async {
   await Firebase.initializeApp();
   String? userID = FirebaseAuth.instance.currentUser?.uid;
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
   var logger = Logger();
 
   final fcmToken = await FirebaseMessaging.instance.getToken();
-  // FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  // NotificationSettings settings = await messaging.requestPermission(
-  //   alert: true,
-  //   announcement: false,
-  //   badge: true,
-  //   carPlay: false,
-  //   criticalAlert: false,
-  //   provisional: false,
-  //   sound: true,
-  // );
 
   FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
     if (FirebaseAuth.instance.currentUser != null) {
-      // Redirect the user to the homepage
-      // final firebaseApp = Firebase.app();
-      // final rtdb = FirebaseDatabase.instanceFor(
-      //   app: firebaseApp,
-      //   databaseURL:
-      //       'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
-      // );
-
       DatabaseReference nameRef =
           FirebaseDatabase.instance.ref().child('students/$userID/designation');
       DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
@@ -69,6 +52,7 @@ Future<void> initFcm() async {
         }
       });
     }
+
     // Note: This callback is fired at each app startup and whenever a new
     // token is generated.
   }).onError((err) {
@@ -88,8 +72,10 @@ Future<void> initFcm() async {
   );
   flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  // Configure FirebaseMessaging to handle background messages
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+  // Handle notification clicks when the app is in the foreground
   FirebaseMessaging.onMessage.listen((RemoteMessage? message) async {
     RemoteNotification? notification = message?.notification;
     AndroidNotification? android = message?.notification?.android;
@@ -105,4 +91,38 @@ Future<void> initFcm() async {
       );
     }
   });
+  // Handle notification clicks when the app is terminated or in the background
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) async {
+    handleNotification(message, context);
+  });
+}
+
+Future<void> handleNotification(RemoteMessage? message, context) async {
+  if (message?.data != null) {
+    // Handle the notification payload here
+    // Example: Navigate to a specific screen based on the payload data
+    // WidgetsFlutterBinding.ensureInitialized();
+    // await Firebase.initializeApp();
+    // Extract the payload data
+    var payloadData = json.decode(message!.data['data']);
+    print(payloadData);
+
+    // Example: Navigate to a screen named 'DetailScreen' with the payload data
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const LoadingPage()));
+  }
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // Handle the background message here
+  print('Handling a background message: ${message.messageId}');
+
+  // You can perform custom logic here, such as saving the message to a local database,
+  // scheduling a local notification, or updating the UI in some way.
+
+  // IMPORTANT: Make sure to call `Firebase.initializeApp()` before using any Firebase services
+  // await Firebase.initializeApp();
+
+  // If you need to access Firebase services or perform additional tasks,
+  // you can do so within this background handler function.
 }
