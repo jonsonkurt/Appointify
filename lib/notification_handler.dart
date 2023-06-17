@@ -59,12 +59,6 @@ Future<void> initFcm(context) async {
     logger.d('Error occurred: $err');
   });
 
-  if (fcmToken != null) {
-    await ref.child(userID.toString()).update({
-      'fcmToken': fcmToken,
-    });
-  }
-
   var initializationSettingsAndroid =
       const AndroidInitializationSettings('@mipmap/ic_launcher');
   var initializationSettings = InitializationSettings(
