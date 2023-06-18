@@ -72,11 +72,11 @@ class ProfileController with ChangeNotifier {
                     ),
                     ListTile(
                       onTap: () async {
-                        if (await Permission.storage.request().isGranted) {
+                        bool request =
+                            await requestPermission(Permission.storage);
+                        if (request) {
                           // ignore: use_build_context_synchronously
                           pickGalleryImage(context);
-                        } else {
-                          await storagePermission();
                         }
 
                         // ignore: use_build_context_synchronously
