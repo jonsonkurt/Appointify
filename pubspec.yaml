@@ -63,6 +63,7 @@ dependencies:
   material_dialogs: ^1.1.4
   graphview: ^1.2.0
   permission_handler: ^10.3.0
+  device_info_plus: ^9.0.2
 
 dev_dependencies:
   flutter_test:
