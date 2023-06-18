@@ -72,14 +72,8 @@ class _ProfessorPageState extends State<ProfessorPage> {
 
   @override
   Widget build(BuildContext context) {
-    final firebaseApp = Firebase.app();
-    final rtdb = FirebaseDatabase.instanceFor(
-      app: firebaseApp,
-      databaseURL:
-          'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    );
-
-    DatabaseReference appointmentsRef = rtdb.ref('professors/');
+    DatabaseReference appointmentsRef =
+        FirebaseDatabase.instance.ref('professors/');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -132,7 +126,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
             ),
             Expanded(
                 child: FirebaseAnimatedList(
-              query: appointmentsRef,
+              query: appointmentsRef.orderByChild("firstName"),
               itemBuilder: (context, snapshot, animation, index) {
                 String availability =
                     snapshot.child('availability').value.toString();
