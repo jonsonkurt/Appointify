@@ -119,7 +119,13 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             color: Colors.black,
                           ), // Icon for Option 1
                           SizedBox(width: 8), // Add some spacing
-                          Text('Edit Profile'),
+                          Text(
+                            'Edit Profile',
+                            style: TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -132,7 +138,13 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             color: Colors.black,
                           ), // Icon for Option 2
                           SizedBox(width: 8), // Add some spacing
-                          Text('Log Out'),
+                          Text(
+                            'Log Out',
+                            style: TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                     ),
