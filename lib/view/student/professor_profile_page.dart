@@ -47,6 +47,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   String fcmProfToken = '';
   bool isLoading = true;
   var logger = Logger();
+  String profilePicStatus = "";
 
   @override
   void initState() {
@@ -180,6 +181,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
             studname = event.snapshot.child("firstName").value.toString();
             studLastName = event.snapshot.child("lastName").value.toString();
             studSection = event.snapshot.child("section").value.toString();
+
             isLoading = false;
           });
         }
@@ -193,6 +195,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
       try {
         if (mounted) {
           setState(() {
+            profilePicStatus =
+                event.snapshot.child("profilePicStatus").value.toString();
             fcmProfToken =
                 event.snapshot.child("fcmProfToken").value.toString();
             isLoading = false;
@@ -229,15 +233,40 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     left: MediaQuery.of(context).size.width / 10,
                     bottom: -50,
                     child: Container(
-                      alignment: Alignment.topLeft,
+                      // pa media querry nito salamat
+                      height: 130,
+                      width: 130,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: const Color.fromARGB(255, 35, 35, 35),
+                            width: 2,
+                          )),
+
                       child: ClipOval(
-                        child: Image.asset(
-                          'assets/images/default.jpg',
-                          fit: BoxFit.cover,
-                          width: 120,
-                          height: 120,
-                        ),
-                      ),
+                          child: profilePicStatus == "None"
+                              ? const Icon(
+                                  Icons.person,
+                                  size: 30,
+                                )
+                              : Image(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(profilePicStatus),
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      return child;
+                                    }
+                                    return const CircularProgressIndicator();
+                                  },
+                                  errorBuilder: (context, object, stack) {
+                                    return const Icon(
+                                      Icons.error_outline,
+                                      color: Color.fromARGB(255, 35, 35, 35),
+                                    );
+                                  },
+                                )),
                     ),
                   ),
                   const SizedBox(height: 25),

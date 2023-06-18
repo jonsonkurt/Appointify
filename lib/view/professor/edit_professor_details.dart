@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import 'professor_profile_controller.dart';
-import 'professor_profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +22,6 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
   final List<TimeOfDay?> _selectedFromTimes = List<TimeOfDay?>.filled(6, null);
   final List<TimeOfDay?> _selectedToTimes = List<TimeOfDay?>.filled(6, null);
   final bool val1 = true;
-  static String imagePath = 'None';
 
   final _formKey = GlobalKey<FormState>();
 
@@ -268,7 +265,6 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                             InkWell(
                               onTap: () {
                                 provider.pickImage(context);
-                                imagePath = provider.imgURL;
                               },
                               child: const CircleAvatar(
                                 radius: 15,
@@ -496,7 +492,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                       await ref
                                           .child(userID.toString())
                                           .update({
-                                        'profilePicStatus': imagePath,
+                                        'profilePicStatus': provider.imgURL,
                                         "mobileNumber": _phoneController.text,
                                         "availability": {
                                           "Monday": _checkboxValues[0] == true
