@@ -88,342 +88,405 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: SafeArea(
+    return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          actions: [
+            PopupMenuButton<String>(
+                icon: const Icon(Icons.more_vert), // Set the icon
+                onSelected: (value) {
+                  // Handle menu item selection here
+                  if (value == 'option1') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EditProfessorProfile(),
+                      ),
+                    );
+                  } else if (value == 'option2') {
+                    // Do something for option 2
+                    _logout();
+                  }
+                },
+                itemBuilder: (BuildContext context) {
+                  return [
+                    const PopupMenuItem<String>(
+                      value: 'option1',
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.account_circle,
+                            color: Colors.black,
+                          ), // Icon for Option 1
+                          SizedBox(width: 8), // Add some spacing
+                          Text(
+                            'Edit Profile',
+                            style: TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem<String>(
+                      value: 'option2',
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.logout,
+                            color: Colors.black,
+                          ), // Icon for Option 2
+                          SizedBox(width: 8), // Add some spacing
+                          Text(
+                            'Log Out',
+                            style: TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ];
+                })
+          ],
+          backgroundColor: const Color(0xFFFF9343),
+          title: const Text(
+            "Profile",
+            style: TextStyle(
+              fontFamily: 'GothamRnd',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        body: SafeArea(
             child: SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0),
-        child: StreamBuilder(
-            stream: ref.child(userID!).onValue,
-            builder: (context, AsyncSnapshot snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasData) {
-                Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
-                String firstName = map['firstName'];
-                String lastName = map['lastName'];
-                String mobileNumber = map['mobileNumber'];
-                String designation = map['designation'];
-                // String professorRole = map['professorRole'];
-                // String salutation = map['salutation'];
-                // ReCase status = ReCase(map['status']);
-                // String statusProf = map["status"];
-                String profilePicStatus = map['profilePicStatus'].toString();
-                String profSched = map['availability'].toString();
-                profFullSched = parseStringToMap(profSched);
+          //physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            child: StreamBuilder(
+                stream: ref.child(userID!).onValue,
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
+                    String firstName = map['firstName'];
+                    String lastName = map['lastName'];
+                    String mobileNumber = map['mobileNumber'];
+                    String designation = map['designation'];
+                    String profilePicStatus =
+                        map['profilePicStatus'].toString();
+                    String profSched = map['availability'].toString();
+                    profFullSched = parseStringToMap(profSched);
 
-                return Column(
-                  children: [
-                    Stack(
-                      clipBehavior: Clip.none,
+                    return Column(
                       children: [
-                        Container(
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height / 4,
-                          decoration: const BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(30.0),
-                              bottomRight: Radius.circular(30.0),
-                            ),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30),
-                            ),
-                            child: Image.network(
-                              "https://lh3.googleusercontent.com/p/AF1QipMK9cNvGkzbzuAYcz3LP0WPUlkKCPh3yFa0dFhq=s1360-w1360-h1020",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          right: MediaQuery.of(context).size.width * .01,
-                          top: MediaQuery.of(context).size.height * .008,
-                          child: IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const EditProfessorProfile()),
-                                );
-                              },
-                              icon: const Icon(
-                                Icons.edit_note,
-                                size: 40,
-                              )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * .15),
-                          child: Center(
-                            child: Container(
-                              height: 130,
-                              width: 130,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color:
-                                        const Color.fromARGB(255, 35, 35, 35),
-                                    width: 2,
-                                  )),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: map['profilePicStatus'].toString() ==
-                                          "None"
-                                      ? const Icon(
-                                          Icons.person,
-                                          size: 35,
-                                        )
-                                      : Image(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(profilePicStatus),
-                                          loadingBuilder: (context, child,
-                                              loadingProgress) {
-                                            if (loadingProgress == null) {
-                                              return child;
-                                            }
-                                            return const CircularProgressIndicator();
-                                          },
-                                          errorBuilder:
-                                              (context, object, stack) {
-                                            return const Icon(
-                                              Icons.error_outline,
-                                              color: Color.fromARGB(
-                                                  255, 35, 35, 35),
-                                            );
-                                          },
-                                        )),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "$firstName $lastName",
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
-                              decoration: TextDecoration.none),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(5),
-                          child: Text(
-                            designation,
-                            style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 15,
-                                decoration: TextDecoration.none),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        Stack(
+                          clipBehavior: Clip.none,
                           children: [
                             Container(
-                              alignment: Alignment.centerLeft,
-                              child: const Text(
-                                "Availability Status:",
-                                style: TextStyle(
-                                    color: Colors.black,
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height / 10,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFFF9343),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(30.0),
+                                  bottomRight: Radius.circular(30.0),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 50),
+                              child: Center(
+                                child: Container(
+                                  height: 130,
+                                  width: 130,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: const Color.fromARGB(
+                                            255, 35, 35, 35),
+                                        width: 2,
+                                      )),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: map['profilePicStatus']
+                                                  .toString() ==
+                                              "None"
+                                          ? const Icon(
+                                              Icons.person,
+                                              size: 35,
+                                            )
+                                          : Image(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                  profilePicStatus),
+                                              loadingBuilder: (context, child,
+                                                  loadingProgress) {
+                                                if (loadingProgress == null) {
+                                                  return child;
+                                                }
+                                                return const CircularProgressIndicator();
+                                              },
+                                              errorBuilder:
+                                                  (context, object, stack) {
+                                                return const Icon(
+                                                  Icons.error_outline,
+                                                  color: Color.fromARGB(
+                                                      255, 35, 35, 35),
+                                                );
+                                              },
+                                            )),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "$firstName $lastName",
+                              style: const TextStyle(
+                                fontFamily: 'GothamRnd',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 25,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              child: Text(
+                                designation,
+                                style: const TextStyle(
+                                    fontFamily: 'GothamRnd',
+                                    color: Colors.grey,
                                     fontSize: 15,
                                     decoration: TextDecoration.none),
                               ),
                             ),
-                            FlutterSwitch(
-                              activeColor: const Color(0xFFFF9343),
-                              value: status1,
-                              height: 25.0,
-                              width: 55,
-                              borderRadius: 30.0,
-                              onToggle: (val) {
-                                setState(() {
-                                  if (val == true) {
-                                    status1 = val;
-                                    ref.child(userID.toString()).update({
-                                      "status": "accepting",
-                                    });
-                                  } else {
-                                    status1 = val;
-                                    ref.child(userID.toString()).update({
-                                      "status": "not accepting",
-                                    });
-                                  }
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/18, 
-                          right: MediaQuery.of(context).size.width/18, top: MediaQuery.of(context).size.width/20),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                alignment: Alignment.centerLeft,
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10)),
-                                  color: Color(0xFFFF9343),
-                                ),
-                                child: const Text(
-                                  "Email:",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      decoration: TextDecoration.none),
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  userEmail!,
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      decoration: TextDecoration.none),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Card(
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/18, 
-                          right: MediaQuery.of(context).size.width/18,top: MediaQuery.of(context).size.width/20),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10)),
-                                  color: Color(0xFFFF9343),
-                                ),
-                                padding: const EdgeInsets.all(5),
-                                child: const Text(
-                                  "Contact Number:",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      decoration: TextDecoration.none),
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                padding: const EdgeInsets.all(5),
-                                child: Text(
-                                  mobileNumber,
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      decoration: TextDecoration.none),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
-                      child: const Text(
-                        "Weekly Schedule",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                            decoration: TextDecoration.none),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          for (var entry in profFullSched.entries.toList()
-                            ..sort((a, b) => _getWeekdayNumber(a.key)
-                                .compareTo(_getWeekdayNumber(b.key))))
-                            if (entry.value != '-')
-                              SizedBox(
-                                child: Card(
-                                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/30),
-                                  elevation: 8,
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10))),
-                                  color: Colors.white30,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                          alignment: Alignment.center,
-                                          width: 140,
-                                          height: 50,
-                                          decoration: const BoxDecoration(
-                                              color: Color(0xFFFF9343),
-                                              borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(10),
-                                                  topRight:
-                                                      Radius.circular(10))),
-                                          child: Text(
-                                            entry.key,
-                                          )),
-                                      Container(
-                                        padding: const EdgeInsets.all(10),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          "${entry.value.split(' to ').join('\nto\n')}",
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                      // Container(
-                                      //   padding: EdgeInsets.all(10),
-                                      //   alignment: Alignment.center,
-                                      //   child: Text("${entry.value}")
-                                      //   ),
-                                    ],
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: const Text(
+                                    "Availability Status:",
+                                    style: TextStyle(
+                                        fontFamily: 'GothamRnd',
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        decoration: TextDecoration.none),
                                   ),
                                 ),
+                                FlutterSwitch(
+                                  activeColor: const Color(0xFFFF9343),
+                                  value: status1,
+                                  height: 30.0,
+                                  width: 55,
+                                  borderRadius: 30.0,
+                                  onToggle: (val) {
+                                    setState(() {
+                                      if (val == true) {
+                                        status1 = val;
+                                        ref.child(userID.toString()).update({
+                                          "status": "accepting",
+                                        });
+                                      } else {
+                                        status1 = val;
+                                        ref.child(userID.toString()).update({
+                                          "status": "not accepting",
+                                        });
+                                      }
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              margin: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width / 18,
+                                  right: MediaQuery.of(context).size.width / 18,
+                                  top: MediaQuery.of(context).size.width / 20),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10)),
+                                      color: Color(0xFFFF9343),
+                                    ),
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Text(
+                                        "Email:",
+                                        style: TextStyle(
+                                            fontFamily: 'GothamRnd',
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                            decoration: TextDecoration.none),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Text(
+                                        userEmail!,
+                                        style: const TextStyle(
+                                            fontFamily: 'GothamRnd',
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                            decoration: TextDecoration.none),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(MediaQuery.of(context).size.height/35),
-                      child: ElevatedButton(
-                        style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343))),
-                        onPressed: _logout,
-                        child: const Text("Logout",
-                        
+                            ),
+                            Card(
+                              margin: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width / 18,
+                                  right: MediaQuery.of(context).size.width / 18,
+                                  top: MediaQuery.of(context).size.width / 40),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10)),
+                                      color: Color(0xFFFF9343),
+                                    ),
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const Text(
+                                      "Contact Number:",
+                                      style: TextStyle(
+                                          fontFamily: 'GothamRnd',
+                                          fontSize: 15,
+                                          color: Colors.white,
+                                          decoration: TextDecoration.none),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      mobileNumber,
+                                      style: const TextStyle(
+                                          fontFamily: 'GothamRnd',
+                                          fontSize: 15,
+                                          color: Colors.black,
+                                          decoration: TextDecoration.none),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                return const Center(child: Text('Something went wrong.'));
-              }
-            }),
-      ),
-    )));
+                        const SizedBox(height: 30),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(
+                              top: 10, bottom: 10, left: 20),
+                          child: const Text(
+                            "Weekly Schedule",
+                            style: TextStyle(
+                                fontFamily: 'GothamRnd',
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                decoration: TextDecoration.none),
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 25),
+                            child: Row(
+                              children: [
+                                for (var entry in profFullSched.entries.toList()
+                                  ..sort((a, b) => _getWeekdayNumber(a.key)
+                                      .compareTo(_getWeekdayNumber(b.key))))
+                                  if (entry.value != '-')
+                                    SizedBox(
+                                      child: Card(
+                                        color: Colors.white,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                                alignment: Alignment.center,
+                                                width: 120,
+                                                height: 50,
+                                                decoration: const BoxDecoration(
+                                                    color: Color(0xFFFF9343),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topLeft: Radius
+                                                                .circular(10),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    10))),
+                                                child: Text(
+                                                  entry.key
+                                                      .substring(0, 3)
+                                                      .toUpperCase(),
+                                                  style: const TextStyle(
+                                                      fontFamily: 'GothamRnd',
+                                                      color: Colors.white),
+                                                )),
+                                            Container(
+                                              padding: const EdgeInsets.all(10),
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                "${entry.value.split(' to ').join('\nto\n')}",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontFamily: 'GothamRnd',
+                                                ),
+                                              ),
+                                            ),
+                                            // Container(
+                                            //   padding: EdgeInsets.all(10),
+                                            //   alignment: Alignment.center,
+                                            //   child: Text("${entry.value}")
+                                            //   ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const Center(child: Text('Something went wrong.'));
+                  }
+                }),
+          ),
+        )));
   }
 }
 
