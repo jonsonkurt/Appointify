@@ -101,7 +101,8 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                                         : Image(
                                                             fit: BoxFit.cover,
                                                             image: NetworkImage(
-                                                                provider.imgURL),
+                                                                provider
+                                                                    .imgURL),
                                                             loadingBuilder:
                                                                 (context, child,
                                                                     loadingProgress) {
@@ -127,9 +128,11 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                                               );
                                                             },
                                                           )
-                                                    : Image.file(File(provider
-                                                            .image!.path)
-                                                        .absolute)),
+                                                    : Image.file(
+                                                        fit: BoxFit.cover,
+                                                        File(provider
+                                                                .image!.path)
+                                                            .absolute)),
                                           ),
                                         ),
                                       ),
@@ -143,7 +146,6 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         ),
                                       )
                                     ]),
-                                
                                 Form(
                                   key: _formKey,
                                   child: Column(
@@ -179,7 +181,10 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                       ),
                                       const SizedBox(height: 16.0),
                                       ElevatedButton(
-                                        style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343))),
+                                        style: const ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    Color(0xFFFF9343))),
                                         onPressed: () async {
                                           if (_formKey.currentState!
                                               .validate()) {
@@ -205,7 +210,10 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         child: const Text('Confirm'),
                                       ),
                                       ElevatedButton(
-                                        style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9343))),
+                                        style: const ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    Color(0xFFFF9343))),
                                         onPressed: () {
                                           Navigator.push(
                                             context,

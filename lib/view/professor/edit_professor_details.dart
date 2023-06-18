@@ -259,6 +259,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                   },
                                                 )
                                           : Image.file(
+                                              fit: BoxFit.cover,
                                               File(provider.image!.path)
                                                   .absolute)),
                                 ),
@@ -406,7 +407,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                 },
                                                 child: Container(
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 10,
                                                       horizontal: 20),
                                                   decoration: BoxDecoration(
@@ -457,7 +458,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                 },
                                                 child: Container(
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 10,
                                                       horizontal: 20),
                                                   decoration: BoxDecoration(
