@@ -31,7 +31,9 @@ class MyApp extends StatelessWidget {
     // cameraPermission();
     // storagePermission();
     initFcm(context);
+
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Appointify',
       theme: ThemeData(
         primarySwatch: Colors.green,
