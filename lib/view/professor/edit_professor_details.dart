@@ -532,13 +532,12 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                         }
                                       });
                                       // ignore: use_build_context_synchronously
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ProfessorProfilePage()),
-                                      );
+
+                                      Navigator.of(context).pop();
+                                      _firstNameController.clear();
+                                      _lastNameController.clear();
                                       _phoneController.clear();
+                                      _professionController.clear();
                                       _emailController.clear();
                                     }
                                   },
@@ -546,13 +545,12 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const ProfessorProfilePage()),
-                                    );
+                                    Navigator.of(context).pop();
+
+                                    _firstNameController.clear();
+                                    _lastNameController.clear();
                                     _phoneController.clear();
+                                    _professionController.clear();
                                     _emailController.clear();
                                   },
                                   child: const Text('Cancel'),
