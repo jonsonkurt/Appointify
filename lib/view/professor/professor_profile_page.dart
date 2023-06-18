@@ -90,6 +90,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           actions: [
             PopupMenuButton<String>(
                 icon: const Icon(Icons.more_vert), // Set the icon
