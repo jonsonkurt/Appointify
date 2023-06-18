@@ -66,11 +66,7 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    DatabaseReference appointmentsRef = rtdb.ref('appointments/');
-    DatabaseReference completedRef =
-        FirebaseDatabase.instance.ref('appointments/');
-    DatabaseReference canceledRef =
-        FirebaseDatabase.instance.ref('appointments/');
+    DatabaseReference appointmentsRef = rtdb.ref('appointments');
     DatabaseReference employeesRef = rtdb.ref('professors/');
     // appointmentsRef.orderByChild('status').equalTo("$userID-PENDING");
 
