@@ -105,7 +105,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     );
                   } else if (value == 'option2') {
                     // Do something for option 2
-                    _logout;
+                    _logout();
                   }
                 },
                 itemBuilder: (BuildContext context) {
@@ -241,15 +241,18 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             Text(
                               "$firstName $lastName",
                               style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                  decoration: TextDecoration.none),
+                                fontFamily: 'GothamRnd',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 25,
+                              ),
                             ),
                             Container(
                               padding: const EdgeInsets.all(5),
                               child: Text(
                                 designation,
                                 style: const TextStyle(
+                                    fontFamily: 'GothamRnd',
                                     color: Colors.grey,
                                     fontSize: 15,
                                     decoration: TextDecoration.none),
@@ -263,6 +266,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                   child: const Text(
                                     "Availability Status:",
                                     style: TextStyle(
+                                        fontFamily: 'GothamRnd',
                                         color: Colors.black,
                                         fontSize: 15,
                                         decoration: TextDecoration.none),
@@ -310,12 +314,16 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                           topRight: Radius.circular(10)),
                                       color: Color(0xFFFF9343),
                                     ),
-                                    child: const Text(
-                                      "Email:",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.white,
-                                          decoration: TextDecoration.none),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: const Text(
+                                        "Email:",
+                                        style: TextStyle(
+                                            fontFamily: 'GothamRnd',
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                            decoration: TextDecoration.none),
+                                      ),
                                     ),
                                   ),
                                   Container(
@@ -324,6 +332,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                     child: Text(
                                       userEmail!,
                                       style: const TextStyle(
+                                          fontFamily: 'GothamRnd',
                                           fontSize: 15,
                                           color: Colors.black,
                                           decoration: TextDecoration.none),
@@ -353,6 +362,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                     child: const Text(
                                       "Contact Number:",
                                       style: TextStyle(
+                                          fontFamily: 'GothamRnd',
                                           fontSize: 15,
                                           color: Colors.white,
                                           decoration: TextDecoration.none),
@@ -364,6 +374,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                     child: Text(
                                       mobileNumber,
                                       style: const TextStyle(
+                                          fontFamily: 'GothamRnd',
                                           fontSize: 15,
                                           color: Colors.black,
                                           decoration: TextDecoration.none),
@@ -381,6 +392,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           child: const Text(
                             "Weekly Schedule",
                             style: TextStyle(
+                                fontFamily: 'GothamRnd',
                                 fontSize: 20,
                                 color: Colors.black,
                                 decoration: TextDecoration.none),
@@ -420,6 +432,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                                       .substring(0, 3)
                                                       .toUpperCase(),
                                                   style: const TextStyle(
+                                                      fontFamily: 'GothamRnd',
                                                       color: Colors.white),
                                                 )),
                                             Container(
@@ -428,6 +441,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                               child: Text(
                                                 "${entry.value.split(' to ').join('\nto\n')}",
                                                 textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontFamily: 'GothamRnd',
+                                                ),
                                               ),
                                             ),
                                             // Container(
