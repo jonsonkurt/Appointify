@@ -31,6 +31,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
   String? userID = FirebaseAuth.instance.currentUser?.uid;
   String? userEmail = FirebaseAuth.instance.currentUser?.email;
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('professors');
+  final List<bool?> _checkboxValues = List.generate(6, (index) => true);
   final List<String> schedStartTime = [];
   final List<String> schedEndTime = [];
   List<String> monday = [];
@@ -80,8 +81,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
       setState(() {
         _selectedFromTimes[index] = picked;
       });
-    } else {
-    }
+    } else {}
   }
 
   Future<void> _selectToTime(BuildContext context, int index) async {
@@ -346,132 +346,143 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 const Text("Weekly Schedule"),
                                 Column(
                                   children: List.generate(6, (index) {
+                                    bool isChecked =
+                                        _checkboxValues[index] ?? false;
+                                    Color containerColor =
+                                        isChecked ? Colors.black : Colors.grey;
+                                    Color textColor =
+                                        isChecked ? Colors.black : Colors.grey;
+
                                     return Column(
                                       children: [
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Text(_getWeekdayNumber(index + 1)),
-                                            GestureDetector(
-                                              onTap: () {
-                                                _selectFromTime(context, index);
+                                            Checkbox(
+                                              value: schedStartTime[index] !=
+                                                      '-'
+                                                  ? (_checkboxValues[index] ??
+                                                      true)
+                                                  : false,
+                                              onChanged: (newValue) {
                                                 setState(() {
-                                                  final format =
-                                                      DateFormat.jm();
-                                                  String test = DateFormat.jm()
-                                                      .format(DateTime.now());
-
-                                                  final parsedTime =
-                                                      format.parse(test);
-                                                  final timeOfDay =
-                                                      TimeOfDay.fromDateTime(
-                                                          parsedTime);
-                                                  _selectedFromTimes[index] =
-                                                      timeOfDay;
+                                                  print(newValue);
+                                                  if (schedStartTime[index] !=
+                                                      '-') {
+                                                    _checkboxValues[index] =
+                                                        newValue;
+                                                  } else {
+                                                    schedStartTime[index] =
+                                                        "6:00 AM";
+                                                    schedEndTime[index] =
+                                                        "5:00 PM";
+                                                  }
                                                 });
                                               },
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10,
-                                                        horizontal: 20),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.grey),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: Text(
-                                                  _selectedFromTimes[index] !=
-                                                          null
-                                                      ? _selectedFromTimes[
-                                                              index]!
-                                                          .format(context)
-                                                      : schedStartTime[index],
-                                                  style: const TextStyle(
-                                                      fontSize: 16),
+                                            ),
+                                            Text(_getWeekdayNumber(index + 1)),
+                                            IgnorePointer(
+                                              ignoring: !isChecked,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  _selectFromTime(
+                                                      context, index);
+                                                  setState(() {
+                                                    final format =
+                                                        DateFormat.jm();
+                                                    String test =
+                                                        DateFormat.jm().format(
+                                                            DateTime.now());
+
+                                                    final parsedTime =
+                                                        format.parse(test);
+                                                    final timeOfDay =
+                                                        TimeOfDay.fromDateTime(
+                                                            parsedTime);
+                                                    _selectedFromTimes[index] =
+                                                        timeOfDay;
+                                                  });
+                                                },
+                                                child: Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 20),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: containerColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: Text(
+                                                    _selectedFromTimes[index] !=
+                                                            null
+                                                        ? _selectedFromTimes[
+                                                                index]!
+                                                            .format(context)
+                                                        : schedStartTime[index],
+                                                    style: TextStyle(
+                                                        color: textColor,
+                                                        fontSize: 16),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                            // GestureDetector(
-                                            //   onTap: () => _selectFromTime(
-                                            //       context, index),
-                                            //   child: Container(
-                                            //     padding:
-                                            //         const EdgeInsets.symmetric(
-                                            //             vertical: 10,
-                                            //             horizontal: 20),
-                                            //     decoration: BoxDecoration(
-                                            //       border: Border.all(
-                                            //           color: Colors.grey),
-                                            //       borderRadius:
-                                            //           BorderRadius.circular(5),
-                                            //     ),
-                                            //     child: Text(
-                                            //       _selectedFromTimes[index] !=
-                                            //               null
-                                            //           ? _selectedFromTimes[
-                                            //                   index]!
-                                            //               .format(context)
-                                            //           : "${schedStartTime[index]}",
-                                            //       style: const TextStyle(
-                                            //           fontSize: 16),
-                                            //     ),
-                                            //   ),
-                                            // ),
                                             const Text(
                                               'To',
                                               style: TextStyle(fontSize: 16),
                                             ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                _selectToTime(context, index);
-                                                setState(() {
-                                                  final format =
-                                                      DateFormat.jm();
-                                                  String test = DateFormat.jm()
-                                                      .format(DateTime.now());
+                                            IgnorePointer(
+                                              ignoring: !isChecked,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  _selectToTime(context, index);
+                                                  setState(() {
+                                                    final format =
+                                                        DateFormat.jm();
+                                                    String test =
+                                                        DateFormat.jm().format(
+                                                            DateTime.now());
 
-                                                  final parsedTime =
-                                                      format.parse(test);
-                                                  final timeOfDay =
-                                                      TimeOfDay.fromDateTime(
-                                                          parsedTime);
-                                                  _selectedToTimes[index] =
-                                                      timeOfDay;
-                                                });
-                                              },
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10,
-                                                        horizontal: 20),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.grey),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: Text(
-                                                  _selectedToTimes[index] !=
-                                                          null
-                                                      ? _selectedToTimes[index]!
-                                                          .format(context)
-                                                      : schedEndTime[index],
-                                                  style: const TextStyle(
-                                                      fontSize: 16),
+                                                    final parsedTime =
+                                                        format.parse(test);
+                                                    final timeOfDay =
+                                                        TimeOfDay.fromDateTime(
+                                                            parsedTime);
+                                                    _selectedToTimes[index] =
+                                                        timeOfDay;
+                                                  });
+                                                },
+                                                child: Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 20),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: containerColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: Text(
+                                                    _selectedToTimes[index] !=
+                                                            null
+                                                        ? _selectedToTimes[
+                                                                index]!
+                                                            .format(context)
+                                                        : schedEndTime[index],
+                                                    style: TextStyle(
+                                                        color: textColor,
+                                                        fontSize: 16),
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ],
                                         ),
-                                        // ElevatedButton(
-                                        //   onPressed: () =>
-                                        //       print(_getTime(index)),
-                                        //   child: Text(
-                                        //       'Print Pair ${index + 1} Time'),
-                                        // ),
                                         const SizedBox(height: 16),
                                       ],
                                     );
@@ -479,7 +490,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () async {
-                                    //print("${_getTime(0)} ");
+                                    print(_selectedFromTimes[0]);
                                     if (_formKey.currentState!.validate()) {
                                       await ref
                                           .child(userID.toString())
@@ -487,12 +498,37 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                         'profilePicStatus': imagePath,
                                         "mobileNumber": _phoneController.text,
                                         "availability": {
-                                          "Monday": _getTime(0),
-                                          "Tuesday": _getTime(1),
-                                          "Wednesday": _getTime(2),
-                                          "Thursday": _getTime(3),
-                                          "Friday": _getTime(4),
-                                          "Saturday": _getTime(5),
+                                          "Monday": _checkboxValues[0] == true
+                                              ? _getTime(0) == '- to -'
+                                                  ? '-'
+                                                  : _getTime(0)
+                                              : "-",
+                                          "Tuesday": _checkboxValues[1] == true
+                                              ? _getTime(1) == '- to -'
+                                                  ? '-'
+                                                  : _getTime(1)
+                                              : "-",
+                                          "Wednesday":
+                                              _checkboxValues[2] == true
+                                                  ? _getTime(2) == '- to -'
+                                                      ? '-'
+                                                      : _getTime(2)
+                                                  : "-",
+                                          "Thursday": _checkboxValues[3] == true
+                                              ? _getTime(3) == '- to -'
+                                                  ? '-'
+                                                  : _getTime(3)
+                                              : "-",
+                                          "Friday": _checkboxValues[4] == true
+                                              ? _getTime(4) == '- to -'
+                                                  ? '-'
+                                                  : _getTime(4)
+                                              : "-",
+                                          "Saturday": _checkboxValues[5] == true
+                                              ? _getTime(5) == '- to -'
+                                                  ? '-'
+                                                  : _getTime(5)
+                                              : "-",
                                         }
                                       });
                                       // ignore: use_build_context_synchronously
