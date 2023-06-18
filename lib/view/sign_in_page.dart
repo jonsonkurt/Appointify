@@ -180,7 +180,7 @@ class _SignInPageState extends State<SignInPage> {
                             // _passwordController
                             //     .clear(); // Handle forgot password
                             // ignore: use_build_context_synchronously
-                           
+
                             Navigator.push(
                               context,
                               PageRouteBuilder(
@@ -223,16 +223,34 @@ class _SignInPageState extends State<SignInPage> {
                             String password = _passwordController.text;
 
                             String getCred = decodingCred();
-
-                            if (email == getCred && password == getCred) {
-                              // ignore: use_build_context_synchronously
+                            bool isPasswordCorrect =
+                                await checkPassword(password);
+                            if (email == getCred) {
                               // print("I/'m an admin");
-                              Navigator.push<void>(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BottomNavigationAdmin()));
+                              if (isPasswordCorrect) {
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const BottomNavigationAdmin()));
+                              } else {
+                                logger.d('Password is incorrect');
+                              }
                             } else {
+                              // if (email == getCred) {
+                              //   // print("I/'m an admin");
+                              //   if (isPasswordCorrect) {
+                              //     // ignore: use_build_context_synchronously
+                              //     Navigator.push(
+                              //         context,
+                              //         MaterialPageRoute(
+                              //             builder: (context) =>
+                              //                 const BottomNavigationAdmin()));
+                              //   } else {
+                              //     logger.d('Password is incorrect');
+                              //   }
+                              // } else {
                               try {
                                 // ignore: unused_local_variable
                                 final credential = await FirebaseAuth.instance
