@@ -166,12 +166,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                   tabBarProperties: TabBarProperties(
-                    margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 30,
-                        right: MediaQuery.of(context).size.width / 30),
+                    width: 360,
+                    height: 50,
+                    indicator: const ContainerTabIndicator(
+                      color: Colors.orange,
+                      radius: BorderRadius.all(Radius.circular(20.0)),
+                    ),
                     background: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFF9343),
+                        color: Colors.white54,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(20.0)),
                         boxShadow: [
@@ -186,9 +189,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     position: TabBarPosition.top,
                     alignment: TabBarAlignment.center,
-                    indicatorColor: Colors.transparent,
                     labelColor: Colors.white,
-                    unselectedLabelColor: Colors.grey[400],
+                    unselectedLabelColor: Colors.black,
                   ),
                   views: [
                     // Tab for Upcoming
@@ -270,11 +272,8 @@ class _HomePageState extends State<HomePage> {
                                                               BoxShape.circle,
                                                           border: Border.all(
                                                             color: const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                35,
-                                                                35,
-                                                                35),
+                                                                .fromARGB(255,
+                                                                35, 35, 35),
                                                             width: 2,
                                                           )),
                                                       child: ClipRRect(
@@ -822,11 +821,8 @@ class _HomePageState extends State<HomePage> {
                                                               BoxShape.circle,
                                                           border: Border.all(
                                                             color: const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                35,
-                                                                35,
-                                                                35),
+                                                                .fromARGB(255,
+                                                                35, 35, 35),
                                                             width: 2,
                                                           )),
                                                       child: ClipRRect(
@@ -1048,11 +1044,8 @@ class _HomePageState extends State<HomePage> {
                                                               BoxShape.circle,
                                                           border: Border.all(
                                                             color: const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                35,
-                                                                35,
-                                                                35),
+                                                                .fromARGB(255,
+                                                                35, 35, 35),
                                                             width: 2,
                                                           )),
                                                       child: ClipRRect(
