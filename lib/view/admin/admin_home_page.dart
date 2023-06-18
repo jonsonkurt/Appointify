@@ -123,14 +123,19 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                         return Container(); // Hide the professor card if it doesn't match the search criteria
                       }
                       return Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        margin: const EdgeInsets.only(top: 10, left: 20, right: 20,),
-                        color: const  Color(0xFFDCDAD8),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        margin: const EdgeInsets.only(
+                          top: 10,
+                          left: 20,
+                          right: 20,
+                        ),
+                        color: const Color(0xFFDCDAD8),
                         child: Column(
                           children: [
                             Center(
                               child: Container(
-                                margin: const  EdgeInsets.only(top: 10),
+                                margin: const EdgeInsets.only(top: 10),
                                 height: 130,
                                 width: 130,
                                 decoration: BoxDecoration(
@@ -180,17 +185,22 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               ),
                             ),
                             Container(
-                              padding: const  EdgeInsets.only(top: 10, bottom: 5),
-                              child: Text("$profFirstName $profLastName", style: const  TextStyle(fontSize: 17,),),
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 5),
+                              child: Text(
+                                "$profFirstName $profLastName",
+                                style: const TextStyle(
+                                  fontSize: 17,
+                                ),
+                              ),
                             ),
                             Text(snapshot
                                 .child('professorRole')
                                 .value
                                 .toString()),
                             Container(
-                              padding: const  EdgeInsets.only(bottom: 10),
-                              child: const Text("Designation: Employee")
-                            ),
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: const Text("Designation: Employee")),
                           ],
                         ),
                       );
@@ -322,7 +332,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                         "lastName": lastName,
                                         "profUserID": userID,
                                         "mobileNumber": "-",
-                                        "professorRole": "Professor",
+                                        "professorRole": "Employee",
                                         "salutation": "",
                                         "status": "accepting",
                                         "designation": "Professor",
@@ -388,7 +398,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
           },
           label: const Text('Create Account'),
           icon: const Icon(Icons.add),
-          backgroundColor: const  Color(0xFFFF9343),
+          backgroundColor: const Color(0xFFFF9343),
         ),
 
         // Text("Hi, I'm Admin"),
