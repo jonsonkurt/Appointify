@@ -140,7 +140,13 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                 })
           ],
           backgroundColor: const Color(0xFFFF9343),
-          title: const Text("Profile"),
+          title: const Text(
+            "Profile",
+            style: TextStyle(
+              fontFamily: 'GothamRnd',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -158,10 +164,6 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     String lastName = map['lastName'];
                     String mobileNumber = map['mobileNumber'];
                     String designation = map['designation'];
-                    // String professorRole = map['professorRole'];
-                    // String salutation = map['salutation'];
-                    // ReCase status = ReCase(map['status']);
-                    // String statusProf = map["status"];
                     String profilePicStatus =
                         map['profilePicStatus'].toString();
                     String profSched = map['availability'].toString();
@@ -174,7 +176,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           children: [
                             Container(
                               width: double.infinity,
-                              height: MediaQuery.of(context).size.height / 6,
+                              height: MediaQuery.of(context).size.height / 10,
                               decoration: const BoxDecoration(
                                 color: Color(0xFFFF9343),
                                 borderRadius: BorderRadius.only(
@@ -185,7 +187,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.height / 13),
+                                  top: MediaQuery.of(context).size.height / 50),
                               child: Center(
                                 child: Container(
                                   height: 130,
@@ -306,7 +308,6 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               child: Column(
                                 children: [
                                   Container(
-                                    padding: const EdgeInsets.all(5),
                                     alignment: Alignment.centerLeft,
                                     decoration: const BoxDecoration(
                                       borderRadius: BorderRadius.only(
@@ -314,9 +315,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                           topRight: Radius.circular(10)),
                                       color: Color(0xFFFF9343),
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: const Text(
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Text(
                                         "Email:",
                                         style: TextStyle(
                                             fontFamily: 'GothamRnd',
@@ -327,15 +328,17 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                     ),
                                   ),
                                   Container(
-                                    padding: const EdgeInsets.all(5),
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      userEmail!,
-                                      style: const TextStyle(
-                                          fontFamily: 'GothamRnd',
-                                          fontSize: 15,
-                                          color: Colors.black,
-                                          decoration: TextDecoration.none),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Text(
+                                        userEmail!,
+                                        style: const TextStyle(
+                                            fontFamily: 'GothamRnd',
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                            decoration: TextDecoration.none),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -345,7 +348,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               margin: EdgeInsets.only(
                                   left: MediaQuery.of(context).size.width / 18,
                                   right: MediaQuery.of(context).size.width / 18,
-                                  top: MediaQuery.of(context).size.width / 20),
+                                  top: MediaQuery.of(context).size.width / 40),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
@@ -358,7 +361,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                           topRight: Radius.circular(10)),
                                       color: Color(0xFFFF9343),
                                     ),
-                                    padding: const EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: const Text(
                                       "Contact Number:",
                                       style: TextStyle(
@@ -370,7 +373,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                   ),
                                   Container(
                                     alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Text(
                                       mobileNumber,
                                       style: const TextStyle(
@@ -385,6 +388,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             )
                           ],
                         ),
+                        const SizedBox(height: 30),
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(
@@ -394,6 +398,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             style: TextStyle(
                                 fontFamily: 'GothamRnd',
                                 fontSize: 20,
+                                fontWeight: FontWeight.bold,
                                 color: Colors.black,
                                 decoration: TextDecoration.none),
                           ),
@@ -402,7 +407,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           scrollDirection: Axis.horizontal,
                           child: Padding(
                             padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 20),
+                                left: MediaQuery.of(context).size.width / 25),
                             child: Row(
                               children: [
                                 for (var entry in profFullSched.entries.toList()
