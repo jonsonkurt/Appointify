@@ -24,7 +24,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
   final List<TimeOfDay?> _selectedFromTimes = List<TimeOfDay?>.filled(6, null);
   final List<TimeOfDay?> _selectedToTimes = List<TimeOfDay?>.filled(6, null);
   final bool val1 = true;
-  String imagePath = 'None';
+  static String imagePath = 'None';
 
   final _formKey = GlobalKey<FormState>();
 

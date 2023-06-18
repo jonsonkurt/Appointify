@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    DatabaseReference appointmentsRef = rtdb.ref('appointments/');
+    DatabaseReference appointmentsRef = rtdb.ref('appointments');
     DatabaseReference employeesRef = rtdb.ref('professors/');
     // appointmentsRef.orderByChild('status').equalTo("$userID-PENDING");
 
@@ -128,9 +129,20 @@ class _HomePageState extends State<HomePage> {
                   child: FirebaseAnimatedList(
                     query: appointmentsRef
                         .orderByChild('status')
-                        .equalTo("$userID-PENDING"),
+                        .startAt("$userID-PENDING")
+                        .endAt("$userID-PENDING\uf8ff"),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, snapshot, animation, index) {
+                      String inputDate =
+                          snapshot.child("date").value.toString();
+                      DateTime dateTime =
+                          DateFormat('MMM dd, yyyy').parse(inputDate);
+                      String outputDate =
+                          DateFormat('MM-dd-yyyy').format(dateTime);
+                      String inputTime =
+                          snapshot.child("time").value.toString();
+                      DateTime time = DateFormat('h:mm a').parse(inputTime);
+                      String outputTime = DateFormat('HH:mm').format(time);
                       return GestureDetector(
                         onTap: () {
                           showDialog(
@@ -211,47 +223,73 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      ElevatedButton(
-                                          child: const Text("Accept"),
-                                          onPressed: () async {
-                                            appointmentsRef
-                                                .child(snapshot
-                                                    .child('appointID')
-                                                    .value
-                                                    .toString())
-                                                .update({
-                                              "requestStatus": "UPCOMING",
-                                              "date": snapshot
-                                                  .child('counteredDate')
+                                      if (snapshot.child('countered').value ==
+                                          "yes")
+                                        ElevatedButton(
+                                            child: const Text("Accept"),
+                                            onPressed: () async {
+                                              String inputDate = snapshot
+                                                  .child("counteredDate")
                                                   .value
-                                                  .toString(),
-                                              "time": snapshot
-                                                  .child('counteredTime')
+                                                  .toString();
+                                              DateTime dateTime =
+                                                  DateFormat('MMM dd, yyyy')
+                                                      .parse(inputDate);
+                                              String outputDate =
+                                                  DateFormat('MM-dd-yyyy')
+                                                      .format(dateTime);
+                                              String inputTime = snapshot
+                                                  .child("counteredTime")
                                                   .value
-                                                  .toString(),
-                                              "requestStatusProfessor":
-                                                  "${snapshot.child('professorID').value}-UPCOMING",
-                                              "status": "$userID-UPCOMING",
-                                              "contered": "no",
-                                            });
-                                            Navigator.of(context).pop();
-                                          }),
-                                      ElevatedButton(
-                                          child: const Text("Reject"),
-                                          onPressed: () {
-                                            appointmentsRef
-                                                .child(snapshot
-                                                    .child('appointID')
+                                                  .toString();
+                                              DateTime time =
+                                                  DateFormat('h:mm a')
+                                                      .parse(inputTime);
+                                              String outputTime =
+                                                  DateFormat('HH:mm')
+                                                      .format(time);
+                                              appointmentsRef
+                                                  .child(snapshot
+                                                      .child('appointID')
+                                                      .value
+                                                      .toString())
+                                                  .update({
+                                                "requestStatus": "UPCOMING",
+                                                "date": snapshot
+                                                    .child('counteredDate')
                                                     .value
-                                                    .toString())
-                                                .update({
-                                              "requestStatus": "CANCELED",
-                                              "requestStatusProfessor":
-                                                  "${snapshot.child('professorID').value}-CANCELED",
-                                              "status": "$userID-CANCELED",
-                                            });
-                                            Navigator.of(context).pop();
-                                          })
+                                                    .toString(),
+                                                "time": snapshot
+                                                    .child('counteredTime')
+                                                    .value
+                                                    .toString(),
+                                                "requestStatusProfessor":
+                                                    "${snapshot.child('professorID').value}-UPCOMING-$outputDate:$outputTime",
+                                                "status":
+                                                    "$userID-UPCOMING-$outputDate:$outputTime",
+                                                "countered": "no",
+                                              });
+                                              Navigator.of(context).pop();
+                                            }),
+                                      if (snapshot.child('countered').value ==
+                                          "yes")
+                                        ElevatedButton(
+                                            child: const Text("Reject"),
+                                            onPressed: () {
+                                              appointmentsRef
+                                                  .child(snapshot
+                                                      .child('appointID')
+                                                      .value
+                                                      .toString())
+                                                  .update({
+                                                "requestStatus": "CANCELED",
+                                                "requestStatusProfessor":
+                                                    "${snapshot.child('professorID').value}-CANCELED-$outputDate:$outputTime",
+                                                "status":
+                                                    "$userID-CANCELED-$outputDate:$outputTime",
+                                              });
+                                              Navigator.of(context).pop();
+                                            })
                                     ],
                                   ),
                                 ],
@@ -404,7 +442,7 @@ class _HomePageState extends State<HomePage> {
                                             .child('requestStatus')
                                             .value
                                             .toString()
-                                        : "RESCHDULE",
+                                        : "RESCHEDULE",
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -489,7 +527,8 @@ class _HomePageState extends State<HomePage> {
                           child: FirebaseAnimatedList(
                             query: appointmentsRef
                                 .orderByChild('status')
-                                .equalTo("$userID-UPCOMING"),
+                                .startAt("$userID-UPCOMING")
+                                .endAt("$userID-UPCOMING\uf8ff"),
                             itemBuilder: (context, snapshot, animation, index) {
                               String employeeName = snapshot
                                   .child('professorName')
@@ -692,7 +731,8 @@ class _HomePageState extends State<HomePage> {
                           child: FirebaseAnimatedList(
                             query: appointmentsRef
                                 .orderByChild('status')
-                                .equalTo("$userID-COMPLETED"),
+                                .startAt("$userID-COMPLETED")
+                                .endAt("$userID-COMPLETED\uf8ff"),
                             itemBuilder: (context, snapshot, animation, index) {
                               String employeeName = snapshot
                                   .child('professorName')
@@ -874,7 +914,8 @@ class _HomePageState extends State<HomePage> {
                           child: FirebaseAnimatedList(
                             query: appointmentsRef
                                 .orderByChild('status')
-                                .equalTo("$userID-CANCELED"),
+                                .startAt("$userID-CANCELED")
+                                .endAt("$userID-CANCELED\uf8ff"),
                             itemBuilder: (context, snapshot, animation, index) {
                               String employeeName = snapshot
                                   .child('professorName')

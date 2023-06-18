@@ -629,6 +629,14 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           ));
                           final fcmToken =
                               await FirebaseMessaging.instance.getToken();
+                          String inputDate = selectedDate;
+                          DateTime dateTime =
+                              DateFormat('MMM dd, yyyy').parse(inputDate);
+                          String outputDate =
+                              DateFormat('MM-dd-yyyy').format(dateTime);
+                          String inputTime = selectedTime;
+                          DateTime time = DateFormat('h:mm a').parse(inputTime);
+                          String outputTime = DateFormat('HH:mm').format(time);
                           await appointmentsRef.set({
                             "appointID": appointKey,
                             "countered": 'no',
@@ -642,8 +650,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             "professorRole": widget.professorRole,
                             "requestStatus": "PENDING",
                             "requestStatusProfessor":
-                                "${widget.professorID}-PENDING",
-                            "status": "$userID-PENDING",
+                                "${widget.professorID}-PENDING-$outputDate:$outputTime",
+                            "status": "$userID-PENDING-$outputDate:$outputTime",
                             "studentID": userID,
                             "studentName": "$studname $studLastName",
                             "section": studSection,
