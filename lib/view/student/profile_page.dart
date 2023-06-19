@@ -303,9 +303,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Container(
                                   padding: const EdgeInsets.all(5),
                                   alignment: Alignment.centerLeft,
-                                  child: const Text(
-                                    'email',
-                                    style: TextStyle(
+                                  child: Text(
+                                    email,
+                                    style: const TextStyle(
                                         fontSize: 15,
                                         color: Colors.black,
                                         fontFamily: "GothamRnd",
@@ -345,7 +345,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   alignment: Alignment.centerLeft,
                                   padding: const EdgeInsets.all(5),
                                   child: Text(
-                                    mobileNumber,
+                                    section,
                                     style: const TextStyle(
                                         fontFamily: "GothamRnd",
                                         fontSize: 15,
