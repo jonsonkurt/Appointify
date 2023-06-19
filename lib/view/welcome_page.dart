@@ -32,14 +32,6 @@ class OnBoarding extends StatelessWidget {
     StreamSubscription<DatabaseEvent>? nameSubscription;
 
     if (FirebaseAuth.instance.currentUser != null) {
-      // Redirect the user to the homepage
-      // final firebaseApp = Firebase.app();
-      // final rtdb = FirebaseDatabase.instanceFor(
-      //   app: firebaseApp,
-      //   databaseURL:
-      //       'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
-      // );
-
       DatabaseReference nameRef =
           FirebaseDatabase.instance.ref().child('students/$userID/designation');
       DatabaseReference ref = FirebaseDatabase.instance.ref().child('students');
@@ -47,7 +39,6 @@ class OnBoarding extends StatelessWidget {
           FirebaseDatabase.instance.ref().child('professors');
       nameSubscription = nameRef.onValue.listen((event) async {
         try {
-          
           name = event.snapshot.value.toString();
           // ignore: unnecessary_null_comparison
           if (name == "Student") {
@@ -123,7 +114,7 @@ class OnBoarding extends StatelessWidget {
         headerBackgroundColor: const Color(0xFFFF9343),
         finishButtonText: 'Get Started',
         onFinish: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>

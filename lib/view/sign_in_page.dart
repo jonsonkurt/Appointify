@@ -231,7 +231,7 @@ class _SignInPageState extends State<SignInPage> {
                               // print("I/'m an admin");
                               if (isPasswordCorrect) {
                                 // ignore: use_build_context_synchronously
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
@@ -260,7 +260,7 @@ class _SignInPageState extends State<SignInPage> {
                                         email: email, password: password);
 
                                 // ignore: use_build_context_synchronously
-                                Navigator.push<void>(
+                                Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
