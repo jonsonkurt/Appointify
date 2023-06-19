@@ -157,7 +157,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                       TextFormField(
                                         controller: _phone,
                                         decoration: const InputDecoration(
-                                          labelText: 'Phone',
+                                          labelText: 'Phone', iconColor: Colors.green
                                         ),
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
@@ -184,7 +184,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         style: const ButtonStyle(
                                             backgroundColor:
                                                 MaterialStatePropertyAll(
-                                                    Color(0xFFFF9343))),
+                                                    Color(0xFFFF9343)),fixedSize: MaterialStatePropertyAll(Size(90, 10))),
                                         onPressed: () async {
                                           if (_formKey.currentState!
                                               .validate()) {
@@ -213,7 +213,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         style: const ButtonStyle(
                                             backgroundColor:
                                                 MaterialStatePropertyAll(
-                                                    Color(0xFFFF9343))),
+                                                    Color(0xFFFF9343)), fixedSize: MaterialStatePropertyAll(Size(90, 10))),
                                         onPressed: () {
                                           Navigator.push(
                                             context,

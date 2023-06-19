@@ -96,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           Container(
                             margin: const EdgeInsets.all(15),
                             alignment: Alignment.centerLeft,
-                            child: const Text("Profile",style: TextStyle(fontSize: 30,
+                            child: const Text("Profile",style: TextStyle(fontSize: 30,fontFamily: "GothamRnd",
                              color: Colors.black, decoration: TextDecoration.none),)
                             ),
                           const SizedBox(
@@ -157,7 +157,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             // update prolife logic
                             children:[ 
                               const Text("Edit Information", style: TextStyle(decoration: TextDecoration.none, 
-                              color: Colors.black, fontSize: 20),
+                              color: Colors.black, fontSize: 20, fontFamily: "GothamRnd"),
                               ),
                               Container(
                                 width: 40,
@@ -194,11 +194,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
                           //update profile button
                           Padding(
-                            padding: const EdgeInsets.only(top: 20),
+                            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/30),
                             child: ElevatedButton(
                               style: ButtonStyle(backgroundColor: const MaterialStatePropertyAll(Color(0xFFFF9343)),shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)))),
                               onPressed: _logout,
-                              child: const Text("Logout",  style: TextStyle(fontSize: 20,),),
+                              child: const Text("Logout",  style: TextStyle(fontSize: 20,fontFamily: "GothamRnd"),),
                             ),
                           ),
                         ]);
