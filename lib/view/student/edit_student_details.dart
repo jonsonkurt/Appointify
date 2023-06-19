@@ -157,7 +157,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                       TextFormField(
                                         controller: _phone,
                                         decoration: const InputDecoration(
-                                          labelText: 'Phone', iconColor: Colors.green
+                                          labelText: 'Phone',
                                         ),
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
