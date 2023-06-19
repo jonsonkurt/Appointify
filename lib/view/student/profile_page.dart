@@ -228,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
 
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         // update prolife logic
                         children: [
                           const Text(
@@ -341,6 +341,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: Text(
                                     mobileNumber,
                                     style: const TextStyle(
+                                        fontFamily: "GothamRnd",
                                         fontSize: 15,
                                         color: Colors.black,
                                         decoration: TextDecoration.none),
