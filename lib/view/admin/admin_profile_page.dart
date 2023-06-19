@@ -49,8 +49,20 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                     children: [
                       TextFormField(
                         controller: _passwordController,
-                        decoration: const InputDecoration(
-                          labelText: 'Password',
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          filled: true,
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.black, width: 1.0),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -62,8 +74,20 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                       const SizedBox(height: 16.0),
                       TextFormField(
                         controller: _passwordConfirmController,
-                        decoration: const InputDecoration(
-                          labelText: 'Confirm Password',
+                        decoration: InputDecoration(
+                          hintText: 'Confirm Password',
+                          filled: true,
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.black, width: 1.0),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -77,6 +101,14 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                       ),
                       const SizedBox(height: 16.0),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(155, 32),
+                          backgroundColor: const Color(0xFF7778EE),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                10), // Adjust the radius as needed
+                          ),
+                        ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             String password = _passwordController.text;
@@ -96,7 +128,9 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                             );
                           }
                         },
-                        child: const Text('Update Password'),
+                        child: const Text(
+                          'Update Password',
+                        ),
                       ),
                       const SizedBox(height: 40),
                     ],
@@ -118,32 +152,92 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(
-              alignment: Alignment.topCenter,
-              child: const Icon(
-                Icons.account_box_rounded,
-                size: 100,
+          child: Column(children: [
+            Stack(clipBehavior: Clip.none, children: [
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height / 5,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFF9343),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30.0),
+                    bottomRight: Radius.circular(30.0),
+                  ),
+                ),
               ),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 8),
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFA2C2FF),
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Adjust the border radius as needed
+                    ),
+                    child: const Icon(
+                      Icons.person,
+                      size: 100,
+                      color: Colors
+                          .white, // Replace 'Colors.blue' with the desired color
+                    ),
+                  ),
+                ),
+              ),
+            ]),
+            const SizedBox(
+              height: 10,
             ),
             Container(
                 padding: const EdgeInsets.only(top: 10, bottom: 10),
                 child: const Text(
                   "Admin",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontFamily: "GothamRnd-Bold",
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
                 )),
-            ElevatedButton(
-              onPressed: _showPasswordModal,
-              child: const Text(
-                "Update Password",
-                style: TextStyle(fontSize: 20),
-              ),
+            const SizedBox(
+              height: 55,
             ),
             ElevatedButton(
+              onPressed: _showPasswordModal,
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(200, 40),
+                backgroundColor: const Color(0xFFFF9343),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(10), // Adjust the radius as needed
+                ),
+              ),
+              child: const Text(
+                "Update Password",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: "GothamRnd-Light",
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+            const SizedBox(height: 15),
+            ElevatedButton(
               onPressed: _logout,
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(130, 10),
+                backgroundColor: const Color(0xFF7778EE),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(5), // Adjust the radius as needed
+                ),
+              ),
               child: const Text(
                 "Logout",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: "GothamRnd-Light",
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           ]),
