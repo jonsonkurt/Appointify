@@ -240,13 +240,15 @@ class _RequestPageState extends State<RequestPage> {
                                                   studentName,
                                                   style: const TextStyle(
                                                       fontSize: 20,
-                                                      color: Colors.black),
+                                                      color: Colors.black,
+                                                      fontFamily: "GothamRnd"),
                                                 ),
                                                 Text(
                                                   studentSection,
                                                   style: const TextStyle(
                                                       fontSize: 15,
-                                                      color: Colors.black),
+                                                      color: Colors.black,
+                                                      fontFamily: "GothamRnd"),
                                                 ),
                                               ],
                                             ),
@@ -291,10 +293,14 @@ class _RequestPageState extends State<RequestPage> {
                                             Icons.calendar_month_outlined,
                                             color: Colors.black,
                                           ),
-                                          Text(snapshot
-                                              .child('date')
-                                              .value
-                                              .toString()),
+                                          Text(
+                                            snapshot
+                                                .child('date')
+                                                .value
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontFamily: "GothamRnd"),
+                                          ),
                                         ],
                                       ),
                                       Row(
@@ -303,10 +309,14 @@ class _RequestPageState extends State<RequestPage> {
                                             Icons.watch_later_outlined,
                                             color: Colors.black,
                                           ),
-                                          Text(snapshot
-                                              .child('time')
-                                              .value
-                                              .toString()),
+                                          Text(
+                                            snapshot
+                                                .child('time')
+                                                .value
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontFamily: "GothamRnd"),
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -375,14 +385,20 @@ class _RequestPageState extends State<RequestPage> {
                                             size: 17, color: Colors.white),
                                         label: const Text(
                                           'Reschedule',
-                                          style: TextStyle(fontSize: 9),
+                                          style: TextStyle(
+                                              fontSize: 8,
+                                              fontFamily: "GothamRnd"),
                                         ),
                                         onPressed: () {
                                           showDialog(
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
-                                                title: const Text('Reschedule'),
+                                                title: const Text(
+                                                  'Reschedule',
+                                                  style: TextStyle(
+                                                      fontFamily: "GothamRnd"),
+                                                ),
                                                 content: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
@@ -400,11 +416,12 @@ class _RequestPageState extends State<RequestPage> {
                                                             onTap:
                                                                 _showDatePicker,
                                                             readOnly: true,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                              labelText:
-                                                                  'Select appointment date',
-                                                            ),
+                                                            decoration: const InputDecoration(
+                                                                labelText:
+                                                                    'Select appointment date',
+                                                                helperStyle: TextStyle(
+                                                                    fontFamily:
+                                                                        "GothamRnd")),
                                                           ),
                                                         ),
                                                       ],
@@ -422,11 +439,12 @@ class _RequestPageState extends State<RequestPage> {
                                                             onTap:
                                                                 _showTimePicker,
                                                             readOnly: true,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                              labelText:
-                                                                  'Select appointment time',
-                                                            ),
+                                                            decoration: const InputDecoration(
+                                                                labelText:
+                                                                    'Select appointment time',
+                                                                helperStyle: TextStyle(
+                                                                    fontFamily:
+                                                                        "GothamRnd")),
                                                           ),
                                                         ),
                                                       ],
@@ -435,7 +453,12 @@ class _RequestPageState extends State<RequestPage> {
                                                 ),
                                                 actions: [
                                                   TextButton(
-                                                    child: const Text('OK'),
+                                                    child: const Text(
+                                                      'OK',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "GothamRnd"),
+                                                    ),
                                                     onPressed: () async {
                                                       await appointmentsRef
                                                           .child(appointID
@@ -460,7 +483,12 @@ class _RequestPageState extends State<RequestPage> {
                                                     },
                                                   ),
                                                   TextButton(
-                                                    child: const Text('Cancel'),
+                                                    child: Text(
+                                                      'Cancel',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "GothamRnd"),
+                                                    ),
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
@@ -491,7 +519,9 @@ class _RequestPageState extends State<RequestPage> {
                                             size: 17, color: Colors.white),
                                         label: const Text(
                                           'Reject',
-                                          style: TextStyle(fontSize: 9),
+                                          style: TextStyle(
+                                              fontSize: 8,
+                                              fontFamily: "GothamRnd"),
                                         ),
                                         onPressed: () {
                                           showDialog(
@@ -500,8 +530,12 @@ class _RequestPageState extends State<RequestPage> {
                                                 String profNotes = '';
 
                                                 return AlertDialog(
-                                                  title: const Text(
-                                                      'State your reason.'),
+                                                  title: Text(
+                                                    'State your reason.',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "GothamRnd"),
+                                                  ),
                                                   content: TextField(
                                                     onChanged: (value) {
                                                       profNotes = value;
@@ -513,13 +547,21 @@ class _RequestPageState extends State<RequestPage> {
                                                         const InputDecoration(
                                                       hintText:
                                                           'Enter your paragraph',
+                                                      hintStyle: TextStyle(
+                                                          fontFamily:
+                                                              "GothamRnd"),
                                                       border:
                                                           OutlineInputBorder(),
                                                     ),
                                                   ),
                                                   actions: [
                                                     TextButton(
-                                                      child: const Text('OK'),
+                                                      child: const Text(
+                                                        'OK',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "GothamRnd"),
+                                                      ),
                                                       onPressed: () async {
                                                         await appointmentsRef
                                                             .child(appointID
@@ -539,8 +581,12 @@ class _RequestPageState extends State<RequestPage> {
                                                       },
                                                     ),
                                                     TextButton(
-                                                      child:
-                                                          const Text('Cancel'),
+                                                      child: const Text(
+                                                        'Cancel',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "GothamRnd"),
+                                                      ),
                                                       onPressed: () {
                                                         Navigator.of(context)
                                                             .pop();
@@ -596,6 +642,7 @@ class _SearchBoxState extends State<SearchBox> {
         controller: _searchController,
         decoration: const InputDecoration(
           labelText: 'Search',
+          labelStyle: TextStyle(fontFamily: "GothamRnd"),
           prefixIcon: Icon(
             Icons.search,
             color: Color(0xFFFF9343),

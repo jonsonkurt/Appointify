@@ -88,7 +88,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
         appBar: AppBar(
           title: const Text(
             "List of Employees",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black, fontFamily: "GothamRnd"),
           ),
           elevation: 0,
           backgroundColor: Colors.white12,
@@ -190,17 +190,19 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               child: Text(
                                 "$profFirstName $profLastName",
                                 style: const TextStyle(
-                                  fontSize: 17,
-                                ),
+                                    fontSize: 17, fontFamily: "GothamRnd"),
                               ),
                             ),
-                            Text(snapshot
-                                .child('professorRole')
-                                .value
-                                .toString()),
+                            Text(
+                              snapshot.child('professorRole').value.toString(),
+                              style: TextStyle(fontFamily: "GothamRnd"),
+                            ),
                             Container(
                                 padding: const EdgeInsets.only(bottom: 10),
-                                child: const Text("Designation: Employee")),
+                                child: const Text(
+                                  "Designation: Employee",
+                                  style: TextStyle(fontFamily: "GothamRnd"),
+                                )),
                           ],
                         ),
                       );
@@ -233,8 +235,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               TextFormField(
                                 controller: _firstNameController,
                                 decoration: const InputDecoration(
-                                  labelText: 'First Name',
-                                ),
+                                    labelText: 'First Name',
+                                    labelStyle:
+                                        TextStyle(fontFamily: "GothamRnd")),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your first name';
@@ -246,8 +249,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               TextFormField(
                                 controller: _lastNameController,
                                 decoration: const InputDecoration(
-                                  labelText: 'Last Name',
-                                ),
+                                    labelText: 'Last Name',
+                                    labelStyle:
+                                        TextStyle(fontFamily: "GothamRnd")),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your last name';
@@ -259,8 +263,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               TextFormField(
                                 controller: _emailController,
                                 decoration: const InputDecoration(
-                                  labelText: 'Email',
-                                ),
+                                    labelText: 'Email',
+                                    labelStyle:
+                                        TextStyle(fontFamily: "GothamRnd")),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter a valid email';
@@ -278,8 +283,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                 controller: _passwordController,
                                 obscureText: _isObscure,
                                 decoration: const InputDecoration(
-                                  labelText: 'Password',
-                                ),
+                                    labelText: 'Password',
+                                    labelStyle:
+                                        TextStyle(fontFamily: "GothamRnd")),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter a password';
@@ -292,8 +298,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                 controller: _conpasswordController,
                                 obscureText: _isObscure,
                                 decoration: const InputDecoration(
-                                  labelText: 'Confirm Password',
-                                ),
+                                    labelText: 'Confirm Password',
+                                    labelStyle:
+                                        TextStyle(fontFamily: "GothamRnd")),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please confirm your password';
@@ -371,18 +378,29 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                             .showSnackBar(
                                           const SnackBar(
                                               content: Text(
-                                                  'The account already exists for that email.')),
+                                            'The account already exists for that email.',
+                                            style: TextStyle(
+                                                fontFamily: "GothamRnd"),
+                                          )),
                                         );
                                       }
                                     } catch (e) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
-                                        const SnackBar(content: Text('Error.')),
+                                        const SnackBar(
+                                            content: Text(
+                                          'Error.',
+                                          style: TextStyle(
+                                              fontFamily: "GothamRnd"),
+                                        )),
                                       );
                                     }
                                   }
                                 },
-                                child: const Text('Create Account'),
+                                child: const Text(
+                                  'Create Account',
+                                  style: TextStyle(fontFamily: "GothamRnd"),
+                                ),
                               ),
                             ],
                           ),
@@ -396,7 +414,10 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                     // },
                     ));
           },
-          label: const Text('Create Account'),
+          label: const Text(
+            'Create Account',
+            style: TextStyle(fontFamily: "GothamRnd"),
+          ),
           icon: const Icon(Icons.add),
           backgroundColor: const Color(0xFFFF9343),
         ),
@@ -462,6 +483,7 @@ class _SearchBoxState extends State<SearchBox> {
             controller: _searchController,
             decoration: const InputDecoration(
               labelText: 'Search...',
+              labelStyle: TextStyle(fontFamily: "GothamRnd"),
               prefixIcon: Icon(
                 Icons.search,
                 color: Color(0xffFF9343),

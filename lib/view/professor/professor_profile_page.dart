@@ -155,6 +155,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
           title: const Text(
             "Profile",
             style: TextStyle(
+              fontSize: 30,
               fontFamily: 'GothamRnd',
               fontWeight: FontWeight.bold,
             ),
