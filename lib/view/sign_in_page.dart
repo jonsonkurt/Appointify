@@ -59,7 +59,9 @@ class _SignInPageState extends State<SignInPage> {
               ),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 110,
+                    bottom: MediaQuery.of(context).size.height / 110),
                 child: Center(
                   child: Image.asset(
                     'assets/images/sign_in.png',

@@ -75,15 +75,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.width / 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 30),
                       const Text(
                         "Sign Up",
                         style: TextStyle(
-                          fontFamily: "GothamRnd-Bold",
+                          fontFamily: "GothamRnd",
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
@@ -101,7 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 const Text(
                                   "First Name",
                                   style: TextStyle(
-                                    fontFamily: "GothamRnd-Medium",
+                                    fontFamily: "GothamRnd",
                                     color: Color(0xFF393838),
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -130,7 +130,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 const Text(
                                   "Surname",
                                   style: TextStyle(
-                                    fontFamily: "GothamRnd-Medium",
+                                    fontFamily: "GothamRnd",
                                     color: Color(0xFF393838),
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -159,7 +159,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 const Text(
                                   "Email Address",
                                   style: TextStyle(
-                                    fontFamily: "GothamRnd-Medium",
+                                    fontFamily: "GothamRnd",
                                     color: Color(0xFF393838),
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -193,7 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 const Text(
                                   "Password",
                                   style: TextStyle(
-                                    fontFamily: "GothamRnd-Medium",
+                                    fontFamily: "GothamRnd",
                                     color: Color(0xFF393838),
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -236,7 +236,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 const Text(
                                   "Confirm Password",
                                   style: TextStyle(
-                                    fontFamily: "GothamRnd-Medium",
+                                    fontFamily: "GothamRnd",
                                     color: Color(0xFF393838),
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -347,7 +347,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               }
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Error.')),
+                                const SnackBar(
+                                    content: Text(
+                                  'Error.',
+                                  style: TextStyle(
+                                    fontFamily: "GothamRnd",
+                                  ),
+                                )),
                               );
                             }
                           }
@@ -363,7 +369,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(
-                            fontFamily: "GothamRnd-Medium.otf",
+                            fontFamily: "GothamRnd",
                             fontSize: 20,
                           ),
                         ),
@@ -400,7 +406,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           text: const TextSpan(
                             text: "I'm already a member. ",
                             style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
+                              fontFamily: "GothamRnd",
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF393838),
                               fontSize: 15,
@@ -409,7 +415,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               TextSpan(
                                 text: "Sign In",
                                 style: TextStyle(
-                                  fontFamily: "GothamRnd-Medium",
+                                  fontFamily: "GothamRnd",
                                   color: Color(0xFFFF9343),
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,

@@ -262,7 +262,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                       top: 20,
                       right: 20,
                       left: 20,
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                      bottom: MediaQuery.of(context).size.height / 15),
                   child: Wrap(
                     spacing: 8.0, // gap between adjacent chips
                     runSpacing: 4.0, // gap between lines
