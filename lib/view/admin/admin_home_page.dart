@@ -84,351 +84,444 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
     DatabaseReference professorRef = rtdb.ref('professors/');
 
     return Scaffold(
-      body: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "List of Employees",
-            style: TextStyle(color: Colors.black),
-          ),
-          elevation: 0,
-          backgroundColor: Colors.white12,
-          titleTextStyle: const TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        body: Column(
-          children: [
-            SearchBox(
-              onSearch: _handleSearch,
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 25,
+              vertical: 20,
             ),
-            Expanded(
-                child: FirebaseAnimatedList(
-                    query: professorRef,
-                    itemBuilder: (context, snapshot, animation, index) {
-                      String profFirstName =
-                          snapshot.child('firstName').value.toString();
-                      String profLastName =
-                          snapshot.child('lastName').value.toString();
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "List of Employees",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: "GothamRnd",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                ),
+              ),
+            ),
+          ),
+          const Divider(
+            indent: 30,
+            endIndent: 30,
+            thickness: 2,
+            color: Colors.black,
+          ),
+          const SizedBox(height: 15),
+          SearchBox(
+            onSearch: _handleSearch,
+          ),
+          const SizedBox(height: 15),
+          Expanded(
+              child: FirebaseAnimatedList(
+                  query: professorRef,
+                  itemBuilder: (context, snapshot, animation, index) {
+                    String profFirstName =
+                        snapshot.child('firstName').value.toString();
+                    String profLastName =
+                        snapshot.child('lastName').value.toString();
 
-                      // Filter professors based on the entered name
+                    // Filter professors based on the entered name
 
-                      if (name.isNotEmpty &&
-                          !profFirstName
-                              .toLowerCase()
-                              .contains(name.toLowerCase()) &&
-                          !profLastName
-                              .toLowerCase()
-                              .contains(name.toLowerCase())) {
-                        return Container(); // Hide the professor card if it doesn't match the search criteria
-                      }
-                      return Card(
+                    if (name.isNotEmpty &&
+                        !profFirstName
+                            .toLowerCase()
+                            .contains(name.toLowerCase()) &&
+                        !profLastName
+                            .toLowerCase()
+                            .contains(name.toLowerCase())) {
+                      return Container(); // Hide the professor card if it doesn't match the search criteria
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 10,
+                      ),
+                      child: Card(
+                        elevation: 5.0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         margin: const EdgeInsets.only(
                           top: 10,
-                          left: 20,
-                          right: 20,
+                          left: 30,
+                          right: 30,
                         ),
                         color: const Color(0xFFDCDAD8),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Center(
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                height: 130,
-                                width: 130,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color:
-                                          const Color.fromARGB(255, 35, 35, 35),
-                                      width: 2,
-                                    )),
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: ProfileController().image == null
-                                        ? snapshot
-                                                    .child('profilePicStatus')
-                                                    .value
-                                                    .toString() ==
-                                                "None"
-                                            ? const Icon(
-                                                Icons.person,
-                                                size: 35,
-                                              )
-                                            : Image(
-                                                fit: BoxFit.cover,
-                                                image: NetworkImage(snapshot
-                                                    .child('profilePicStatus')
-                                                    .value
-                                                    .toString()),
-                                                loadingBuilder: (context, child,
-                                                    loadingProgress) {
-                                                  if (loadingProgress == null) {
-                                                    return child;
-                                                  }
-                                                  return const CircularProgressIndicator();
-                                                },
-                                                errorBuilder:
-                                                    (context, object, stack) {
-                                                  return const Icon(
-                                                    Icons.error_outline,
-                                                    color: Color.fromARGB(
-                                                        255, 35, 35, 35),
-                                                  );
-                                                },
-                                              )
-                                        : Image.file(File(
-                                                ProfileController().image!.path)
-                                            .absolute)),
-                              ),
-                            ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.only(top: 10, bottom: 5),
-                              child: Text(
-                                "$profFirstName $profLastName",
-                                style: const TextStyle(
-                                  fontSize: 17,
+                            Row(children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 15,
+                                ),
+                                child: Container(
+                                  margin: const EdgeInsets.only(top: 10),
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFA2C2FF),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child: ProfileController().image == null
+                                          ? snapshot
+                                                      .child('profilePicStatus')
+                                                      .value
+                                                      .toString() ==
+                                                  "None"
+                                              ? const Icon(
+                                                  Icons.person,
+                                                  size: 35,
+                                                )
+                                              : Image(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(snapshot
+                                                      .child('profilePicStatus')
+                                                      .value
+                                                      .toString()),
+                                                  loadingBuilder: (context,
+                                                      child, loadingProgress) {
+                                                    if (loadingProgress ==
+                                                        null) {
+                                                      return child;
+                                                    }
+                                                    return const CircularProgressIndicator();
+                                                  },
+                                                  errorBuilder:
+                                                      (context, object, stack) {
+                                                    return const Icon(
+                                                      Icons.error_outline,
+                                                      color: Color.fromARGB(
+                                                          255, 35, 35, 35),
+                                                    );
+                                                  },
+                                                )
+                                          : Image.file(File(ProfileController()
+                                                  .image!
+                                                  .path)
+                                              .absolute)),
                                 ),
                               ),
-                            ),
-                            Text(snapshot
-                                .child('professorRole')
-                                .value
-                                .toString()),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 5),
+                                    child: Text(
+                                      "$profFirstName $profLastName",
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          fontFamily: "GothamRnd",
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Text(
+                                    snapshot
+                                        .child('professorRole')
+                                        .value
+                                        .toString(),
+                                    style: const TextStyle(
+                                        fontFamily: "GothamRnd-Light",
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.normal),
+                                  ),
+                                ],
+                              ),
+                            ]),
                             Container(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: const Text("Designation: Employee")),
+                                padding: const EdgeInsets.only(bottom: 15),
+                                child: const Text(
+                                  "Designation: Employee",
+                                  style: TextStyle(fontFamily: "GothamRnd"),
+                                )),
                           ],
                         ),
-                      );
-                    }))
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            showModalBottomSheet<dynamic>(
-                shape: const RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(25.0))),
-                context: context,
-                isScrollControlled: true,
-                builder: (context) => Padding(
-                    padding: EdgeInsets.only(
-                        top: 20,
-                        right: 20,
-                        left: 20,
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: Wrap(
-                      spacing: 8.0, // gap between adjacent chips
-                      runSpacing: 4.0, // gap between lines
-                      children: <Widget>[
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              TextFormField(
-                                controller: _firstNameController,
-                                decoration: const InputDecoration(
+                      ),
+                    );
+                  }))
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          showModalBottomSheet<dynamic>(
+              shape: const RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(25.0))),
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => Padding(
+                  padding: EdgeInsets.only(
+                      top: 20,
+                      right: 20,
+                      left: 20,
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: Wrap(
+                    spacing: 8.0, // gap between adjacent chips
+                    runSpacing: 4.0, // gap between lines
+                    children: <Widget>[
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              controller: _firstNameController,
+                              decoration: const InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1, color: Colors.grey),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
                                   labelText: 'First Name',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your first name';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                              ),
-                              const SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _lastNameController,
-                                decoration: const InputDecoration(
+                                  labelStyle:
+                                      TextStyle(fontFamily: "GothamRnd")),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your first name';
+                                }
+                                return null; // Return null if there is no error
+                              },
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextFormField(
+                              controller: _lastNameController,
+                              decoration: const InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1, color: Colors.grey),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
                                   labelText: 'Last Name',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your last name';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                              ),
-                              const SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _emailController,
-                                decoration: const InputDecoration(
+                                  labelStyle:
+                                      TextStyle(fontFamily: "GothamRnd")),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your last name';
+                                }
+                                return null; // Return null if there is no error
+                              },
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextFormField(
+                              controller: _emailController,
+                              decoration: const InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1, color: Colors.grey),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
                                   labelText: 'Email',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter a valid email';
-                                  } else if (!RegExp(
-                                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                      .hasMatch(value)) {
-                                    return 'Please enter a valid email';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                                keyboardType: TextInputType.emailAddress,
-                              ),
-                              const SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _passwordController,
-                                obscureText: _isObscure,
-                                decoration: const InputDecoration(
+                                  labelStyle:
+                                      TextStyle(fontFamily: "GothamRnd")),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter a valid email';
+                                } else if (!RegExp(
+                                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                    .hasMatch(value)) {
+                                  return 'Please enter a valid email';
+                                }
+                                return null; // Return null if there is no error
+                              },
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextFormField(
+                              controller: _passwordController,
+                              obscureText: _isObscure,
+                              decoration: const InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1, color: Colors.grey),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
                                   labelText: 'Password',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter a password';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                              ),
-                              const SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _conpasswordController,
-                                obscureText: _isObscure,
-                                decoration: const InputDecoration(
+                                  labelStyle:
+                                      TextStyle(fontFamily: "GothamRnd")),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter a password';
+                                }
+                                return null; // Return null if there is no error
+                              },
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextFormField(
+                              controller: _conpasswordController,
+                              obscureText: _isObscure,
+                              decoration: const InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1, color: Colors.grey),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
                                   labelText: 'Confirm Password',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please confirm your password';
-                                  }
-                                  if (value != _passwordController.text) {
-                                    return 'Passwords do not match';
-                                  }
-                                  return null; // Return null if there is no error
-                                },
-                              ),
-                              const SizedBox(height: 16.0),
-                              ElevatedButton(
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    // Perform sign in logic here
-                                    String firstName =
-                                        _firstNameController.text;
-                                    String lastName = _lastNameController.text;
-                                    String email = _emailController.text;
-                                    String password = _passwordController.text;
+                                  labelStyle:
+                                      TextStyle(fontFamily: "GothamRnd")),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please confirm your password';
+                                }
+                                if (value != _passwordController.text) {
+                                  return 'Passwords do not match';
+                                }
+                                return null; // Return null if there is no error
+                              },
+                            ),
+                            const SizedBox(height: 16.0),
+                            ElevatedButton(
+                              style: const ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      Color(0xFFFF9343))),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  // Perform sign in logic here
+                                  String firstName = _firstNameController.text;
+                                  String lastName = _lastNameController.text;
+                                  String email = _emailController.text;
+                                  String password = _passwordController.text;
 
-                                    try {
-                                      // ignore: unused_local_variable
-                                      final credential = await FirebaseAuth
-                                          .instance
-                                          .createUserWithEmailAndPassword(
-                                        email: email,
-                                        password: password,
-                                      );
+                                  try {
+                                    // ignore: unused_local_variable
+                                    final credential = await FirebaseAuth
+                                        .instance
+                                        .createUserWithEmailAndPassword(
+                                      email: email,
+                                      password: password,
+                                    );
 
-                                      String? userID = FirebaseAuth
-                                          .instance.currentUser?.uid;
+                                    String? userID =
+                                        FirebaseAuth.instance.currentUser?.uid;
 
-                                      await rtdb.ref("professors/$userID").set({
-                                        "firstName": firstName,
-                                        "lastName": lastName,
-                                        "profUserID": userID,
-                                        "mobileNumber": "-",
-                                        "professorRole": "Employee",
-                                        "salutation": "",
-                                        "status": "accepting",
-                                        "designation": "Professor",
-                                        "profilePicStatus": "None",
-                                        "fcmProfToken": "-",
-                                        "availability": {
-                                          "Monday": "-",
-                                          "Tuesday": "-",
-                                          "Wednesday": "-",
-                                          "Thursday": "-",
-                                          "Friday": "-",
-                                          "Saturday": "-",
-                                          "Sunday": "-",
-                                        }
-                                      });
-
-                                      // ignore: use_build_context_synchronously
-                                      Navigator.pop(context);
-
-                                      _firstNameController.text = "";
-                                      _lastNameController.text = "";
-                                      _emailController.text = "";
-                                      _passwordController.text = "";
-                                      _conpasswordController.text = "";
-                                    } on FirebaseAuthException catch (e) {
-                                      if (e.code == 'weak-password') {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'The password provided is too weak.')),
-                                        );
-                                      } else if (e.code ==
-                                          'email-already-in-use') {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'The account already exists for that email.')),
-                                        );
+                                    await rtdb.ref("professors/$userID").set({
+                                      "firstName": firstName,
+                                      "lastName": lastName,
+                                      "profUserID": userID,
+                                      "mobileNumber": "-",
+                                      "professorRole": "Employee",
+                                      "salutation": "",
+                                      "status": "accepting",
+                                      "designation": "Professor",
+                                      "profilePicStatus": "None",
+                                      "fcmProfToken": "-",
+                                      "availability": {
+                                        "Monday": "-",
+                                        "Tuesday": "-",
+                                        "Wednesday": "-",
+                                        "Thursday": "-",
+                                        "Friday": "-",
+                                        "Saturday": "-",
+                                        "Sunday": "-",
                                       }
-                                    } catch (e) {
+                                    });
+
+                                    // ignore: use_build_context_synchronously
+                                    Navigator.pop(context);
+
+                                    _firstNameController.text = "";
+                                    _lastNameController.text = "";
+                                    _emailController.text = "";
+                                    _passwordController.text = "";
+                                    _conpasswordController.text = "";
+                                  } on FirebaseAuthException catch (e) {
+                                    if (e.code == 'weak-password') {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
-                                        const SnackBar(content: Text('Error.')),
+                                        const SnackBar(
+                                            content: Text(
+                                                'The password provided is too weak.')),
+                                      );
+                                    } else if (e.code ==
+                                        'email-already-in-use') {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content: Text(
+                                          'The account already exists for that email.',
+                                          style: TextStyle(
+                                              fontFamily: "GothamRnd"),
+                                        )),
                                       );
                                     }
+                                  } catch (e) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                        'Error.',
+                                        style:
+                                            TextStyle(fontFamily: "GothamRnd"),
+                                      )),
+                                    );
                                   }
-                                },
-                                child: const Text('Create Account'),
+                                }
+                              },
+                              child: const Text(
+                                'Create Account',
+                                style: TextStyle(
+                                    fontFamily: "GothamRnd",
+                                    color: Colors.white),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 20),
-                      ],
-                      // ),
-                      // ),
-                    )
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                    // ),
+                    // ),
+                  )
 
-                    // },
-                    ));
-          },
-          label: const Text('Create Account'),
-          icon: const Icon(Icons.add),
-          backgroundColor: const Color(0xFFFF9343),
+                  // },
+                  ));
+        },
+        label: const Text(
+          'Create Account',
+          style: TextStyle(fontFamily: "GothamRnd"),
         ),
-
-        // Text("Hi, I'm Admin"),
-        // Expanded(
-        //   child: FirebaseAnimatedList(
-        //     query: appointmentsRef
-        //         .orderByChild('studentUserID')
-        //         .equalTo(userID),
-        //     itemBuilder: (context, snapshot, animation, index) {
-        //       return Card(
-        //           child: Column(
-        //         children: [
-        //           Text(
-        //             snapshot.child('professorName').value.toString(),
-        //           ),
-        //           Text(
-        //             snapshot.child('professorRole').value.toString(),
-        //           ),
-        //           Text(
-        //             snapshot.child('date').value.toString(),
-        //           ),
-        //           Text(
-        //             snapshot.child('time').value.toString(),
-        //           ),
-        //         ],
-        //       ));
-        //     },
-        //   ),
-        // ),
+        icon: const Icon(Icons.add),
+        backgroundColor: const Color(0xFFFF9343),
       ),
+
+      // Text("Hi, I'm Admin"),
+      // Expanded(
+      //   child: FirebaseAnimatedList(
+      //     query: appointmentsRef
+      //         .orderByChild('studentUserID')
+      //         .equalTo(userID),
+      //     itemBuilder: (context, snapshot, animation, index) {
+      //       return Card(
+      //           child: Column(
+      //         children: [
+      //           Text(
+      //             snapshot.child('professorName').value.toString(),
+      //           ),
+      //           Text(
+      //             snapshot.child('professorRole').value.toString(),
+      //           ),
+      //           Text(
+      //             snapshot.child('date').value.toString(),
+      //           ),
+      //           Text(
+      //             snapshot.child('time').value.toString(),
+      //           ),
+      //         ],
+      //       ));
+      //     },
+      //   ),
+      // ),
     );
   }
 }
@@ -460,13 +553,27 @@ class _SearchBoxState extends State<SearchBox> {
           width: 350,
           child: TextField(
             controller: _searchController,
-            decoration: const InputDecoration(
-              labelText: 'Search...',
-              prefixIcon: Icon(
+            decoration: InputDecoration(
+              hintText: 'Search',
+              hintStyle: const TextStyle(
+                fontFamily: "GothamRnd",
+                fontSize: 15,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color(0xffFF9343), width: 1.0),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color(0xffFF9343), width: 2.0),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              prefixIcon: const Icon(
                 Icons.search,
                 color: Color(0xffFF9343),
               ),
-              border: OutlineInputBorder(
+              border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                 Radius.circular(20),
               )),

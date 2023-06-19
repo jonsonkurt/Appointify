@@ -90,6 +90,7 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.black,
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
+                        fontFamily: "GothamRnd"
                       ),
                     ),
                   )),
@@ -103,6 +104,7 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.black,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
+                        fontFamily: "GothamRnd"
                       ),
                     ),
                   )),
@@ -119,6 +121,7 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.black,
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
+                        fontFamily: "GothamRnd"
                       ),
                     ),
                   )),
@@ -160,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                                           .value
                                           .toString()
                                       : "Reschedule",
-                                  style: const TextStyle(fontSize: 20),
+                                  style: const TextStyle(fontSize: 20,fontFamily: "GothamRnd"),
                                 ),
                                 content: SizedBox(
                                   height: 200, // Set the desired height here
@@ -171,31 +174,34 @@ class _HomePageState extends State<HomePage> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       const Text(
-                                        'Professor name:',
+                                        'Professor name:', style: TextStyle(fontFamily: "GothamRnd"),
                                       ),
                                       Center(
                                         child: Text(
                                           snapshot
                                               .child('professorName')
                                               .value
-                                              .toString(),
+                                              .toString(),style: TextStyle(fontFamily: "GothamRnd"),
                                         ),
                                       ),
                                       const Text(
-                                        'Designation:',
+                                        'Designation:', style: TextStyle(fontFamily: "GothamRnd"),
                                       ),
                                       Center(
                                         child: Text(
                                           snapshot
                                               .child('professorRole')
                                               .value
-                                              .toString(),
+                                              .toString(),style: TextStyle(fontFamily: "GothamRnd"),
                                         ),
                                       ),
-                                      const Text('Requested Appointment:'),
+                                      const Text('Requested Appointment:',style: TextStyle(fontFamily: "GothamRnd"),),
                                       Center(
                                         child: Text(
-                                            '${snapshot.child('date').value} - ${snapshot.child('time').value}'),
+                                            '${snapshot.child('date').value} - ${snapshot.child('time').value}',
+                                            style: TextStyle(fontFamily: "GothamRnd"),
+                                            ),
+                                            
                                       ),
                                       if (snapshot.child('countered').value ==
                                           "yes")
@@ -206,11 +212,12 @@ class _HomePageState extends State<HomePage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             const Text(
-                                              'Counter Proposal:',
+                                              'Counter Proposal:',style: TextStyle(fontFamily: "GothamRnd"),
                                             ),
                                             Center(
                                               child: Text(
                                                 '${snapshot.child('counteredDate').value} - ${snapshot.child('counteredTime').value}',
+                                              style: TextStyle(fontFamily: "GothamRnd"),
                                               ),
                                             ),
                                           ],
@@ -403,6 +410,7 @@ class _HomePageState extends State<HomePage> {
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
+                                      fontFamily: "GothamRnd",
                                     ),
                                   ),
                                 ),
@@ -445,7 +453,9 @@ class _HomePageState extends State<HomePage> {
                                         : "RESCHEDULE",
                                     style: const TextStyle(
                                         color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "GothamRnd",
+                                        ),
                                   ),
                                 ),
                               ],
@@ -470,6 +480,7 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.black,
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
+                        fontFamily: "GothamRnd"
                       ),
                     ),
                   )),
@@ -481,15 +492,15 @@ class _HomePageState extends State<HomePage> {
                   tabs: const [
                     Text(
                       'Upcoming',
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 15,  fontFamily: "GothamRnd"),
                     ),
                     Text(
                       'Completed',
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 15,fontFamily: "GothamRnd"),
                     ),
                     Text(
                       'Canceled',
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 15,fontFamily: "GothamRnd"),
                     ),
                   ],
                   tabBarProperties: TabBarProperties(
@@ -656,29 +667,21 @@ class _HomePageState extends State<HomePage> {
                                                             style: const TextStyle(
                                                                 fontSize: 15,
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                                    FontWeight.bold, 
+                                                                    fontFamily: "GothamRnd"),
                                                           ),
                                                           Text(
                                                             employeePosition,
                                                             style:
                                                                 const TextStyle(
-                                                                    fontSize:
-                                                                        15),
+                                                                    fontSize:15,
+                                                                    fontFamily: "GothamRnd"),
                                                           ),
                                                           Container(
-                                                            height: 20,
-                                                            margin:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    top: 10),
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    left: 10,
-                                                                    right: 10),
-                                                            alignment: Alignment
-                                                                .center,
+                                                            alignment: Alignment.centerLeft,
+                                                            height:  MediaQuery.of(context).size.height/35,
+                                                            width: MediaQuery.of(context).size.width/2,
+                                                            padding:EdgeInsets.only(left: 20),
                                                             decoration:
                                                                 BoxDecoration(
                                                               color:
@@ -693,17 +696,18 @@ class _HomePageState extends State<HomePage> {
                                                                 Text(
                                                                   schedDate,
                                                                   style: const TextStyle(
-                                                                      fontSize:
-                                                                          15),
+                                                                      fontSize:15,
+                                                                      fontFamily: "GothamRnd"),
                                                                 ),
                                                                 const SizedBox(
                                                                   width: 10,
                                                                 ),
                                                                 Text(
+                                                                  
                                                                   schedTime,
                                                                   style: const TextStyle(
-                                                                      fontSize:
-                                                                          15),
+                                                                      fontSize:15,
+                                                                      fontFamily: "GothamRnd"),
                                                                 ),
                                                               ],
                                                             ),
@@ -750,8 +754,10 @@ class _HomePageState extends State<HomePage> {
                               String schedTime =
                                   snapshot.child('time').value.toString();
                               return SizedBox(
+                              
                                   height: 100,
                                   child: Card(
+                                    color: Colors.white12,
                                       child: Row(
                                     children: [
                                       Flexible(
@@ -854,20 +860,16 @@ class _HomePageState extends State<HomePage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        employeeName,
+                                                        employeeName, style: TextStyle(fontFamily: "GothamRnd",
+                                                        fontWeight: FontWeight.bold),
                                                       ),
                                                       Text(
-                                                        employeePosition,
+                                                        employeePosition, style: TextStyle(fontFamily: "GothamRnd")
                                                       ),
                                                       Container(
-                                                        height: 20,
-                                                        margin: const EdgeInsets
-                                                            .only(top: 10),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                left: 10,
-                                                                right: 10),
+                                                        height:  MediaQuery.of(context).size.height/35,
+                                                            width: MediaQuery.of(context).size.width/2,
+                                                            padding:EdgeInsets.only(left: 20),
                                                         alignment:
                                                             Alignment.center,
                                                         decoration: BoxDecoration(
@@ -879,13 +881,13 @@ class _HomePageState extends State<HomePage> {
                                                         child: Row(
                                                           children: [
                                                             Text(
-                                                              schedDate,
+                                                              schedDate, style: TextStyle(fontFamily: "GothamRnd")
                                                             ),
                                                             const SizedBox(
                                                               width: 10,
                                                             ),
                                                             Text(
-                                                              schedTime,
+                                                              schedTime, style: TextStyle(fontFamily: "GothamRnd")
                                                             ),
                                                           ],
                                                         ),
@@ -948,7 +950,7 @@ class _HomePageState extends State<HomePage> {
                                               content: Text(profNotes),
                                               actions: [
                                                 TextButton(
-                                                  child: const Text('Close'),
+                                                  child: const Text('Close',style: TextStyle(fontFamily: "GothamRnd")),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
@@ -958,6 +960,7 @@ class _HomePageState extends State<HomePage> {
                                           });
                                     },
                                     child: Card(
+                                      color: Colors.white12,
                                         child: Row(
                                       children: [
                                         Flexible(
@@ -1066,23 +1069,38 @@ class _HomePageState extends State<HomePage> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          employeeName,
+                                                          employeeName, style: TextStyle(fontFamily: "GothamRnd",
+                                                          fontWeight: FontWeight.bold)
                                                         ),
                                                         Text(
-                                                          employeePosition,
+                                                          employeePosition, style: TextStyle(fontFamily: "GothamRnd")
                                                         ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              schedDate,
+                                                        Container(
+                                                          height:  MediaQuery.of(context).size.height/35,
+                                                            width: MediaQuery.of(context).size.width/2,
+                                                            padding:EdgeInsets.only(left: 20),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color:
+                                                                  Colors.white,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
                                                             ),
-                                                            const SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Text(
-                                                              schedTime,
-                                                            ),
-                                                          ],
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                schedDate, style: TextStyle(fontFamily: "GothamRnd")
+                                                              ),
+                                                              const SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
+                                                                schedTime, style: TextStyle(fontFamily: "GothamRnd")
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ],
                                                     )

@@ -230,7 +230,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                                   Text(
                                     '$profFirstName $profLastName',
                                     style: const TextStyle(
-                                      fontFamily: "GothamRnd-Medium",
+                                      fontFamily: "GothamRnd",
                                       color: Color(0xFF393838),
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
