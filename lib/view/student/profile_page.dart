@@ -26,7 +26,13 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
   }
 
-  Future<void> _logout() async {
+  @override
+  void dispose() {
+    nameSubscription?.cancel();
+    super.dispose();
+  }
+
+  _logout() async {
     await FirebaseAuth.instance.signOut();
     DatabaseReference studRef =
         FirebaseDatabase.instance.ref().child('students');
