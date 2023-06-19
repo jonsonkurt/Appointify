@@ -235,6 +235,12 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               TextFormField(
                                 controller: _firstNameController,
                                 decoration: const InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1, color: Colors.grey),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
                                     labelText: 'First Name',
                                     labelStyle:
                                         TextStyle(fontFamily: "GothamRnd")),
@@ -249,6 +255,12 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               TextFormField(
                                 controller: _lastNameController,
                                 decoration: const InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1, color: Colors.grey),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
                                     labelText: 'Last Name',
                                     labelStyle:
                                         TextStyle(fontFamily: "GothamRnd")),
@@ -263,6 +275,12 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               TextFormField(
                                 controller: _emailController,
                                 decoration: const InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1, color: Colors.grey),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
                                     labelText: 'Email',
                                     labelStyle:
                                         TextStyle(fontFamily: "GothamRnd")),
@@ -283,6 +301,12 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                 controller: _passwordController,
                                 obscureText: _isObscure,
                                 decoration: const InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1, color: Colors.grey),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
                                     labelText: 'Password',
                                     labelStyle:
                                         TextStyle(fontFamily: "GothamRnd")),
@@ -298,6 +322,12 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                 controller: _conpasswordController,
                                 obscureText: _isObscure,
                                 decoration: const InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1, color: Colors.grey),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
                                     labelText: 'Confirm Password',
                                     labelStyle:
                                         TextStyle(fontFamily: "GothamRnd")),
@@ -313,6 +343,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               ),
                               const SizedBox(height: 16.0),
                               ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                        Color(0xFFFF9343))),
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
                                     // Perform sign in logic here
@@ -399,7 +432,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                 },
                                 child: const Text(
                                   'Create Account',
-                                  style: TextStyle(fontFamily: "GothamRnd"),
+                                  style: TextStyle(
+                                      fontFamily: "GothamRnd",
+                                      color: Colors.white),
                                 ),
                               ),
                             ],

@@ -121,8 +121,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 "Profile",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "GothamRnd-Bold",
-                                  fontSize: 25,
+                                  fontFamily: "GothamRnd",
+                                  fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                   decoration: TextDecoration.none,
                                 ),
@@ -194,28 +194,28 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Positioned(
-                          left: 180,
+                          left: MediaQuery.of(context).size.width / 2.5,
                           top: MediaQuery.of(context).size.height * .21,
                           child: Row(
                             children: [
                               Text(
                                 firstName,
                                 style: const TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: "GothamRnd-Bold",
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    color: Colors.black,
+                                    fontFamily: "GothamRnd",
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.none),
                               ),
                               const SizedBox(width: 5),
                               Text(
                                 lastName,
                                 style: const TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: "GothamRnd-Bold",
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    color: Colors.black,
+                                    fontFamily: "GothamRnd",
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.none),
                               ),
                             ],
                           ),
@@ -236,7 +236,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: TextStyle(
                                 decoration: TextDecoration.none,
                                 color: Colors.black,
-                                fontSize: 20),
+                                fontSize: 20,
+                                fontFamily: "GothamRnd"),
                           ),
                           Container(
                             width: 40,
@@ -254,7 +255,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                             const EditStudentProfile()),
                                   );
                                 },
-                                icon: const Icon(Icons.edit)),
+                                icon: const Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
+                                )),
                           )
                         ]),
                     const SizedBox(
@@ -283,7 +287,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: const Text(
                                     "Email:",
                                     style: TextStyle(
-                                      fontFamily: "GothamRnd-Bold",
+                                      fontFamily: "GothamRnd",
                                       fontSize: 15,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -298,6 +302,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: Colors.black,
+                                        fontFamily: "GothamRnd",
                                         decoration: TextDecoration.none),
                                   ),
                                 ),
@@ -323,7 +328,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: const Text(
                                     "Section:",
                                     style: TextStyle(
-                                      fontFamily: "GothamRnd-Bold",
+                                      fontFamily: "GothamRnd",
                                       fontSize: 15,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -363,7 +368,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: const Text(
                                     "Contact Number:",
                                     style: TextStyle(
-                                      fontFamily: "GothamRnd-Bold",
+                                      fontFamily: "GothamRnd",
                                       fontSize: 15,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -378,6 +383,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     style: const TextStyle(
                                         fontSize: 15,
                                         color: Colors.black,
+                                        fontFamily: "GothamRnd",
                                         decoration: TextDecoration.none),
                                   ),
                                 )
@@ -417,7 +423,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           "Logout",
                           style: TextStyle(
                             color: Colors.white,
-                            fontFamily: "GothamRnd-Light",
+                            fontFamily: "GothamRnd",
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
                           ),
@@ -426,7 +432,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ]);
                 } else {
-                  return const Center(child: Text('Something went wrong.'));
+                  return const Center(
+                      child: Text(
+                    'Something went wrong.',
+                    style: TextStyle(fontFamily: "GothamRnd"),
+                  ));
                 }
               }),
         )));
@@ -447,9 +457,15 @@ class ReuseableRow extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(title),
+          title: Text(
+            title,
+            style: TextStyle(fontFamily: "GothamRnd"),
+          ),
           leading: Icon(iconData),
-          trailing: Text(value),
+          trailing: Text(
+            value,
+            style: TextStyle(fontFamily: "GothamRnd"),
+          ),
         ),
         const Divider(
           color: Color.fromARGB(255, 35, 35, 35),
