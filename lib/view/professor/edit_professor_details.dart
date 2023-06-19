@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import 'professor_profile_controller.dart';
-import 'professor_profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +22,6 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
   final List<TimeOfDay?> _selectedFromTimes = List<TimeOfDay?>.filled(6, null);
   final List<TimeOfDay?> _selectedToTimes = List<TimeOfDay?>.filled(6, null);
   final bool val1 = true;
-  static String imagePath = 'None';
 
   final _formKey = GlobalKey<FormState>();
 
@@ -76,6 +73,18 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: _selectedFromTimes[index] ?? TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) => Theme(
+        data: ThemeData().copyWith(
+          colorScheme: const ColorScheme.dark(
+            primary: Color(0xFF7778EE),
+            onPrimary: Colors.grey,
+            surface: Colors.white,
+            onSurface: Colors.black,
+          ),
+          dialogBackgroundColor: Colors.grey,
+        ),
+        child: child!,
+      ),
     );
     if (picked != null && picked != _selectedFromTimes[index]) {
       setState(() {
@@ -88,6 +97,18 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: _selectedToTimes[index] ?? TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) => Theme(
+        data: ThemeData().copyWith(
+          colorScheme: const ColorScheme.dark(
+            primary: Color(0xFF7778EE),
+            onPrimary: Colors.grey,
+            surface: Colors.white,
+            onSurface: Colors.black,
+          ),
+          dialogBackgroundColor: Colors.grey,
+        ),
+        child: child!,
+      ),
     );
     if (picked != null && picked != _selectedToTimes[index]) {
       setState(() {
@@ -132,184 +153,257 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
           builder: (context, provider, child) {
         return SafeArea(
             child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-              child: StreamBuilder(
-                  stream: ref.child(userID!.toString()).onValue,
-                  builder: (context, AsyncSnapshot snapshot) {
-                    if (!snapshot.hasData) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasData) {
-                      Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
-                      _firstNameController.text = map['firstName'];
-                      _lastNameController.text = map['lastName'];
-                      _phoneController.text = map['mobileNumber'];
-                      _emailController.text = userEmail!;
-                      _professionController.text = map['designation'];
-                      Map<dynamic, dynamic> availability = map['availability'];
+          child: SingleChildScrollView(
+            child: StreamBuilder(
+                stream: ref.child(userID!.toString()).onValue,
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    Map<dynamic, dynamic> map = snapshot.data.snapshot.value;
+                    _firstNameController.text = map['firstName'];
+                    _lastNameController.text = map['lastName'];
+                    _phoneController.text = map['mobileNumber'];
+                    _emailController.text = userEmail!;
+                    _professionController.text = map['designation'];
+                    Map<dynamic, dynamic> availability = map['availability'];
 
-                      String dayOne = availability["Monday"];
-                      String dayTwo = availability["Tuesday"];
-                      String dayThree = availability["Wednesday"];
-                      String dayFour = availability["Thursday"];
-                      String dayFive = availability["Friday"];
-                      String daySix = availability["Saturday"];
-                      if (dayOne != "-") {
-                        monday = extractTimes(dayOne);
-                        schedStartTime.add(monday[0]);
-                        schedEndTime.add(monday[1]);
-                      } else {
-                        schedStartTime.add("-");
-                        schedEndTime.add("-");
-                      }
-                      if (dayTwo != "-") {
-                        tuesday = extractTimes(dayTwo);
-                        schedStartTime.add(tuesday[0]);
-                        schedEndTime.add(tuesday[1]);
-                      } else {
-                        schedStartTime.add("-");
-                        schedEndTime.add("-");
-                      }
-                      if (dayThree != "-") {
-                        wednesday = extractTimes(dayThree);
-                        schedStartTime.add(wednesday[0]);
-                        schedEndTime.add(wednesday[1]);
-                      } else {
-                        schedStartTime.add("-");
-                        schedEndTime.add("-");
-                      }
-                      if (dayFour != "-") {
-                        thursday = extractTimes(dayFour);
-                        schedStartTime.add(thursday[0]);
-                        schedEndTime.add(thursday[1]);
-                      } else {
-                        schedStartTime.add("-");
-                        schedEndTime.add("-");
-                      }
-                      if (dayFive != "-") {
-                        friday = extractTimes(dayFive);
-                        schedStartTime.add(friday[0]);
-                        schedEndTime.add(friday[1]);
-                      } else {
-                        schedStartTime.add("-");
-                        schedEndTime.add("-");
-                      }
+                    String dayOne = availability["Monday"];
+                    String dayTwo = availability["Tuesday"];
+                    String dayThree = availability["Wednesday"];
+                    String dayFour = availability["Thursday"];
+                    String dayFive = availability["Friday"];
+                    String daySix = availability["Saturday"];
+                    if (dayOne != "-") {
+                      monday = extractTimes(dayOne);
+                      schedStartTime.add(monday[0]);
+                      schedEndTime.add(monday[1]);
+                    } else {
+                      schedStartTime.add("-");
+                      schedEndTime.add("-");
+                    }
+                    if (dayTwo != "-") {
+                      tuesday = extractTimes(dayTwo);
+                      schedStartTime.add(tuesday[0]);
+                      schedEndTime.add(tuesday[1]);
+                    } else {
+                      schedStartTime.add("-");
+                      schedEndTime.add("-");
+                    }
+                    if (dayThree != "-") {
+                      wednesday = extractTimes(dayThree);
+                      schedStartTime.add(wednesday[0]);
+                      schedEndTime.add(wednesday[1]);
+                    } else {
+                      schedStartTime.add("-");
+                      schedEndTime.add("-");
+                    }
+                    if (dayFour != "-") {
+                      thursday = extractTimes(dayFour);
+                      schedStartTime.add(thursday[0]);
+                      schedEndTime.add(thursday[1]);
+                    } else {
+                      schedStartTime.add("-");
+                      schedEndTime.add("-");
+                    }
+                    if (dayFive != "-") {
+                      friday = extractTimes(dayFive);
+                      schedStartTime.add(friday[0]);
+                      schedEndTime.add(friday[1]);
+                    } else {
+                      schedStartTime.add("-");
+                      schedEndTime.add("-");
+                    }
 
-                      if (daySix != "-") {
-                        saturday = extractTimes(daySix);
-                        schedStartTime.add(saturday[0]);
-                        schedEndTime.add(saturday[1]);
-                      } else {
-                        schedStartTime.add("-");
-                        schedEndTime.add("-");
-                      }
+                    if (daySix != "-") {
+                      saturday = extractTimes(daySix);
+                      schedStartTime.add(saturday[0]);
+                      schedEndTime.add(saturday[1]);
+                    } else {
+                      schedStartTime.add("-");
+                      schedEndTime.add("-");
+                    }
 
-                      provider.imgURL = map['profilePicStatus'].toString();
+                    provider.imgURL = map['profilePicStatus'].toString();
 
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Stack(alignment: Alignment.bottomCenter, children: [
-                            // Warning!!! Don't delete. This is edit picture
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Center(
-                                child: Container(
-                                  height: 130,
-                                  width: 130,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 35, 35, 35),
-                                        width: 2,
-                                      )),
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: provider.image == null
-                                          ? map['profilePicStatus']
-                                                      .toString() ==
-                                                  "None"
-                                              ? const Icon(
-                                                  Icons.person,
-                                                  size: 35,
-                                                )
-                                              : Image(
-                                                  fit: BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      provider.imgURL),
-                                                  loadingBuilder: (context,
-                                                      child, loadingProgress) {
-                                                    if (loadingProgress ==
-                                                        null) {
-                                                      return child;
-                                                    }
-                                                    return const CircularProgressIndicator();
-                                                  },
-                                                  errorBuilder:
-                                                      (context, object, stack) {
-                                                    return const Icon(
-                                                      Icons.error_outline,
-                                                      color: Color.fromARGB(
-                                                          255, 35, 35, 35),
-                                                    );
-                                                  },
-                                                )
-                                          : Image.file(
-                                              fit: BoxFit.cover,
-                                              File(provider.image!.path)
-                                                  .absolute)),
+                    return Column(
+                      children: [
+                        Stack(
+                            alignment: Alignment.bottomCenter,
+                            clipBehavior: Clip.none,
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                height: MediaQuery.of(context).size.height / 5,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFFF9343),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(30.0),
+                                    bottomRight: Radius.circular(30.0),
+                                  ),
                                 ),
                               ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                provider.pickImage(context);
-                                imagePath = provider.imgURL;
-                              },
-                              child: const CircleAvatar(
-                                radius: 15,
-                                child: Icon(Icons.edit, size: 15),
+                              // Warning!!! Don't delete. This is edit picture
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height /
+                                        50),
+                                child: Center(
+                                  child: Container(
+                                    height: 130,
+                                    width: 130,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 35, 35, 35),
+                                          width: 2,
+                                        )),
+                                    child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: provider.image == null
+                                            ? map['profilePicStatus']
+                                                        .toString() ==
+                                                    "None"
+                                                ? const Icon(
+                                                    Icons.person,
+                                                    size: 35,
+                                                  )
+                                                : Image(
+                                                    fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                        provider.imgURL),
+                                                    loadingBuilder: (context,
+                                                        child,
+                                                        loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) {
+                                                        return child;
+                                                      }
+                                                      return const CircularProgressIndicator();
+                                                    },
+                                                    errorBuilder: (context,
+                                                        object, stack) {
+                                                      return const Icon(
+                                                        Icons.error_outline,
+                                                        color: Color.fromARGB(
+                                                            255, 35, 35, 35),
+                                                      );
+                                                    },
+                                                  )
+                                            : Image.file(
+                                                fit: BoxFit.cover,
+                                                File(provider.image!.path)
+                                                    .absolute)),
+                                  ),
+                                ),
                               ),
-                            )
-                          ]),
-                          Form(
+                              InkWell(
+                                onTap: () {
+                                  provider.pickImage(context);
+                                },
+                                child: const CircleAvatar(
+                                  radius: 15,
+                                  child: Icon(Icons.edit, size: 15),
+                                ),
+                              )
+                            ]),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              "Personal Information",
+                              style: TextStyle(
+                                fontFamily: "GothamRnd-Bold",
+                                fontSize: 21,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Form(
                             key: _formKey,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const SizedBox(height: 30.0),
+                                const SizedBox(height: 15.0),
                                 TextFormField(
                                   controller: _firstNameController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'First Name',
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(20.0),
+                                    hintText: 'Enter your Name',
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.black, width: 1.0),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.black, width: 2.0),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Please enter your phone';
+                                      return 'Please enter your Name';
                                     }
                                     return null; // Return null if there is no error
                                   },
                                 ),
+                                const SizedBox(height: 15.0),
                                 TextFormField(
                                   controller: _lastNameController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Last Name',
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    hintText: 'Professor',
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.black, width: 1.0),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.black, width: 2.0),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Please enter your phone';
+                                      return 'Please enter your professor name';
                                     }
                                     return null; // Return null if there is no error
                                   },
                                 ),
+                                const SizedBox(height: 15.0),
                                 TextFormField(
                                   controller: _professionController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Profession',
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    hintText: 'Phone Number',
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.black, width: 1.0),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.black, width: 2.0),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -318,33 +412,17 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     return null; // Return null if there is no error
                                   },
                                 ),
-                                TextFormField(
-                                  controller: _phoneController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Phone',
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your phone';
-                                    }
-                                    return null; // Return null if there is no error
-                                  },
+                                const SizedBox(height: 16.0),
+                                const Text(
+                                  "Weekly Schedule",
+                                  style: TextStyle(
+                                      fontFamily: 'GothamRnd',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      decoration: TextDecoration.none),
                                 ),
                                 const SizedBox(height: 16.0),
-                                TextFormField(
-                                  controller: _emailController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Email',
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your email address';
-                                    }
-                                    return null; // Return null if there is no error
-                                  },
-                                ),
-                                const SizedBox(height: 16.0),
-                                const Text("Weekly Schedule"),
                                 Column(
                                   children: List.generate(6, (index) {
                                     bool isChecked =
@@ -382,7 +460,17 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                 });
                                               },
                                             ),
-                                            Text(_getWeekdayNumber(index + 1)),
+                                            Text(
+                                              _getWeekdayNumber(index + 1)
+                                                  .substring(0, 3)
+                                                  .toUpperCase(),
+                                              style: const TextStyle(
+                                                fontFamily: 'GothamRnd',
+                                                fontWeight: FontWeight.normal,
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                              ),
+                                            ),
                                             IgnorePointer(
                                               ignoring: !isChecked,
                                               child: GestureDetector(
@@ -425,14 +513,18 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                             .format(context)
                                                         : schedStartTime[index],
                                                     style: TextStyle(
-                                                        color: textColor,
-                                                        fontSize: 16),
+                                                      color: textColor,
+                                                      fontSize: 16,
+                                                      fontFamily: 'GothamRnd',
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
                                             const Text(
-                                              'To',
+                                              '-',
                                               style: TextStyle(fontSize: 16),
                                             ),
                                             IgnorePointer(
@@ -476,8 +568,12 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                             .format(context)
                                                         : schedEndTime[index],
                                                     style: TextStyle(
-                                                        color: textColor,
-                                                        fontSize: 16),
+                                                      color: textColor,
+                                                      fontSize: 16,
+                                                      fontFamily: 'GothamRnd',
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -489,14 +585,23 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     );
                                   }),
                                 ),
+                                const SizedBox(height: 16),
                                 ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: const Size(155, 32),
+                                    backgroundColor: const Color(0xFF7778EE),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10), // Adjust the radius as needed
+                                    ),
+                                  ),
                                   onPressed: () async {
                                     print(_selectedFromTimes[0]);
                                     if (_formKey.currentState!.validate()) {
                                       await ref
                                           .child(userID.toString())
                                           .update({
-                                        'profilePicStatus': imagePath,
+                                        'profilePicStatus': provider.imgURL,
                                         "mobileNumber": _phoneController.text,
                                         "availability": {
                                           "Monday": _checkboxValues[0] == true
@@ -545,6 +650,14 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   child: const Text('Confirm'),
                                 ),
                                 ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: const Size(155, 32),
+                                    backgroundColor: const Color(0xFFFF9343),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          10), // Adjust the radius as needed
+                                    ),
+                                  ),
                                   onPressed: () {
                                     Navigator.of(context).pop();
 
@@ -559,13 +672,13 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                               ],
                             ),
                           ),
-                        ],
-                      );
-                    } else {
-                      return const Center(child: Text('Something went wrong.'));
-                    }
-                  }),
-            ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const Center(child: Text('Something went wrong.'));
+                  }
+                }),
           ),
         ));
       }),
