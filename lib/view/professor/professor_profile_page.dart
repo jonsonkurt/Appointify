@@ -209,8 +209,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                       color: Colors.white,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 35, 35, 35),
+                                        color: Colors.white,
                                         width: 2,
                                       )),
                                   child: ClipRRect(

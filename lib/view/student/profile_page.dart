@@ -98,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: double.infinity,
                           height: MediaQuery.of(context).size.height / 5,
                           decoration: const BoxDecoration(
-                            color: Colors.orange,
+                            color: Color(0xFFFF9343),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(30.0),
                               bottomRight: Radius.circular(30.0),
@@ -159,6 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   height: 110,
                                   width: 110,
                                   decoration: BoxDecoration(
+                                    color: Colors.white,
                                     shape: BoxShape.circle,
                                     border: Border.all(
                                       color: Colors.white,

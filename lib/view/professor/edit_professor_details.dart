@@ -253,10 +253,10 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     height: 130,
                                     width: 130,
                                     decoration: BoxDecoration(
+                                        color: Colors.white,
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: const Color.fromARGB(
-                                              255, 35, 35, 35),
+                                          color: Colors.white,
                                           width: 2,
                                         )),
                                     child: ClipRRect(
