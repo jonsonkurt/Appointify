@@ -27,8 +27,10 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
         backgroundColor: const Color(0xffFF9343),
         bottomNavigationBar: SafeArea(
           child: SalomonBottomBar(
+            selectedColorOpacity: 0,
             margin: const EdgeInsets.only(left: 30, right: 30),
-            itemPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            itemPadding:
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             currentIndex: currentIndex,
             items: [
               SalomonBottomBarItem(
