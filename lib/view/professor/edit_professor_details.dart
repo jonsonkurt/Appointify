@@ -233,6 +233,16 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                             clipBehavior: Clip.none,
                             children: [
                               Container(
+                                padding: EdgeInsets.all(
+                                    MediaQuery.of(context).size.width / 30),
+                                child: Text(
+                                  "Edit Profile",
+                                  style: TextStyle(
+                                      fontFamily: "GothamRnd",
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                                 width: double.infinity,
                                 height: MediaQuery.of(context).size.height / 5,
                                 decoration: const BoxDecoration(
