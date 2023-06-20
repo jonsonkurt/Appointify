@@ -159,6 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   height: 110,
                                   width: 110,
                                   decoration: BoxDecoration(
+                                    color: Colors.white,
                                     shape: BoxShape.circle,
                                     border: Border.all(
                                       color: Colors.white,
