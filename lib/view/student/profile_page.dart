@@ -194,7 +194,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height / 30),
+                              top: MediaQuery.of(context).size.height / 30,
+                              left: MediaQuery.of(context).size.height / 7.5),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 30,
@@ -247,10 +248,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        Positioned(
-                          left: MediaQuery.of(context).size.width / 2.5,
-                          top: MediaQuery.of(context).size.height / 10,
+                        Container(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height / 5),
+                          alignment: Alignment.center,
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 "$firstName $lastName",
@@ -269,12 +273,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(
                       height: 25,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 25),
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.height / 25,
+                              top: MediaQuery.of(context).size.height / 70),
                           child: Text(
                             'Personal Information',
                             style: TextStyle(
@@ -316,7 +322,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(10),
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     email,
@@ -358,7 +364,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 Container(
                                   alignment: Alignment.centerLeft,
-                                  padding: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(10),
                                   child: Text(
                                     section,
                                     style: const TextStyle(
@@ -399,7 +405,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 Container(
                                   alignment: Alignment.centerLeft,
-                                  padding: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(10),
                                   child: Text(
                                     mobileNumber,
                                     style: const TextStyle(
