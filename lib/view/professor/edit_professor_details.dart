@@ -244,73 +244,79 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ),
                               ),
                               // Warning!!! Don't delete. This is edit picture
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: MediaQuery.of(context).size.height /
-                                        50),
-                                child: Center(
-                                  child: Container(
-                                    height: 130,
-                                    width: 130,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
+                              Positioned(
+                                bottom: -60,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      top: MediaQuery.of(context).size.height /
+                                          50),
+                                  child: Center(
+                                    child: Container(
+                                      height: 130,
+                                      width: 130,
+                                      decoration: BoxDecoration(
                                           color: Colors.white,
-                                          width: 2,
-                                        )),
-                                    child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: provider.image == null
-                                            ? map['profilePicStatus']
-                                                        .toString() ==
-                                                    "None"
-                                                ? const Icon(
-                                                    Icons.person,
-                                                    size: 35,
-                                                  )
-                                                : Image(
-                                                    fit: BoxFit.cover,
-                                                    image: NetworkImage(
-                                                        provider.imgURL),
-                                                    loadingBuilder: (context,
-                                                        child,
-                                                        loadingProgress) {
-                                                      if (loadingProgress ==
-                                                          null) {
-                                                        return child;
-                                                      }
-                                                      return const CircularProgressIndicator();
-                                                    },
-                                                    errorBuilder: (context,
-                                                        object, stack) {
-                                                      return const Icon(
-                                                        Icons.error_outline,
-                                                        color: Color.fromARGB(
-                                                            255, 35, 35, 35),
-                                                      );
-                                                    },
-                                                  )
-                                            : Image.file(
-                                                fit: BoxFit.cover,
-                                                File(provider.image!.path)
-                                                    .absolute)),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Colors.white,
+                                            width: 2,
+                                          )),
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          child: provider.image == null
+                                              ? map['profilePicStatus']
+                                                          .toString() ==
+                                                      "None"
+                                                  ? const Icon(
+                                                      Icons.person,
+                                                      size: 35,
+                                                    )
+                                                  : Image(
+                                                      fit: BoxFit.cover,
+                                                      image: NetworkImage(
+                                                          provider.imgURL),
+                                                      loadingBuilder: (context,
+                                                          child,
+                                                          loadingProgress) {
+                                                        if (loadingProgress ==
+                                                            null) {
+                                                          return child;
+                                                        }
+                                                        return const CircularProgressIndicator();
+                                                      },
+                                                      errorBuilder: (context,
+                                                          object, stack) {
+                                                        return const Icon(
+                                                          Icons.error_outline,
+                                                          color: Color.fromARGB(
+                                                              255, 35, 35, 35),
+                                                        );
+                                                      },
+                                                    )
+                                              : Image.file(
+                                                  fit: BoxFit.cover,
+                                                  File(provider.image!.path)
+                                                      .absolute)),
+                                    ),
                                   ),
                                 ),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  provider.pickImage(context);
-                                },
-                                child: const CircleAvatar(
-                                  radius: 15,
-                                  child: Icon(Icons.edit, size: 15),
+                              Positioned(
+                                bottom: -70,
+                                child: InkWell(
+                                  onTap: () {
+                                    provider.pickImage(context);
+                                  },
+                                  child: const CircleAvatar(
+                                    radius: 15,
+                                    child: Icon(Icons.edit, size: 15),
+                                  ),
                                 ),
                               )
                             ]),
                         const SizedBox(
-                          height: 25,
+                          height: 75,
                         ),
                         const Padding(
                           padding: EdgeInsets.all(8.0),
@@ -495,7 +501,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                 },
                                                 child: Container(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       vertical: 10,
                                                       horizontal: 20),
                                                   decoration: BoxDecoration(
@@ -550,7 +556,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                 },
                                                 child: Container(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       vertical: 10,
                                                       horizontal: 20),
                                                   decoration: BoxDecoration(
