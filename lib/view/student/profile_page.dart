@@ -71,9 +71,80 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     // final Storage storage = Storage();
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: SafeArea(
+    return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          actions: [
+            PopupMenuButton<String>(
+                icon: const Icon(Icons.more_vert), // Set the icon
+                onSelected: (value) {
+                  // Handle menu item selection here
+                  if (value == 'option1') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EditStudentProfile(),
+                      ),
+                    );
+                  } else if (value == 'option2') {
+                    // Do something for option 2
+                    _logout();
+                  }
+                },
+                itemBuilder: (BuildContext context) {
+                  return [
+                    const PopupMenuItem<String>(
+                      value: 'option1',
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.account_circle,
+                            color: Colors.black,
+                          ), // Icon for Option 1
+                          SizedBox(width: 8), // Add some spacing
+                          Text(
+                            'Edit Profile',
+                            style: TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const PopupMenuItem<String>(
+                      value: 'option2',
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.logout,
+                            color: Colors.black,
+                          ), // Icon for Option 2
+                          SizedBox(width: 8), // Add some spacing
+                          Text(
+                            'Log Out',
+                            style: TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ];
+                })
+          ],
+          backgroundColor: const Color(0xFFFF9343),
+          title: const Text(
+            "Profile",
+            style: TextStyle(
+              fontSize: 30,
+              fontFamily: 'GothamRnd',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        body: SafeArea(
             child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: StreamBuilder(
@@ -96,7 +167,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Container(
                           width: double.infinity,
-                          height: MediaQuery.of(context).size.height / 5,
+                          height: MediaQuery.of(context).size.height / 10,
                           decoration: const BoxDecoration(
                             color: Color(0xFFFF9343),
                             borderRadius: BorderRadius.only(
@@ -118,36 +189,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.topLeft,
-                              margin: const EdgeInsets.all(15),
-                              child: const Text(
-                                "Profile",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "GothamRnd",
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
-                            ),
-                            const Divider(
-                              indent: 30,
-                              endIndent: 30,
-                              thickness: 2,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
                         const SizedBox(
                           height: 20,
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * .12),
+                              top: MediaQuery.of(context).size.height / 30),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 30,
@@ -202,21 +249,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         Positioned(
                           left: MediaQuery.of(context).size.width / 2.5,
-                          top: MediaQuery.of(context).size.height * .21,
+                          top: MediaQuery.of(context).size.height / 10,
                           child: Row(
                             children: [
                               Text(
-                                firstName,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: "GothamRnd",
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.none),
-                              ),
-                              const SizedBox(width: 5),
-                              Text(
-                                lastName,
+                                "$firstName $lastName",
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontFamily: "GothamRnd",
@@ -229,47 +266,24 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ],
                     ),
-
                     const SizedBox(
                       height: 25,
                     ),
-
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        // update prolife logic
-                        children: [
-                          const Text(
-                            "Personal Information",
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 25),
+                          child: Text(
+                            'Personal Information',
                             style: TextStyle(
-                                decoration: TextDecoration.none,
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontFamily: "GothamRnd"),
+                                fontFamily: "GothamRnd",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20),
                           ),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: const Color(0xFFFF9343),
-                            ),
-                            child: IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const EditStudentProfile()),
-                                  );
-                                },
-                                icon: const Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                )),
-                          )
-                        ]),
-                    const SizedBox(
-                      height: 25,
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10),
@@ -399,43 +413,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ],
-                      ),
-                    ),
-                    // ReuseableRow(
-                    //     title: 'Name',
-                    //     value: '$firstName $lastName',
-                    //     iconData: Icons.person_outline),
-                    // ReuseableRow(
-                    //     title: 'Email', value: email, iconData: Icons.email),
-                    // ReuseableRow(
-                    //     title: 'Phone',
-                    //     value: mobileNumber,
-                    //     iconData: Icons.phone),
-                    // ReuseableRow(
-                    //     title: 'Section',
-                    //     value: section,
-                    //     iconData: Icons.group),
-
-                    //update profile button
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: const MaterialStatePropertyAll(
-                                Color(0xFFFF9343)),
-                            shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)))),
-                        onPressed: _logout,
-                        child: const Text(
-                          "Logout",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "GothamRnd",
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
                       ),
                     ),
                   ]);
