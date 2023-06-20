@@ -65,10 +65,13 @@ class ProfessorProfileController with ChangeNotifier {
                         Navigator.pop(context);
                       },
                       leading: const Icon(
-                        Icons.camera,
+                        Icons.camera_outlined,
                         color: Color.fromARGB(255, 35, 35, 35),
                       ),
-                      title: const Text('Camera'),
+                      title: const Text(
+                        'Camera',
+                        style: TextStyle(fontFamily: "GothamRnd"),
+                      ),
                     ),
                     ListTile(
                       onTap: () async {
@@ -82,10 +85,13 @@ class ProfessorProfileController with ChangeNotifier {
                         Navigator.pop(context);
                       },
                       leading: const Icon(
-                        Icons.image,
+                        Icons.image_outlined,
                         color: Color.fromARGB(255, 35, 35, 35),
                       ),
-                      title: const Text('Gallery'),
+                      title: const Text(
+                        'Gallery',
+                        style: TextStyle(fontFamily: "GothamRnd"),
+                      ),
                     ),
                   ],
                 )),
