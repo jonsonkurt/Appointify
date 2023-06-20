@@ -222,7 +222,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height / 5,
                     decoration: const BoxDecoration(
-                      color: Colors.orange,
+                      color: Color(0xff274C77),
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30.0),
                         bottomRight: Radius.circular(30.0),
@@ -384,10 +384,10 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10)),
-                                  color: Color(0xFF7778EE),
+                                  color: Color(0xFF6096BA),
                                 ),
                                 child: Text(
-                                  entry.key,
+                                  entry.key.substring(0, 3),
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
@@ -452,7 +452,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Color(
-                              0xFF7778EE), // Replace with your desired color
+                              0xFF6096BA), // Replace with your desired color
                         ),
                         child: const Icon(
                           Icons.calendar_today,
@@ -468,7 +468,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            color: const Color(0xFF7778EE),
+                            color: const Color(0xFF6096BA),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -480,19 +480,21 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: "GothamRnd-Light",
+                                      fontFamily: "GothamRnd",
                                       fontSize: 15,
-                                      fontWeight: FontWeight.normal,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.all(15.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFFD9D9D9),
+                                    color: Color(0xFFFFFFFF),
                                   ),
                                   child: Container(
                                     decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20)),
                                       color: Colors.white,
                                     ),
                                     child: TextField(
@@ -501,16 +503,22 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                       onTap: _showDatePicker,
                                       readOnly: true,
                                       decoration: const InputDecoration(
+                                        border: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                          color: Colors
+                                              .grey, // Set the desired border color here
+                                          width:
+                                              2.0, // Set the desired border width here
+                                        )),
                                         hintText: 'Date:',
                                         hintStyle: TextStyle(
-                                          fontFamily: "GothamRnd-Italic",
+                                          fontFamily: "GothamRnd",
                                           fontSize: 15,
-                                          fontStyle: FontStyle.italic,
+                                          fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.normal,
                                           color: Colors.grey,
                                         ),
-                                        border: InputBorder
-                                            .none, // Removes the border
+
                                         focusedBorder: InputBorder
                                             .none, // Removes the border when the TextField is focused
                                       ),
