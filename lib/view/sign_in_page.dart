@@ -32,7 +32,6 @@ class _SignInPageState extends State<SignInPage> {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -65,6 +64,7 @@ class _SignInPageState extends State<SignInPage> {
                 child: Center(
                   child: Image.asset(
                     'assets/images/sign_in.png',
+                    height: MediaQuery.of(context).size.height / 3.8,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -82,7 +82,7 @@ class _SignInPageState extends State<SignInPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 10),
                       const Text(
                         "Sign In",
                         style: TextStyle(
@@ -91,7 +91,7 @@ class _SignInPageState extends State<SignInPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 15),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -294,7 +294,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 20),
                       GestureDetector(
                         onTap: () {
                           _emailController.clear();
@@ -344,7 +344,6 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 55),
                     ],
                   ),
                 ),
