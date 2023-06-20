@@ -322,7 +322,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(10),
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     email,
@@ -364,7 +364,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 Container(
                                   alignment: Alignment.centerLeft,
-                                  padding: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(10),
                                   child: Text(
                                     section,
                                     style: const TextStyle(
@@ -405,7 +405,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 Container(
                                   alignment: Alignment.centerLeft,
-                                  padding: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(10),
                                   child: Text(
                                     mobileNumber,
                                     style: const TextStyle(
