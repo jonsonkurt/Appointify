@@ -233,6 +233,16 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                             clipBehavior: Clip.none,
                             children: [
                               Container(
+                                padding: EdgeInsets.all(
+                                    MediaQuery.of(context).size.width / 30),
+                                child: Text(
+                                  "Edit Profile",
+                                  style: TextStyle(
+                                      fontFamily: "GothamRnd",
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                                 width: double.infinity,
                                 height: MediaQuery.of(context).size.height / 5,
                                 decoration: const BoxDecoration(
@@ -344,8 +354,11 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   controller: _firstNameController,
                                   style: const TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(20.0),
+                                    contentPadding: EdgeInsets.all(
+                                        MediaQuery.of(context).size.width / 20),
                                     hintText: 'Enter your Name',
+                                    hintStyle:
+                                        TextStyle(fontFamily: "GothamRnd"),
                                     filled: true,
                                     fillColor: Colors.white,
                                     enabledBorder: OutlineInputBorder(
@@ -372,6 +385,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   style: const TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
                                     hintText: 'Professor',
+                                    hintStyle:
+                                        TextStyle(fontFamily: "GothamRnd"),
                                     filled: true,
                                     fillColor: Colors.white,
                                     enabledBorder: OutlineInputBorder(
@@ -398,6 +413,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   style: const TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
                                     hintText: 'Phone Number',
+                                    hintStyle:
+                                        TextStyle(fontFamily: "GothamRnd"),
                                     filled: true,
                                     fillColor: Colors.white,
                                     enabledBorder: OutlineInputBorder(
@@ -501,7 +518,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                 },
                                                 child: Container(
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 10,
                                                       horizontal: 20),
                                                   decoration: BoxDecoration(
@@ -556,7 +573,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                 },
                                                 child: Container(
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       vertical: 10,
                                                       horizontal: 20),
                                                   decoration: BoxDecoration(

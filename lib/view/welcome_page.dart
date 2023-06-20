@@ -113,6 +113,7 @@ class OnBoarding extends StatelessWidget {
         centerBackground: true,
         headerBackgroundColor: const Color(0xFFFF9343),
         finishButtonText: 'Get Started',
+        finishButtonTextStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 15),
         onFinish: () {
           Navigator.pushReplacement(
             context,
@@ -141,11 +142,13 @@ class OnBoarding extends StatelessWidget {
         ),
         skipTextButton: const Text(
           'Skip',
-          style: TextStyle(color: Colors.white, fontSize: 20),
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontFamily: "GothamRnd"),
         ),
         trailing: const Text(
           'Register',
-          style: TextStyle(color: Colors.white, fontSize: 20),
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontFamily: "GothamRnd"),
         ),
         trailingFunction: () {
           Navigator.push(
@@ -265,12 +268,15 @@ class OnBoarding extends StatelessWidget {
                 ),
                 Text(
                   "Seamlessly Connect with Professors,",
-                  style: TextStyle(fontFamily: 'GothamRnd-book', fontSize: 20),
+                  style: TextStyle(
+                    fontFamily: 'GothamRnd',
+                    fontSize: 18,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 Text(
                   "One Appointment at a Time",
-                  style: TextStyle(fontFamily: 'GothamRnd-book', fontSize: 20),
+                  style: TextStyle(fontFamily: 'GothamRnd', fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -285,12 +291,12 @@ class OnBoarding extends StatelessWidget {
                 ),
                 Text(
                   "Your Passport to Hassle-Free",
-                  style: TextStyle(fontFamily: 'GothamRnd-book', fontSize: 20),
+                  style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
                 Text(
                   "Appointments",
-                  style: TextStyle(fontFamily: 'GothamRnd-book', fontSize: 20),
+                  style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -305,12 +311,12 @@ class OnBoarding extends StatelessWidget {
                 ),
                 Text(
                   "Bridge the Gap and Book",
-                  style: TextStyle(fontFamily: 'GothamRnd-book', fontSize: 20),
+                  style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
                 Text(
                   "Your Success",
-                  style: TextStyle(fontFamily: 'GothamRnd-book', fontSize: 20),
+                  style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
               ],
