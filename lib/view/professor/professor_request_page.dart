@@ -464,13 +464,28 @@ class _RequestPageState extends State<RequestPage> {
                                                               onTap:
                                                                   _showDatePicker,
                                                               readOnly: true,
-                                                              decoration: const InputDecoration(
-                                                                  labelText:
-                                                                      'Select appointment date',
-                                                                  helperStyle:
-                                                                      TextStyle(
+                                                              decoration:
+                                                                  const InputDecoration(
+                                                                      enabledBorder:
+                                                                          OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(10)),
+                                                                        borderSide: BorderSide(
+                                                                            width:
+                                                                                1,
+                                                                            color:
+                                                                                Colors.black), //<-- SEE HERE
+                                                                      ),
+                                                                      labelText:
+                                                                          'Select appointment date',
+                                                                      labelStyle: TextStyle(
                                                                           fontFamily:
-                                                                              "GothamRnd")),
+                                                                              "GothamRnd",
+                                                                          fontSize:
+                                                                              12),
+                                                                      helperStyle:
+                                                                          TextStyle(
+                                                                              fontFamily: "GothamRnd")),
                                                             ),
                                                           ),
                                                         ],
@@ -489,13 +504,28 @@ class _RequestPageState extends State<RequestPage> {
                                                               onTap:
                                                                   _showTimePicker,
                                                               readOnly: true,
-                                                              decoration: const InputDecoration(
-                                                                  labelText:
-                                                                      'Select appointment time',
-                                                                  helperStyle:
-                                                                      TextStyle(
+                                                              decoration:
+                                                                  const InputDecoration(
+                                                                      enabledBorder:
+                                                                          OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(10)),
+                                                                        borderSide: BorderSide(
+                                                                            width:
+                                                                                1,
+                                                                            color:
+                                                                                Colors.black), //<-- SEE HERE
+                                                                      ),
+                                                                      labelText:
+                                                                          'Select appointment time',
+                                                                      labelStyle: TextStyle(
                                                                           fontFamily:
-                                                                              "GothamRnd")),
+                                                                              "GothamRnd",
+                                                                          fontSize:
+                                                                              12),
+                                                                      helperStyle:
+                                                                          TextStyle(
+                                                                              fontFamily: "GothamRnd")),
                                                             ),
                                                           ),
                                                         ],
@@ -508,7 +538,9 @@ class _RequestPageState extends State<RequestPage> {
                                                         'OK',
                                                         style: TextStyle(
                                                             fontFamily:
-                                                                "GothamRnd"),
+                                                                "GothamRnd",
+                                                            color: Color(
+                                                                0xFFFF9343)),
                                                       ),
                                                       onPressed: () async {
                                                         await appointmentsRef
@@ -538,7 +570,9 @@ class _RequestPageState extends State<RequestPage> {
                                                         'Cancel',
                                                         style: TextStyle(
                                                             fontFamily:
-                                                                "GothamRnd"),
+                                                                "GothamRnd",
+                                                            color: Color(
+                                                                0xFFFF9343)),
                                                       ),
                                                       onPressed: () {
                                                         Navigator.of(context)

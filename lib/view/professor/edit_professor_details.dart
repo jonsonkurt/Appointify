@@ -325,7 +325,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                             child: Text(
                               "Personal Information",
                               style: TextStyle(
-                                fontFamily: "GothamRnd-Bold",
+                                fontFamily: "GothamRnd",
                                 fontSize: 21,
                                 fontWeight: FontWeight.bold,
                               ),

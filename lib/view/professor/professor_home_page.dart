@@ -567,7 +567,7 @@ class _HomePageState extends State<HomePage> {
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .center,
+                                                            .spaceEvenly,
                                                     children: [
                                                       ElevatedButton.icon(
                                                         icon: const Icon(
