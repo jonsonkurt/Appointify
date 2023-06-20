@@ -86,7 +86,7 @@ class _SignInPageState extends State<SignInPage> {
                       const Text(
                         "Sign In",
                         style: TextStyle(
-                          fontFamily: "GothamRnd-Bold",
+                          fontFamily: "GothamRnd",
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
@@ -98,7 +98,7 @@ class _SignInPageState extends State<SignInPage> {
                           const Text(
                             "Email Address",
                             style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
+                              fontFamily: "GothamRnd",
                               color: Color(0xFF393838),
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -132,7 +132,7 @@ class _SignInPageState extends State<SignInPage> {
                           const Text(
                             "Password",
                             style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
+                              fontFamily: "GothamRnd",
                               color: Color(0xFF393838),
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -209,7 +209,7 @@ class _SignInPageState extends State<SignInPage> {
                           child: const Text(
                             "Forgot Password?",
                             style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
+                              fontFamily: "GothamRnd",
                               color: Color(0xFF393838),
                               fontSize: 10,
                               fontWeight: FontWeight.w700,
@@ -288,7 +288,7 @@ class _SignInPageState extends State<SignInPage> {
                           child: const Text(
                             'Sign In',
                             style: TextStyle(
-                              fontFamily: "GothamRnd-Medium.otf",
+                              fontFamily: "GothamRnd",
                               fontSize: 20,
                             ),
                           ),
@@ -326,7 +326,7 @@ class _SignInPageState extends State<SignInPage> {
                           text: const TextSpan(
                             text: "I'm a new user. ",
                             style: TextStyle(
-                              fontFamily: "GothamRnd-Medium",
+                              fontFamily: "GothamRnd",
                               color: Color(0xFF393838),
                               fontSize: 15,
                             ),
@@ -334,7 +334,7 @@ class _SignInPageState extends State<SignInPage> {
                               TextSpan(
                                 text: "Sign Up",
                                 style: TextStyle(
-                                  fontFamily: "GothamRnd-Medium",
+                                  fontFamily: "GothamRnd",
                                   color: Color(0xFFFF9343),
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
