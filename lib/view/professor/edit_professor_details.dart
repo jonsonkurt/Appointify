@@ -259,7 +259,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                           shape: BoxShape.circle,
                                           border: Border.all(
                                             color: Colors.white,
-                                            width: 2,
+                                            width: 5,
                                           )),
                                       child: ClipRRect(
                                           borderRadius:
@@ -303,23 +303,29 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ),
                               ),
                               Positioned(
-                                bottom: -70,
+                                right: 140,
+                                bottom: -50,
                                 child: InkWell(
                                   onTap: () {
                                     provider.pickImage(context);
                                   },
                                   child: const CircleAvatar(
+                                    backgroundColor: Color(0xFFFF9343),
                                     radius: 15,
-                                    child: Icon(Icons.edit, size: 15),
+                                    child: Icon(
+                                      Icons.add_a_photo,
+                                      size: 15,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               )
                             ]),
                         const SizedBox(
-                          height: 75,
+                          height: 80,
                         ),
                         const Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.only(left: 20),
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
@@ -333,108 +339,141 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Form(
                             key: _formKey,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 const SizedBox(height: 15.0),
-                                TextFormField(
-                                  controller: _firstNameController,
-                                  style: const TextStyle(color: Colors.black),
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(20.0),
-                                    hintText: 'Enter your Name',
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.black, width: 1.0),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.black, width: 2.0),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your Name';
-                                    }
-                                    return null; // Return null if there is no error
-                                  },
-                                ),
-                                const SizedBox(height: 15.0),
-                                TextFormField(
-                                  controller: _lastNameController,
-                                  style: const TextStyle(color: Colors.black),
-                                  decoration: InputDecoration(
-                                    hintText: 'Professor',
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.black, width: 1.0),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.black, width: 2.0),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your professor name';
-                                    }
-                                    return null; // Return null if there is no error
-                                  },
-                                ),
-                                const SizedBox(height: 15.0),
-                                TextFormField(
-                                  controller: _professionController,
-                                  style: const TextStyle(color: Colors.black),
-                                  decoration: InputDecoration(
-                                    hintText: 'Phone Number',
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.black, width: 1.0),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.black, width: 2.0),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your Profession';
-                                    }
-                                    return null; // Return null if there is no error
-                                  },
-                                ),
-                                const SizedBox(height: 16.0),
-                                const Text(
-                                  "Weekly Schedule",
-                                  style: TextStyle(
-                                      fontFamily: 'GothamRnd',
-                                      fontSize: 20,
+                                const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Name",
+                                    style: TextStyle(
+                                      fontFamily: "GothamRnd",
+                                      color: Color(0xFF393838),
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                      decoration: TextDecoration.none),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                Material(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: TextFormField(
+                                    controller: _firstNameController,
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(20.0),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your Name';
+                                      }
+                                      return null; // Return null if there is no error
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Profession",
+                                    style: TextStyle(
+                                      fontFamily: "GothamRnd",
+                                      color: Color(0xFF393838),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                Material(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: TextFormField(
+                                    controller: _professionController,
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your profession name';
+                                      }
+                                      return null; // Return null if there is no error
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Email Address",
+                                    style: TextStyle(
+                                      fontFamily: "GothamRnd",
+                                      color: Color(0xFF393838),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                Material(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: TextFormField(
+                                    controller: _emailController,
+                                    style: const TextStyle(color: Colors.black),
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your Profession';
+                                      }
+                                      return null; // Return null if there is no error
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(height: 20.0),
+                                const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Weekly Schedule",
+                                    style: TextStyle(
+                                        fontFamily: 'GothamRnd',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        decoration: TextDecoration.none),
+                                  ),
                                 ),
                                 const SizedBox(height: 16.0),
                                 Column(
                                   children: List.generate(6, (index) {
                                     bool isChecked =
                                         _checkboxValues[index] ?? false;
-                                    Color containerColor =
-                                        isChecked ? Colors.black : Colors.grey;
+
                                     Color textColor =
                                         isChecked ? Colors.black : Colors.grey;
 
@@ -442,145 +481,259 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                       children: [
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
+                                              MainAxisAlignment.start,
                                           children: [
-                                            Checkbox(
-                                              value: schedStartTime[index] !=
-                                                      '-'
-                                                  ? (_checkboxValues[index] ??
-                                                      true)
-                                                  : false,
-                                              onChanged: (newValue) {
-                                                setState(() {
-                                                  print(newValue);
-                                                  if (schedStartTime[index] !=
-                                                      '-') {
-                                                    _checkboxValues[index] =
-                                                        newValue;
-                                                  } else {
-                                                    schedStartTime[index] =
-                                                        "6:00 AM";
-                                                    schedEndTime[index] =
-                                                        "5:00 PM";
-                                                  }
-                                                });
-                                              },
-                                            ),
-                                            Text(
-                                              _getWeekdayNumber(index + 1)
-                                                  .substring(0, 3)
-                                                  .toUpperCase(),
-                                              style: const TextStyle(
-                                                fontFamily: 'GothamRnd',
-                                                fontWeight: FontWeight.normal,
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            IgnorePointer(
-                                              ignoring: !isChecked,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  _selectFromTime(
-                                                      context, index);
-                                                  setState(() {
-                                                    final format =
-                                                        DateFormat.jm();
-                                                    String test =
-                                                        DateFormat.jm().format(
-                                                            DateTime.now());
-
-                                                    final parsedTime =
-                                                        format.parse(test);
-                                                    final timeOfDay =
-                                                        TimeOfDay.fromDateTime(
-                                                            parsedTime);
-                                                    _selectedFromTimes[index] =
-                                                        timeOfDay;
-                                                  });
-                                                },
-                                                child: Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 20),
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: containerColor),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  child: Text(
-                                                    _selectedFromTimes[index] !=
-                                                            null
-                                                        ? _selectedFromTimes[
-                                                                index]!
-                                                            .format(context)
-                                                        : schedStartTime[index],
-                                                    style: TextStyle(
-                                                      color: textColor,
-                                                      fontSize: 16,
-                                                      fontFamily: 'GothamRnd',
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                            Column(
+                                              children: [
+                                                SizedBox(
+                                                  width:
+                                                      110, // Set the desired width
+                                                  height:
+                                                      50, // Set the desired height
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10), // Adjust the radius as needed
+                                                      color: const Color(
+                                                          0xFF7778EE),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 5.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            activeColor:
+                                                                Colors.white,
+                                                            checkColor:
+                                                                Colors.black,
+                                                            value: schedStartTime[
+                                                                        index] !=
+                                                                    '-'
+                                                                ? (_checkboxValues[
+                                                                        index] ??
+                                                                    true)
+                                                                : false,
+                                                            onChanged:
+                                                                (newValue) {
+                                                              setState(() {
+                                                                print(newValue);
+                                                                if (schedStartTime[
+                                                                        index] !=
+                                                                    '-') {
+                                                                  _checkboxValues[
+                                                                          index] =
+                                                                      newValue;
+                                                                } else {
+                                                                  schedStartTime[
+                                                                          index] =
+                                                                      "6:00 AM";
+                                                                  schedEndTime[
+                                                                          index] =
+                                                                      "5:00 PM";
+                                                                }
+                                                              });
+                                                            },
+                                                          ),
+                                                          Text(
+                                                            _getWeekdayNumber(
+                                                                    index + 1)
+                                                                .substring(0, 3)
+                                                                .toUpperCase(),
+                                                            style:
+                                                                const TextStyle(
+                                                              fontFamily:
+                                                                  'GothamRnd',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .normal,
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 16,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
+                                              ],
                                             ),
-                                            const Text(
-                                              '-',
-                                              style: TextStyle(fontSize: 16),
-                                            ),
-                                            IgnorePointer(
-                                              ignoring: !isChecked,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  _selectToTime(context, index);
-                                                  setState(() {
-                                                    final format =
-                                                        DateFormat.jm();
-                                                    String test =
-                                                        DateFormat.jm().format(
-                                                            DateTime.now());
-
-                                                    final parsedTime =
-                                                        format.parse(test);
-                                                    final timeOfDay =
-                                                        TimeOfDay.fromDateTime(
-                                                            parsedTime);
-                                                    _selectedToTimes[index] =
-                                                        timeOfDay;
-                                                  });
-                                                },
-                                                child: Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 20),
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: containerColor),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  child: Text(
-                                                    _selectedToTimes[index] !=
-                                                            null
-                                                        ? _selectedToTimes[
-                                                                index]!
-                                                            .format(context)
-                                                        : schedEndTime[index],
-                                                    style: TextStyle(
-                                                      color: textColor,
-                                                      fontSize: 16,
-                                                      fontFamily: 'GothamRnd',
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                            const SizedBox(width: 10.0),
+                                            Expanded(
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      const Color(0xFFD9D9D9),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    const SizedBox(width: 5),
+                                                    Container(
+                                                      width: 105,
+                                                      height: 38,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: IgnorePointer(
+                                                        ignoring: !isChecked,
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            _selectFromTime(
+                                                                context, index);
+                                                            setState(() {
+                                                              final format =
+                                                                  DateFormat
+                                                                      .jm();
+                                                              String test = DateFormat
+                                                                      .jm()
+                                                                  .format(DateTime
+                                                                      .now());
+                                                              final parsedTime =
+                                                                  format.parse(
+                                                                      test);
+                                                              final timeOfDay =
+                                                                  TimeOfDay
+                                                                      .fromDateTime(
+                                                                          parsedTime);
+                                                              _selectedFromTimes[
+                                                                      index] =
+                                                                  timeOfDay;
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical:
+                                                                        10,
+                                                                    horizontal:
+                                                                        18),
+                                                            child: Text(
+                                                              _selectedFromTimes[
+                                                                          index] !=
+                                                                      null
+                                                                  ? _selectedFromTimes[
+                                                                          index]!
+                                                                      .format(
+                                                                          context)
+                                                                  : schedStartTime[
+                                                                      index],
+                                                              style: TextStyle(
+                                                                color:
+                                                                    textColor,
+                                                                fontSize: 14,
+                                                                fontFamily:
+                                                                    'GothamRnd',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
+                                                    const Padding(
+                                                      padding:
+                                                          EdgeInsets.all(5.0),
+                                                      child: Text(
+                                                        '-',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'GothamRnd',
+                                                          color: Colors.black,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 105,
+                                                      height: 38,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: IgnorePointer(
+                                                        ignoring: !isChecked,
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            _selectToTime(
+                                                                context, index);
+                                                            setState(() {
+                                                              final format =
+                                                                  DateFormat
+                                                                      .jm();
+                                                              String test = DateFormat
+                                                                      .jm()
+                                                                  .format(DateTime
+                                                                      .now());
+                                                              final parsedTime =
+                                                                  format.parse(
+                                                                      test);
+                                                              final timeOfDay =
+                                                                  TimeOfDay
+                                                                      .fromDateTime(
+                                                                          parsedTime);
+                                                              _selectedToTimes[
+                                                                      index] =
+                                                                  timeOfDay;
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical:
+                                                                        10,
+                                                                    horizontal:
+                                                                        20),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                            ),
+                                                            child: Text(
+                                                              _selectedToTimes[
+                                                                          index] !=
+                                                                      null
+                                                                  ? _selectedToTimes[
+                                                                          index]!
+                                                                      .format(
+                                                                          context)
+                                                                  : schedEndTime[
+                                                                      index],
+                                                              style: TextStyle(
+                                                                color:
+                                                                    textColor,
+                                                                fontSize: 14,
+                                                                fontFamily:
+                                                                    'GothamRnd',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
@@ -591,7 +744,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     );
                                   }),
                                 ),
-                                const SizedBox(height: 16),
+                                const SizedBox(height: 8),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     fixedSize: const Size(155, 32),
