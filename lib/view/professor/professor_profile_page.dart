@@ -151,7 +151,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                   ];
                 })
           ],
-          backgroundColor: const Color(0xFFFF9343),
+          backgroundColor: const Color(0xFF274C77),
           title: const Text(
             "Profile",
             style: TextStyle(
@@ -191,7 +191,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               width: double.infinity,
                               height: MediaQuery.of(context).size.height / 10,
                               decoration: const BoxDecoration(
-                                color: Color(0xFFFF9343),
+                                color: Color(0xFF274C77),
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(30.0),
                                   bottomRight: Radius.circular(30.0),
@@ -287,7 +287,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                   ),
                                 ),
                                 FlutterSwitch(
-                                  activeColor: const Color(0xFFFF9343),
+                                  activeColor: const Color(0xFF6096BA),
                                   value: status1,
                                   height: 30.0,
                                   width: 55,
@@ -325,7 +325,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                       borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(10),
                                           topRight: Radius.circular(10)),
-                                      color: Color(0xFFFF9343),
+                                      color: Color(0xFF6096BA),
                                     ),
                                     child: const Padding(
                                       padding: EdgeInsets.all(10.0),
@@ -371,7 +371,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                       borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(10),
                                           topRight: Radius.circular(10)),
-                                      color: Color(0xFFFF9343),
+                                      color: Color(0xFF6096BA),
                                     ),
                                     padding: const EdgeInsets.all(10.0),
                                     child: const Text(
@@ -436,7 +436,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                                 width: 120,
                                                 height: 50,
                                                 decoration: const BoxDecoration(
-                                                    color: Color(0xFFFF9343),
+                                                    color: Color(0xFF6096BA),
                                                     borderRadius:
                                                         BorderRadius.only(
                                                             topLeft: Radius

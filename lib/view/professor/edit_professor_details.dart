@@ -76,7 +76,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
       builder: (BuildContext context, Widget? child) => Theme(
         data: ThemeData().copyWith(
           colorScheme: const ColorScheme.dark(
-            primary: Color(0xFF7778EE),
+            primary: Color(0xFF6096BA),
             onPrimary: Colors.grey,
             surface: Colors.white,
             onSurface: Colors.black,
@@ -100,7 +100,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
       builder: (BuildContext context, Widget? child) => Theme(
         data: ThemeData().copyWith(
           colorScheme: const ColorScheme.dark(
-            primary: Color(0xFF7778EE),
+            primary: Color(0xFF6096BA),
             onPrimary: Colors.grey,
             surface: Colors.white,
             onSurface: Colors.black,
@@ -246,7 +246,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 width: double.infinity,
                                 height: MediaQuery.of(context).size.height / 5,
                                 decoration: const BoxDecoration(
-                                  color: Color(0xFFFF9343),
+                                  color: Color(0xFF274C77),
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(30.0),
                                     bottomRight: Radius.circular(30.0),
@@ -299,8 +299,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                           object, stack) {
                                                         return const Icon(
                                                           Icons.error_outline,
-                                                          color: Color.fromARGB(
-                                                              255, 35, 35, 35),
+                                                          color:
+                                                              Color(0xFF6096BA),
                                                         );
                                                       },
                                                     )
@@ -320,7 +320,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     provider.pickImage(context);
                                   },
                                   child: const CircleAvatar(
-                                    backgroundColor: Color(0xFFFF9343),
+                                    backgroundColor: Color(0xFF6096BA),
                                     radius: 15,
                                     child: Icon(
                                       Icons.add_a_photo,
@@ -349,7 +349,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width / 60),
                           child: Form(
                             key: _formKey,
                             child: Column(
@@ -370,10 +371,13 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ),
                                 const SizedBox(height: 8.0),
                                 Material(
+                                  elevation: 5,
                                   borderRadius: BorderRadius.circular(30),
                                   child: TextFormField(
                                     controller: _firstNameController,
-                                    style: const TextStyle(color: Colors.black),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "GothamRnd"),
                                     decoration: InputDecoration(
                                       contentPadding:
                                           const EdgeInsets.all(20.0),
@@ -408,6 +412,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ),
                                 const SizedBox(height: 8.0),
                                 Material(
+                                  elevation: 5,
                                   borderRadius: BorderRadius.circular(30),
                                   child: TextFormField(
                                     controller: _professionController,
@@ -444,6 +449,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ),
                                 const SizedBox(height: 8.0),
                                 Material(
+                                  elevation: 5,
                                   borderRadius: BorderRadius.circular(30),
                                   child: TextFormField(
                                     controller: _emailController,
@@ -506,7 +512,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                           BorderRadius.circular(
                                                               10), // Adjust the radius as needed
                                                       color: const Color(
-                                                          0xFF7778EE),
+                                                          0xFF6096BA),
                                                     ),
                                                     child: Padding(
                                                       padding: const EdgeInsets
@@ -758,7 +764,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     fixedSize: const Size(155, 32),
-                                    backgroundColor: const Color(0xFF7778EE),
+                                    backgroundColor: const Color(0xFF6096BA),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                           10), // Adjust the radius as needed
@@ -821,7 +827,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     fixedSize: const Size(155, 32),
-                                    backgroundColor: const Color(0xFFFF9343),
+                                    backgroundColor: const Color(0xFF6096BA),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                           10), // Adjust the radius as needed

@@ -238,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                       width: 360,
                       height: 50,
                       indicator: const ContainerTabIndicator(
-                        color: Colors.orange,
+                        color: Color(0xFF274C77),
                         radius: BorderRadius.all(Radius.circular(20.0)),
                       ),
                       background: Container(
@@ -333,10 +333,11 @@ class _HomePageState extends State<HomePage> {
                                       padding:
                                           const EdgeInsets.only(bottom: 30),
                                       child: Card(
+                                        elevation: 10,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20)),
-                                        color: Colors.grey,
+                                        color: Colors.white,
                                         margin: EdgeInsets.only(
                                             left: MediaQuery.of(context)
                                                     .size
@@ -486,20 +487,30 @@ class _HomePageState extends State<HomePage> {
                                                           .size
                                                           .width /
                                                       15),
-                                              decoration: const BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                                color: Colors.white,
-                                              ),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                    width: 2,
+                                                  )),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 30,
-                                                            left: 20),
+                                                    padding: EdgeInsets.only(
+                                                        right: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            20,
+                                                        left: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            20),
                                                     child: Row(
                                                       children: [
                                                         const Icon(
@@ -555,15 +566,12 @@ class _HomePageState extends State<HomePage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      1,
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height /
-                                                      10,
+                                                Padding(
+                                                  padding: EdgeInsets.all(
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          130),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -600,7 +608,7 @@ class _HomePageState extends State<HomePage> {
                                                           backgroundColor:
                                                               MaterialStatePropertyAll(
                                                             Color(
-                                                                0xFFFF9343), // card button color
+                                                                0xFF6096BA), // card button color
                                                           ),
                                                         ),
                                                         onPressed: () {
@@ -767,7 +775,7 @@ class _HomePageState extends State<HomePage> {
                                                           backgroundColor:
                                                               MaterialStatePropertyAll(
                                                             Color(
-                                                                0xFFFF9343), // card button color
+                                                                0xFF6096BA), // card button color
                                                           ),
                                                         ),
                                                         onPressed: () {
@@ -888,7 +896,7 @@ class _HomePageState extends State<HomePage> {
                                                           backgroundColor:
                                                               MaterialStatePropertyAll(
                                                             Color(
-                                                                0xFFFF9343), // card button color
+                                                                0xFF6096BA), // card button color
                                                           ),
                                                         ),
                                                         onPressed: () {
@@ -1007,10 +1015,273 @@ class _HomePageState extends State<HomePage> {
                                       padding:
                                           const EdgeInsets.only(bottom: 20),
                                       child: Card(
+                                        elevation: 10,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20)),
-                                        color: Colors.grey,
+                                        color: Colors.white,
+                                        margin: EdgeInsets.only(
+                                            left: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                20,
+                                            right: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                20),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            const SizedBox(height: 15),
+                                            Flexible(
+                                              child: FirebaseAnimatedList(
+                                                query: studentsRef
+                                                    .orderByChild('UID')
+                                                    .equalTo(snapshot
+                                                        .child('studentID')
+                                                        .value
+                                                        .toString()),
+                                                itemBuilder: (context, snapshot,
+                                                    animation, index) {
+                                                  return SizedBox(
+                                                    child: Row(
+                                                      children: [
+                                                        const SizedBox(
+                                                            width: 10),
+                                                        Container(
+                                                          height: 60,
+                                                          width: 60,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: const Color
+                                                                            .fromARGB(
+                                                                        255,
+                                                                        35,
+                                                                        35,
+                                                                        35),
+                                                                    width: 2,
+                                                                  )),
+                                                          child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          100),
+                                                              child: ProfileController()
+                                                                          .image ==
+                                                                      null
+                                                                  ? snapshot.child('profilePicStatus').value.toString() ==
+                                                                          "None"
+                                                                      ? const Icon(
+                                                                          Icons
+                                                                              .person,
+                                                                          size:
+                                                                              35,
+                                                                        )
+                                                                      : Image(
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                          image: NetworkImage(snapshot
+                                                                              .child('profilePicStatus')
+                                                                              .value
+                                                                              .toString()),
+                                                                          loadingBuilder: (context,
+                                                                              child,
+                                                                              loadingProgress) {
+                                                                            if (loadingProgress ==
+                                                                                null) {
+                                                                              return child;
+                                                                            }
+                                                                            return const CircularProgressIndicator();
+                                                                          },
+                                                                          errorBuilder: (context,
+                                                                              object,
+                                                                              stack) {
+                                                                            return const Icon(
+                                                                              Icons.error_outline,
+                                                                              color: Color.fromARGB(255, 35, 35, 35),
+                                                                            );
+                                                                          },
+                                                                        )
+                                                                  : Image.file(File(ProfileController()
+                                                                          .image!
+                                                                          .path)
+                                                                      .absolute)),
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              studentName,
+                                                              style: const TextStyle(
+                                                                  fontSize: 20,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontFamily:
+                                                                      "GothamRnd"),
+                                                            ),
+                                                            Text(
+                                                              studentSection,
+                                                              style: const TextStyle(
+                                                                  fontSize: 15,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontFamily:
+                                                                      "GothamRnd"),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  bottom: MediaQuery.of(context)
+                                                          .size
+                                                          .height /
+                                                      100,
+                                                  left: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      15,
+                                                  right: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      15),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  0.5,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  25,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  color: Colors.white,
+                                                  border: Border.all(width: 2)),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons
+                                                            .calendar_month_outlined,
+                                                        color: Colors.black,
+                                                      ),
+                                                      Text(
+                                                        snapshot
+                                                            .child('date')
+                                                            .value
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontFamily:
+                                                                "GothamRnd"),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons
+                                                            .watch_later_outlined,
+                                                        color: Colors.black,
+                                                      ),
+                                                      Text(
+                                                        snapshot
+                                                            .child('time')
+                                                            .value
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontFamily:
+                                                                "GothamRnd"),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ));
+                              },
+                            ),
+                          ),
+                        ),
+
+                      // Tab for Canceled
+                      if (isEmptyCanceled)
+                        const SizedBox(
+                          // color: Colors.red,
+                          height: 125,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "No Available Data",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "GothamRnd"),
+                              ),
+                            ],
+                          ),
+                        ),
+                      if (!isEmptyCanceled)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: SizedBox(
+                            width: 350,
+                            height: 600,
+                            child: FirebaseAnimatedList(
+                              query: canceledRef
+                                  .orderByChild('requestStatusProfessor')
+                                  .startAt("$userID-CANCELED")
+                                  .endAt("$userID-CANCELED\uf8ff"),
+                              itemBuilder:
+                                  (context, snapshot, animation, index) {
+                                String studentName = snapshot
+                                    .child('studentName')
+                                    .value
+                                    .toString();
+                                String studentSection =
+                                    snapshot.child('section').value.toString();
+                                return SizedBox(
+                                    height: 140,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 20),
+                                      child: Card(
+                                        elevation: 10,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        color: Colors.white,
                                         margin: EdgeInsets.only(
                                             left: MediaQuery.of(context)
                                                     .size
@@ -1166,276 +1437,24 @@ class _HomePageState extends State<HomePage> {
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(10)),
                                                 color: Colors.white,
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      const Icon(
-                                                        Icons
-                                                            .calendar_month_outlined,
-                                                        color: Colors.black,
-                                                      ),
-                                                      Text(
-                                                        snapshot
-                                                            .child('date')
-                                                            .value
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                            color: Colors.black,
-                                                            fontFamily:
-                                                                "GothamRnd"),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      const Icon(
-                                                        Icons
-                                                            .watch_later_outlined,
-                                                        color: Colors.black,
-                                                      ),
-                                                      Text(
-                                                        snapshot
-                                                            .child('time')
-                                                            .value
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                            color: Colors.black,
-                                                            fontFamily:
-                                                                "GothamRnd"),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ));
-                              },
-                            ),
-                          ),
-                        ),
-
-                      // Tab for Canceled
-                      if (isEmptyCanceled)
-                        const SizedBox(
-                          // color: Colors.red,
-                          height: 125,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "No Available Data",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "GothamRnd"),
-                              ),
-                            ],
-                          ),
-                        ),
-                      if (!isEmptyCanceled)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: SizedBox(
-                            width: 350,
-                            height: 600,
-                            child: FirebaseAnimatedList(
-                              query: canceledRef
-                                  .orderByChild('requestStatusProfessor')
-                                  .startAt("$userID-CANCELED")
-                                  .endAt("$userID-CANCELED\uf8ff"),
-                              itemBuilder:
-                                  (context, snapshot, animation, index) {
-                                String studentName = snapshot
-                                    .child('studentName')
-                                    .value
-                                    .toString();
-                                String studentSection =
-                                    snapshot.child('section').value.toString();
-                                return SizedBox(
-                                    height: 140,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 20),
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        color: Colors.grey,
-                                        margin: EdgeInsets.only(
-                                            left: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                20,
-                                            right: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                20),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            const SizedBox(height: 15),
-                                            Flexible(
-                                              child: FirebaseAnimatedList(
-                                                query: studentsRef
-                                                    .orderByChild('UID')
-                                                    .equalTo(snapshot
-                                                        .child('studentID')
-                                                        .value
-                                                        .toString()),
-                                                itemBuilder: (context, snapshot,
-                                                    animation, index) {
-                                                  return SizedBox(
-                                                    child: Row(
-                                                      children: [
-                                                        const SizedBox(
-                                                            width: 10),
-                                                        Container(
-                                                          height: 60,
-                                                          width: 60,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: const Color
-                                                                            .fromARGB(
-                                                                        255,
-                                                                        35,
-                                                                        35,
-                                                                        35),
-                                                                    width: 2,
-                                                                  )),
-                                                          child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          100),
-                                                              child: ProfileController()
-                                                                          .image ==
-                                                                      null
-                                                                  ? snapshot.child('profilePicStatus').value.toString() ==
-                                                                          "None"
-                                                                      ? const Icon(
-                                                                          Icons
-                                                                              .person,
-                                                                          size:
-                                                                              35,
-                                                                        )
-                                                                      : Image(
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                          image: NetworkImage(snapshot
-                                                                              .child('profilePicStatus')
-                                                                              .value
-                                                                              .toString()),
-                                                                          loadingBuilder: (context,
-                                                                              child,
-                                                                              loadingProgress) {
-                                                                            if (loadingProgress ==
-                                                                                null) {
-                                                                              return child;
-                                                                            }
-                                                                            return const CircularProgressIndicator();
-                                                                          },
-                                                                          errorBuilder: (context,
-                                                                              object,
-                                                                              stack) {
-                                                                            return const Icon(
-                                                                              Icons.error_outline,
-                                                                              color: Color.fromARGB(255, 35, 35, 35),
-                                                                            );
-                                                                          },
-                                                                        )
-                                                                  : Image.file(File(ProfileController()
-                                                                          .image!
-                                                                          .path)
-                                                                      .absolute)),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 20,
-                                                        ),
-                                                        Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              studentName,
-                                                              style: const TextStyle(
-                                                                  fontSize: 20,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontFamily:
-                                                                      "GothamRnd"),
-                                                            ),
-                                                            Text(
-                                                              studentSection,
-                                                              style: const TextStyle(
-                                                                  fontSize: 15,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontFamily:
-                                                                      "GothamRnd"),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  bottom: MediaQuery.of(context)
-                                                          .size
-                                                          .height /
-                                                      100,
-                                                  left: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      15,
-                                                  right: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      15),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  0.5,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  25,
-                                              decoration: const BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                                color: Colors.white,
+                                                border: Border.all(width: 2),
                                               ),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 30,
-                                                            left: 20),
+                                                    padding: EdgeInsets.only(
+                                                        right: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            20,
+                                                        left: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            20),
                                                     child: Row(
                                                       children: [
                                                         const Icon(

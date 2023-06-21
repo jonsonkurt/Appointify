@@ -27,10 +27,12 @@ class _ProfessorBottomNavigationState extends State<ProfessorBottomNavigation> {
       home: Scaffold(
         bottomNavigationBar: SafeArea(
           child: SalomonBottomBar(
+            selectedColorOpacity: 0,
             margin: const EdgeInsets.only(left: 50, right: 60),
-            itemPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            itemPadding:
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             currentIndex: currentIndex,
-            backgroundColor: const Color(0xFFFF9343),
+            backgroundColor: const Color(0xFF274C77),
             items: [
               SalomonBottomBarItem(
                 icon: const Icon(Icons.home),
