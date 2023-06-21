@@ -28,34 +28,40 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return Scaffold(
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(
+          mediaQuery.size.height * 0.1,
+        ),
+        child: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: Padding(
+            padding: EdgeInsets.fromLTRB(
+              mediaQuery.size.width * 0.035,
+              mediaQuery.size.height * 0.028,
+              0,
+              0,
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const WelcomePage()),
+                );
+              },
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+            ),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: SizedBox(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(
-                height: kToolbarHeight,
-                child: PreferredSize(
-                  preferredSize: const Size.fromHeight(kToolbarHeight),
-                  child: Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: Alignment.centerLeft,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const WelcomePage()),
-                        );
-                      },
-                      child: const Icon(Icons.arrow_back, color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.only(
@@ -178,11 +184,6 @@ class _SignInPageState extends State<SignInPage> {
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
                           onTap: () {
-                            // _emailController.clear();
-                            // _passwordController
-                            //     .clear(); // Handle forgot password
-                            // ignore: use_build_context_synchronously
-
                             Navigator.push(
                               context,
                               PageRouteBuilder(
@@ -230,6 +231,8 @@ class _SignInPageState extends State<SignInPage> {
                             if (email == getCred) {
                               // print("I/'m an admin");
                               if (isPasswordCorrect) {
+                                _emailController.clear();
+                                _passwordController.clear();
                                 // ignore: use_build_context_synchronously
                                 Navigator.pushReplacement(
                                     context,
@@ -237,27 +240,23 @@ class _SignInPageState extends State<SignInPage> {
                                         builder: (context) =>
                                             const BottomNavigationAdmin()));
                               } else {
-                                logger.d('Password is incorrect');
+                                // ignore: use_build_context_synchronously
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content:
+                                        Text('Admin password is incorrect.'),
+                                  ),
+                                );
                               }
                             } else {
-                              // if (email == getCred) {
-                              //   // print("I/'m an admin");
-                              //   if (isPasswordCorrect) {
-                              //     // ignore: use_build_context_synchronously
-                              //     Navigator.push(
-                              //         context,
-                              //         MaterialPageRoute(
-                              //             builder: (context) =>
-                              //                 const BottomNavigationAdmin()));
-                              //   } else {
-                              //     logger.d('Password is incorrect');
-                              //   }
-                              // } else {
                               try {
                                 // ignore: unused_local_variable
                                 final credential = await FirebaseAuth.instance
                                     .signInWithEmailAndPassword(
                                         email: email, password: password);
+
+                                _emailController.clear();
+                                _passwordController.clear();
 
                                 // ignore: use_build_context_synchronously
                                 Navigator.pushReplacement(
@@ -267,14 +266,25 @@ class _SignInPageState extends State<SignInPage> {
                                             const LoadingPage()));
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'user-not-found') {
-                                  //  print('No user found for that email.');
+                                  // ignore: use_build_context_synchronously
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content:
+                                          Text('No user found for that email.'),
+                                    ),
+                                  );
+                                  _emailController.clear();
+                                  _passwordController.clear();
                                 } else if (e.code == 'wrong-password') {
-                                  // print('Wrong password provided for that user.');
+                                  // ignore: use_build_context_synchronously
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Password is incorrect.'),
+                                    ),
+                                  );
                                 }
                               }
                             }
-                            _emailController.clear();
-                            _passwordController.clear();
                           }, // Handle sign in
 
                           style: ElevatedButton.styleFrom(

@@ -1,7 +1,6 @@
 import 'package:appointify/view/student/bottom_navigation_bar.dart';
 import 'package:appointify/view/sign_in_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -35,36 +34,38 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final firebaseApp = Firebase.app();
-    final rtdb = FirebaseDatabase.instanceFor(
-        app: firebaseApp,
-        databaseURL:
-            'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/');
-
+    final mediaQuery = MediaQuery.of(context);
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(
+          mediaQuery.size.height * 0.1,
+        ),
+        child: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: Padding(
+            padding: EdgeInsets.fromLTRB(
+              mediaQuery.size.width * 0.035,
+              mediaQuery.size.height * 0.028,
+              0,
+              0,
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+            ),
+          ),
+        ),
+      ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(
-                height: kToolbarHeight,
-                child: PreferredSize(
-                  preferredSize: const Size.fromHeight(kToolbarHeight),
-                  child: Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: Alignment.centerLeft,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(Icons.arrow_back, color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
               Container(
                 decoration: const BoxDecoration(
                   color: Color(0xFFF2F2F2),
@@ -305,7 +306,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                   FirebaseAuth.instance.currentUser?.uid;
                               final fcmToken =
                                   await FirebaseMessaging.instance.getToken();
-                              await rtdb.ref("students/$userID").set({
+                              await FirebaseDatabase.instance
+                                  .ref("students/$userID")
+                                  .set({
                                 "firstName": firstName,
                                 "lastName": lastName,
                                 "designation": "Student",
