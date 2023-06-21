@@ -232,7 +232,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                   Padding(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height / 10,
-                        left: MediaQuery.of(context).size.height / 6),
+                        left: MediaQuery.of(context).size.height / 5),
                     child: Container(
                       // pa media querry nito salamat
                       height: 130,
@@ -357,71 +357,63 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                   ),
                 ),
               ),
+              const SizedBox(height: 5),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(12),
-                child: Row(
-                  children: [
-                    for (var entry in myDictionary.entries.toList()
-                      ..sort((a, b) => _getWeekdayNumber(a.key)
-                          .compareTo(_getWeekdayNumber(b.key))))
-                      if (entry.value != '-')
-                        Card(
-                          elevation: 5.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          margin: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 10, top: 10),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 25,
-                                  vertical: 15,
-                                ),
-                                alignment: Alignment.center,
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10)),
-                                  color: Color(0xFF6096BA),
-                                ),
-                                child: Text(
-                                  entry.key.substring(0, 3),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width / 25),
+                  child: Row(
+                    children: [
+                      for (var entry in myDictionary.entries.toList()
+                        ..sort((a, b) => _getWeekdayNumber(a.key)
+                            .compareTo(_getWeekdayNumber(b.key))))
+                        if (entry.value != '-')
+                          SizedBox(
+                            child: Card(
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+                                  Container(
+                                      alignment: Alignment.center,
+                                      width: 120,
+                                      height: 50,
+                                      decoration: const BoxDecoration(
+                                          color: Color(0xFF6096BA),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(10),
+                                              topRight: Radius.circular(10))),
+                                      child: Text(
+                                        entry.key.substring(0, 3).toUpperCase(),
+                                        style: const TextStyle(
+                                            fontFamily: 'GothamRnd',
+                                            color: Colors.white),
+                                      )),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "${entry.value.split(' to ').join('\nto\n')}",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontFamily: 'GothamRnd',
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  // Container(
+                                  //   padding: EdgeInsets.all(10),
+                                  //   alignment: Alignment.center,
+                                  //   child: Text("${entry.value}")
+                                  //   ),
+                                ],
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(10.0),
-                                alignment: Alignment.centerLeft,
-                                decoration: const BoxDecoration(
-                                  color: Colors
-                                      .white, // Set the background color of the box
-                                  borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(15),
-                                    bottomLeft: Radius.circular(15),
-                                  ),
-                                ),
-                                child: Text(
-                                  "${entry.value.split(' to ').join('\nto\n')}",
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
+              const SizedBox(height: 5),
               Padding(
                 padding: const EdgeInsets.only(
                   left: 20,
