@@ -158,7 +158,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height / 5,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFFF9343),
+                  color: Color(0xFF274C77),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0),
@@ -193,7 +193,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                 child: const Text(
                   "Admin",
                   style: TextStyle(
-                    fontFamily: "GothamRnd-Bold",
+                    fontFamily: "GothamRnd",
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
@@ -205,7 +205,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
               onPressed: _showPasswordModal,
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(200, 40),
-                backgroundColor: const Color(0xFFFF9343),
+                backgroundColor: const Color(0xFF6096BA),
                 shape: RoundedRectangleBorder(
                   borderRadius:
                       BorderRadius.circular(10), // Adjust the radius as needed
@@ -215,7 +215,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                 "Update Password",
                 style: TextStyle(
                   fontSize: 18,
-                  fontFamily: "GothamRnd-Light",
+                  fontFamily: "GothamRnd",
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -225,7 +225,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
               onPressed: _logout,
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(130, 10),
-                backgroundColor: const Color(0xFF7778EE),
+                backgroundColor: const Color(0xFFA3CEF1),
                 shape: RoundedRectangleBorder(
                   borderRadius:
                       BorderRadius.circular(5), // Adjust the radius as needed
@@ -235,7 +235,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                 "Logout",
                 style: TextStyle(
                   fontSize: 18,
-                  fontFamily: "GothamRnd-Light",
+                  fontFamily: "GothamRnd",
                   fontWeight: FontWeight.normal,
                 ),
               ),
