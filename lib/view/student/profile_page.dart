@@ -195,7 +195,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Padding(
                           padding: EdgeInsets.only(
                               top: MediaQuery.of(context).size.height / 30,
-                              left: MediaQuery.of(context).size.height / 7.5),
+                              left: MediaQuery.of(context).size.height / 6),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 30,
