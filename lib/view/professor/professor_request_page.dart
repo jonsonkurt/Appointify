@@ -115,7 +115,7 @@ class _RequestPageState extends State<RequestPage> {
                 ),
                 const Divider(
                   color: Colors.black,
-                  thickness: 2,
+                  thickness: 1,
                 ),
                 SearchBox(onSearch: _handleSearch),
                 if (isEmptyPending)
@@ -179,9 +179,10 @@ class _RequestPageState extends State<RequestPage> {
                         return SizedBox(
                           height: 210,
                           child: Card(
+                              elevation: 10,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
-                              color: Colors.grey,
+                              color: Colors.white,
                               margin: const EdgeInsets.only(
                                   top: 20, left: 17, right: 17),
                               child: Column(
@@ -321,10 +322,15 @@ class _RequestPageState extends State<RequestPage> {
                                   // ),
                                   Container(
                                     alignment: Alignment.center,
-                                    margin: const EdgeInsets.only(top: 10),
-                                    width: 340,
+                                    margin: EdgeInsets.only(
+                                        top:
+                                            MediaQuery.of(context).size.height /
+                                                60),
+                                    width: MediaQuery.of(context).size.width /
+                                        1.25,
                                     height: 30,
-                                    decoration: const BoxDecoration(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 1),
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(10)),
                                       color: Colors.white,
@@ -383,7 +389,7 @@ class _RequestPageState extends State<RequestPage> {
                                           style: const ButtonStyle(
                                             backgroundColor:
                                                 MaterialStatePropertyAll(
-                                                    Color(0xFFFF9343)),
+                                                    Color(0xFF6096BA)),
                                             fixedSize: MaterialStatePropertyAll(
                                                 Size(100, 20)),
                                             shape: MaterialStatePropertyAll(
@@ -417,7 +423,7 @@ class _RequestPageState extends State<RequestPage> {
                                           style: const ButtonStyle(
                                             backgroundColor:
                                                 MaterialStatePropertyAll(
-                                                    Color(0xFFFF9343)),
+                                                    Color(0xFF6096BA)),
                                             fixedSize: MaterialStatePropertyAll(
                                                 Size(100, 20)),
                                             shape: MaterialStatePropertyAll(
@@ -540,7 +546,7 @@ class _RequestPageState extends State<RequestPage> {
                                                             fontFamily:
                                                                 "GothamRnd",
                                                             color: Color(
-                                                                0xFFFF9343)),
+                                                                0xFF6096BA)),
                                                       ),
                                                       onPressed: () async {
                                                         await appointmentsRef
@@ -572,7 +578,7 @@ class _RequestPageState extends State<RequestPage> {
                                                             fontFamily:
                                                                 "GothamRnd",
                                                             color: Color(
-                                                                0xFFFF9343)),
+                                                                0xFF6096BA)),
                                                       ),
                                                       onPressed: () {
                                                         Navigator.of(context)
@@ -590,7 +596,7 @@ class _RequestPageState extends State<RequestPage> {
                                           style: const ButtonStyle(
                                             backgroundColor:
                                                 MaterialStatePropertyAll(
-                                                    Color(0xFFFF9343)),
+                                                    Color(0xFF6096BA)),
                                             fixedSize: MaterialStatePropertyAll(
                                                 Size(80, 20)),
                                             shape: MaterialStatePropertyAll(
@@ -729,12 +735,13 @@ class _SearchBoxState extends State<SearchBox> {
         controller: _searchController,
         decoration: const InputDecoration(
           labelText: 'Search',
-          labelStyle: TextStyle(fontFamily: "GothamRnd"),
+          labelStyle: TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
           prefixIcon: Icon(
             Icons.search,
-            color: Color(0xFFFF9343),
+            color: Color(0xFF6096BA),
           ),
           border: OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFF274C77)),
               borderRadius: BorderRadius.all(Radius.circular(20))),
         ),
         onChanged: widget.onSearch,
