@@ -24,7 +24,7 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color(0xffFF9343),
+        backgroundColor: const Color(0xff274C77),
         bottomNavigationBar: SafeArea(
           child: SalomonBottomBar(
             selectedColorOpacity: 0,

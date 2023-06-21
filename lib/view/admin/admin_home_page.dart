@@ -469,7 +469,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                       style: ElevatedButton.styleFrom(
                                         fixedSize: const Size(203, 50),
                                         backgroundColor:
-                                            const Color(0xFFFF9343),
+                                            const Color(0xFF274C77),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
                                               10), // Adjust the radius as needed
@@ -591,7 +591,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
           style: TextStyle(fontFamily: "GothamRnd"),
         ),
         icon: const Icon(Icons.add),
-        backgroundColor: const Color(0xFFFF9343),
+        backgroundColor: const Color(0xFF274C77),
       ),
 
       // Text("Hi, I'm Admin"),
@@ -660,17 +660,17 @@ class _SearchBoxState extends State<SearchBox> {
               ),
               enabledBorder: OutlineInputBorder(
                 borderSide:
-                    const BorderSide(color: Color(0xffFF9343), width: 1.0),
+                    const BorderSide(color: Color(0xff274C77), width: 1.0),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide:
-                    const BorderSide(color: Color(0xffFF9343), width: 2.0),
+                    const BorderSide(color: Color(0xff274C77), width: 2.0),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               prefixIcon: const Icon(
                 Icons.search,
-                color: Color(0xffFF9343),
+                color: Color(0xff274C77),
               ),
               border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(

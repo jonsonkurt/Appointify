@@ -30,7 +30,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               child: PreferredSize(
                 preferredSize: const Size.fromHeight(kToolbarHeight),
                 child: Container(
-                  color: const Color(0xFFFF9343),
+                  color: const Color(0xFF274C77),
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   alignment: Alignment.centerLeft,
                   child: GestureDetector(
@@ -51,7 +51,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height / 5,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFFF9343),
+                  color: Color(0xFF274C77),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0),
@@ -142,7 +142,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               },
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(203, 50),
-                backgroundColor: const Color(0xFFFF9343),
+                backgroundColor: const Color(0xFF274C77),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

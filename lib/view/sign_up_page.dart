@@ -220,7 +220,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         _passwordVisible
                                             ? Icons.visibility
                                             : Icons.visibility_off,
-                                        color: const Color(0xFFFF9343),
+                                        color: const Color(0xFF274C77),
                                       ),
                                     ),
                                   ),
@@ -264,7 +264,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         _conpasswordVisible
                                             ? Icons.visibility
                                             : Icons.visibility_off,
-                                        color: const Color(0xFFFF9343),
+                                        color: const Color(0xFF274C77),
                                       ),
                                     ),
                                   ),
@@ -359,7 +359,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(203, 50),
-                          backgroundColor: const Color(0xFFFF9343),
+                          backgroundColor: const Color(0xFF274C77),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 10), // Adjust the radius as needed
@@ -415,7 +415,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 text: "Sign In",
                                 style: TextStyle(
                                   fontFamily: "GothamRnd",
-                                  color: Color(0xFFFF9343),
+                                  color: Color(0xFF274C77),
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),

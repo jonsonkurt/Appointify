@@ -111,7 +111,7 @@ class OnBoarding extends StatelessWidget {
       home: OnBoardingSlider(
         pageBackgroundColor: Colors.white,
         centerBackground: true,
-        headerBackgroundColor: const Color(0xFFFF9343),
+        headerBackgroundColor: const Color(0xFF274C77),
         finishButtonText: 'Get Started',
         finishButtonTextStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 15),
         onFinish: () {
@@ -138,7 +138,7 @@ class OnBoarding extends StatelessWidget {
           );
         },
         finishButtonStyle: const FinishButtonStyle(
-          backgroundColor: Color(0xFFFF9343),
+          backgroundColor: Color(0xFF274C77),
         ),
         skipTextButton: const Text(
           'Skip',
@@ -168,7 +168,7 @@ class OnBoarding extends StatelessWidget {
                   height: 500, // Set the height of the container
                   decoration: const BoxDecoration(
                     color: Color(
-                        0xFFFF9343), // Set the background color of the box
+                        0xFF274C77), // Set the background color of the box
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.elliptical(300, 150),
                       bottomLeft: Radius.elliptical(300, 150),
@@ -185,7 +185,7 @@ class OnBoarding extends StatelessWidget {
                           const SizedBox(
                             height: 30,
                           ),
-                          Image.asset('assets/images/Appointify1.png'),
+                          Image.asset('assets/images/Appointify.png'),
                         ],
                       )),
                 )
@@ -201,7 +201,7 @@ class OnBoarding extends StatelessWidget {
                   height: 500, // Set the height of the container
                   decoration: const BoxDecoration(
                     color: Color(
-                        0xFFFF9343), // Set the background color of the box
+                        0xFF274C77), // Set the background color of the box
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.elliptical(300, 150),
                       bottomLeft: Radius.elliptical(300, 150),
@@ -215,7 +215,7 @@ class OnBoarding extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Image.asset('assets/images/welcome_logo2.png'),
-                          Image.asset('assets/images/Appointify1.png'),
+                          Image.asset('assets/images/Appointify.png'),
                         ],
                       )),
                 ),
@@ -231,7 +231,7 @@ class OnBoarding extends StatelessWidget {
                   height: 500, // Set the height of the container
                   decoration: const BoxDecoration(
                     color: Color(
-                        0xFFFF9343), // Set the background color of the box
+                        0xFF274C77), // Set the background color of the box
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.elliptical(300, 150),
                       bottomLeft: Radius.elliptical(300, 150),
@@ -248,7 +248,7 @@ class OnBoarding extends StatelessWidget {
                           const SizedBox(
                             height: 30,
                           ),
-                          Image.asset('assets/images/Appointify1.png'),
+                          Image.asset('assets/images/Appointify.png'),
                         ],
                       )),
                 ),
