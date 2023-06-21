@@ -318,6 +318,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                                 children: [
                                   Row(
                                     children: [
+                                      const SizedBox(width: 20),
                                       const Icon(
                                         Icons.event_available,
                                         color: Colors.black,
@@ -337,6 +338,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                                       ),
                                     ],
                                   ),
+                                  const SizedBox(width: 20),
                                   ElevatedButton.icon(
                                     icon: const Icon(
                                       Icons.add,
