@@ -447,7 +447,7 @@ class _HomePageState extends State<HomePage> {
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
-                                color: const Color(0xffFF9343),
+                                color: const Color(0xff6096BA),
                                 child: Column(
                                   children: [
                                     Flexible(
@@ -577,7 +577,7 @@ class _HomePageState extends State<HomePage> {
                                       height: 20,
                                       width: 150,
                                       decoration: const BoxDecoration(
-                                          color: Color(0xFF4394FF),
+                                          color: Color(0xFF274C77),
                                           borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(20),
                                               bottomRight:
@@ -649,7 +649,7 @@ class _HomePageState extends State<HomePage> {
                       width: 360,
                       height: 50,
                       indicator: const ContainerTabIndicator(
-                        color: Colors.orange,
+                        color: Color(0xFF6096BA),
                         radius: BorderRadius.all(Radius.circular(20.0)),
                       ),
                       background: Container(

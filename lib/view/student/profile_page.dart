@@ -134,7 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ];
                 })
           ],
-          backgroundColor: const Color(0xFFFF9343),
+          backgroundColor: const Color(0xFF274C77),
           title: const Text(
             "Profile",
             style: TextStyle(
@@ -169,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: double.infinity,
                           height: MediaQuery.of(context).size.height / 10,
                           decoration: const BoxDecoration(
-                            color: Color(0xFFFF9343),
+                            color: Color(0xFF274C77),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(30.0),
                               bottomRight: Radius.circular(30.0),
@@ -309,7 +309,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10)),
-                                    color: Color(0xFF7778EE),
+                                    color: Color(0xFF6096BA),
                                   ),
                                   child: const Text(
                                     "Email:",
@@ -349,7 +349,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10)),
-                                    color: Color(0xFF7778EE),
+                                    color: Color(0xFF6096BA),
                                   ),
                                   padding: const EdgeInsets.all(10),
                                   child: const Text(
@@ -390,7 +390,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10)),
-                                    color: Color(0xFF7778EE),
+                                    color: Color(0xFF6096BA),
                                   ),
                                   padding: const EdgeInsets.all(10),
                                   child: const Text(

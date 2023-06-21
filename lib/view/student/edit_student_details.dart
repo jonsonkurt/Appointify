@@ -38,7 +38,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFFFF9343),
+          backgroundColor: const Color(0xFF274C77),
           title: const Text('Edit Profile'),
         ),
         body: ChangeNotifierProvider(
@@ -184,7 +184,9 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         style: const ButtonStyle(
                                             backgroundColor:
                                                 MaterialStatePropertyAll(
-                                                    Color(0xFFFF9343)),fixedSize: MaterialStatePropertyAll(Size(90, 10))),
+                                                    Color(0xFF6096BA)),
+                                            fixedSize: MaterialStatePropertyAll(
+                                                Size(90, 10))),
                                         onPressed: () async {
                                           if (_formKey.currentState!
                                               .validate()) {
@@ -213,7 +215,9 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         style: const ButtonStyle(
                                             backgroundColor:
                                                 MaterialStatePropertyAll(
-                                                    Color(0xFFFF9343)), fixedSize: MaterialStatePropertyAll(Size(90, 10))),
+                                                    Color(0xFF6096BA)),
+                                            fixedSize: MaterialStatePropertyAll(
+                                                Size(90, 10))),
                                         onPressed: () {
                                           Navigator.push(
                                             context,

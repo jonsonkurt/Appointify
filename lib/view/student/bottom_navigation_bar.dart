@@ -28,7 +28,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
       home: Scaffold(
         bottomNavigationBar: SafeArea(
           child: SalomonBottomBar(
-            backgroundColor: const Color(0xFFFF9343),
+            selectedColorOpacity: 0,
+            backgroundColor: const Color(0xFF274C77),
             currentIndex: currentIndex,
             items: [
               SalomonBottomBarItem(
