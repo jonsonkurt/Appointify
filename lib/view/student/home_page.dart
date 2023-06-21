@@ -264,20 +264,27 @@ class _HomePageState extends State<HomePage> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text(
-                                      snapshot
-                                                  .child('countered')
-                                                  .value
-                                                  .toString() ==
-                                              "no"
-                                          ? snapshot
-                                              .child('requestStatus')
-                                              .value
-                                              .toString()
-                                          : "Reschedule",
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          fontFamily: "GothamRnd"),
+                                    titlePadding: EdgeInsets.all(0),
+                                    title: Container(
+                                      height: 70,
+                                      padding: EdgeInsets.all(20),
+                                      color: const Color(0xFF274C77),
+                                      child: Text(
+                                        snapshot
+                                                    .child('countered')
+                                                    .value
+                                                    .toString() ==
+                                                "no"
+                                            ? snapshot
+                                                .child('requestStatus')
+                                                .value
+                                                .toString()
+                                            : "Reschedule",
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: "GothamRnd",
+                                            color: Colors.white),
+                                      ),
                                     ),
                                     content: SizedBox(
                                       height:
@@ -288,6 +295,7 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
+                                          const SizedBox(height: 8),
                                           const Text(
                                             'Professor name:',
                                             style: TextStyle(
@@ -300,9 +308,13 @@ class _HomePageState extends State<HomePage> {
                                                   .value
                                                   .toString(),
                                               style: const TextStyle(
-                                                  fontFamily: "GothamRnd"),
+                                                fontFamily: "GothamRnd",
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                              ),
                                             ),
                                           ),
+                                          const SizedBox(height: 8),
                                           const Text(
                                             'Designation:',
                                             style: TextStyle(
@@ -315,9 +327,13 @@ class _HomePageState extends State<HomePage> {
                                                   .value
                                                   .toString(),
                                               style: const TextStyle(
-                                                  fontFamily: "GothamRnd"),
+                                                fontFamily: "GothamRnd",
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                              ),
                                             ),
                                           ),
+                                          const SizedBox(height: 8),
                                           const Text(
                                             'Requested Appointment:',
                                             style: TextStyle(
@@ -327,7 +343,10 @@ class _HomePageState extends State<HomePage> {
                                             child: Text(
                                               '${snapshot.child('date').value} - ${snapshot.child('time').value}',
                                               style: const TextStyle(
-                                                  fontFamily: "GothamRnd"),
+                                                fontFamily: "GothamRnd",
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                              ),
                                             ),
                                           ),
                                           if (snapshot
@@ -340,6 +359,7 @@ class _HomePageState extends State<HomePage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                const SizedBox(height: 8),
                                                 const Text(
                                                   'Counter Proposal:',
                                                   style: TextStyle(
@@ -349,8 +369,11 @@ class _HomePageState extends State<HomePage> {
                                                   child: Text(
                                                     '${snapshot.child('counteredDate').value} - ${snapshot.child('counteredTime').value}',
                                                     style: const TextStyle(
-                                                        fontFamily:
-                                                            "GothamRnd"),
+                                                      fontFamily: "GothamRnd",
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 18,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -368,6 +391,15 @@ class _HomePageState extends State<HomePage> {
                                                   .value ==
                                               "yes")
                                             ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      const Color(0xFF274C77),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10), // Adjust the radius as needed
+                                                  ),
+                                                ),
                                                 child: const Text("Accept"),
                                                 onPressed: () async {
                                                   String inputDate = snapshot
@@ -418,6 +450,15 @@ class _HomePageState extends State<HomePage> {
                                                   .value ==
                                               "yes")
                                             ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      const Color(0xFF6096BA),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10), // Adjust the radius as needed
+                                                  ),
+                                                ),
                                                 child: const Text("Reject"),
                                                 onPressed: () {
                                                   appointmentsRef

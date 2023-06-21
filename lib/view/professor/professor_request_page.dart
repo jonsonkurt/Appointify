@@ -446,11 +446,21 @@ class _RequestPageState extends State<RequestPage> {
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return AlertDialog(
-                                                  title: const Text(
-                                                    'Reschedule',
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "GothamRnd"),
+                                                  titlePadding:
+                                                      EdgeInsets.all(0),
+                                                  title: Container(
+                                                    height: 70,
+                                                    padding: EdgeInsets.all(20),
+                                                    color:
+                                                        const Color(0xFF274C77),
+                                                    child: const Text(
+                                                      'Reschedule',
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontFamily:
+                                                              "GothamRnd",
+                                                          color: Colors.white),
+                                                    ),
                                                   ),
                                                   content: Column(
                                                     mainAxisSize:
@@ -458,6 +468,28 @@ class _RequestPageState extends State<RequestPage> {
                                                     children: [
                                                       const SizedBox(
                                                           height: 10),
+                                                      const Column(
+                                                        children: [
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            child: Text(
+                                                              "Appointment Date:",
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    "GothamRnd",
+                                                                color: Color(
+                                                                    0xFF393838),
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(height: 5),
+                                                        ],
+                                                      ),
                                                       Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -482,9 +514,9 @@ class _RequestPageState extends State<RequestPage> {
                                                                             color:
                                                                                 Colors.black), //<-- SEE HERE
                                                                       ),
-                                                                      labelText:
+                                                                      hintText:
                                                                           'Select appointment date',
-                                                                      labelStyle: TextStyle(
+                                                                      hintStyle: TextStyle(
                                                                           fontFamily:
                                                                               "GothamRnd",
                                                                           fontSize:
@@ -498,6 +530,23 @@ class _RequestPageState extends State<RequestPage> {
                                                       ),
                                                       const SizedBox(
                                                           height: 10),
+                                                      const Align(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Text(
+                                                          "Appointment Time:",
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                "GothamRnd",
+                                                            color: Color(
+                                                                0xFF393838),
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 5),
                                                       Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -522,9 +571,9 @@ class _RequestPageState extends State<RequestPage> {
                                                                             color:
                                                                                 Colors.black), //<-- SEE HERE
                                                                       ),
-                                                                      labelText:
+                                                                      hintText:
                                                                           'Select appointment time',
-                                                                      labelStyle: TextStyle(
+                                                                      hintStyle: TextStyle(
                                                                           fontFamily:
                                                                               "GothamRnd",
                                                                           fontSize:
@@ -572,7 +621,7 @@ class _RequestPageState extends State<RequestPage> {
                                                       },
                                                     ),
                                                     TextButton(
-                                                      child: Text(
+                                                      child: const Text(
                                                         'Cancel',
                                                         style: TextStyle(
                                                             fontFamily:
@@ -622,11 +671,23 @@ class _RequestPageState extends State<RequestPage> {
                                                   String profNotes = '';
 
                                                   return AlertDialog(
-                                                    title: Text(
-                                                      'State your reason.',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "GothamRnd"),
+                                                    titlePadding:
+                                                        EdgeInsets.all(0),
+                                                    title: Container(
+                                                      height: 70,
+                                                      padding:
+                                                          EdgeInsets.all(20),
+                                                      color: const Color(
+                                                          0xFF274C77),
+                                                      child: const Text(
+                                                        'State your reason.',
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            fontFamily:
+                                                                "GothamRnd",
+                                                            color:
+                                                                Colors.white),
+                                                      ),
                                                     ),
                                                     content: TextField(
                                                       onChanged: (value) {
