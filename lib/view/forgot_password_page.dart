@@ -9,6 +9,7 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
 
   @override
@@ -103,49 +104,59 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               const SizedBox(
                 height: 50,
               ),
-              Padding(
-                padding: const EdgeInsets.all(25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Email Address",
-                      style: TextStyle(
-                        fontFamily: "GothamRnd-Medium",
-                        color: Color(0xFF393838),
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
+              Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Email Address",
+                        style: TextStyle(
+                          fontFamily: "GothamRnd-Medium",
+                          color: Color(0xFF393838),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextField(
+                      const SizedBox(height: 8),
+                      TextFormField(
                         controller: _emailController,
                         style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: const Color(0xFFF2F2F2),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
                             borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        textInputAction: TextInputAction.next,
-                        onEditingComplete: () =>
-                            FocusScope.of(context).nextFocus(),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter an email';
+                          } else if (!RegExp(
+                                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                              .hasMatch(value)) {
+                            return 'Please enter a valid email';
+                          }
+                          return null; // Return null if there is no error
+                        },
+                        keyboardType: TextInputType.emailAddress,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 25),
               ElevatedButton(
                 onPressed: () async {
-                  String email = _emailController.text;
-                  await FirebaseAuth.instance
-                      .sendPasswordResetEmail(email: email);
-                  _emailController.clear();
+                  if (_formKey.currentState!.validate()) {
+                    String email = _emailController.text;
+                    await FirebaseAuth.instance
+                        .sendPasswordResetEmail(email: email);
+                    _emailController.clear();
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(203, 50),
@@ -162,6 +173,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 30,
+              )
             ],
           ),
         ),
