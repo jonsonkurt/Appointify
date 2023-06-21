@@ -445,9 +445,10 @@ class _HomePageState extends State<HomePage> {
                             child: SizedBox(
                               width: 150,
                               child: Card(
+                                elevation: 5,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
-                                color: const Color(0xff6096BA),
+                                color: Colors.white,
                                 child: Column(
                                   children: [
                                     Flexible(
@@ -548,7 +549,7 @@ class _HomePageState extends State<HomePage> {
                                             .value
                                             .toString(),
                                         style: const TextStyle(
-                                          color: Colors.white,
+                                          color: Color(0xFF6096BA),
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
                                           fontFamily: "GothamRnd",
@@ -557,7 +558,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Text(
                                       style: const TextStyle(
-                                        color: Colors.white,
+                                        color: Color(0xFF6096BA),
                                       ),
                                       snapshot
                                           .child('professorRole')
@@ -654,7 +655,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       background: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white54,
+                          color: Colors.white,
                           borderRadius:
                               const BorderRadius.all(Radius.circular(20.0)),
                           boxShadow: [
@@ -722,10 +723,11 @@ class _HomePageState extends State<HomePage> {
                                   return SizedBox(
                                       height: 100,
                                       child: Card(
+                                          elevation: 5,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          color: Colors.white12,
+                                          color: Colors.white,
                                           child: Row(
                                             children: [
                                               Flexible(
@@ -954,7 +956,8 @@ class _HomePageState extends State<HomePage> {
                                   return SizedBox(
                                       height: 100,
                                       child: Card(
-                                          color: Colors.white12,
+                                          elevation: 5,
+                                          color: Colors.white,
                                           child: Row(
                                             children: [
                                               Flexible(
@@ -1196,7 +1199,8 @@ class _HomePageState extends State<HomePage> {
                                               });
                                         },
                                         child: Card(
-                                            color: Colors.white12,
+                                            elevation: 5,
+                                            color: Colors.white,
                                             child: Row(
                                               children: [
                                                 Flexible(
@@ -1273,66 +1277,97 @@ class _HomePageState extends State<HomePage> {
                                                             const SizedBox(
                                                               width: 20,
                                                             ),
-                                                            Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                    employeeName,
-                                                                    style: const TextStyle(
-                                                                        fontFamily:
-                                                                            "GothamRnd",
-                                                                        fontWeight:
-                                                                            FontWeight.bold)),
-                                                                Text(
-                                                                    employeePosition,
-                                                                    style: const TextStyle(
-                                                                        fontFamily:
-                                                                            "GothamRnd")),
-                                                                Container(
-                                                                  height: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .height /
-                                                                      35,
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      2,
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      left: 20),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                  ),
-                                                                  child: Row(
+                                                            Expanded(
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .end,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .end,
                                                                     children: [
-                                                                      Text(
-                                                                          schedDate,
-                                                                          style:
-                                                                              const TextStyle(fontFamily: "GothamRnd")),
-                                                                      const SizedBox(
-                                                                        width:
-                                                                            10,
+                                                                      Padding(
+                                                                        padding: const EdgeInsets.only(
+                                                                            top:
+                                                                                5,
+                                                                            right:
+                                                                                5),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .note_outlined,
+                                                                          color:
+                                                                              Color(0xFF6096BA),
+                                                                        ),
                                                                       ),
-                                                                      Text(
-                                                                          schedTime,
-                                                                          style:
-                                                                              const TextStyle(fontFamily: "GothamRnd")),
                                                                     ],
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                  Text(
+                                                                      employeeName,
+                                                                      style: const TextStyle(
+                                                                          fontFamily:
+                                                                              "GothamRnd",
+                                                                          fontWeight:
+                                                                              FontWeight.bold)),
+                                                                  Text(
+                                                                      employeePosition,
+                                                                      style: const TextStyle(
+                                                                          fontFamily:
+                                                                              "GothamRnd")),
+                                                                  Container(
+                                                                    height: MediaQuery.of(context)
+                                                                            .size
+                                                                            .height /
+                                                                        35,
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width /
+                                                                        2,
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            20),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Text(
+                                                                            schedDate,
+                                                                            style:
+                                                                                const TextStyle(fontFamily: "GothamRnd")),
+                                                                        const SizedBox(
+                                                                          width:
+                                                                              10,
+                                                                        ),
+                                                                        Text(
+                                                                            schedTime,
+                                                                            style:
+                                                                                const TextStyle(fontFamily: "GothamRnd")),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             )
                                                           ],
                                                         ),
