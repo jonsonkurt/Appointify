@@ -119,10 +119,12 @@ class _ProfessorPageState extends State<ProfessorPage> {
                         0xFF274C77), // Set the background color of the box
                     // Set the border radius of the box
                   ),
-                  child: const Padding(
+                  child: Padding(
                       padding: EdgeInsets.only(
-                        top: 30,
-                        left: 20,
+                        top: MediaQuery.of(context).size.width / 100,
+                        bottom: MediaQuery.of(context).size.width / 100,
+                        left: MediaQuery.of(context).size.width / 30,
+                        right: MediaQuery.of(context).size.width / 30,
                       ),
                       child: Align(
                         alignment: Alignment.centerLeft,
@@ -131,6 +133,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
+                            fontFamily: "GothamRnd",
                             fontWeight: FontWeight.bold,
                           ),
                         ),

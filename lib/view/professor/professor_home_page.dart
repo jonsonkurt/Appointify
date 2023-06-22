@@ -196,14 +196,12 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: "GothamRnd"),
                       ),
                     )),
-                const SizedBox(height: 10),
-                const Divider(
+                Divider(
+                  indent: MediaQuery.of(context).size.width / 30,
+                  endIndent: MediaQuery.of(context).size.width / 30,
                   color: Colors.black,
-                  thickness: 1.5,
-                  indent: 20,
-                  endIndent: 20,
+                  thickness: 1,
                 ),
-                const SizedBox(height: 10),
                 const Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Align(

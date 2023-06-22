@@ -39,7 +39,11 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xFF274C77),
-          title: const Text('Edit Profile'),
+          title: const Text('Edit Profile',
+              style: TextStyle(
+                  fontFamily: "GothamRnd",
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
         ),
         body: ChangeNotifierProvider(
             create: (_) => ProfileController(),
@@ -152,13 +156,22 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       const SizedBox(height: 16.0),
-                                      Text('$firstName $lastName'),
+                                      Text(
+                                        '$firstName $lastName',
+                                        style: TextStyle(
+                                            fontFamily: "GothamRnd",
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                       const SizedBox(height: 16.0),
                                       TextFormField(
+                                        style:
+                                            TextStyle(fontFamily: "GothamRnd"),
                                         controller: _phone,
                                         decoration: const InputDecoration(
-                                          labelText: 'Phone',
-                                        ),
+                                            labelText: 'Phone',
+                                            labelStyle: TextStyle(
+                                                fontFamily: "GothamRnd")),
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return 'Please enter your phone';
@@ -168,10 +181,13 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                       ),
                                       const SizedBox(height: 16.0),
                                       TextFormField(
+                                        style:
+                                            TextStyle(fontFamily: "GothamRnd"),
                                         controller: _section,
                                         decoration: const InputDecoration(
-                                          labelText: 'Section',
-                                        ),
+                                            labelText: 'Section',
+                                            labelStyle: TextStyle(
+                                                fontFamily: "GothamRnd")),
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return 'Please enter your section';
@@ -208,7 +224,9 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                             _section.clear();
                                           }
                                         },
-                                        child: const Text('Confirm'),
+                                        child: const Text('Confirm',
+                                            style: TextStyle(
+                                                fontFamily: "GothamRnd")),
                                       ),
                                       ElevatedButton(
                                         style: const ButtonStyle(
@@ -227,7 +245,11 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                           _phone.clear();
                                           _section.clear();
                                         },
-                                        child: const Text('Cancel'),
+                                        child: const Text(
+                                          'Cancel',
+                                          style: TextStyle(
+                                              fontFamily: "GothamRnd"),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -236,7 +258,8 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                             );
                           } else {
                             return const Center(
-                                child: Text('Something went wrong.'));
+                                child: Text('Something went wrong.',
+                                    style: TextStyle(fontFamily: "GothamRnd")));
                           }
                         }),
                   ),
