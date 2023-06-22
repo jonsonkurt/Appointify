@@ -245,13 +245,21 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                       bottomRight: Radius.circular(30.0),
                                     ),
                                   ),
-                                  child: const Text(
-                                    "Edit Profile",
-                                    style: TextStyle(
-                                        fontFamily: "GothamRnd",
-                                        fontSize: 30,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width /
+                                          30,
+                                      top: MediaQuery.of(context).size.height /
+                                          100,
+                                    ),
+                                    child: const Text(
+                                      "Edit Profile",
+                                      style: TextStyle(
+                                          fontFamily: "GothamRnd",
+                                          fontSize: 30,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
                                 // Warning!!! Don't delete. This is edit picture
@@ -350,8 +358,11 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(
-                              MediaQuery.of(context).size.width / 60),
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height / 100,
+                              bottom: MediaQuery.of(context).size.height / 100,
+                              right: MediaQuery.of(context).size.width / 20,
+                              left: MediaQuery.of(context).size.width / 20),
                           child: Form(
                             key: _formKey,
                             child: Column(
@@ -504,7 +515,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                               children: [
                                                 SizedBox(
                                                   width:
-                                                      110, // Set the desired width
+                                                      100, // Set the desired width
                                                   height:
                                                       50, // Set the desired height
                                                   child: Container(
@@ -518,7 +529,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                     child: Padding(
                                                       padding: const EdgeInsets
                                                               .symmetric(
-                                                          horizontal: 5.0),
+                                                          horizontal: 1.0),
                                                       child: Row(
                                                         children: [
                                                           Checkbox(
@@ -579,10 +590,15 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                               ],
                                             ),
                                             const SizedBox(width: 10.0),
-                                            Expanded(
+                                            Flexible(
                                               child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.6,
+                                                alignment: Alignment.center,
                                                 padding:
-                                                    const EdgeInsets.all(8),
+                                                    const EdgeInsets.all(5),
                                                 decoration: BoxDecoration(
                                                   color:
                                                       const Color(0xFFD9D9D9),
@@ -590,9 +606,13 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                       BorderRadius.circular(10),
                                                 ),
                                                 child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
                                                   children: [
                                                     const SizedBox(width: 5),
                                                     Container(
+                                                      alignment:
+                                                          Alignment.center,
                                                       width: 105,
                                                       height: 38,
                                                       decoration: BoxDecoration(

@@ -119,18 +119,21 @@ class _ProfessorPageState extends State<ProfessorPage> {
                         0xFF274C77), // Set the background color of the box
                     // Set the border radius of the box
                   ),
-                  child: const Padding(
+                  child: Padding(
                       padding: EdgeInsets.only(
-                        top: 30,
-                        left: 20,
+                        top: MediaQuery.of(context).size.height / 50,
+                        bottom: MediaQuery.of(context).size.width / 100,
+                        left: MediaQuery.of(context).size.width / 20,
+                        right: MediaQuery.of(context).size.width / 30,
                       ),
-                      child: Align(
+                      child: const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Employees",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
+                            fontFamily: "GothamRnd",
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -140,15 +143,31 @@ class _ProfessorPageState extends State<ProfessorPage> {
               Container(
                 width: double.infinity,
                 height: 20,
-                decoration: const BoxDecoration(
-                  color:
-                      Color(0xFF274C77), // Set the background color of the box
+                decoration: BoxDecoration(
+                  color: const Color(0xFF274C77),
+                  border: Border.all(
+                    color: Colors.transparent,
+                  ),
+                  // Set the background color of the box
                   // Set the border radius of the box
                 ),
                 child: const Divider(
                   color: Colors.white,
                   thickness: 1.5,
+                  indent: 20,
+                  endIndent: 20,
                 ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF274C77),
+                  border: Border.all(
+                    color: Colors.transparent,
+                  ),
+                  // Set the background color of the box
+                  // Set the border radius of the box
+                ),
+                height: 10,
               ),
               SearchBox(onSearch: _handleSearch),
               const SizedBox(
@@ -446,22 +465,22 @@ class _SearchBoxState extends State<SearchBox> {
         // Set the border radius of the box
       ),
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: 30,
-          right: 30,
-        ),
-        child: TextFormField(
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width / 20,
+            right: MediaQuery.of(context).size.width / 20),
+        child: TextField(
           controller: _searchController,
           style: const TextStyle(
             color: Colors.black,
           ),
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             filled: true,
             fillColor: Colors.white,
             hintText: 'Search',
-            prefixIcon: const Icon(Icons.search, color: Color(0xFF6096BA)),
+            hintStyle: TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
+            prefixIcon: Icon(Icons.search, color: Color(0xFF6096BA)),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide.none,
             ),
           ),

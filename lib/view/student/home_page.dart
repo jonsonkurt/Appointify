@@ -248,6 +248,9 @@ class _HomePageState extends State<HomePage> {
                             .endAt("$userID-PENDING\uf8ff"),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, snapshot, animation, index) {
+                          DatabaseReference employees2Ref =
+                              FirebaseDatabase.instance.ref(
+                                  'professors/${snapshot.child('professorID').value.toString()}');
                           String inputDate =
                               snapshot.child("date").value.toString();
                           DateTime dateTime =
@@ -492,95 +495,98 @@ class _HomePageState extends State<HomePage> {
                                     borderRadius: BorderRadius.circular(20)),
                                 color: Colors.white,
                                 child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Flexible(
-                                      child: FirebaseAnimatedList(
-                                        query: employeesRef
-                                            .orderByChild('profUserID')
-                                            .equalTo(snapshot
-                                                .child('professorID')
-                                                .value
-                                                .toString()),
-                                        scrollDirection: Axis.vertical,
-                                        itemBuilder: (context, snapshot,
-                                            animation, index) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                              top: 10,
-                                            ),
-                                            child: Center(
-                                              child: Container(
-                                                height: 80,
-                                                width: 80,
-                                                decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255, 35, 35, 35),
-                                                      width: 2,
-                                                    )),
-                                                child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100),
-                                                    child: ProfileController()
-                                                                .image ==
-                                                            null
-                                                        ? snapshot
-                                                                    .child(
-                                                                        'profilePicStatus')
-                                                                    .value
-                                                                    .toString() ==
-                                                                "None"
-                                                            ? const Icon(
-                                                                Icons.person,
-                                                                size: 20,
-                                                              )
-                                                            : Image(
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                                image: NetworkImage(snapshot
-                                                                    .child(
-                                                                        'profilePicStatus')
-                                                                    .value
-                                                                    .toString()),
-                                                                loadingBuilder:
-                                                                    (context,
-                                                                        child,
-                                                                        loadingProgress) {
-                                                                  if (loadingProgress ==
-                                                                      null) {
-                                                                    return child;
-                                                                  }
-                                                                  return const CircularProgressIndicator();
-                                                                },
-                                                                errorBuilder:
-                                                                    (context,
-                                                                        object,
-                                                                        stack) {
-                                                                  return const Icon(
-                                                                    Icons
-                                                                        .error_outline,
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            35,
-                                                                            35,
-                                                                            35),
-                                                                  );
-                                                                },
-                                                              )
-                                                        : Image.file(File(
-                                                                ProfileController()
-                                                                    .image!
-                                                                    .path)
-                                                            .absolute)),
+                                      child: StreamBuilder(
+                                        stream: employees2Ref.onValue,
+                                        builder:
+                                            (context, AsyncSnapshot snapshot) {
+                                          if (!snapshot.hasData) {
+                                            return const Center(
+                                                child:
+                                                    CircularProgressIndicator());
+                                          } else if (snapshot.hasData) {
+                                            // Getting values from database
+                                            Map<dynamic, dynamic> map =
+                                                snapshot.data.snapshot.value;
+
+                                            String profilePicStatus =
+                                                map['profilePicStatus']
+                                                    .toString();
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Center(
+                                                child: Container(
+                                                  height: 70,
+                                                  width: 70,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: const Color
+                                                                .fromARGB(
+                                                            255, 35, 35, 35),
+                                                        width: 2,
+                                                      )),
+                                                  child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      child: ProfileController()
+                                                                  .image ==
+                                                              null
+                                                          ? map['profilePicStatus']
+                                                                      .toString() ==
+                                                                  "None"
+                                                              ? const Icon(
+                                                                  Icons.person,
+                                                                  size: 20,
+                                                                )
+                                                              : Image(
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  image: NetworkImage(
+                                                                      profilePicStatus),
+                                                                  loadingBuilder:
+                                                                      (context,
+                                                                          child,
+                                                                          loadingProgress) {
+                                                                    if (loadingProgress ==
+                                                                        null) {
+                                                                      return child;
+                                                                    }
+                                                                    return const CircularProgressIndicator();
+                                                                  },
+                                                                  errorBuilder:
+                                                                      (context,
+                                                                          object,
+                                                                          stack) {
+                                                                    return const Icon(
+                                                                      Icons
+                                                                          .error_outline,
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          35,
+                                                                          35,
+                                                                          35),
+                                                                    );
+                                                                  },
+                                                                )
+                                                          : Image.file(File(
+                                                                  ProfileController()
+                                                                      .image!
+                                                                      .path)
+                                                              .absolute)),
+                                                ),
                                               ),
-                                            ),
-                                          );
+                                            );
+                                          } else {
+                                            return const Center(
+                                                child: Text(
+                                              'Something went wrong.',
+                                            ));
+                                          }
                                         },
                                       ),
                                     ),
@@ -612,6 +618,14 @@ class _HomePageState extends State<HomePage> {
                                             .info_outline, // Replace with the desired icon
                                         color: Colors
                                             .red, // Replace with the desired color
+                                      ),
+                                    if (snapshot.child('countered').value ==
+                                        "no")
+                                      const Icon(
+                                        Icons
+                                            .info_outline, // Replace with the desired icon
+                                        color: Colors
+                                            .white, // Replace with the desired color
                                       ),
                                     Container(
                                       margin: EdgeInsets.only(top: 10),

@@ -113,15 +113,69 @@ class _RequestPageState extends State<RequestPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Requests',
-                    style: TextStyle(fontSize: 30, fontFamily: "GothamRnd"),
+                  Stack(children: [
+                    Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Color(
+                            0xFF274C77), // Set the background color of the box
+                        // Set the border radius of the box
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 50,
+                          bottom: MediaQuery.of(context).size.width / 100,
+                          left: MediaQuery.of(context).size.width / 15,
+                          right: MediaQuery.of(context).size.width / 30,
+                        ),
+                        child: const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Requests',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontFamily: 'GothamRnd',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                  Container(
+                    width: double.infinity,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF274C77),
+                      border: Border.all(
+                        color: Colors.transparent,
+                      ),
+                      // Set the background color of the box
+                      // Set the border radius of the box
+                    ),
+                    child: const Divider(
+                      color: Colors.white,
+                      thickness: 1.5,
+                      indent: 20,
+                      endIndent: 20,
+                    ),
                   ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 1,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF274C77),
+                      border: Border.all(
+                        color: Colors.transparent,
+                      ),
+                      // Set the background color of the box
+                      // Set the border radius of the box
+                    ),
+                    height: 10,
                   ),
                   SearchBox(onSearch: _handleSearch),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   if (isEmptyPending)
                     const SizedBox(
                       // color: Colors.red,
@@ -146,6 +200,7 @@ class _RequestPageState extends State<RequestPage> {
                   if (!isEmptyPending)
                     Expanded(
                       child: FirebaseAnimatedList(
+                        padding: const EdgeInsets.only(bottom: 20),
                         query: appointmentsRef
                             .orderByChild('requestStatusProfessor')
                             .startAt("$userID-PENDING")
@@ -188,7 +243,10 @@ class _RequestPageState extends State<RequestPage> {
                                     borderRadius: BorderRadius.circular(20)),
                                 color: Colors.white,
                                 margin: const EdgeInsets.only(
-                                    top: 20, left: 17, right: 17),
+                                  top: 20,
+                                  left: 17,
+                                  right: 17,
+                                ),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -196,6 +254,8 @@ class _RequestPageState extends State<RequestPage> {
                                     const SizedBox(height: 15),
                                     Flexible(
                                       child: FirebaseAnimatedList(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         query: studentsRef
                                             .orderByChild('UID')
                                             .equalTo(snapshot
@@ -802,24 +862,38 @@ class _SearchBoxState extends State<SearchBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width / 30,
-          right: MediaQuery.of(context).size.width / 30),
-      child: TextField(
-        controller: _searchController,
-        decoration: const InputDecoration(
-          labelText: 'Search',
-          labelStyle: TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
-          prefixIcon: Icon(
-            Icons.search,
-            color: Color(0xFF6096BA),
-          ),
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFF274C77)),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+    return Container(
+      width: double.infinity,
+      height: 100,
+      decoration: const BoxDecoration(
+        color: Color(0xFF274C77), // Set the background color of the box
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
         ),
-        onChanged: widget.onSearch,
+        // Set the border radius of the box
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width / 20,
+            right: MediaQuery.of(context).size.width / 20),
+        child: TextField(
+          controller: _searchController,
+          decoration: const InputDecoration(
+            hintText: 'Search',
+            hintStyle: TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Color(0xFF6096BA),
+            ),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF274C77)),
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            filled: true,
+            fillColor: Colors.white,
+          ),
+          onChanged: widget.onSearch,
+        ),
       ),
     );
   }

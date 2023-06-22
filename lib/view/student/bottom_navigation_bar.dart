@@ -34,25 +34,37 @@ class _BottomNavigationState extends State<BottomNavigation> {
             items: [
               SalomonBottomBarItem(
                 icon: const Icon(Icons.home),
-                title: const Text("Home"),
+                title: const Text(
+                  "Home",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
                 unselectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.list_alt),
-                title: const Text("Employee"),
+                title: const Text(
+                  "Employee",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
                 unselectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.groups),
-                title: const Text("Org Chart"),
+                title: const Text(
+                  "Org Chart",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
                 unselectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.person),
-                title: const Text("Profile"),
+                title: const Text(
+                  "Profile",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
                 unselectedColor: Colors.white,
               ),
