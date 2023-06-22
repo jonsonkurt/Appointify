@@ -146,6 +146,7 @@ class _RequestPageState extends State<RequestPage> {
                   if (!isEmptyPending)
                     Expanded(
                       child: FirebaseAnimatedList(
+                        padding: const EdgeInsets.only(bottom: 20),
                         query: appointmentsRef
                             .orderByChild('requestStatusProfessor')
                             .startAt("$userID-PENDING")
@@ -188,7 +189,10 @@ class _RequestPageState extends State<RequestPage> {
                                     borderRadius: BorderRadius.circular(20)),
                                 color: Colors.white,
                                 margin: const EdgeInsets.only(
-                                    top: 20, left: 17, right: 17),
+                                  top: 20,
+                                  left: 17,
+                                  right: 17,
+                                ),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -196,6 +200,8 @@ class _RequestPageState extends State<RequestPage> {
                                     const SizedBox(height: 15),
                                     Flexible(
                                       child: FirebaseAnimatedList(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         query: studentsRef
                                             .orderByChild('UID')
                                             .equalTo(snapshot
