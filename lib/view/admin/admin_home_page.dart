@@ -45,6 +45,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
     _firstNameController.addListener(() {});
     FirebaseDatabase.instance.ref('organizationChart/null').set({
       'name': "-",
+      'position1': "test",
     });
   }
 
