@@ -190,7 +190,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         onPressed: () async {
                                           if (_formKey.currentState!
                                               .validate()) {
-                                            provider.updloadImage(context);
+                                            await provider.updloadImage();
                                             await ref
                                                 .child(userID.toString())
                                                 .update({

@@ -99,7 +99,7 @@ class ProfessorProfileController with ChangeNotifier {
         });
   }
 
-  void updloadImage(BuildContext context) async {
+  updloadImage() async {
     firebase_storage.Reference storageRef = firebase_storage
         .FirebaseStorage.instance
         .ref('professorProfile/$userID');
@@ -109,12 +109,5 @@ class ProfessorProfileController with ChangeNotifier {
 
     imgURL = await storageRef.getDownloadURL();
 
-    // ref
-    //     .child(userID.toString())
-    //     .update({'profilePicStatus': newUrl.toString()}).then((value) {
-    //   _image = null;
-    // }).onError((error, stackTrace) {
-    //   //insert toast here
-    // });
   }
 }

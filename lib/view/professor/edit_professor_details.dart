@@ -772,7 +772,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     ),
                                   ),
                                   onPressed: () async {
-                                    provider.updloadImage(context);
+                                    await provider.updloadImage();
                                     print(_selectedFromTimes[0]);
                                     if (_formKey.currentState!.validate()) {
                                       await ref
