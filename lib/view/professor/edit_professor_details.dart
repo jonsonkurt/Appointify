@@ -229,7 +229,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                     return Column(
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height / 3.5,
+                          height: MediaQuery.of(context).size.height / 2.5,
                           child: Stack(
                               alignment: Alignment.topCenter,
                               clipBehavior: Clip.none,
@@ -237,7 +237,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 Container(
                                   width: double.infinity,
                                   height:
-                                      MediaQuery.of(context).size.height / 7,
+                                      MediaQuery.of(context).size.height / 5.5,
                                   decoration: const BoxDecoration(
                                     color: Color(0xFF274C77),
                                     borderRadius: BorderRadius.only(
@@ -273,7 +273,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                         shape: BoxShape.circle,
                                         border: Border.all(
                                           color: Colors.white,
-                                          width: 5,
+                                          width: 2,
                                         )),
                                     child: ClipRRect(
                                         borderRadius:
@@ -344,7 +344,9 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                         //   height: 50,
                         // ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 20),
+                          padding: EdgeInsets.only(
+                            left: 20,
+                          ),
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
