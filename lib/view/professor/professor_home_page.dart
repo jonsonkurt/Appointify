@@ -284,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       if (!isEmptyUpcoming)
                         Padding(
-                          padding: const EdgeInsets.only(top: 5),
+                          padding: const EdgeInsets.only(top: 15),
                           child: SizedBox(
                             width: 350,
                             height: 600,
@@ -331,7 +331,7 @@ class _HomePageState extends State<HomePage> {
                                         3.5,
                                     child: Padding(
                                       padding:
-                                          const EdgeInsets.only(bottom: 30),
+                                          const EdgeInsets.only(bottom: 20),
                                       child: Card(
                                         elevation: 10,
                                         shape: RoundedRectangleBorder(
@@ -354,6 +354,8 @@ class _HomePageState extends State<HomePage> {
                                             const SizedBox(height: 15),
                                             Flexible(
                                               child: FirebaseAnimatedList(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
                                                 query: studentsRef
                                                     .orderByChild('UID')
                                                     .equalTo(snapshot
@@ -489,7 +491,7 @@ class _HomePageState extends State<HomePage> {
                                                       15),
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.all(
+                                                      const BorderRadius.all(
                                                           Radius.circular(10)),
                                                   color: Colors.white,
                                                   border: Border.all(
@@ -1036,6 +1038,8 @@ class _HomePageState extends State<HomePage> {
                                             const SizedBox(height: 15),
                                             Flexible(
                                               child: FirebaseAnimatedList(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
                                                 query: studentsRef
                                                     .orderByChild('UID')
                                                     .equalTo(snapshot
@@ -1173,7 +1177,7 @@ class _HomePageState extends State<HomePage> {
                                                   25,
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.all(
+                                                      const BorderRadius.all(
                                                           Radius.circular(10)),
                                                   color: Colors.white,
                                                   border: Border.all(width: 2)),
@@ -1298,6 +1302,8 @@ class _HomePageState extends State<HomePage> {
                                             const SizedBox(height: 15),
                                             Flexible(
                                               child: FirebaseAnimatedList(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
                                                 query: studentsRef
                                                     .orderByChild('UID')
                                                     .equalTo(snapshot
@@ -1434,8 +1440,9 @@ class _HomePageState extends State<HomePage> {
                                                       .height /
                                                   25,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(10)),
                                                 color: Colors.white,
                                                 border: Border.all(width: 2),
                                               ),
