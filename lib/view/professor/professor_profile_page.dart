@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:appointify/image_viewer.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -207,46 +208,62 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                     top: MediaQuery.of(context).size.height /
                                         50),
                                 child: Center(
-                                  child: Container(
-                                    height: 130,
-                                    width: 130,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.white,
-                                          width: 2,
-                                        )),
-                                    child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: map['profilePicStatus']
-                                                    .toString() ==
-                                                "None"
-                                            ? const Icon(
-                                                Icons.person,
-                                                size: 35,
-                                              )
-                                            : Image(
-                                                fit: BoxFit.cover,
-                                                image: NetworkImage(
-                                                    profilePicStatus),
-                                                loadingBuilder: (context, child,
-                                                    loadingProgress) {
-                                                  if (loadingProgress == null) {
-                                                    return child;
-                                                  }
-                                                  return const CircularProgressIndicator();
-                                                },
-                                                errorBuilder:
-                                                    (context, object, stack) {
-                                                  return const Icon(
-                                                    Icons.error_outline,
-                                                    color: Color.fromARGB(
-                                                        255, 35, 35, 35),
-                                                  );
-                                                },
-                                              )),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return DetailScreen(
+                                          imageUrl: profilePicStatus,
+                                          projectID: userID!,
+                                        );
+                                      }));
+                                    },
+                                    child: Hero(
+                                      tag: userID!,
+                                      child: Container(
+                                        height: 130,
+                                        width: 130,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Colors.white,
+                                              width: 2,
+                                            )),
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            child: map['profilePicStatus']
+                                                        .toString() ==
+                                                    "None"
+                                                ? const Icon(
+                                                    Icons.person,
+                                                    size: 35,
+                                                  )
+                                                : Image(
+                                                    fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                        profilePicStatus),
+                                                    loadingBuilder: (context,
+                                                        child,
+                                                        loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) {
+                                                        return child;
+                                                      }
+                                                      return const CircularProgressIndicator();
+                                                    },
+                                                    errorBuilder: (context,
+                                                        object, stack) {
+                                                      return const Icon(
+                                                        Icons.error_outline,
+                                                        color: Color.fromARGB(
+                                                            255, 35, 35, 35),
+                                                      );
+                                                    },
+                                                  )),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

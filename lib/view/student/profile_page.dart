@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:appointify/image_viewer.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -203,45 +204,61 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Container(
-                                  height: 110,
-                                  width: 110,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: Colors.white,
-                                      width: 4,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return DetailScreen(
+                                        imageUrl: profilePicStatus,
+                                        projectID: userID!,
+                                      );
+                                    }));
+                                  },
+                                  child: Hero(
+                                    tag: userID!,
+                                    child: Container(
+                                      height: 110,
+                                      width: 110,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Colors.white,
+                                          width: 4,
+                                        ),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: map['profilePicStatus']
+                                                    .toString() ==
+                                                "None"
+                                            ? const Icon(
+                                                Icons.person,
+                                                size: 35,
+                                              )
+                                            : Image(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(
+                                                    profilePicStatus),
+                                                loadingBuilder: (context, child,
+                                                    loadingProgress) {
+                                                  if (loadingProgress == null) {
+                                                    return child;
+                                                  }
+                                                  return const CircularProgressIndicator();
+                                                },
+                                                errorBuilder:
+                                                    (context, object, stack) {
+                                                  return const Icon(
+                                                    Icons.error_outline,
+                                                    color: Color.fromARGB(
+                                                        255, 35, 35, 35),
+                                                  );
+                                                },
+                                              ),
+                                      ),
                                     ),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: map['profilePicStatus'].toString() ==
-                                            "None"
-                                        ? const Icon(
-                                            Icons.person,
-                                            size: 35,
-                                          )
-                                        : Image(
-                                            fit: BoxFit.cover,
-                                            image:
-                                                NetworkImage(profilePicStatus),
-                                            loadingBuilder: (context, child,
-                                                loadingProgress) {
-                                              if (loadingProgress == null) {
-                                                return child;
-                                              }
-                                              return const CircularProgressIndicator();
-                                            },
-                                            errorBuilder:
-                                                (context, object, stack) {
-                                              return const Icon(
-                                                Icons.error_outline,
-                                                color: Color.fromARGB(
-                                                    255, 35, 35, 35),
-                                              );
-                                            },
-                                          ),
                                   ),
                                 ),
                               ],
@@ -281,7 +298,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           padding: EdgeInsets.only(
                               left: MediaQuery.of(context).size.height / 25,
                               top: MediaQuery.of(context).size.height / 70),
-                          child: Text(
+                          child: const Text(
                             'Personal Information',
                             style: TextStyle(
                                 fontFamily: "GothamRnd",
