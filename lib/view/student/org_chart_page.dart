@@ -12,6 +12,9 @@ class OrgChartPage extends StatefulWidget {
 
 class _OrgChartPage extends State<OrgChartPage> {
   Map<String, List<Map<String, Object>>> schoolOrg = {"nodes": [], "edges": []};
+  TransformationController transformationController =
+      TransformationController();
+
   // // nodes
   List<Map<String, Object>> nodes = [];
   // var json = {
@@ -137,193 +140,153 @@ class _OrgChartPage extends State<OrgChartPage> {
                   if (dataSnapshot.value != null) {
                     values = dataSnapshot.value;
 
-                  for (int index = 0; index < values.length; index++) {
-                    if (values.keys.elementAt(index) != "null") {
-                      int id = int.parse(values.keys.elementAt(index));
-                      String name = values[id.toString()]["name"];
-                      String rank = values[id.toString()]["rank"];
-                      int intRank = int.parse(rank);
-                      var newNode = {
-                        "id": id,
-                        "label": name,
-                        "rank": intRank,
-                      };
-                      schoolOrg["nodes"]!.add(newNode);
-                      nodes.add(newNode);
+                    for (int index = 0; index < values.length; index++) {
+                      if (values.keys.elementAt(index) != "null") {
+                        int id = int.parse(values.keys.elementAt(index));
+                        String name = values[id.toString()]["name"];
+                        String rank = values[id.toString()]["rank"];
+                        String pos1 = values[id.toString()]["position1"];
+                        String pos2 = values[id.toString()]["position2"];
+                        String pos3 = values[id.toString()]["position3"];
+                        String faculty = values[id.toString()]["faculty"];
+                        int intRank = int.parse(rank);
+                        var newNode = {
+                          "id": id,
+                          "label": name,
+                          "rank": intRank,
+                          "position1": pos1,
+                          "position2": pos2,
+                          "position3": pos3,
+                          "faculty": faculty,
+                        };
+                        schoolOrg["nodes"]!.add(newNode);
+                        nodes.add(newNode);
+                      }
                     }
                   }
-                }
 
-                // print("Nodes sa taas: $nodes");
-                // var jsonNodes = schoolOrg["nodes"];
-                Map<String, dynamic> entry;
+                  // print("Nodes sa taas: $nodes");
+                  // var jsonNodes = schoolOrg["nodes"];
+                  Map<String, dynamic> entry;
 
-                Map<int, List<Map<String, Object>>> groupedData = {};
-                for (entry in nodes) {
-                  int rank = entry["rank"];
+                  Map<int, List<Map<String, Object>>> groupedData = {};
+                  for (entry in nodes) {
+                    int rank = entry["rank"];
 
-                  if (!groupedData.containsKey(rank)) {
-                    groupedData[rank] = [];
+                    if (!groupedData.containsKey(rank)) {
+                      groupedData[rank] = [];
+                    }
+                    groupedData[rank]!.add(entry.cast<String, Object>());
                   }
-                  groupedData[rank]!.add(entry.cast<String, Object>());
-                }
 
-                // Print the ranks and corresponding IDs and labels
-                for (int rank = 1; rank <= 5; rank++) {
-                  if (groupedData.containsKey(rank) &&
-                      groupedData.containsKey(rank + 1)) {
-                    List<Map<String, dynamic>> rankData1 = groupedData[rank]!;
-                    List<Map<String, dynamic>> rankData2 =
-                        groupedData[rank + 1]!;
+                  // Print the ranks and corresponding IDs and labels
+                  for (int rank = 1; rank <= 5; rank++) {
+                    if (groupedData.containsKey(rank) &&
+                        groupedData.containsKey(rank + 1)) {
+                      List<Map<String, dynamic>> rankData1 = groupedData[rank]!;
+                      List<Map<String, dynamic>> rankData2 =
+                          groupedData[rank + 1]!;
 
-                    // List<String> entries = [];
+                      // List<String> entries = [];
 
-                    for (var entry1 in rankData1) {
-                      for (var entry2 in rankData2) {
-                        if (rank == 5) {
-                          var newEdges = {
-                            "from": entry1["id"],
-                            "to": entry2["id"]
-                          };
-                          if (entry1["label"] == "Ar. Kenn") {
+                      for (var entry1 in rankData1) {
+                        for (var entry2 in rankData2) {
+                          if (rank == 5) {
+                            var newEdges = {
+                              "from": entry1["id"],
+                              "to": entry2["id"]
+                            };
+                            if (entry1["label"] == "Ar. Kenn") {
+                              schoolOrg["edges"]!
+                                  .add(newEdges.cast<String, Object>());
+                            }
+                          } else {
+                            var newEdges = {
+                              "from": entry1["id"],
+                              "to": entry2["id"]
+                            };
                             schoolOrg["edges"]!
                                 .add(newEdges.cast<String, Object>());
                           }
-                        } else {
-                          var newEdges = {
-                            "from": entry1["id"],
-                            "to": entry2["id"]
-                          };
-                          schoolOrg["edges"]!
-                              .add(newEdges.cast<String, Object>());
                         }
                       }
                     }
                   }
-                }
-                var edges = schoolOrg["edges"]!;
-                print("titi: $edges");
+                  var edges = schoolOrg["edges"]!;
+                  print("titi: $edges");
 
-                for (var element in edges) {
-                  var fromNodeId = element["from"];
-                  var toNodeId = element["to"];
+                  for (var element in edges) {
+                    var fromNodeId = element["from"];
+                    var toNodeId = element["to"];
 
-                  graph.addEdge(Node.Id(fromNodeId), Node.Id(toNodeId));
-                }
+                    graph.addEdge(Node.Id(fromNodeId), Node.Id(toNodeId));
+                  }
 
-                builder
-                  ..siblingSeparation = (100)
-                  ..levelSeparation = (150)
-                  ..subtreeSeparation = (150)
-                  ..orientation =
-                      (BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM);
-                // schoolOrg = {"nodes": nodes, "edges": edges};
+                  builder
+                    ..siblingSeparation = (100)
+                    ..levelSeparation = (150)
+                    ..subtreeSeparation = (150)
+                    ..orientation =
+                        (BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM);
+                  // schoolOrg = {"nodes": nodes, "edges": edges};
 
-                // print(json.runtimeType);
-                // print(json);
-                // print(schoolOrg.runtimeType);
-                // print(schoolOrg);
-                // var edges = schoolOrg["edges"]!
-                //     .map((element) => element as Map<String, Object>)
-                //     .toList();
+                  // print(json.runtimeType);
+                  // print(json);
+                  // print(schoolOrg.runtimeType);
+                  // print(schoolOrg);
+                  // var edges = schoolOrg["edges"]!
+                  //     .map((element) => element as Map<String, Object>)
+                  //     .toList();
 
-                // for (var element in edges) {
-                //   var fromNodeId = element["from"];
-                //   var toNodeId = element["to"];
-                //   print("1::: ${fromNodeId}");
-                //   print("2::: ${toNodeId}");
-                // }
+                  // for (var element in edges) {
+                  //   var fromNodeId = element["from"];
+                  //   var toNodeId = element["to"];
+                  //   print("1::: ${fromNodeId}");
+                  //   print("2::: ${toNodeId}");
+                  // }
 
-                // return Card();
-                return SafeArea(
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Wrap(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              child: TextFormField(
-                                initialValue:
-                                    builder.siblingSeparation.toString(),
-                                decoration: const InputDecoration(
-                                    labelText: 'Sibling Separation'),
-                                onChanged: (text) {
-                                  builder.siblingSeparation =
-                                      int.tryParse(text) ?? 100;
-                                  setState(() {});
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: TextFormField(
-                                initialValue:
-                                    builder.levelSeparation.toString(),
-                                decoration: const InputDecoration(
-                                    labelText: 'Level Separation'),
-                                onChanged: (text) {
-                                  builder.levelSeparation =
-                                      int.tryParse(text) ?? 100;
-                                  setState(() {});
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: TextFormField(
-                                initialValue:
-                                    builder.subtreeSeparation.toString(),
-                                decoration: const InputDecoration(
-                                    labelText: 'Subtree separation'),
-                                onChanged: (text) {
-                                  builder.subtreeSeparation =
-                                      int.tryParse(text) ?? 100;
-                                  setState(() {});
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: TextFormField(
-                                initialValue: builder.orientation.toString(),
-                                decoration: const InputDecoration(
-                                    labelText: 'Orientation'),
-                                onChanged: (text) {
-                                  builder.orientation =
-                                      int.tryParse(text) ?? 100;
-                                  setState(() {});
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: InteractiveViewer(
-                              constrained: false,
-                              boundaryMargin: const EdgeInsets.all(50),
-                              minScale: 0.1,
-                              maxScale: 5.6,
-                              child: GraphView(
-                                graph: graph,
-                                algorithm: BuchheimWalkerAlgorithm(
-                                    builder, TreeEdgeRenderer(builder)),
-                                paint: Paint()
-                                  ..color = Colors.black
-                                  ..strokeWidth = 1
-                                  ..style = PaintingStyle.stroke,
-                                builder: (Node node) {
-                                  // I can decide what widget should be shown here based on the id
-                                  var a = node.key!.value as int?;
-                                  List<Map<String, Object>> nodes =
-                                      schoolOrg['nodes']!;
+                  // return Card();
+
+                  return SafeArea(
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: InteractiveViewer(
+                                constrained: false,
+                                transformationController:
+                                    TransformationController(
+                                        transformationController.value =
+                                            Matrix4.identity()
+                                              ..translate(-350.0, 0, -100)
+                                              ..scale(0.5)),
+                                boundaryMargin: const EdgeInsets.all(100),
+                                minScale: 0.1,
+                                maxScale: 5.6,
+                                child: GraphView(
+                                  graph: graph,
+                                  algorithm: BuchheimWalkerAlgorithm(
+                                      builder, TreeEdgeRenderer(builder)),
+                                  paint: Paint()
+                                    ..color = Colors.black
+                                    ..strokeWidth = 2
+                                    ..style = PaintingStyle.stroke,
+                                  builder: (Node node) {
+                                    // I can decide what widget should be shown here based on the id
+                                    var a = node.key!.value as int?;
+                                    List<Map<String, Object>> nodes =
+                                        schoolOrg['nodes']!;
 
                                     var nodeValue = nodes.firstWhere(
                                         (element) => element["id"] == a);
 
                                     return rectangleWidget(
                                       nodeValue["label"] as String?,
+                                      nodeValue["position1"] as String?,
+                                      nodeValue["position2"] as String?,
+                                      nodeValue["position3"] as String?,
+                                      nodeValue["faculty"] as String?,
                                     );
                                   },
                                 )),
@@ -342,6 +305,10 @@ class _OrgChartPage extends State<OrgChartPage> {
 
   Widget rectangleWidget(
     String? a,
+    String? position1,
+    String? position2,
+    String? position3,
+    String? faculty,
   ) {
     return InkWell(
       onTap: () {
@@ -352,10 +319,11 @@ class _OrgChartPage extends State<OrgChartPage> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
             boxShadow: [
-              BoxShadow(color: Colors.blue[100]!, spreadRadius: 1),
+              BoxShadow(color: Colors.blue[100]!, spreadRadius: 2),
             ],
           ),
-          child: Text('${a}')),
+          child:
+              Text('${a}\n${position1}\n${position2}\n$position3\n$faculty')),
     );
   }
 
@@ -379,6 +347,6 @@ class _OrgChartPage extends State<OrgChartPage> {
     //   ..siblingSeparation = (100)
     //   ..levelSeparation = (150)
     //   ..subtreeSeparation = (150)
-    //   ..orientation = (BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM);
+    //   ..orientation = (BuchheimWalkerConfiguration.ORIENTATION_LEFT_RIGHT);
   }
 }
