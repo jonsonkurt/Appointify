@@ -116,22 +116,26 @@ class _OrgChartPage extends State<OrgChartPage> {
         FirebaseDatabase.instance.ref().child('organizationChart');
 
     return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Org Chart"),
-            backgroundColor: Colors.orange,
-          ),
-          body: StreamBuilder(
-            stream: ref.orderByChild("rank").onValue,
-            builder: (context, AsyncSnapshot snapshot) {
-              dynamic values;
-              // String latestRank = "";
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasData) {
-                DataSnapshot dataSnapshot = snapshot.data!.snapshot;
-                if (dataSnapshot.value != null) {
-                  values = dataSnapshot.value;
+      child: WillPopScope(
+        onWillPop: () async {
+          return false; // Disable back button
+        },
+        child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Org Chart"),
+              backgroundColor: Colors.orange,
+            ),
+            body: StreamBuilder(
+              stream: ref.orderByChild("rank").onValue,
+              builder: (context, AsyncSnapshot snapshot) {
+                dynamic values;
+                String latestRank = "";
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasData) {
+                  DataSnapshot dataSnapshot = snapshot.data!.snapshot;
+                  if (dataSnapshot.value != null) {
+                    values = dataSnapshot.value;
 
                   for (int index = 0; index < values.length; index++) {
                     if (values.keys.elementAt(index) != "null") {
@@ -315,23 +319,24 @@ class _OrgChartPage extends State<OrgChartPage> {
                                   List<Map<String, Object>> nodes =
                                       schoolOrg['nodes']!;
 
-                                  var nodeValue = nodes.firstWhere(
-                                      (element) => element["id"] == a);
+                                    var nodeValue = nodes.firstWhere(
+                                        (element) => element["id"] == a);
 
-                                  return rectangleWidget(
-                                    nodeValue["label"] as String?,
-                                  );
-                                },
-                              )),
-                        ),
-                      ],
+                                    return rectangleWidget(
+                                      nodeValue["label"] as String?,
+                                    );
+                                  },
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }
-              return const Text("hello");
-            },
-          )),
+                  );
+                }
+                return const Text("hello");
+              },
+            )),
+      ),
     );
   }
 
