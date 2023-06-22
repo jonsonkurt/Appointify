@@ -53,7 +53,7 @@ class OnBoarding extends StatelessWidget {
               'fcmToken': fcmToken,
             });
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               PageRouteBuilder(
                 transitionDuration: const Duration(milliseconds: 1),
@@ -82,7 +82,7 @@ class OnBoarding extends StatelessWidget {
             });
 
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               PageRouteBuilder(
                 transitionDuration: const Duration(milliseconds: 1),
