@@ -121,16 +121,23 @@ class _RequestPageState extends State<RequestPage> {
                             0xFF274C77), // Set the background color of the box
                         // Set the border radius of the box
                       ),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.only(left: 20, top: 15, bottom: 10.0),
-                        child: Text(
-                          'Requests',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontFamily: 'GothamRnd',
-                            fontWeight: FontWeight.bold,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 50,
+                          bottom: MediaQuery.of(context).size.width / 100,
+                          left: MediaQuery.of(context).size.width / 15,
+                          right: MediaQuery.of(context).size.width / 30,
+                        ),
+                        child: const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Requests',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontFamily: 'GothamRnd',
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -868,13 +875,13 @@ class _SearchBoxState extends State<SearchBox> {
       ),
       child: Padding(
         padding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width / 30,
-            right: MediaQuery.of(context).size.width / 30),
+            left: MediaQuery.of(context).size.width / 20,
+            right: MediaQuery.of(context).size.width / 20),
         child: TextField(
           controller: _searchController,
           decoration: const InputDecoration(
-            labelText: 'Search',
-            labelStyle: TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
+            hintText: 'Search',
+            hintStyle: TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
             prefixIcon: Icon(
               Icons.search,
               color: Color(0xFF6096BA),
