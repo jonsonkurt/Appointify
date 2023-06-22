@@ -11,103 +11,104 @@ class OrgChartPage extends StatefulWidget {
 }
 
 class _OrgChartPage extends State<OrgChartPage> {
-  var json = {
-    'nodes': [
-      {
-        "id": 11,
-        "label": "Ar. Brian",
-        "rank": 6,
-      },
-      {
-        "id": 12,
-        "label": "Engr. Alvin",
-        "rank": 5,
-      },
-      {
-        "id": 13,
-        "label": "Engr. Marcelino",
-        "rank": 5,
-      },
-      {
-        "id": 14,
-        "label": "Engr. Ralph",
-        "rank": 5,
-      },
-      {
-        "id": 15,
-        "label": "Prof. William",
-        "rank": 5,
-      },
-      {
-        "id": 1,
-        "label": "Robles",
-        "rank": 1,
-      },
-      {
-        "id": 2,
-        "label": "Dr. Ma. Agnes",
-        "rank": 2,
-      },
-      {
-        "id": 3,
-        "label": "Dr. Willie",
-        "rank": 3,
-      },
-      {
-        "id": 4,
-        "label": "Engr. Roslyn",
-        "rank": 4,
-      },
-      {
-        "id": 5,
-        "label": "Engr. Larry",
-        "rank": 5,
-      },
-      {
-        "id": 6,
-        "label": "Engr. Cene",
-        "rank": 5,
-      },
-      {
-        "id": 7,
-        "label": "Engr. Renato",
-        "rank": 5,
-      },
-      {
-        "id": 8,
-        "label": "Ar. Kenn",
-        "rank": 5,
-      },
-      {
-        "id": 9,
-        "label": "Ar. Christian",
-        "rank": 6,
-      },
-      {
-        "id": 10,
-        "label": "Ar. Dan",
-        "rank": 6,
-      },
-    ],
-    'edges': [
-      {"from": 1, "to": 2},
-      {"from": 2, "to": 3},
-      {"from": 3, "to": 4},
-      {"from": 4, "to": 12},
-      {"from": 4, "to": 13},
-      {"from": 4, "to": 14},
-      {"from": 4, "to": 15},
-      {"from": 4, "to": 5},
-      {"from": 4, "to": 6},
-      {"from": 4, "to": 7},
-      {"from": 4, "to": 8},
-      {"from": 8, "to": 11},
-      {"from": 8, "to": 9},
-      {"from": 8, "to": 10}
-    ]
-  };
-
-  var schoolOrg = {"nodes": [], "edges": []};
+  Map<String, List<Map<String, Object>>> schoolOrg = {"nodes": [], "edges": []};
+  // // nodes
+  List<Map<String, Object>> nodes = [];
+  // var json = {
+  //   'nodes': [
+  //     {
+  //       "id": 11,
+  //       "label": "Ar. Brian",
+  //       "rank": 6,
+  //     },
+  //     {
+  //       "id": 12,
+  //       "label": "Engr. Alvin",
+  //       "rank": 5,
+  //     },
+  //     {
+  //       "id": 13,
+  //       "label": "Engr. Marcelino",
+  //       "rank": 5,
+  //     },
+  //     {
+  //       "id": 14,
+  //       "label": "Engr. Ralph",
+  //       "rank": 5,
+  //     },
+  //     {
+  //       "id": 15,
+  //       "label": "Prof. William",
+  //       "rank": 5,
+  //     },
+  //     {
+  //       "id": 1,
+  //       "label": "Robles",
+  //       "rank": 1,
+  //     },
+  //     {
+  //       "id": 2,
+  //       "label": "Dr. Ma. Agnes",
+  //       "rank": 2,
+  //     },
+  //     {
+  //       "id": 3,
+  //       "label": "Dr. Willie",
+  //       "rank": 3,
+  //     },
+  //     {
+  //       "id": 4,
+  //       "label": "Engr. Roslyn",
+  //       "rank": 4,
+  //     },
+  //     {
+  //       "id": 5,
+  //       "label": "Engr. Larry",
+  //       "rank": 5,
+  //     },
+  //     {
+  //       "id": 6,
+  //       "label": "Engr. Cene",
+  //       "rank": 5,
+  //     },
+  //     {
+  //       "id": 7,
+  //       "label": "Engr. Renato",
+  //       "rank": 5,
+  //     },
+  //     {
+  //       "id": 8,
+  //       "label": "Ar. Kenn",
+  //       "rank": 5,
+  //     },
+  //     {
+  //       "id": 9,
+  //       "label": "Ar. Christian",
+  //       "rank": 6,
+  //     },
+  //     {
+  //       "id": 10,
+  //       "label": "Ar. Dan",
+  //       "rank": 6,
+  //     },
+  //   ],
+  //   'edges': [
+  //     {"from": 1, "to": 2},
+  //     {"from": 2, "to": 3},
+  //     {"from": 3, "to": 4},
+  //     {"from": 4, "to": 12},
+  //     {"from": 4, "to": 13},
+  //     {"from": 4, "to": 14},
+  //     {"from": 4, "to": 15},
+  //     {"from": 4, "to": 5},
+  //     {"from": 4, "to": 6},
+  //     {"from": 4, "to": 7},
+  //     {"from": 4, "to": 8},
+  //     {"from": 8, "to": 11},
+  //     {"from": 8, "to": 9},
+  //     {"from": 8, "to": 10}
+  //   ]
+  // };
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +125,7 @@ class _OrgChartPage extends State<OrgChartPage> {
             stream: ref.orderByChild("rank").onValue,
             builder: (context, AsyncSnapshot snapshot) {
               dynamic values;
-              String latestRank = "";
+              // String latestRank = "";
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasData) {
@@ -134,9 +135,9 @@ class _OrgChartPage extends State<OrgChartPage> {
 
                   for (int index = 0; index < values.length; index++) {
                     if (values.keys.elementAt(index) != "null") {
-                      String id = values.keys.elementAt(index);
-                      String name = values[id]["name"];
-                      String rank = values[id]["rank"];
+                      int id = int.parse(values.keys.elementAt(index));
+                      String name = values[id.toString()]["name"];
+                      String rank = values[id.toString()]["rank"];
                       int intRank = int.parse(rank);
                       var newNode = {
                         "id": id,
@@ -144,19 +145,23 @@ class _OrgChartPage extends State<OrgChartPage> {
                         "rank": intRank,
                       };
                       schoolOrg["nodes"]!.add(newNode);
+                      nodes.add(newNode);
                     }
                   }
                 }
-                var jsonNodes = schoolOrg["nodes"];
 
-                Map<int, List<Map<String, dynamic>>> groupedData = {};
-                for (var entry in jsonNodes!) {
+                // print("Nodes sa taas: $nodes");
+                // var jsonNodes = schoolOrg["nodes"];
+                Map<String, dynamic> entry;
+
+                Map<int, List<Map<String, Object>>> groupedData = {};
+                for (entry in nodes) {
                   int rank = entry["rank"];
 
                   if (!groupedData.containsKey(rank)) {
                     groupedData[rank] = [];
                   }
-                  groupedData[rank]!.add(entry);
+                  groupedData[rank]!.add(entry.cast<String, Object>());
                 }
 
                 // Print the ranks and corresponding IDs and labels
@@ -166,7 +171,8 @@ class _OrgChartPage extends State<OrgChartPage> {
                     List<Map<String, dynamic>> rankData1 = groupedData[rank]!;
                     List<Map<String, dynamic>> rankData2 =
                         groupedData[rank + 1]!;
-                    List<String> entries = [];
+
+                    // List<String> entries = [];
 
                     for (var entry1 in rankData1) {
                       for (var entry2 in rankData2) {
@@ -176,21 +182,53 @@ class _OrgChartPage extends State<OrgChartPage> {
                             "to": entry2["id"]
                           };
                           if (entry1["label"] == "Ar. Kenn") {
-                            schoolOrg["edges"]!.add(newEdges);
+                            schoolOrg["edges"]!
+                                .add(newEdges.cast<String, Object>());
                           }
                         } else {
                           var newEdges = {
                             "from": entry1["id"],
                             "to": entry2["id"]
                           };
-                          schoolOrg["edges"]!.add(newEdges);
+                          schoolOrg["edges"]!
+                              .add(newEdges.cast<String, Object>());
                         }
                       }
                     }
                   }
                 }
-                print("NODES: ${schoolOrg["nodes"]}");
-                print("EDGES: ${schoolOrg["edges"]}");
+                var edges = schoolOrg["edges"]!;
+                print("titi: $edges");
+
+                for (var element in edges) {
+                  var fromNodeId = element["from"];
+                  var toNodeId = element["to"];
+
+                  graph.addEdge(Node.Id(fromNodeId), Node.Id(toNodeId));
+                }
+
+                builder
+                  ..siblingSeparation = (100)
+                  ..levelSeparation = (150)
+                  ..subtreeSeparation = (150)
+                  ..orientation =
+                      (BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM);
+                // schoolOrg = {"nodes": nodes, "edges": edges};
+
+                // print(json.runtimeType);
+                // print(json);
+                // print(schoolOrg.runtimeType);
+                // print(schoolOrg);
+                // var edges = schoolOrg["edges"]!
+                //     .map((element) => element as Map<String, Object>)
+                //     .toList();
+
+                // for (var element in edges) {
+                //   var fromNodeId = element["from"];
+                //   var toNodeId = element["to"];
+                //   print("1::: ${fromNodeId}");
+                //   print("2::: ${toNodeId}");
+                // }
 
                 // return Card();
                 return SafeArea(
@@ -274,7 +312,8 @@ class _OrgChartPage extends State<OrgChartPage> {
                                 builder: (Node node) {
                                   // I can decide what widget should be shown here based on the id
                                   var a = node.key!.value as int?;
-                                  var nodes = json['nodes']!;
+                                  List<Map<String, Object>> nodes =
+                                      schoolOrg['nodes']!;
 
                                   var nodeValue = nodes.firstWhere(
                                       (element) => element["id"] == a);
@@ -321,18 +360,20 @@ class _OrgChartPage extends State<OrgChartPage> {
   @override
   void initState() {
     super.initState();
-    var edges = json["edges"]!;
-    edges.forEach((element) {
-      var fromNodeId = element["from"];
-      var toNodeId = element["to"];
+    // var edges = schoolOrg["edges"]!;
+    // print("titi: $edges");
 
-      graph.addEdge(Node.Id(fromNodeId), Node.Id(toNodeId));
-    });
+    // for (var element in edges) {
+    //   var fromNodeId = element["from"];
+    //   var toNodeId = element["to"];
 
-    builder
-      ..siblingSeparation = (100)
-      ..levelSeparation = (150)
-      ..subtreeSeparation = (150)
-      ..orientation = (BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM);
+    //   graph.addEdge(Node.Id(fromNodeId), Node.Id(toNodeId));
+    // }
+
+    // builder
+    //   ..siblingSeparation = (100)
+    //   ..levelSeparation = (150)
+    //   ..subtreeSeparation = (150)
+    //   ..orientation = (BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM);
   }
 }
