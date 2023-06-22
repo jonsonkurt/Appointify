@@ -49,7 +49,7 @@ class OnBoarding extends StatelessWidget {
             });
 
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               PageRouteBuilder(
                 transitionDuration: const Duration(milliseconds: 1),
@@ -77,7 +77,7 @@ class OnBoarding extends StatelessWidget {
               'fcmProfToken': fcmToken,
             });
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               PageRouteBuilder(
                 transitionDuration: const Duration(milliseconds: 1),
@@ -116,7 +116,7 @@ class OnBoarding extends StatelessWidget {
         finishButtonTextStyle:
             const TextStyle(fontFamily: "GothamRnd", fontSize: 15),
         onFinish: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const SignInPage()),
           );
