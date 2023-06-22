@@ -170,9 +170,6 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 5),
-                const SizedBox(
-                  width: 350,
-                ),
                 Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Align(
@@ -200,7 +197,12 @@ class _HomePageState extends State<HomePage> {
                       ),
                     )),
                 const SizedBox(height: 10),
-                Container(width: 600, height: 1, color: Colors.black),
+                const Divider(
+                  color: Colors.black,
+                  thickness: 1.5,
+                  indent: 20,
+                  endIndent: 20,
+                ),
                 const SizedBox(height: 10),
                 const Padding(
                     padding: EdgeInsets.only(left: 20),
@@ -622,12 +624,28 @@ class _HomePageState extends State<HomePage> {
                                                                 (BuildContext
                                                                     context) {
                                                               return AlertDialog(
+                                                                titlePadding:
+                                                                    const EdgeInsets
+                                                                        .all(0),
                                                                 title:
-                                                                    const Text(
-                                                                  'Reschedule',
-                                                                  style: TextStyle(
-                                                                      fontFamily:
-                                                                          "GothamRnd"),
+                                                                    Container(
+                                                                  height: 70,
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(20),
+                                                                  color: const Color(
+                                                                      0xFF274C77),
+                                                                  child:
+                                                                      const Text(
+                                                                    'Reschedule',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            20,
+                                                                        fontFamily:
+                                                                            "GothamRnd",
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
                                                                 ),
                                                                 content: Column(
                                                                   mainAxisSize:
@@ -637,31 +655,70 @@ class _HomePageState extends State<HomePage> {
                                                                     const SizedBox(
                                                                         height:
                                                                             10),
-                                                                    Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceAround,
+                                                                    Column(
                                                                       children: [
-                                                                        Expanded(
+                                                                        const Align(
+                                                                          alignment:
+                                                                              Alignment.centerLeft,
                                                                           child:
-                                                                              TextField(
-                                                                            controller:
-                                                                                _dateController,
-                                                                            onTap:
-                                                                                _showDatePicker,
-                                                                            readOnly:
-                                                                                true,
-                                                                            decoration:
-                                                                                const InputDecoration(
-                                                                              labelText: 'Select appointment date',
+                                                                              Text(
+                                                                            "Appointment Date:",
+                                                                            style:
+                                                                                TextStyle(
+                                                                              fontFamily: "GothamRnd",
+                                                                              color: Color(0xFF393838),
+                                                                              fontSize: 15,
+                                                                              fontWeight: FontWeight.bold,
                                                                             ),
                                                                           ),
                                                                         ),
+                                                                        const SizedBox(
+                                                                            height:
+                                                                                5),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceAround,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: TextField(
+                                                                                controller: _dateController,
+                                                                                onTap: _showDatePicker,
+                                                                                readOnly: true,
+                                                                                decoration: const InputDecoration(
+                                                                                    enabledBorder: OutlineInputBorder(
+                                                                                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                      borderSide: BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
+                                                                                    ),
+                                                                                    hintText: 'Select appointment date',
+                                                                                    hintStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 12),
+                                                                                    helperStyle: TextStyle(fontFamily: "GothamRnd")),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                            height:
+                                                                                10),
+                                                                        const Align(
+                                                                          alignment:
+                                                                              Alignment.centerLeft,
+                                                                          child:
+                                                                              Text(
+                                                                            "Appointment Time:",
+                                                                            style:
+                                                                                TextStyle(
+                                                                              fontFamily: "GothamRnd",
+                                                                              color: Color(0xFF393838),
+                                                                              fontSize: 15,
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        const SizedBox(
+                                                                            height:
+                                                                                5),
                                                                       ],
                                                                     ),
-                                                                    const SizedBox(
-                                                                        height:
-                                                                            10),
                                                                     Row(
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment
@@ -676,10 +733,14 @@ class _HomePageState extends State<HomePage> {
                                                                                 _showTimePicker,
                                                                             readOnly:
                                                                                 true,
-                                                                            decoration:
-                                                                                const InputDecoration(
-                                                                              labelText: 'Select appointment time',
-                                                                            ),
+                                                                            decoration: const InputDecoration(
+                                                                                enabledBorder: OutlineInputBorder(
+                                                                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                  borderSide: BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
+                                                                                ),
+                                                                                hintText: 'Select appointment time',
+                                                                                hintStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 12),
+                                                                                helperStyle: TextStyle(fontFamily: "GothamRnd")),
                                                                           ),
                                                                         ),
                                                                       ],
@@ -791,32 +852,58 @@ class _HomePageState extends State<HomePage> {
                                                                     '';
 
                                                                 return AlertDialog(
+                                                                  titlePadding:
+                                                                      const EdgeInsets
+                                                                          .all(0),
                                                                   title:
-                                                                      const Text(
-                                                                    'State your reason.',
-                                                                    style: TextStyle(
-                                                                        fontFamily:
-                                                                            "GothamRnd"),
+                                                                      Container(
+                                                                    height: 70,
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            20),
+                                                                    color: const Color(
+                                                                        0xFF274C77),
+                                                                    child:
+                                                                        const Text(
+                                                                      'State your reason.',
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              20,
+                                                                          fontFamily:
+                                                                              "GothamRnd",
+                                                                          color:
+                                                                              Colors.white),
+                                                                    ),
                                                                   ),
                                                                   content:
+                                                                      Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .min,
+                                                                    children: [
+                                                                      const SizedBox(
+                                                                          height:
+                                                                              10),
                                                                       TextField(
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      profNotes =
-                                                                          value;
-                                                                    },
-                                                                    maxLines:
-                                                                        null,
-                                                                    keyboardType:
-                                                                        TextInputType
-                                                                            .multiline,
-                                                                    decoration:
-                                                                        const InputDecoration(
-                                                                      hintText:
-                                                                          'Enter your paragraph',
-                                                                      border:
-                                                                          OutlineInputBorder(),
-                                                                    ),
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          profNotes =
+                                                                              value;
+                                                                        },
+                                                                        maxLines:
+                                                                            null,
+                                                                        keyboardType:
+                                                                            TextInputType.multiline,
+                                                                        decoration: const InputDecoration(
+                                                                            enabledBorder: OutlineInputBorder(
+                                                                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                              borderSide: BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
+                                                                            ),
+                                                                            hintText: 'Enter your paragraph',
+                                                                            hintStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 12),
+                                                                            helperStyle: TextStyle(fontFamily: "GothamRnd")),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                   actions: [
                                                                     TextButton(
