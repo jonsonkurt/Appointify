@@ -94,7 +94,7 @@ class ProfileController with ChangeNotifier {
         });
   }
 
-  void updloadImage(BuildContext context) async {
+  updloadImage() async {
     firebase_storage.Reference storageRef =
         firebase_storage.FirebaseStorage.instance.ref('studentProfile/$userID');
     firebase_storage.UploadTask uploadTask =
@@ -103,12 +103,6 @@ class ProfileController with ChangeNotifier {
 
     imgURL = await storageRef.getDownloadURL();
 
-    // ref
-    //     .child(userID.toString())
-    //     .update({'profilePicStatus': newUrl.toString()}).then((value) {
-    //   _image = null;
-    // }).onError((error, stackTrace) {
-    //   //insert toast here
-    // });
+
   }
 }

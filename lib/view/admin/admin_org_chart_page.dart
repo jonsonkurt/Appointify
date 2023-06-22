@@ -77,110 +77,115 @@ class _OrgChartPageState extends State<OrgChartPage> {
         logger.d('Stack trace: $stackTrace');
       }
     });
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: <Widget>[
-          Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(labelText: 'Full Name'),
-                ),
-                DropdownButtonFormField<String>(
-                  value: null,
-                  decoration: const InputDecoration(labelText: 'Position 1'),
-                  onChanged: (value) {
-                    position1Controller.text = value!;
-                  },
-                  items: const [
-                    DropdownMenuItem<String>(
-                      value: '1 to 18 years old',
-                      child: Text('1 to 18 years old'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: '19 to 24 years old',
-                      child: Text('19 to 24 years old'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: '25 to 35 years old',
-                      child: Text('25 to 35 years old'),
-                    ),
-                  ],
-                ),
-                DropdownButtonFormField<String>(
-                  value: null,
-                  decoration: const InputDecoration(labelText: 'Position 2'),
-                  onChanged: (value) {
-                    position2Controller.text = value!;
-                  },
-                  items: const [
-                    DropdownMenuItem<String>(
-                      value: 'Position 1',
-                      child: Text('Position 1'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Position 2',
-                      child: Text('Position 2'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Position 3',
-                      child: Text('Position 3'),
-                    ),
-                  ],
-                ),
-                DropdownButtonFormField<String>(
-                  value: null,
-                  decoration: const InputDecoration(labelText: 'Position 3'),
-                  onChanged: (value) {
-                    position3Controller.text = value!;
-                  },
-                  items: const [
-                    DropdownMenuItem<String>(
-                      value: 'Position 1',
-                      child: Text('Position 1'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Position 2',
-                      child: Text('Position 2'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Position 3',
-                      child: Text('Position 3'),
-                    ),
-                  ],
-                ),
-                DropdownButtonFormField<String>(
-                  value: null,
-                  decoration: const InputDecoration(labelText: 'Faculty'),
-                  onChanged: (value) {
-                    facultyController.text = value!;
-                  },
-                  items: const [
-                    DropdownMenuItem<String>(
-                      value: '-',
-                      child: Text('-'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'CE Faculty',
-                      child: Text('CE Faculty'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Archi Faculty',
-                      child: Text('Archi Faculty'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _onDone,
-        child: const Icon(Icons.done),
+    return WillPopScope(
+      onWillPop: () async {
+        return false; // Disable back button
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Column(
+          children: <Widget>[
+            Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  TextField(
+                    controller: nameController,
+                    decoration: const InputDecoration(labelText: 'Full Name'),
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: null,
+                    decoration: const InputDecoration(labelText: 'Position 1'),
+                    onChanged: (value) {
+                      position1Controller.text = value!;
+                    },
+                    items: const [
+                      DropdownMenuItem<String>(
+                        value: '1 to 18 years old',
+                        child: Text('1 to 18 years old'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: '19 to 24 years old',
+                        child: Text('19 to 24 years old'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: '25 to 35 years old',
+                        child: Text('25 to 35 years old'),
+                      ),
+                    ],
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: null,
+                    decoration: const InputDecoration(labelText: 'Position 2'),
+                    onChanged: (value) {
+                      position2Controller.text = value!;
+                    },
+                    items: const [
+                      DropdownMenuItem<String>(
+                        value: 'Position 1',
+                        child: Text('Position 1'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Position 2',
+                        child: Text('Position 2'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Position 3',
+                        child: Text('Position 3'),
+                      ),
+                    ],
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: null,
+                    decoration: const InputDecoration(labelText: 'Position 3'),
+                    onChanged: (value) {
+                      position3Controller.text = value!;
+                    },
+                    items: const [
+                      DropdownMenuItem<String>(
+                        value: 'Position 1',
+                        child: Text('Position 1'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Position 2',
+                        child: Text('Position 2'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Position 3',
+                        child: Text('Position 3'),
+                      ),
+                    ],
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: null,
+                    decoration: const InputDecoration(labelText: 'Faculty'),
+                    onChanged: (value) {
+                      facultyController.text = value!;
+                    },
+                    items: const [
+                      DropdownMenuItem<String>(
+                        value: '-',
+                        child: Text('-'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'CE Faculty',
+                        child: Text('CE Faculty'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Archi Faculty',
+                        child: Text('Archi Faculty'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _onDone,
+          child: const Icon(Icons.done),
+        ),
       ),
     );
   }
