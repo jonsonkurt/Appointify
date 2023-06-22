@@ -115,184 +115,189 @@ class _OrgChartPage extends State<OrgChartPage> {
         FirebaseDatabase.instance.ref().child('organizationChart');
 
     return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Org Chart"),
-            backgroundColor: Colors.orange,
-          ),
-          body: StreamBuilder(
-            stream: ref.orderByChild("rank").onValue,
-            builder: (context, AsyncSnapshot snapshot) {
-              dynamic values;
-              String latestRank = "";
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasData) {
-                DataSnapshot dataSnapshot = snapshot.data!.snapshot;
-                if (dataSnapshot.value != null) {
-                  values = dataSnapshot.value;
+      child: WillPopScope(
+        onWillPop: () async {
+          return false; // Disable back button
+        },
+        child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Org Chart"),
+              backgroundColor: Colors.orange,
+            ),
+            body: StreamBuilder(
+              stream: ref.orderByChild("rank").onValue,
+              builder: (context, AsyncSnapshot snapshot) {
+                dynamic values;
+                String latestRank = "";
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasData) {
+                  DataSnapshot dataSnapshot = snapshot.data!.snapshot;
+                  if (dataSnapshot.value != null) {
+                    values = dataSnapshot.value;
 
-                  for (int index = 0; index < values.length; index++) {
-                    if (values.keys.elementAt(index) != "null") {
-                      String id = values.keys.elementAt(index);
-                      String name = values[id]["name"];
-                      String rank = values[id]["rank"];
-                      int intRank = int.parse(rank);
-                      var newNode = {
-                        "id": id,
-                        "label": name,
-                        "rank": intRank,
-                      };
-                      schoolOrg["nodes"]!.add(newNode);
+                    for (int index = 0; index < values.length; index++) {
+                      if (values.keys.elementAt(index) != "null") {
+                        String id = values.keys.elementAt(index);
+                        String name = values[id]["name"];
+                        String rank = values[id]["rank"];
+                        int intRank = int.parse(rank);
+                        var newNode = {
+                          "id": id,
+                          "label": name,
+                          "rank": intRank,
+                        };
+                        schoolOrg["nodes"]!.add(newNode);
+                      }
                     }
                   }
-                }
-                var jsonNodes = schoolOrg["nodes"];
+                  var jsonNodes = schoolOrg["nodes"];
 
-                Map<int, List<Map<String, dynamic>>> groupedData = {};
-                for (var entry in jsonNodes!) {
-                  int rank = entry["rank"];
+                  Map<int, List<Map<String, dynamic>>> groupedData = {};
+                  for (var entry in jsonNodes!) {
+                    int rank = entry["rank"];
 
-                  if (!groupedData.containsKey(rank)) {
-                    groupedData[rank] = [];
+                    if (!groupedData.containsKey(rank)) {
+                      groupedData[rank] = [];
+                    }
+                    groupedData[rank]!.add(entry);
                   }
-                  groupedData[rank]!.add(entry);
-                }
 
-                // Print the ranks and corresponding IDs and labels
-                for (int rank = 1; rank <= 5; rank++) {
-                  if (groupedData.containsKey(rank) &&
-                      groupedData.containsKey(rank + 1)) {
-                    List<Map<String, dynamic>> rankData1 = groupedData[rank]!;
-                    List<Map<String, dynamic>> rankData2 =
-                        groupedData[rank + 1]!;
-                    List<String> entries = [];
+                  // Print the ranks and corresponding IDs and labels
+                  for (int rank = 1; rank <= 5; rank++) {
+                    if (groupedData.containsKey(rank) &&
+                        groupedData.containsKey(rank + 1)) {
+                      List<Map<String, dynamic>> rankData1 = groupedData[rank]!;
+                      List<Map<String, dynamic>> rankData2 =
+                          groupedData[rank + 1]!;
+                      List<String> entries = [];
 
-                    for (var entry1 in rankData1) {
-                      for (var entry2 in rankData2) {
-                        if (rank == 5) {
-                          var newEdges = {
-                            "from": entry1["id"],
-                            "to": entry2["id"]
-                          };
-                          if (entry1["label"] == "Ar. Kenn") {
+                      for (var entry1 in rankData1) {
+                        for (var entry2 in rankData2) {
+                          if (rank == 5) {
+                            var newEdges = {
+                              "from": entry1["id"],
+                              "to": entry2["id"]
+                            };
+                            if (entry1["label"] == "Ar. Kenn") {
+                              schoolOrg["edges"]!.add(newEdges);
+                            }
+                          } else {
+                            var newEdges = {
+                              "from": entry1["id"],
+                              "to": entry2["id"]
+                            };
                             schoolOrg["edges"]!.add(newEdges);
                           }
-                        } else {
-                          var newEdges = {
-                            "from": entry1["id"],
-                            "to": entry2["id"]
-                          };
-                          schoolOrg["edges"]!.add(newEdges);
                         }
                       }
                     }
                   }
-                }
-                print("NODES: ${schoolOrg["nodes"]}");
-                print("EDGES: ${schoolOrg["edges"]}");
+                  print("NODES: ${schoolOrg["nodes"]}");
+                  print("EDGES: ${schoolOrg["edges"]}");
 
-                // return Card();
-                return SafeArea(
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Wrap(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              child: TextFormField(
-                                initialValue:
-                                    builder.siblingSeparation.toString(),
-                                decoration: const InputDecoration(
-                                    labelText: 'Sibling Separation'),
-                                onChanged: (text) {
-                                  builder.siblingSeparation =
-                                      int.tryParse(text) ?? 100;
-                                  setState(() {});
-                                },
+                  // return Card();
+                  return SafeArea(
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Wrap(
+                            children: [
+                              SizedBox(
+                                width: 100,
+                                child: TextFormField(
+                                  initialValue:
+                                      builder.siblingSeparation.toString(),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Sibling Separation'),
+                                  onChanged: (text) {
+                                    builder.siblingSeparation =
+                                        int.tryParse(text) ?? 100;
+                                    setState(() {});
+                                  },
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: TextFormField(
-                                initialValue:
-                                    builder.levelSeparation.toString(),
-                                decoration: const InputDecoration(
-                                    labelText: 'Level Separation'),
-                                onChanged: (text) {
-                                  builder.levelSeparation =
-                                      int.tryParse(text) ?? 100;
-                                  setState(() {});
-                                },
+                              SizedBox(
+                                width: 100,
+                                child: TextFormField(
+                                  initialValue:
+                                      builder.levelSeparation.toString(),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Level Separation'),
+                                  onChanged: (text) {
+                                    builder.levelSeparation =
+                                        int.tryParse(text) ?? 100;
+                                    setState(() {});
+                                  },
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: TextFormField(
-                                initialValue:
-                                    builder.subtreeSeparation.toString(),
-                                decoration: const InputDecoration(
-                                    labelText: 'Subtree separation'),
-                                onChanged: (text) {
-                                  builder.subtreeSeparation =
-                                      int.tryParse(text) ?? 100;
-                                  setState(() {});
-                                },
+                              SizedBox(
+                                width: 100,
+                                child: TextFormField(
+                                  initialValue:
+                                      builder.subtreeSeparation.toString(),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Subtree separation'),
+                                  onChanged: (text) {
+                                    builder.subtreeSeparation =
+                                        int.tryParse(text) ?? 100;
+                                    setState(() {});
+                                  },
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              child: TextFormField(
-                                initialValue: builder.orientation.toString(),
-                                decoration: const InputDecoration(
-                                    labelText: 'Orientation'),
-                                onChanged: (text) {
-                                  builder.orientation =
-                                      int.tryParse(text) ?? 100;
-                                  setState(() {});
-                                },
+                              SizedBox(
+                                width: 100,
+                                child: TextFormField(
+                                  initialValue: builder.orientation.toString(),
+                                  decoration: const InputDecoration(
+                                      labelText: 'Orientation'),
+                                  onChanged: (text) {
+                                    builder.orientation =
+                                        int.tryParse(text) ?? 100;
+                                    setState(() {});
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: InteractiveViewer(
-                              constrained: false,
-                              boundaryMargin: const EdgeInsets.all(50),
-                              minScale: 0.1,
-                              maxScale: 5.6,
-                              child: GraphView(
-                                graph: graph,
-                                algorithm: BuchheimWalkerAlgorithm(
-                                    builder, TreeEdgeRenderer(builder)),
-                                paint: Paint()
-                                  ..color = Colors.black
-                                  ..strokeWidth = 1
-                                  ..style = PaintingStyle.stroke,
-                                builder: (Node node) {
-                                  // I can decide what widget should be shown here based on the id
-                                  var a = node.key!.value as int?;
-                                  var nodes = json['nodes']!;
+                            ],
+                          ),
+                          Expanded(
+                            child: InteractiveViewer(
+                                constrained: false,
+                                boundaryMargin: const EdgeInsets.all(50),
+                                minScale: 0.1,
+                                maxScale: 5.6,
+                                child: GraphView(
+                                  graph: graph,
+                                  algorithm: BuchheimWalkerAlgorithm(
+                                      builder, TreeEdgeRenderer(builder)),
+                                  paint: Paint()
+                                    ..color = Colors.black
+                                    ..strokeWidth = 1
+                                    ..style = PaintingStyle.stroke,
+                                  builder: (Node node) {
+                                    // I can decide what widget should be shown here based on the id
+                                    var a = node.key!.value as int?;
+                                    var nodes = json['nodes']!;
 
-                                  var nodeValue = nodes.firstWhere(
-                                      (element) => element["id"] == a);
+                                    var nodeValue = nodes.firstWhere(
+                                        (element) => element["id"] == a);
 
-                                  return rectangleWidget(
-                                    nodeValue["label"] as String?,
-                                  );
-                                },
-                              )),
-                        ),
-                      ],
+                                    return rectangleWidget(
+                                      nodeValue["label"] as String?,
+                                    );
+                                  },
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }
-              return const Text("hello");
-            },
-          )),
+                  );
+                }
+                return const Text("hello");
+              },
+            )),
+      ),
     );
   }
 
