@@ -113,27 +113,62 @@ class _RequestPageState extends State<RequestPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 30,
-                      top: MediaQuery.of(context).size.height / 100,
-                    ),
-                    child: const Text(
-                      'Requests',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: 'GothamRnd',
-                        fontWeight: FontWeight.bold,
+                  Stack(children: [
+                    Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Color(
+                            0xFF274C77), // Set the background color of the box
+                        // Set the border radius of the box
+                      ),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.only(left: 20, top: 15, bottom: 10.0),
+                        child: Text(
+                          'Requests',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontFamily: 'GothamRnd',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
+                  ]),
+                  Container(
+                    width: double.infinity,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF274C77),
+                      border: Border.all(
+                        color: Colors.transparent,
+                      ),
+                      // Set the background color of the box
+                      // Set the border radius of the box
+                    ),
+                    child: const Divider(
+                      color: Colors.white,
+                      thickness: 1.5,
+                      indent: 20,
+                      endIndent: 20,
+                    ),
                   ),
-                  Divider(
-                    indent: MediaQuery.of(context).size.width / 30,
-                    endIndent: MediaQuery.of(context).size.width / 30,
-                    color: Colors.black,
-                    thickness: 1,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF274C77),
+                      border: Border.all(
+                        color: Colors.transparent,
+                      ),
+                      // Set the background color of the box
+                      // Set the border radius of the box
+                    ),
+                    height: 10,
                   ),
                   SearchBox(onSearch: _handleSearch),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   if (isEmptyPending)
                     const SizedBox(
                       // color: Colors.red,
@@ -820,24 +855,38 @@ class _SearchBoxState extends State<SearchBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width / 30,
-          right: MediaQuery.of(context).size.width / 30),
-      child: TextField(
-        controller: _searchController,
-        decoration: const InputDecoration(
-          labelText: 'Search',
-          labelStyle: TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
-          prefixIcon: Icon(
-            Icons.search,
-            color: Color(0xFF6096BA),
-          ),
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFF274C77)),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+    return Container(
+      width: double.infinity,
+      height: 100,
+      decoration: const BoxDecoration(
+        color: Color(0xFF274C77), // Set the background color of the box
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
         ),
-        onChanged: widget.onSearch,
+        // Set the border radius of the box
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width / 30,
+            right: MediaQuery.of(context).size.width / 30),
+        child: TextField(
+          controller: _searchController,
+          decoration: const InputDecoration(
+            labelText: 'Search',
+            labelStyle: TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Color(0xFF6096BA),
+            ),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF274C77)),
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            filled: true,
+            fillColor: Colors.white,
+          ),
+          onChanged: widget.onSearch,
+        ),
       ),
     );
   }
