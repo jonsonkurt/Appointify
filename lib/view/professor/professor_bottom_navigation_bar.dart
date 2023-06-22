@@ -36,19 +36,28 @@ class _ProfessorBottomNavigationState extends State<ProfessorBottomNavigation> {
             items: [
               SalomonBottomBarItem(
                 icon: const Icon(Icons.home),
-                title: const Text("Home"),
+                title: const Text(
+                  "Home",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
                 unselectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.inbox),
-                title: const Text("Requests"),
+                title: const Text(
+                  "Requests",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
                 unselectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.person),
-                title: const Text("Profile"),
+                title: const Text(
+                  "Profile",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
                 unselectedColor: Colors.white,
               ),
