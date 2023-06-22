@@ -240,7 +240,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             color: Colors.white,
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: const Color.fromARGB(255, 35, 35, 35),
+                              color: Colors.white,
                               width: 2,
                             )),
 
@@ -601,7 +601,6 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                         hintStyle: TextStyle(
                                           fontFamily: "GothamRnd",
                                           fontSize: 15,
-                                          fontStyle: FontStyle.italic,
                                           fontWeight: FontWeight.normal,
                                           color: Colors.grey,
                                         ),
