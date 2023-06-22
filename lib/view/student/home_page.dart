@@ -737,7 +737,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       if (!isEmptyUpcoming)
                         Padding(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 15),
                           child: SizedBox(
                             child: SizedBox(
                               width: 350,
@@ -970,7 +970,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       if (!isEmptyCompleted)
                         Padding(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 15),
                           child: SizedBox(
                             child: SizedBox(
                               width: 350,
@@ -1185,7 +1185,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       if (!isEmptyCanceled)
                         Padding(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 15),
                           child: SizedBox(
                             child: SizedBox(
                               width: 350,
