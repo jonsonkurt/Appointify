@@ -230,44 +230,44 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 10,
-                        left: MediaQuery.of(context).size.height / 5),
-                    child: Container(
-                      // pa media querry nito salamat
-                      height: 130,
-                      width: 130,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: const Color.fromARGB(255, 35, 35, 35),
-                            width: 2,
-                          )),
+                    padding: const EdgeInsets.only(top: 90.0),
+                    child: Center(
+                      child: Container(
+                        // pa media querry nito salamat
+                        height: 130,
+                        width: 130,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 35, 35, 35),
+                              width: 2,
+                            )),
 
-                      child: ClipOval(
-                          child: profilePicStatus == "None"
-                              ? const Icon(
-                                  Icons.person,
-                                  size: 30,
-                                )
-                              : Image(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(profilePicStatus),
-                                  loadingBuilder:
-                                      (context, child, loadingProgress) {
-                                    if (loadingProgress == null) {
-                                      return child;
-                                    }
-                                    return const CircularProgressIndicator();
-                                  },
-                                  errorBuilder: (context, object, stack) {
-                                    return const Icon(
-                                      Icons.error_outline,
-                                      color: Color.fromARGB(255, 35, 35, 35),
-                                    );
-                                  },
-                                )),
+                        child: ClipOval(
+                            child: profilePicStatus == "None"
+                                ? const Icon(
+                                    Icons.person,
+                                    size: 30,
+                                  )
+                                : Image(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(profilePicStatus),
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress == null) {
+                                        return child;
+                                      }
+                                      return const CircularProgressIndicator();
+                                    },
+                                    errorBuilder: (context, object, stack) {
+                                      return const Icon(
+                                        Icons.error_outline,
+                                        color: Color.fromARGB(255, 35, 35, 35),
+                                      );
+                                    },
+                                  )),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 25),
@@ -310,9 +310,8 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   top: 5,
-                  left: MediaQuery.of(context).size.width / 30,
                 ),
                 child: Container(
                   alignment: Alignment.center,
