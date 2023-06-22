@@ -35,17 +35,26 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
             items: [
               SalomonBottomBarItem(
                 icon: const Icon(Icons.home),
-                title: const Text("Home"),
+                title: const Text(
+                  "Home",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.list_alt),
-                title: const Text("Organization chart"),
+                title: const Text(
+                  "Organization chart",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.people),
-                title: const Text("Profile"),
+                title: const Text(
+                  "Profile",
+                  style: TextStyle(fontFamily: "GothamRnd"),
+                ),
                 selectedColor: Colors.white,
               ),
             ],
