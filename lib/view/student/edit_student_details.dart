@@ -199,6 +199,8 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                                   provider.imgURL
                                             });
                                             // ignore: use_build_context_synchronously
+                                            provider.updloadImage(context);
+                                            // ignore: use_build_context_synchronously
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(

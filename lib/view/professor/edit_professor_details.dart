@@ -228,116 +228,117 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
 
                     return Column(
                       children: [
-                        Stack(
-                            alignment: Alignment.bottomCenter,
-                            clipBehavior: Clip.none,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width / 30),
-                                child: Text(
-                                  "Edit Profile",
-                                  style: TextStyle(
-                                      fontFamily: "GothamRnd",
-                                      fontSize: 30,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                width: double.infinity,
-                                height: MediaQuery.of(context).size.height / 5,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF274C77),
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(30.0),
-                                    bottomRight: Radius.circular(30.0),
+                        Container(
+                          height: MediaQuery.of(context).size.height / 3.5,
+                          child: Stack(
+                              alignment: Alignment.topCenter,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  height:
+                                      MediaQuery.of(context).size.height / 7,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFF274C77),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(30.0),
+                                      bottomRight: Radius.circular(30.0),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    "Edit Profile",
+                                    style: TextStyle(
+                                        fontFamily: "GothamRnd",
+                                        fontSize: 30,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                              ),
-                              // Warning!!! Don't delete. This is edit picture
-                              Positioned(
-                                bottom: -60,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.height /
-                                          50),
-                                  child: Center(
-                                    child: Container(
-                                      height: 130,
-                                      width: 130,
-                                      decoration: BoxDecoration(
+                                // Warning!!! Don't delete. This is edit picture
+
+                                Center(
+                                  child: Container(
+                                    height: 130,
+                                    width: 130,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
                                           color: Colors.white,
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
+                                          width: 5,
+                                        )),
+                                    child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: provider.image == null
+                                            ? map['profilePicStatus']
+                                                        .toString() ==
+                                                    "None"
+                                                ? const Icon(
+                                                    Icons.person,
+                                                    size: 35,
+                                                  )
+                                                : Image(
+                                                    fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                        provider.imgURL),
+                                                    loadingBuilder: (context,
+                                                        child,
+                                                        loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) {
+                                                        return child;
+                                                      }
+                                                      return const CircularProgressIndicator();
+                                                    },
+                                                    errorBuilder: (context,
+                                                        object, stack) {
+                                                      return const Icon(
+                                                        Icons.error_outline,
+                                                        color:
+                                                            Color(0xFF6096BA),
+                                                      );
+                                                    },
+                                                  )
+                                            : Image.file(
+                                                fit: BoxFit.cover,
+                                                File(provider.image!.path)
+                                                    .absolute)),
+                                  ),
+                                ),
+
+                                Center(
+                                  child: Container(
+                                    height: 125,
+                                    width: 120,
+                                    child: Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: InkWell(
+                                        onTap: () {
+                                          provider.pickImage(context);
+                                        },
+                                        child: const CircleAvatar(
+                                          backgroundColor: Color(0xFF6096BA),
+                                          radius: 15,
+                                          child: Icon(
+                                            Icons.add_a_photo,
+                                            size: 15,
                                             color: Colors.white,
-                                            width: 5,
-                                          )),
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          child: provider.image == null
-                                              ? map['profilePicStatus']
-                                                          .toString() ==
-                                                      "None"
-                                                  ? const Icon(
-                                                      Icons.person,
-                                                      size: 35,
-                                                    )
-                                                  : Image(
-                                                      fit: BoxFit.cover,
-                                                      image: NetworkImage(
-                                                          provider.imgURL),
-                                                      loadingBuilder: (context,
-                                                          child,
-                                                          loadingProgress) {
-                                                        if (loadingProgress ==
-                                                            null) {
-                                                          return child;
-                                                        }
-                                                        return const CircularProgressIndicator();
-                                                      },
-                                                      errorBuilder: (context,
-                                                          object, stack) {
-                                                        return const Icon(
-                                                          Icons.error_outline,
-                                                          color:
-                                                              Color(0xFF6096BA),
-                                                        );
-                                                      },
-                                                    )
-                                              : Image.file(
-                                                  fit: BoxFit.cover,
-                                                  File(provider.image!.path)
-                                                      .absolute)),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              Positioned(
-                                right: 140,
-                                bottom: -50,
-                                child: InkWell(
-                                  onTap: () {
-                                    provider.pickImage(context);
-                                  },
-                                  child: const CircleAvatar(
-                                    backgroundColor: Color(0xFF6096BA),
-                                    radius: 15,
-                                    child: Icon(
-                                      Icons.add_a_photo,
-                                      size: 15,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ]),
-                        const SizedBox(
-                          height: 80,
+                                )
+                              ]),
                         ),
+                        // const SizedBox(
+                        //   height: 50,
+                        // ),
                         const Padding(
                           padding: EdgeInsets.only(left: 20),
                           child: Align(
-                            alignment: Alignment.bottomLeft,
+                            alignment: Alignment.topLeft,
                             child: Text(
                               "Personal Information",
                               style: TextStyle(
@@ -813,7 +814,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                         }
                                       });
                                       // ignore: use_build_context_synchronously
-
+                                      provider.updloadImage(context);
+                                      // ignore: use_build_context_synchronously
                                       Navigator.of(context).pop();
                                       _firstNameController.clear();
                                       _lastNameController.clear();
