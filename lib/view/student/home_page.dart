@@ -484,13 +484,16 @@ class _HomePageState extends State<HomePage> {
                             },
                             // Status of request list
                             child: SizedBox(
-                              width: 150,
+                              width: MediaQuery.of(context).size.width / 2.5,
+                              // height: MediaQuery.of(context).size.height / 2,
                               child: Card(
                                 elevation: 5,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
                                 color: Colors.white,
                                 child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Flexible(
                                       child: FirebaseAnimatedList(
@@ -504,12 +507,13 @@ class _HomePageState extends State<HomePage> {
                                         itemBuilder: (context, snapshot,
                                             animation, index) {
                                           return Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 10),
+                                            padding: const EdgeInsets.only(
+                                              top: 10,
+                                            ),
                                             child: Center(
                                               child: Container(
-                                                height: 100,
-                                                width: 100,
+                                                height: 80,
+                                                width: 80,
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     border: Border.all(
@@ -580,21 +584,16 @@ class _HomePageState extends State<HomePage> {
                                         },
                                       ),
                                     ),
-                                    Container(
-                                      margin: const EdgeInsets.only(
-                                        top: 3,
-                                      ),
-                                      child: Text(
-                                        snapshot
-                                            .child('professorName')
-                                            .value
-                                            .toString(),
-                                        style: const TextStyle(
-                                          color: Color(0xFF6096BA),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                          fontFamily: "GothamRnd",
-                                        ),
+                                    Text(
+                                      snapshot
+                                          .child('professorName')
+                                          .value
+                                          .toString(),
+                                      style: const TextStyle(
+                                        color: Color(0xFF6096BA),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        fontFamily: "GothamRnd",
                                       ),
                                     ),
                                     Text(
@@ -615,16 +614,19 @@ class _HomePageState extends State<HomePage> {
                                             .red, // Replace with the desired color
                                       ),
                                     Container(
+                                      margin: EdgeInsets.only(top: 10),
                                       alignment: Alignment.center,
-                                      height: 20,
-                                      width: 150,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              35,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
                                       decoration: const BoxDecoration(
                                           color: Color(0xFF274C77),
                                           borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(20),
                                               bottomRight:
                                                   Radius.circular(20))),
-                                      margin: const EdgeInsets.only(top: 20),
                                       child: Text(
                                         snapshot
                                                     .child('countered')
@@ -882,8 +884,9 @@ class _HomePageState extends State<HomePage> {
                                                                         "GothamRnd"),
                                                               ),
                                                               Container(
-                                                                alignment: Alignment
-                                                                    .centerLeft,
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
                                                                 height: MediaQuery.of(
                                                                             context)
                                                                         .size
@@ -893,7 +896,7 @@ class _HomePageState extends State<HomePage> {
                                                                             context)
                                                                         .size
                                                                         .width /
-                                                                    2,
+                                                                    1.8,
                                                                 padding:
                                                                     const EdgeInsets
                                                                             .only(
@@ -907,6 +910,10 @@ class _HomePageState extends State<HomePage> {
                                                                       BorderRadius
                                                                           .circular(
                                                                               5),
+                                                                  border: Border
+                                                                      .all(
+                                                                          width:
+                                                                              2),
                                                                 ),
                                                                 child: Row(
                                                                   children: [
@@ -1107,28 +1114,37 @@ class _HomePageState extends State<HomePage> {
                                                                       fontFamily:
                                                                           "GothamRnd")),
                                                               Container(
-                                                                height: 20,
-                                                                margin:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top:
-                                                                            10),
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                height: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .height /
+                                                                    35,
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    1.8,
                                                                 padding:
                                                                     const EdgeInsets
                                                                             .only(
                                                                         left:
-                                                                            10,
-                                                                        right:
-                                                                            10),
-                                                                alignment:
-                                                                    Alignment
-                                                                        .center,
-                                                                decoration: BoxDecoration(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            5)),
+                                                                            20),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                  border: Border
+                                                                      .all(
+                                                                          width:
+                                                                              2),
+                                                                ),
                                                                 child: Row(
                                                                   children: [
                                                                     Text(
@@ -1370,6 +1386,9 @@ class _HomePageState extends State<HomePage> {
                                                                           fontFamily:
                                                                               "GothamRnd")),
                                                                   Container(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
                                                                     height: MediaQuery.of(context)
                                                                             .size
                                                                             .height /
@@ -1377,7 +1396,7 @@ class _HomePageState extends State<HomePage> {
                                                                     width: MediaQuery.of(context)
                                                                             .size
                                                                             .width /
-                                                                        2,
+                                                                        1.8,
                                                                     padding: const EdgeInsets
                                                                             .only(
                                                                         left:
@@ -1389,6 +1408,9 @@ class _HomePageState extends State<HomePage> {
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               5),
+                                                                      border: Border.all(
+                                                                          width:
+                                                                              2),
                                                                     ),
                                                                     child: Row(
                                                                       children: [
