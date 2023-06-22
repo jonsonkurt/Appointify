@@ -38,16 +38,19 @@ class _ProfessorBottomNavigationState extends State<ProfessorBottomNavigation> {
                 icon: const Icon(Icons.home),
                 title: const Text("Home"),
                 selectedColor: Colors.white,
+                unselectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.inbox),
                 title: const Text("Requests"),
                 selectedColor: Colors.white,
+                unselectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.person),
                 title: const Text("Profile"),
                 selectedColor: Colors.white,
+                unselectedColor: Colors.white,
               ),
             ],
             onTap: (index) {

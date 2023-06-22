@@ -264,10 +264,10 @@ class _HomePageState extends State<HomePage> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    titlePadding: EdgeInsets.all(0),
+                                    titlePadding: const EdgeInsets.all(0),
                                     title: Container(
                                       height: 70,
-                                      padding: EdgeInsets.all(20),
+                                      padding: const EdgeInsets.all(20),
                                       color: const Color(0xFF274C77),
                                       child: Text(
                                         snapshot
@@ -508,7 +508,7 @@ class _HomePageState extends State<HomePage> {
                                                 const EdgeInsets.only(top: 10),
                                             child: Center(
                                               child: Container(
-                                                height: 100,
+                                                height: 80,
                                                 width: 100,
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
@@ -1221,8 +1221,24 @@ class _HomePageState extends State<HomePage> {
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return AlertDialog(
-                                                  title: const Text(
-                                                      'Professor Note'),
+                                                  titlePadding:
+                                                      const EdgeInsets.all(0),
+                                                  title: Container(
+                                                    height: 70,
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20),
+                                                    color:
+                                                        const Color(0xFF274C77),
+                                                    child: const Text(
+                                                      'Professor Note',
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontFamily:
+                                                              "GothamRnd",
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
                                                   content: Text(profNotes),
                                                   actions: [
                                                     TextButton(
@@ -1330,7 +1346,7 @@ class _HomePageState extends State<HomePage> {
                                                                     CrossAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  Row(
+                                                                  const Row(
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
@@ -1342,7 +1358,7 @@ class _HomePageState extends State<HomePage> {
                                                                             .end,
                                                                     children: [
                                                                       Padding(
-                                                                        padding: const EdgeInsets.only(
+                                                                        padding: EdgeInsets.only(
                                                                             top:
                                                                                 5,
                                                                             right:
