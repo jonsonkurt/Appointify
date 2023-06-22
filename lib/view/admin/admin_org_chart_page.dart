@@ -128,314 +128,319 @@ class _OrgChartPageState extends State<OrgChartPage> {
       }
     });
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: <Widget>[
-          Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(labelText: 'Full Name'),
-                ),
-                DropdownButtonFormField<String>(
-                  value: selectedPosition1,
-                  decoration: const InputDecoration(labelText: 'Position 1'),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedPosition1 = value;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem<String>(
-                      value: '-',
-                      child: Text('-'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'University President',
-                      child: Text('University President'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Vice President for Academic Affairs',
-                      child: Text('Vice President for Academic Affairs'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Dean',
-                      child: Text('Dean'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department Chairperson',
-                      child: Text('Department Chairperson'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'BSCE Program Coordinator',
-                      child: Text('BSCE Program Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department Secretary',
-                      child: Text('Department Secretary'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Job Placement Officer',
-                      child: Text('Job Placement Officer'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'OJT Coordinator',
-                      child: Text('OJT Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department Extension Coordinator',
-                      child: Text('Department Extension Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Budget Officer/Property Custodian',
-                      child: Text('Budget Officer/Property Custodian'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department BSCE Research Coordinator',
-                      child: Text('Department BSCE Research Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'GAD Coordinator',
-                      child: Text('GAD Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'In-Charge Knowledge Management Unit',
-                      child: Text('In-Charge Knowledge Management Unit'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Program Coordinator, BS Archi',
-                      child: Text('Program Coordinator, BS Archi'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Research Coordinator, BS Archi',
-                      child: Text('Research Coordinator, BS Archi'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'CE Faculty',
-                      child: Text('CE Faculty'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'DRAW/CADD Faculty',
-                      child: Text('DRAW/CADD Faculty'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Archi Faculty',
-                      child: Text('Archi Faculty'),
-                    ),
-                  ],
-                ),
-                DropdownButtonFormField<String>(
-                  value: selectedPosition2,
-                  decoration: const InputDecoration(labelText: 'Position 2'),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedPosition2 = value;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem<String>(
-                      value: '-',
-                      child: Text('-'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'University President',
-                      child: Text('University President'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Vice President for Academic Affairs',
-                      child: Text('Vice President for Academic Affairs'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Dean',
-                      child: Text('Dean'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department Chairperson',
-                      child: Text('Department Chairperson'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'BSCE Program Coordinator',
-                      child: Text('BSCE Program Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department Secretary',
-                      child: Text('Department Secretary'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Job Placement Officer',
-                      child: Text('Job Placement Officer'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'OJT Coordinator',
-                      child: Text('OJT Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department Extension Coordinator',
-                      child: Text('Department Extension Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Budget Officer/Property Custodian',
-                      child: Text('Budget Officer/Property Custodian'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department BSCE Research Coordinator',
-                      child: Text('Department BSCE Research Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'GAD Coordinator',
-                      child: Text('GAD Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'In-Charge Knowledge Management Unit',
-                      child: Text('In-Charge Knowledge Management Unit'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Program Coordinator, BS Archi',
-                      child: Text('Program Coordinator, BS Archi'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Research Coordinator, BS Archi',
-                      child: Text('Research Coordinator, BS Archi'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'CE Faculty',
-                      child: Text('CE Faculty'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'DRAW/CADD Faculty',
-                      child: Text('DRAW/CADD Faculty'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Archi Faculty',
-                      child: Text('Archi Faculty'),
-                    ),
-                  ],
-                ),
-                DropdownButtonFormField<String>(
-                  value: selectedPosition3,
-                  decoration: const InputDecoration(labelText: 'Position 3'),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedPosition3 = value;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem<String>(
-                      value: '-',
-                      child: Text('-'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'University President',
-                      child: Text('University President'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Vice President for Academic Affairs',
-                      child: Text('Vice President for Academic Affairs'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Dean',
-                      child: Text('Dean'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department Chairperson',
-                      child: Text('Department Chairperson'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'BSCE Program Coordinator',
-                      child: Text('BSCE Program Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department Secretary',
-                      child: Text('Department Secretary'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Job Placement Officer',
-                      child: Text('Job Placement Officer'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'OJT Coordinator',
-                      child: Text('OJT Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department Extension Coordinator',
-                      child: Text('Department Extension Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Budget Officer/Property Custodian',
-                      child: Text('Budget Officer/Property Custodian'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Department BSCE Research Coordinator',
-                      child: Text('Department BSCE Research Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'GAD Coordinator',
-                      child: Text('GAD Coordinator'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'In-Charge Knowledge Management Unit',
-                      child: Text('In-Charge Knowledge Management Unit'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Program Coordinator, BS Archi',
-                      child: Text('Program Coordinator, BS Archi'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Research Coordinator, BS Archi',
-                      child: Text('Research Coordinator, BS Archi'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'CE Faculty',
-                      child: Text('CE Faculty'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'DRAW/CADD Faculty',
-                      child: Text('DRAW/CADD Faculty'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Archi Faculty',
-                      child: Text('Archi Faculty'),
-                    ),
-                  ],
-                ),
-                DropdownButtonFormField<String>(
-                  value: selectedFaculty,
-                  decoration: const InputDecoration(labelText: 'Faculty'),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedFaculty = value;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem<String>(
-                      value: '-',
-                      child: Text('-'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'CE Faculty',
-                      child: Text('CE Faculty'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'Archi Faculty',
-                      child: Text('Archi Faculty'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'DRAW/CADD Faculty',
-                      child: Text('DRAW/CADD Faculty'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _onDone,
-        child: const Icon(Icons.done),
+    return WillPopScope(
+      onWillPop: () async {
+        return false; // Disable back button
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Column(
+          children: <Widget>[
+            Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  TextField(
+                    controller: nameController,
+                    decoration: const InputDecoration(labelText: 'Full Name'),
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: selectedPosition1,
+                    decoration: const InputDecoration(labelText: 'Position 1'),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedPosition1 = value;
+                      });
+                    },
+                    items: const [
+                      DropdownMenuItem<String>(
+                        value: '-',
+                        child: Text('-'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'University President',
+                        child: Text('University President'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Vice President for Academic Affairs',
+                        child: Text('Vice President for Academic Affairs'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Dean',
+                        child: Text('Dean'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department Chairperson',
+                        child: Text('Department Chairperson'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'BSCE Program Coordinator',
+                        child: Text('BSCE Program Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department Secretary',
+                        child: Text('Department Secretary'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Job Placement Officer',
+                        child: Text('Job Placement Officer'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'OJT Coordinator',
+                        child: Text('OJT Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department Extension Coordinator',
+                        child: Text('Department Extension Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Budget Officer/Property Custodian',
+                        child: Text('Budget Officer/Property Custodian'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department BSCE Research Coordinator',
+                        child: Text('Department BSCE Research Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'GAD Coordinator',
+                        child: Text('GAD Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'In-Charge Knowledge Management Unit',
+                        child: Text('In-Charge Knowledge Management Unit'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Program Coordinator, BS Archi',
+                        child: Text('Program Coordinator, BS Archi'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Research Coordinator, BS Archi',
+                        child: Text('Research Coordinator, BS Archi'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'CE Faculty',
+                        child: Text('CE Faculty'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'DRAW/CADD Faculty',
+                        child: Text('DRAW/CADD Faculty'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Archi Faculty',
+                        child: Text('Archi Faculty'),
+                      ),
+                    ],
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: selectedPosition2,
+                    decoration: const InputDecoration(labelText: 'Position 2'),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedPosition2 = value;
+                      });
+                    },
+                    items: const [
+                      DropdownMenuItem<String>(
+                        value: '-',
+                        child: Text('-'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'University President',
+                        child: Text('University President'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Vice President for Academic Affairs',
+                        child: Text('Vice President for Academic Affairs'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Dean',
+                        child: Text('Dean'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department Chairperson',
+                        child: Text('Department Chairperson'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'BSCE Program Coordinator',
+                        child: Text('BSCE Program Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department Secretary',
+                        child: Text('Department Secretary'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Job Placement Officer',
+                        child: Text('Job Placement Officer'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'OJT Coordinator',
+                        child: Text('OJT Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department Extension Coordinator',
+                        child: Text('Department Extension Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Budget Officer/Property Custodian',
+                        child: Text('Budget Officer/Property Custodian'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department BSCE Research Coordinator',
+                        child: Text('Department BSCE Research Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'GAD Coordinator',
+                        child: Text('GAD Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'In-Charge Knowledge Management Unit',
+                        child: Text('In-Charge Knowledge Management Unit'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Program Coordinator, BS Archi',
+                        child: Text('Program Coordinator, BS Archi'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Research Coordinator, BS Archi',
+                        child: Text('Research Coordinator, BS Archi'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'CE Faculty',
+                        child: Text('CE Faculty'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'DRAW/CADD Faculty',
+                        child: Text('DRAW/CADD Faculty'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Archi Faculty',
+                        child: Text('Archi Faculty'),
+                      ),
+                    ],
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: selectedPosition3,
+                    decoration: const InputDecoration(labelText: 'Position 3'),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedPosition3 = value;
+                      });
+                    },
+                    items: const [
+                      DropdownMenuItem<String>(
+                        value: '-',
+                        child: Text('-'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'University President',
+                        child: Text('University President'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Vice President for Academic Affairs',
+                        child: Text('Vice President for Academic Affairs'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Dean',
+                        child: Text('Dean'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department Chairperson',
+                        child: Text('Department Chairperson'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'BSCE Program Coordinator',
+                        child: Text('BSCE Program Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department Secretary',
+                        child: Text('Department Secretary'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Job Placement Officer',
+                        child: Text('Job Placement Officer'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'OJT Coordinator',
+                        child: Text('OJT Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department Extension Coordinator',
+                        child: Text('Department Extension Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Budget Officer/Property Custodian',
+                        child: Text('Budget Officer/Property Custodian'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Department BSCE Research Coordinator',
+                        child: Text('Department BSCE Research Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'GAD Coordinator',
+                        child: Text('GAD Coordinator'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'In-Charge Knowledge Management Unit',
+                        child: Text('In-Charge Knowledge Management Unit'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Program Coordinator, BS Archi',
+                        child: Text('Program Coordinator, BS Archi'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Research Coordinator, BS Archi',
+                        child: Text('Research Coordinator, BS Archi'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'CE Faculty',
+                        child: Text('CE Faculty'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'DRAW/CADD Faculty',
+                        child: Text('DRAW/CADD Faculty'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Archi Faculty',
+                        child: Text('Archi Faculty'),
+                      ),
+                    ],
+                  ),
+                  DropdownButtonFormField<String>(
+                    value: selectedFaculty,
+                    decoration: const InputDecoration(labelText: 'Faculty'),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedFaculty = value;
+                      });
+                    },
+                    items: const [
+                      DropdownMenuItem<String>(
+                        value: '-',
+                        child: Text('-'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'CE Faculty',
+                        child: Text('CE Faculty'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'Archi Faculty',
+                        child: Text('Archi Faculty'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'DRAW/CADD Faculty',
+                        child: Text('DRAW/CADD Faculty'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _onDone,
+          child: const Icon(Icons.done),
+        ),
       ),
     );
   }

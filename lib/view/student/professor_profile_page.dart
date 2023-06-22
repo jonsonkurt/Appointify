@@ -107,9 +107,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
       builder: (BuildContext context, Widget? child) => Theme(
         data: ThemeData().copyWith(
           colorScheme: const ColorScheme.dark(
-            primary: Color(0xFF7778EE),
+            primary: Color(0xFF274C77),
             onPrimary: Colors.grey,
-            surface: Color(0xFFFF9343),
+            surface: Color(0xFF6096BA),
             onSurface: Colors.black,
           ),
           dialogBackgroundColor: Colors.white,
@@ -130,7 +130,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
       builder: (BuildContext context, Widget? child) => Theme(
         data: ThemeData().copyWith(
           colorScheme: const ColorScheme.dark(
-            primary: Color(0xFF7778EE),
+            primary: Color(0xFF274C77),
             onPrimary: Colors.grey,
             surface: Colors.white,
             onSurface: Colors.black,
@@ -229,9 +229,10 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    left: MediaQuery.of(context).size.width / 10,
-                    bottom: -50,
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 10,
+                        left: MediaQuery.of(context).size.height / 5),
                     child: Container(
                       // pa media querry nito salamat
                       height: 130,
@@ -309,19 +310,19 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(
+                padding: EdgeInsets.only(
                   top: 5,
-                  left: 90,
+                  left: MediaQuery.of(context).size.width / 30,
                 ),
                 child: Container(
                   alignment: Alignment.center,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         '${widget.firstName} ${widget.lastName}',
                         style: const TextStyle(
-                          fontFamily: "GothamRnd-Bold",
+                          fontFamily: "GothamRnd",
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
@@ -329,7 +330,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                       Text(
                         widget.professorRole,
                         style: const TextStyle(
-                          fontFamily: "GothamRnd-Bold",
+                          fontFamily: "GothamRnd",
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
                         ),
@@ -349,78 +350,70 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     'Weekly Schedule',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: "GothamRnd-Bold",
+                      fontFamily: "GothamRnd",
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
+              const SizedBox(height: 5),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(12),
-                child: Row(
-                  children: [
-                    for (var entry in myDictionary.entries.toList()
-                      ..sort((a, b) => _getWeekdayNumber(a.key)
-                          .compareTo(_getWeekdayNumber(b.key))))
-                      if (entry.value != '-')
-                        Card(
-                          elevation: 5.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          margin: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 10, top: 10),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 15,
-                                ),
-                                alignment: Alignment.centerLeft,
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10)),
-                                  color: Color(0xFF6096BA),
-                                ),
-                                child: Text(
-                                  entry.key.substring(0, 3),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width / 25),
+                  child: Row(
+                    children: [
+                      for (var entry in myDictionary.entries.toList()
+                        ..sort((a, b) => _getWeekdayNumber(a.key)
+                            .compareTo(_getWeekdayNumber(b.key))))
+                        if (entry.value != '-')
+                          SizedBox(
+                            child: Card(
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+                                  Container(
+                                      alignment: Alignment.center,
+                                      width: 120,
+                                      height: 50,
+                                      decoration: const BoxDecoration(
+                                          color: Color(0xFF6096BA),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(10),
+                                              topRight: Radius.circular(10))),
+                                      child: Text(
+                                        entry.key.substring(0, 3).toUpperCase(),
+                                        style: const TextStyle(
+                                            fontFamily: 'GothamRnd',
+                                            color: Colors.white),
+                                      )),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "${entry.value.split(' to ').join('\nto\n')}",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontFamily: 'GothamRnd',
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  // Container(
+                                  //   padding: EdgeInsets.all(10),
+                                  //   alignment: Alignment.center,
+                                  //   child: Text("${entry.value}")
+                                  //   ),
+                                ],
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(10.0),
-                                alignment: Alignment.centerLeft,
-                                decoration: const BoxDecoration(
-                                  color: Colors
-                                      .white, // Set the background color of the box
-                                  borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(15),
-                                    bottomLeft: Radius.circular(15),
-                                  ),
-                                ),
-                                child: Text(
-                                  "${entry.value.split(' to ').join('\nto\n')}",
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
+              const SizedBox(height: 5),
               Padding(
                 padding: const EdgeInsets.only(
                   left: 20,
@@ -431,7 +424,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                     'Set an Appointment',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: "GothamRnd-Bold",
+                      fontFamily: "GothamRnd",
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -466,7 +459,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                           child: Card(
                             elevation: 5.0,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             color: const Color(0xFF6096BA),
                             child: Column(
@@ -487,7 +480,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(20.0),
                                   decoration: const BoxDecoration(
                                     color: Color(0xFFFFFFFF),
                                   ),
@@ -523,7 +516,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                             .none, // Removes the border when the TextField is focused
                                       ),
                                       style: const TextStyle(
-                                        fontFamily: "GothamRnd-Light",
+                                        fontFamily: "GothamRnd",
                                         fontSize: 15,
                                         fontWeight: FontWeight.normal,
                                         color: Colors.black,
@@ -550,7 +543,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Color(
-                              0xFF7778EE), // Replace with your desired color
+                              0xFF6096BA), // Replace with your desired color
                         ),
                         child: const Icon(
                           Icons.access_time,
@@ -566,7 +559,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            color: const Color(0xFF7778EE),
+                            color: const Color(0xFF6096BA),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -578,7 +571,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: "GothamRnd-Light",
+                                      fontFamily: "GothamRnd",
                                       fontSize: 15,
                                       fontWeight: FontWeight.normal,
                                     ),
@@ -587,7 +580,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                 Container(
                                   padding: const EdgeInsets.all(15.0),
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFFD9D9D9),
+                                    color: Color.fromARGB(255, 255, 255, 255),
                                   ),
                                   child: Container(
                                     decoration: const BoxDecoration(
@@ -599,7 +592,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                       onTap: _showTimePicker,
                                       readOnly: true,
                                       style: const TextStyle(
-                                        fontFamily: "GothamRnd-Light",
+                                        fontFamily: "GothamRnd",
                                         fontSize: 15,
                                         fontWeight: FontWeight.normal,
                                         color: Colors.black,
@@ -607,20 +600,27 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                       decoration: const InputDecoration(
                                         hintText: 'Time:',
                                         hintStyle: TextStyle(
-                                          fontFamily: "GothamRnd-Italic",
+                                          fontFamily: "GothamRnd",
                                           fontSize: 15,
                                           fontStyle: FontStyle.italic,
                                           fontWeight: FontWeight.normal,
                                           color: Colors.grey,
                                         ),
-                                        border: InputBorder
-                                            .none, // Removes the border
+
+                                        // Removes the border
                                         focusedBorder: InputBorder
                                             .none, // Removes the border when the TextField is focused
                                         contentPadding: EdgeInsets.symmetric(
                                           vertical: 16,
                                           horizontal: 24,
                                         ),
+                                        border: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                          color: Colors
+                                              .grey, // Set the desired border color here
+                                          width:
+                                              2.0, // Set the desired border width here
+                                        )),
                                       ),
                                     ),
                                   ),
@@ -709,7 +709,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                 },
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(155, 32),
-                  backgroundColor: const Color(0xFFFF9343),
+                  backgroundColor: const Color(0xFF274C77),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                         15), // Adjust the radius as needed

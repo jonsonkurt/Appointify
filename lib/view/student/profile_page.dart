@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:appointify/image_viewer.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -134,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ];
                 })
           ],
-          backgroundColor: const Color(0xFFFF9343),
+          backgroundColor: const Color(0xFF274C77),
           title: const Text(
             "Profile",
             style: TextStyle(
@@ -169,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: double.infinity,
                           height: MediaQuery.of(context).size.height / 10,
                           decoration: const BoxDecoration(
-                            color: Color(0xFFFF9343),
+                            color: Color(0xFF274C77),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(30.0),
                               bottomRight: Radius.circular(30.0),
@@ -203,45 +204,61 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Container(
-                                  height: 110,
-                                  width: 110,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: Colors.white,
-                                      width: 4,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return DetailScreen(
+                                        imageUrl: profilePicStatus,
+                                        projectID: userID!,
+                                      );
+                                    }));
+                                  },
+                                  child: Hero(
+                                    tag: userID!,
+                                    child: Container(
+                                      height: 110,
+                                      width: 110,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Colors.white,
+                                          width: 4,
+                                        ),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: map['profilePicStatus']
+                                                    .toString() ==
+                                                "None"
+                                            ? const Icon(
+                                                Icons.person,
+                                                size: 35,
+                                              )
+                                            : Image(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(
+                                                    profilePicStatus),
+                                                loadingBuilder: (context, child,
+                                                    loadingProgress) {
+                                                  if (loadingProgress == null) {
+                                                    return child;
+                                                  }
+                                                  return const CircularProgressIndicator();
+                                                },
+                                                errorBuilder:
+                                                    (context, object, stack) {
+                                                  return const Icon(
+                                                    Icons.error_outline,
+                                                    color: Color.fromARGB(
+                                                        255, 35, 35, 35),
+                                                  );
+                                                },
+                                              ),
+                                      ),
                                     ),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: map['profilePicStatus'].toString() ==
-                                            "None"
-                                        ? const Icon(
-                                            Icons.person,
-                                            size: 35,
-                                          )
-                                        : Image(
-                                            fit: BoxFit.cover,
-                                            image:
-                                                NetworkImage(profilePicStatus),
-                                            loadingBuilder: (context, child,
-                                                loadingProgress) {
-                                              if (loadingProgress == null) {
-                                                return child;
-                                              }
-                                              return const CircularProgressIndicator();
-                                            },
-                                            errorBuilder:
-                                                (context, object, stack) {
-                                              return const Icon(
-                                                Icons.error_outline,
-                                                color: Color.fromARGB(
-                                                    255, 35, 35, 35),
-                                              );
-                                            },
-                                          ),
                                   ),
                                 ),
                               ],
@@ -281,7 +298,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           padding: EdgeInsets.only(
                               left: MediaQuery.of(context).size.height / 25,
                               top: MediaQuery.of(context).size.height / 70),
-                          child: Text(
+                          child: const Text(
                             'Personal Information',
                             style: TextStyle(
                                 fontFamily: "GothamRnd",
@@ -309,7 +326,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10)),
-                                    color: Color(0xFF7778EE),
+                                    color: Color(0xFF6096BA),
                                   ),
                                   child: const Text(
                                     "Email:",
@@ -349,7 +366,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10)),
-                                    color: Color(0xFF7778EE),
+                                    color: Color(0xFF6096BA),
                                   ),
                                   padding: const EdgeInsets.all(10),
                                   child: const Text(
@@ -390,7 +407,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10)),
-                                    color: Color(0xFF7778EE),
+                                    color: Color(0xFF6096BA),
                                   ),
                                   padding: const EdgeInsets.all(10),
                                   child: const Text(

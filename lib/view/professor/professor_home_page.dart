@@ -238,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                       width: 360,
                       height: 50,
                       indicator: const ContainerTabIndicator(
-                        color: Colors.orange,
+                        color: Color(0xFF274C77),
                         radius: BorderRadius.all(Radius.circular(20.0)),
                       ),
                       background: Container(
@@ -284,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       if (!isEmptyUpcoming)
                         Padding(
-                          padding: const EdgeInsets.only(top: 5),
+                          padding: const EdgeInsets.only(top: 15),
                           child: SizedBox(
                             width: 350,
                             height: 600,
@@ -331,12 +331,13 @@ class _HomePageState extends State<HomePage> {
                                         3.5,
                                     child: Padding(
                                       padding:
-                                          const EdgeInsets.only(bottom: 30),
+                                          const EdgeInsets.only(bottom: 20),
                                       child: Card(
+                                        elevation: 10,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20)),
-                                        color: Colors.grey,
+                                        color: Colors.white,
                                         margin: EdgeInsets.only(
                                             left: MediaQuery.of(context)
                                                     .size
@@ -353,6 +354,8 @@ class _HomePageState extends State<HomePage> {
                                             const SizedBox(height: 15),
                                             Flexible(
                                               child: FirebaseAnimatedList(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
                                                 query: studentsRef
                                                     .orderByChild('UID')
                                                     .equalTo(snapshot
@@ -486,20 +489,30 @@ class _HomePageState extends State<HomePage> {
                                                           .size
                                                           .width /
                                                       15),
-                                              decoration: const BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                                color: Colors.white,
-                                              ),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                    width: 2,
+                                                  )),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 30,
-                                                            left: 20),
+                                                    padding: EdgeInsets.only(
+                                                        right: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            20,
+                                                        left: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            20),
                                                     child: Row(
                                                       children: [
                                                         const Icon(
@@ -555,15 +568,12 @@ class _HomePageState extends State<HomePage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      1,
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height /
-                                                      10,
+                                                Padding(
+                                                  padding: EdgeInsets.all(
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          130),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -600,7 +610,7 @@ class _HomePageState extends State<HomePage> {
                                                           backgroundColor:
                                                               MaterialStatePropertyAll(
                                                             Color(
-                                                                0xFFFF9343), // card button color
+                                                                0xFF6096BA), // card button color
                                                           ),
                                                         ),
                                                         onPressed: () {
@@ -767,7 +777,7 @@ class _HomePageState extends State<HomePage> {
                                                           backgroundColor:
                                                               MaterialStatePropertyAll(
                                                             Color(
-                                                                0xFFFF9343), // card button color
+                                                                0xFF6096BA), // card button color
                                                           ),
                                                         ),
                                                         onPressed: () {
@@ -888,7 +898,7 @@ class _HomePageState extends State<HomePage> {
                                                           backgroundColor:
                                                               MaterialStatePropertyAll(
                                                             Color(
-                                                                0xFFFF9343), // card button color
+                                                                0xFF6096BA), // card button color
                                                           ),
                                                         ),
                                                         onPressed: () {
@@ -1007,10 +1017,11 @@ class _HomePageState extends State<HomePage> {
                                       padding:
                                           const EdgeInsets.only(bottom: 20),
                                       child: Card(
+                                        elevation: 10,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20)),
-                                        color: Colors.grey,
+                                        color: Colors.white,
                                         margin: EdgeInsets.only(
                                             left: MediaQuery.of(context)
                                                     .size
@@ -1027,6 +1038,8 @@ class _HomePageState extends State<HomePage> {
                                             const SizedBox(height: 15),
                                             Flexible(
                                               child: FirebaseAnimatedList(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
                                                 query: studentsRef
                                                     .orderByChild('UID')
                                                     .equalTo(snapshot
@@ -1163,10 +1176,11 @@ class _HomePageState extends State<HomePage> {
                                                       .height /
                                                   25,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                                color: Colors.white,
-                                              ),
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  color: Colors.white,
+                                                  border: Border.all(width: 2)),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -1267,10 +1281,11 @@ class _HomePageState extends State<HomePage> {
                                       padding:
                                           const EdgeInsets.only(bottom: 20),
                                       child: Card(
+                                        elevation: 10,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20)),
-                                        color: Colors.grey,
+                                        color: Colors.white,
                                         margin: EdgeInsets.only(
                                             left: MediaQuery.of(context)
                                                     .size
@@ -1287,6 +1302,8 @@ class _HomePageState extends State<HomePage> {
                                             const SizedBox(height: 15),
                                             Flexible(
                                               child: FirebaseAnimatedList(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
                                                 query: studentsRef
                                                     .orderByChild('UID')
                                                     .equalTo(snapshot
@@ -1422,20 +1439,29 @@ class _HomePageState extends State<HomePage> {
                                                       .size
                                                       .height /
                                                   25,
-                                              decoration: const BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(10)),
                                                 color: Colors.white,
+                                                border: Border.all(width: 2),
                                               ),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 30,
-                                                            left: 20),
+                                                    padding: EdgeInsets.only(
+                                                        right: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            20,
+                                                        left: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            20),
                                                     child: Row(
                                                       children: [
                                                         const Icon(

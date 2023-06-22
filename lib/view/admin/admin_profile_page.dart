@@ -150,97 +150,102 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Column(children: [
-            Stack(clipBehavior: Clip.none, children: [
+      home: WillPopScope(
+        onWillPop: () async {
+          return false; // Disable back button
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child: Column(children: [
+              Stack(clipBehavior: Clip.none, children: [
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height / 5,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF274C77),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30.0),
+                      bottomRight: Radius.circular(30.0),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height / 8),
+                  child: Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFA2C2FF),
+                        borderRadius: BorderRadius.circular(
+                            10.0), // Adjust the border radius as needed
+                      ),
+                      child: const Icon(
+                        Icons.person,
+                        size: 100,
+                        color: Colors
+                            .white, // Replace 'Colors.blue' with the desired color
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height / 5,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF274C77),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30.0),
-                    bottomRight: Radius.circular(30.0),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  child: const Text(
+                    "Admin",
+                    style: TextStyle(
+                      fontFamily: "GothamRnd",
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
+              const SizedBox(
+                height: 55,
+              ),
+              ElevatedButton(
+                onPressed: _showPasswordModal,
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(200, 40),
+                  backgroundColor: const Color(0xFF6096BA),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        10), // Adjust the radius as needed
+                  ),
+                ),
+                child: const Text(
+                  "Update Password",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: "GothamRnd",
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height / 8),
-                child: Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFA2C2FF),
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the border radius as needed
-                    ),
-                    child: const Icon(
-                      Icons.person,
-                      size: 100,
-                      color: Colors
-                          .white, // Replace 'Colors.blue' with the desired color
-                    ),
+              const SizedBox(height: 15),
+              ElevatedButton(
+                onPressed: _logout,
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(130, 10),
+                  backgroundColor: const Color(0xFFA3CEF1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(5), // Adjust the radius as needed
+                  ),
+                ),
+                child: const Text(
+                  "Logout",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: "GothamRnd",
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
             ]),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
-                child: const Text(
-                  "Admin",
-                  style: TextStyle(
-                    fontFamily: "GothamRnd",
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )),
-            const SizedBox(
-              height: 55,
-            ),
-            ElevatedButton(
-              onPressed: _showPasswordModal,
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(200, 40),
-                backgroundColor: const Color(0xFF6096BA),
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(10), // Adjust the radius as needed
-                ),
-              ),
-              child: const Text(
-                "Update Password",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontFamily: "GothamRnd",
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
-            const SizedBox(height: 15),
-            ElevatedButton(
-              onPressed: _logout,
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(130, 10),
-                backgroundColor: const Color(0xFFA3CEF1),
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(5), // Adjust the radius as needed
-                ),
-              ),
-              child: const Text(
-                "Logout",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontFamily: "GothamRnd",
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
-          ]),
+          ),
         ),
       ),
     );

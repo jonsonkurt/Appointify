@@ -111,7 +111,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color:
-                      Color(0xFFFF9343), // Set the background color of the box
+                      Color(0xFF274C77), // Set the background color of the box
                   // Set the border radius of the box
                 ),
                 child: const Padding(
@@ -136,7 +136,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
               width: double.infinity,
               height: 20,
               decoration: const BoxDecoration(
-                color: Color(0xFFFF9343), // Set the background color of the box
+                color: Color(0xFF274C77), // Set the background color of the box
                 // Set the border radius of the box
               ),
               child: const Divider(
@@ -318,6 +318,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                                 children: [
                                   Row(
                                     children: [
+                                      const SizedBox(width: 20),
                                       const Icon(
                                         Icons.event_available,
                                         color: Colors.black,
@@ -337,6 +338,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                                       ),
                                     ],
                                   ),
+                                  const SizedBox(width: 20),
                                   ElevatedButton.icon(
                                     icon: const Icon(
                                       Icons.add,
@@ -345,6 +347,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                                     label: const Text(
                                       'Appointment',
                                       style: TextStyle(
+                                        color: Colors.white,
                                         fontFamily: "GothamRnd-Light",
                                         fontSize: 12,
                                       ),
@@ -374,7 +377,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                                         : null,
                                     style: ElevatedButton.styleFrom(
                                       fixedSize: const Size(130, 10),
-                                      backgroundColor: const Color(0xFF7778EE),
+                                      backgroundColor: const Color(0xFF6096BA),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(
                                             5), // Adjust the radius as needed
@@ -422,7 +425,7 @@ class _SearchBoxState extends State<SearchBox> {
       width: double.infinity,
       height: 100,
       decoration: const BoxDecoration(
-        color: Color(0xFFFF9343), // Set the background color of the box
+        color: Color(0xFF274C77), // Set the background color of the box
         borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(20),
           bottomLeft: Radius.circular(20),
@@ -443,7 +446,7 @@ class _SearchBoxState extends State<SearchBox> {
             filled: true,
             fillColor: Colors.white,
             hintText: 'Search',
-            prefixIcon: const Icon(Icons.search, color: Color(0xFFFF9343)),
+            prefixIcon: const Icon(Icons.search, color: Color(0xFF6096BA)),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide: BorderSide.none,

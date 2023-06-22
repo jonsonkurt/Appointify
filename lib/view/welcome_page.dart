@@ -49,7 +49,7 @@ class OnBoarding extends StatelessWidget {
             });
 
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               PageRouteBuilder(
                 transitionDuration: const Duration(milliseconds: 1),
@@ -77,7 +77,7 @@ class OnBoarding extends StatelessWidget {
               'fcmProfToken': fcmToken,
             });
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               PageRouteBuilder(
                 transitionDuration: const Duration(milliseconds: 1),
@@ -113,28 +113,12 @@ class OnBoarding extends StatelessWidget {
         centerBackground: true,
         headerBackgroundColor: const Color(0xFF274C77),
         finishButtonText: 'Get Started',
-        finishButtonTextStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 15),
+        finishButtonTextStyle:
+            const TextStyle(fontFamily: "GothamRnd", fontSize: 15),
         onFinish: () {
           Navigator.pushReplacement(
             context,
-            PageRouteBuilder(
-              pageBuilder: (context, animation, secondaryAnimation) =>
-                  const SignInPage(),
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                var begin = const Offset(0.0, 1.0);
-                var end = Offset.zero;
-                var curve = Curves.ease;
-
-                var tween = Tween(begin: begin, end: end)
-                    .chain(CurveTween(curve: curve));
-
-                return SlideTransition(
-                  position: animation.drive(tween),
-                  child: child,
-                );
-              },
-            ),
+            MaterialPageRoute(builder: (context) => const SignInPage()),
           );
         },
         finishButtonStyle: const FinishButtonStyle(

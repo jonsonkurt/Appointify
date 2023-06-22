@@ -27,7 +27,7 @@ class ProfessorProfileController with ChangeNotifier {
       _image = XFile(pickedFile.path);
       notifyListeners();
       // ignore: use_build_context_synchronously
-      updloadImage(context);
+      // updloadImage(context);
     }
   }
 
@@ -39,7 +39,7 @@ class ProfessorProfileController with ChangeNotifier {
       _image = XFile(pickedFile.path);
       notifyListeners();
       // ignore: use_build_context_synchronously
-      updloadImage(context);
+      // updloadImage(context);
     }
   }
 
@@ -99,21 +99,15 @@ class ProfessorProfileController with ChangeNotifier {
         });
   }
 
-  void updloadImage(BuildContext context) async {
-    firebase_storage.Reference storageRef =
-        firebase_storage.FirebaseStorage.instance.ref('studentProfile/$userID');
+  updloadImage() async {
+    firebase_storage.Reference storageRef = firebase_storage
+        .FirebaseStorage.instance
+        .ref('professorProfile/$userID');
     firebase_storage.UploadTask uploadTask =
         storageRef.putFile(File(image!.path).absolute);
     await Future.value(uploadTask);
 
     imgURL = await storageRef.getDownloadURL();
 
-    // ref
-    //     .child(userID.toString())
-    //     .update({'profilePicStatus': newUrl.toString()}).then((value) {
-    //   _image = null;
-    // }).onError((error, stackTrace) {
-    //   //insert toast here
-    // });
   }
 }
