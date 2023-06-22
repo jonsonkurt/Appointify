@@ -116,7 +116,7 @@ class OnBoarding extends StatelessWidget {
         finishButtonTextStyle:
             const TextStyle(fontFamily: "GothamRnd", fontSize: 15),
         onFinish: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const SignInPage()),
           );
