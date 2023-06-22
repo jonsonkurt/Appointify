@@ -772,6 +772,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     ),
                                   ),
                                   onPressed: () async {
+                                    provider.updloadImage(context);
                                     print(_selectedFromTimes[0]);
                                     if (_formKey.currentState!.validate()) {
                                       await ref
@@ -813,8 +814,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                               : "-",
                                         }
                                       });
-                                      // ignore: use_build_context_synchronously
-                                      provider.updloadImage(context);
+
                                       // ignore: use_build_context_synchronously
                                       Navigator.of(context).pop();
                                       _firstNameController.clear();

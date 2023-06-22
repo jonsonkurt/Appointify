@@ -190,6 +190,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         onPressed: () async {
                                           if (_formKey.currentState!
                                               .validate()) {
+                                            provider.updloadImage(context);
                                             await ref
                                                 .child(userID.toString())
                                                 .update({
@@ -198,14 +199,10 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                               'profilePicStatus':
                                                   provider.imgURL
                                             });
+
                                             // ignore: use_build_context_synchronously
-                                            provider.updloadImage(context);
-                                            // ignore: use_build_context_synchronously
-                                            Navigator.push(
+                                            Navigator.pop(
                                               context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const ProfilePage()),
                                             );
                                             _phone.clear();
                                             _section.clear();
