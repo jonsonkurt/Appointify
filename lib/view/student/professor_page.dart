@@ -100,300 +100,313 @@ class _ProfessorPageState extends State<ProfessorPage> {
         FirebaseDatabase.instance.ref('professors/');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            const SizedBox(
-              width: 350,
-            ),
-            Stack(children: [
+      home: WillPopScope(
+        onWillPop: () async {
+          return false; // Disable back button
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              const SizedBox(
+                width: 350,
+              ),
+              Stack(children: [
+                Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Color(
+                        0xFF274C77), // Set the background color of the box
+                    // Set the border radius of the box
+                  ),
+                  child: const Padding(
+                      padding: EdgeInsets.only(
+                        top: 30,
+                        left: 20,
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Employees",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )),
+                ),
+              ]),
               Container(
                 width: double.infinity,
+                height: 20,
                 decoration: const BoxDecoration(
                   color:
                       Color(0xFF274C77), // Set the background color of the box
                   // Set the border radius of the box
                 ),
-                child: const Padding(
-                    padding: EdgeInsets.only(
-                      top: 30,
-                      left: 20,
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Employees",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )),
-              ),
-            ]),
-            Container(
-              width: double.infinity,
-              height: 20,
-              decoration: const BoxDecoration(
-                color: Color(0xFF274C77), // Set the background color of the box
-                // Set the border radius of the box
-              ),
-              child: const Divider(
-                color: Colors.white,
-                thickness: 1.5,
-              ),
-            ),
-            SearchBox(onSearch: _handleSearch),
-            const SizedBox(
-              height: 10,
-            ),
-            if (isEmptyProfessor)
-              const SizedBox(
-                // color: Colors.red,
-                height: 200,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "No Available Data",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "GothamRnd"),
-                      ),
-                    ],
-                  ),
+                child: const Divider(
+                  color: Colors.white,
+                  thickness: 1.5,
                 ),
               ),
-            if (!isEmptyProfessor)
-              Expanded(
-                  child: FirebaseAnimatedList(
-                query: appointmentsRef.orderByChild("firstName"),
-                itemBuilder: (context, snapshot, animation, index) {
-                  String availability =
-                      snapshot.child('availability').value.toString();
-
-                  String profFirstName =
-                      snapshot.child('firstName').value.toString();
-                  String profLastName =
-                      snapshot.child('lastName').value.toString();
-                  String status = snapshot.child('status').value.toString();
-                  // Filter professors based on the entered name
-
-                  if (name.isNotEmpty &&
-                      !profFirstName
-                          .toLowerCase()
-                          .contains(name.toLowerCase()) &&
-                      !profLastName
-                          .toLowerCase()
-                          .contains(name.toLowerCase())) {
-                    return Container(); // Hide the professor card if it doesn't match the search criteria
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                      left: 30,
-                      right: 30,
-                      bottom: 10,
+              SearchBox(onSearch: _handleSearch),
+              const SizedBox(
+                height: 10,
+              ),
+              if (isEmptyProfessor)
+                const SizedBox(
+                  // color: Colors.red,
+                  height: 200,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "No Available Data",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "GothamRnd"),
+                        ),
+                      ],
                     ),
-                    child: Card(
-                        elevation: 5.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        color: const Color(0xFFDCDAD8),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      top: 15,
-                                      left: 15,
-                                      right: 15,
-                                      bottom: 5,
-                                    ),
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFA2C2FF),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
+                  ),
+                ),
+              if (!isEmptyProfessor)
+                Expanded(
+                    child: FirebaseAnimatedList(
+                  query: appointmentsRef.orderByChild("firstName"),
+                  itemBuilder: (context, snapshot, animation, index) {
+                    String availability =
+                        snapshot.child('availability').value.toString();
+
+                    String profFirstName =
+                        snapshot.child('firstName').value.toString();
+                    String profLastName =
+                        snapshot.child('lastName').value.toString();
+                    String status = snapshot.child('status').value.toString();
+                    // Filter professors based on the entered name
+
+                    if (name.isNotEmpty &&
+                        !profFirstName
+                            .toLowerCase()
+                            .contains(name.toLowerCase()) &&
+                        !profLastName
+                            .toLowerCase()
+                            .contains(name.toLowerCase())) {
+                      return Container(); // Hide the professor card if it doesn't match the search criteria
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        left: 30,
+                        right: 30,
+                        bottom: 10,
+                      ),
+                      child: Card(
+                          elevation: 5.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          color: const Color(0xFFDCDAD8),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 15,
+                                        left: 15,
+                                        right: 15,
+                                        bottom: 5,
                                       ),
-                                      child: ClipRRect(
+                                      child: Container(
+                                        height: 50,
+                                        width: 50,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFA2C2FF),
                                           borderRadius:
                                               BorderRadius.circular(10.0),
-                                          child: ProfileController().image ==
-                                                  null
-                                              ? snapshot
-                                                          .child(
-                                                              'profilePicStatus')
-                                                          .value
-                                                          .toString() ==
-                                                      "None"
-                                                  ? const Icon(
-                                                      Icons.person,
-                                                      color: Colors.white,
-                                                      size: 25,
-                                                    )
-                                                  : Image(
-                                                      fit: BoxFit.cover,
-                                                      image: NetworkImage(snapshot
-                                                          .child(
-                                                              'profilePicStatus')
-                                                          .value
-                                                          .toString()),
-                                                      loadingBuilder: (context,
-                                                          child,
-                                                          loadingProgress) {
-                                                        if (loadingProgress ==
-                                                            null) {
-                                                          return child;
-                                                        }
-                                                        return const CircularProgressIndicator();
-                                                      },
-                                                      errorBuilder: (context,
-                                                          object, stack) {
-                                                        return const Icon(
-                                                          Icons.error_outline,
-                                                          color: Color.fromARGB(
-                                                              255, 35, 35, 35),
-                                                        );
-                                                      },
-                                                    )
-                                              : Image.file(File(
-                                                      ProfileController()
-                                                          .image!
-                                                          .path)
-                                                  .absolute)),
+                                        ),
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: ProfileController().image ==
+                                                    null
+                                                ? snapshot
+                                                            .child(
+                                                                'profilePicStatus')
+                                                            .value
+                                                            .toString() ==
+                                                        "None"
+                                                    ? const Icon(
+                                                        Icons.person,
+                                                        color: Colors.white,
+                                                        size: 25,
+                                                      )
+                                                    : Image(
+                                                        fit: BoxFit.cover,
+                                                        image: NetworkImage(snapshot
+                                                            .child(
+                                                                'profilePicStatus')
+                                                            .value
+                                                            .toString()),
+                                                        loadingBuilder: (context,
+                                                            child,
+                                                            loadingProgress) {
+                                                          if (loadingProgress ==
+                                                              null) {
+                                                            return child;
+                                                          }
+                                                          return const CircularProgressIndicator();
+                                                        },
+                                                        errorBuilder: (context,
+                                                            object, stack) {
+                                                          return const Icon(
+                                                            Icons.error_outline,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    35,
+                                                                    35,
+                                                                    35),
+                                                          );
+                                                        },
+                                                      )
+                                                : Image.file(File(
+                                                        ProfileController()
+                                                            .image!
+                                                            .path)
+                                                    .absolute)),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '$profFirstName $profLastName',
-                                      style: const TextStyle(
-                                        fontFamily: "GothamRnd",
-                                        color: Color(0xFF393838),
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      snapshot
-                                          .child('professorRole')
-                                          .value
-                                          .toString(),
-                                      style: const TextStyle(
-                                        fontFamily: "GothamRnd-Light",
-                                        color: Color(0xFF393838),
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Divider(
-                              color: Colors.black,
-                              thickness: 1.2,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 15,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      const SizedBox(width: 20),
-                                      const Icon(
-                                        Icons.event_available,
-                                        color: Colors.black,
+                                      Text(
+                                        '$profFirstName $profLastName',
+                                        style: const TextStyle(
+                                          fontFamily: "GothamRnd",
+                                          color: Color(0xFF393838),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                       Text(
                                         snapshot
-                                            .child('status')
+                                            .child('professorRole')
                                             .value
                                             .toString(),
                                         style: const TextStyle(
-                                          fontFamily: "GothamRnd-Bold",
+                                          fontFamily: "GothamRnd-Light",
                                           color: Color(0xFF393838),
-                                          fontSize: 12,
-                                          fontStyle: FontStyle.italic,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10,
                                         ),
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(width: 20),
-                                  ElevatedButton.icon(
-                                    icon: const Icon(
-                                      Icons.add,
-                                      size: 15,
-                                    ),
-                                    label: const Text(
-                                      'Appointment',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "GothamRnd-Light",
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    onPressed: status == 'accepting'
-                                        ? () => _handleButtonPress(
-                                              profFirstName,
-                                              profLastName,
-                                              snapshot
-                                                  .child('professorRole')
-                                                  .value
-                                                  .toString(),
-                                              snapshot
-                                                  .child('status')
-                                                  .value
-                                                  .toString(),
-                                              availability,
-                                              snapshot
-                                                  .child('profUserID')
-                                                  .value
-                                                  .toString(),
-                                              snapshot
-                                                  .child('salutation')
-                                                  .value
-                                                  .toString(),
-                                            )
-                                        : null,
-                                    style: ElevatedButton.styleFrom(
-                                      fixedSize: const Size(130, 10),
-                                      backgroundColor: const Color(0xFF6096BA),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            5), // Adjust the radius as needed
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 40),
                                 ],
                               ),
-                            ),
-                          ],
-                        )),
-                  );
-                },
-              ))
-          ]),
+                              const Divider(
+                                color: Colors.black,
+                                thickness: 1.2,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 15,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const SizedBox(width: 20),
+                                        const Icon(
+                                          Icons.event_available,
+                                          color: Colors.black,
+                                        ),
+                                        Text(
+                                          snapshot
+                                              .child('status')
+                                              .value
+                                              .toString(),
+                                          style: const TextStyle(
+                                            fontFamily: "GothamRnd-Bold",
+                                            color: Color(0xFF393838),
+                                            fontSize: 12,
+                                            fontStyle: FontStyle.italic,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(width: 20),
+                                    ElevatedButton.icon(
+                                      icon: const Icon(
+                                        Icons.add,
+                                        size: 15,
+                                      ),
+                                      label: const Text(
+                                        'Appointment',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "GothamRnd-Light",
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      onPressed: status == 'accepting'
+                                          ? () => _handleButtonPress(
+                                                profFirstName,
+                                                profLastName,
+                                                snapshot
+                                                    .child('professorRole')
+                                                    .value
+                                                    .toString(),
+                                                snapshot
+                                                    .child('status')
+                                                    .value
+                                                    .toString(),
+                                                availability,
+                                                snapshot
+                                                    .child('profUserID')
+                                                    .value
+                                                    .toString(),
+                                                snapshot
+                                                    .child('salutation')
+                                                    .value
+                                                    .toString(),
+                                              )
+                                          : null,
+                                      style: ElevatedButton.styleFrom(
+                                        fixedSize: const Size(130, 10),
+                                        backgroundColor:
+                                            const Color(0xFF6096BA),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              5), // Adjust the radius as needed
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 40),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )),
+                    );
+                  },
+                ))
+            ]),
+          ),
         ),
       ),
     );
