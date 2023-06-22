@@ -113,11 +113,23 @@ class _RequestPageState extends State<RequestPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Requests',
-                    style: TextStyle(fontSize: 30, fontFamily: "GothamRnd"),
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width / 30,
+                      top: MediaQuery.of(context).size.height / 100,
+                    ),
+                    child: const Text(
+                      'Requests',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: 'GothamRnd',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                  const Divider(
+                  Divider(
+                    indent: MediaQuery.of(context).size.width / 30,
+                    endIndent: MediaQuery.of(context).size.width / 30,
                     color: Colors.black,
                     thickness: 1,
                   ),
