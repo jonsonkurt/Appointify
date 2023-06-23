@@ -47,63 +47,96 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      TextFormField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.black, width: 1.0),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.black, width: 2.0),
-                            borderRadius: BorderRadius.circular(10.0),
+                      const SizedBox(height: 15.0),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Full Name",
+                            style: TextStyle(
+                              fontFamily: "GothamRnd",
+                              color: Color(0xFF393838),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your new password';
-                          }
-                          return null; // Return null if there is no error
-                        },
                       ),
-                      const SizedBox(height: 16.0),
-                      TextFormField(
-                        controller: _passwordConfirmController,
-                        decoration: InputDecoration(
-                          hintText: 'Confirm Password',
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.black, width: 1.0),
-                            borderRadius: BorderRadius.circular(10.0),
+                      const SizedBox(height: 8.0),
+                      Material(
+                        elevation: 5,
+                        borderRadius: BorderRadius.circular(30),
+                        child: TextFormField(
+                          controller: _passwordController,
+                          style: const TextStyle(
+                              color: Colors.black, fontFamily: "GothamRnd"),
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(20.0),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.black, width: 2.0),
-                            borderRadius: BorderRadius.circular(10.0),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your new password';
+                            }
+                            return null; // Return null if there is no error
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 15.0),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Confirm password",
+                            style: TextStyle(
+                              fontFamily: "GothamRnd",
+                              color: Color(0xFF393838),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please confirm your new password';
-                          }
-                          if (value != _passwordController.text) {
-                            return 'Password is not match';
-                          }
-                          return null; // Return null if there is no error
-                        },
                       ),
-                      const SizedBox(height: 16.0),
+                      const SizedBox(height: 8.0),
+                      Material(
+                        elevation: 5,
+                        borderRadius: BorderRadius.circular(30),
+                        child: TextFormField(
+                          controller: _passwordConfirmController,
+                          style: const TextStyle(
+                              color: Colors.black, fontFamily: "GothamRnd"),
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(20.0),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please confirm your new password';
+                            }
+                            if (value != _passwordController.text) {
+                              return 'Password is not match';
+                            }
+                            return null; // Return null if there is no error
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(155, 32),
-                          backgroundColor: const Color(0xFF7778EE),
+                          fixedSize: const Size(155, 40),
+                          backgroundColor: const Color(0xFF274C77),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 10), // Adjust the radius as needed
@@ -175,15 +208,15 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                   child: Center(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFFA2C2FF),
+                        color: const Color(0xFF6096BA),
                         borderRadius: BorderRadius.circular(
                             10.0), // Adjust the border radius as needed
                       ),
                       child: const Icon(
                         Icons.person,
                         size: 100,
-                        color: Colors
-                            .white, // Replace 'Colors.blue' with the desired color
+                        color: Colors.white,
+                        // Replace 'Colors.blue' with the desired color
                       ),
                     ),
                   ),
@@ -209,7 +242,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                 onPressed: _showPasswordModal,
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(200, 40),
-                  backgroundColor: const Color(0xFF6096BA),
+                  backgroundColor: const Color(0xFF274C77),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                         10), // Adjust the radius as needed
@@ -229,7 +262,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                 onPressed: _logout,
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(130, 10),
-                  backgroundColor: const Color(0xFFA3CEF1),
+                  backgroundColor: const Color(0xFF6096BA),
                   shape: RoundedRectangleBorder(
                     borderRadius:
                         BorderRadius.circular(5), // Adjust the radius as needed

@@ -176,7 +176,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.logout,
+                                Icons.manage_accounts,
                                 color: Colors.black,
                               ), // Icon for Option 2
                               SizedBox(width: 8), // Add some spacing
