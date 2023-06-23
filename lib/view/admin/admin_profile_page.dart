@@ -53,47 +53,6 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Full Name",
-                            style: TextStyle(
-                              fontFamily: "GothamRnd",
-                              color: Color(0xFF393838),
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8.0),
-                      Material(
-                        elevation: 5,
-                        borderRadius: BorderRadius.circular(30),
-                        child: TextFormField(
-                          controller: _passwordController,
-                          style: const TextStyle(
-                              color: Colors.black, fontFamily: "GothamRnd"),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(20.0),
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your new password';
-                            }
-                            return null; // Return null if there is no error
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 15.0),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
                             "Confirm password",
                             style: TextStyle(
                               fontFamily: "GothamRnd",
