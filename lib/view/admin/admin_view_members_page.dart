@@ -110,17 +110,17 @@ class _AdminViewMembers extends State<AdminViewMembers> {
 
                         if (position1 != "test") {
                           return Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 10,
+                            padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height / 90,
                             ),
                             child: Card(
                               elevation: 5.0,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
-                              margin: const EdgeInsets.only(
-                                top: 10,
-                                left: 30,
-                                right: 30,
+                              margin: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height / 90,
+                                left: MediaQuery.of(context).size.width / 20,
+                                right: MediaQuery.of(context).size.width / 20,
                               ),
                               color: const Color(0xFFDCDAD8),
                               child: Column(
