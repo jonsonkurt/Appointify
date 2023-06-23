@@ -42,7 +42,17 @@ class _AdminViewMembers extends State<AdminViewMembers> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Members"),
+          elevation: 0,
+          backgroundColor: Color(0xFF274C77),
+          title: const Text(
+            "Members",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+              fontFamily: "GothamRnd",
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -52,16 +62,32 @@ class _AdminViewMembers extends State<AdminViewMembers> {
         body: SafeArea(
           child: Column(
             children: [
-              const Divider(
-                indent: 30,
-                endIndent: 30,
-                thickness: 2,
-                color: Colors.black,
+              Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color:
+                      Color(0xFF274C77), // Set the background color of the box
+                  // Set the border radius of the box
+                ),
+                child: const Divider(
+                  color: Colors.white,
+                  thickness: 1.5,
+                  indent: 25,
+                  endIndent: 25,
+                ),
+                // child: Padding(
+                //   padding: EdgeInsets.only(
+                //     top: MediaQuery.of(context).size.height / 50,
+                //     bottom: MediaQuery.of(context).size.width / 100,
+                //     left: MediaQuery.of(context).size.width / 20,
+                //     right: MediaQuery.of(context).size.width / 30,
+                //   ),
+                // ),
               ),
-              const SizedBox(height: 15),
               SearchBox(
                 onSearch: _handleSearch,
               ),
+              const SizedBox(height: 15),
               Expanded(
                   child: FirebaseAnimatedList(
                       query: professorRef,
@@ -101,70 +127,103 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Row(children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                        vertical: 15,
-                                      ),
-                                      child: Container(
-                                        margin: const EdgeInsets.only(top: 10),
-                                        height: 50,
-                                        width: 50,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFA2C2FF),
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                            vertical: 15,
+                                          ),
+                                          child: Container(
+                                            margin:
+                                                const EdgeInsets.only(top: 10),
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                9,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                5,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFA2C2FF),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                child: ProfileController()
+                                                            .image ==
+                                                        null
+                                                    ? snapshot
+                                                                .child(
+                                                                    'profilePicStatus')
+                                                                .value
+                                                                .toString() ==
+                                                            "None"
+                                                        ? const Icon(
+                                                            Icons.person,
+                                                            size: 35,
+                                                          )
+                                                        : Image(
+                                                            fit: BoxFit.cover,
+                                                            image: NetworkImage(
+                                                                snapshot
+                                                                    .child(
+                                                                        'profilePicStatus')
+                                                                    .value
+                                                                    .toString()),
+                                                            loadingBuilder:
+                                                                (context, child,
+                                                                    loadingProgress) {
+                                                              if (loadingProgress ==
+                                                                  null) {
+                                                                return child;
+                                                              }
+                                                              return const CircularProgressIndicator();
+                                                            },
+                                                            errorBuilder:
+                                                                (context,
+                                                                    object,
+                                                                    stack) {
+                                                              return const Icon(
+                                                                Icons
+                                                                    .error_outline,
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        35,
+                                                                        35,
+                                                                        35),
+                                                              );
+                                                            },
+                                                          )
+                                                    : Image.file(File(
+                                                            ProfileController()
+                                                                .image!
+                                                                .path)
+                                                        .absolute)),
+                                          ),
                                         ),
-                                        child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            child: ProfileController().image ==
-                                                    null
-                                                ? snapshot
-                                                            .child(
-                                                                'profilePicStatus')
-                                                            .value
-                                                            .toString() ==
-                                                        "None"
-                                                    ? const Icon(
-                                                        Icons.person,
-                                                        size: 35,
-                                                      )
-                                                    : Image(
-                                                        fit: BoxFit.cover,
-                                                        image: NetworkImage(snapshot
-                                                            .child(
-                                                                'profilePicStatus')
-                                                            .value
-                                                            .toString()),
-                                                        loadingBuilder: (context,
-                                                            child,
-                                                            loadingProgress) {
-                                                          if (loadingProgress ==
-                                                              null) {
-                                                            return child;
-                                                          }
-                                                          return const CircularProgressIndicator();
-                                                        },
-                                                        errorBuilder: (context,
-                                                            object, stack) {
-                                                          return const Icon(
-                                                            Icons.error_outline,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    35,
-                                                                    35,
-                                                                    35),
-                                                          );
-                                                        },
-                                                      )
-                                                : Image.file(File(
-                                                        ProfileController()
-                                                            .image!
-                                                            .path)
-                                                    .absolute)),
-                                      ),
+                                        if (faculty.isNotEmpty)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 5.0),
+                                            child: Text(
+                                              faculty,
+                                              style: TextStyle(
+                                                fontFamily: "GothamRnd-Light",
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    35,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        const SizedBox(height: 10),
+                                      ],
                                     ),
                                     Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -178,8 +237,11 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                                               top: 10, bottom: 5),
                                           child: Text(
                                             name1,
-                                            style: const TextStyle(
-                                                fontSize: 17,
+                                            style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    25,
                                                 fontFamily: "GothamRnd",
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -187,52 +249,104 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                                         if (position1.isNotEmpty)
                                           Text(
                                             position1,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontFamily: "GothamRnd-Light",
-                                              fontSize: 13,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  35,
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
                                         if (position2.isNotEmpty)
                                           Text(
                                             position2,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontFamily: "GothamRnd-Light",
-                                              fontSize: 13,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  35,
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
                                         if (position3.isNotEmpty)
                                           Text(
                                             position3,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontFamily: "GothamRnd-Light",
-                                              fontSize: 13,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  35,
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
-                                        if (faculty.isNotEmpty)
-                                          Text(
-                                            faculty,
-                                            style: const TextStyle(
-                                              fontFamily: "GothamRnd-Light",
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                          ),
+                                        const SizedBox(height: 10.0),
                                         Row(
                                           children: [
-                                            IconButton(
-                                                onPressed: () {
-                                                  print("this is edit button");
-                                                },
-                                                icon: Icon(Icons.edit)),
-                                            IconButton(
-                                                onPressed: () {
-                                                  print(
-                                                      "this is delete button");
-                                                },
-                                                icon: Icon(Icons.delete)),
+                                            // IconButton(
+                                            //     onPressed: () {
+                                            //       print("this is edit button");
+                                            //     },
+                                            //     icon: const CircleAvatar(
+                                            //         backgroundColor:
+                                            //             const Color(0xFF274C77),
+                                            //         foregroundColor:
+                                            //             Colors.white,
+                                            //         child: Icon(
+                                            //           Icons.edit,
+                                            //           size: 20,
+                                            //         ))),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                fixedSize: const Size(100, 20),
+                                                backgroundColor:
+                                                    const Color(0xFF274C77),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10), // Adjust the radius as needed
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: const Text(
+                                                'Edit',
+                                                style: TextStyle(
+                                                  fontFamily: "GothamRnd",
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25,
+                                            ),
+
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                fixedSize: const Size(100, 20),
+                                                backgroundColor:
+                                                    const Color(0xFF274C77),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10), // Adjust the radius as needed
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: const Text(
+                                                'Remove',
+                                                style: TextStyle(
+                                                  fontFamily: "GothamRnd",
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -276,36 +390,41 @@ class _SearchBoxState extends State<SearchBox> {
   Widget build(BuildContext context) {
     return Center(
       child: SafeArea(
-        child: SizedBox(
-          width: 350,
-          child: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              hintText: 'Search',
-              hintStyle: const TextStyle(
-                fontFamily: "GothamRnd",
-                fontSize: 15,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: Color(0xff274C77), width: 1.0),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: Color(0xff274C77), width: 2.0),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              prefixIcon: const Icon(
-                Icons.search,
-                color: Color(0xff274C77),
-              ),
-              border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              )),
+        child: Container(
+          width: double.infinity,
+          height: 100,
+          decoration: const BoxDecoration(
+            color: Color(0xFF274C77), // Set the background color of the box
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20),
             ),
-            onChanged: widget.onSearch,
+            // Set the border radius of the box
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 50,
+                left: MediaQuery.of(context).size.width / 20,
+                right: MediaQuery.of(context).size.width / 20),
+            child: TextField(
+              controller: _searchController,
+              style: const TextStyle(
+                color: Colors.black,
+              ),
+              decoration: const InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: 'Search',
+                hintStyle:
+                    TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
+                prefixIcon: Icon(Icons.search, color: Color(0xFF6096BA)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              onChanged: widget.onSearch,
+            ),
           ),
         ),
       ),

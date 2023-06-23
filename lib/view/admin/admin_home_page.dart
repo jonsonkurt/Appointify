@@ -94,31 +94,31 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
       child: Scaffold(
         body: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 25,
-                vertical: 20,
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "List of Employees",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "GothamRnd",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  ),
+            Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 50,
+                  bottom: MediaQuery.of(context).size.width / 100,
+                  left: MediaQuery.of(context).size.width / 15,
+                  right: MediaQuery.of(context).size.width / 30,
                 ),
-              ),
-            ),
+                child: const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "List Employees",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontFamily: "GothamRnd",
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )),
             const Divider(
-              indent: 30,
-              endIndent: 30,
-              thickness: 2,
               color: Colors.black,
+              thickness: 1.5,
+              indent: 20,
+              endIndent: 20,
             ),
-            const SizedBox(height: 15),
             SearchBox(
               onSearch: _handleSearch,
             ),
@@ -259,7 +259,8 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                           ),
                         ),
                       );
-                    }))
+                    })),
+            const SizedBox(height: 15),
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
@@ -661,38 +662,43 @@ class _SearchBoxState extends State<SearchBox> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SafeArea(
-        child: SizedBox(
-          width: 350,
-          child: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              hintText: 'Search',
-              hintStyle: const TextStyle(
-                fontFamily: "GothamRnd",
-                fontSize: 15,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: Color(0xff274C77), width: 1.0),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: Color(0xff274C77), width: 2.0),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              prefixIcon: const Icon(
-                Icons.search,
-                color: Color(0xff274C77),
-              ),
-              border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                Radius.circular(20),
-              )),
-            ),
-            onChanged: widget.onSearch,
+      child: Padding(
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height / 50,
+            left: MediaQuery.of(context).size.width / 20,
+            right: MediaQuery.of(context).size.width / 20),
+        child: TextField(
+          controller: _searchController,
+          style: const TextStyle(
+            color: Colors.black,
           ),
+          decoration: const InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            hintText: 'Search',
+            hintStyle: TextStyle(fontFamily: "GothamRnd", color: Colors.grey),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Color(0xFF274C77),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide.none,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: Color(0xFF274C77),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: Color(0xFF274C77),
+              ),
+            ),
+          ),
+          onChanged: widget.onSearch,
         ),
       ),
     );
