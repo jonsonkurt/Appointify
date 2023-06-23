@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
 import 'package:appointify/view/student/profile_controller.dart';
+import 'admin_edit_members.dart';
 
 class AdminViewMembers extends StatefulWidget {
   const AdminViewMembers({Key? key}) : super(key: key);
@@ -101,6 +102,7 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                             snapshot.child('position3').value.toString();
                         String faculty =
                             snapshot.child('faculty').value.toString();
+                        String id = snapshot.child('id').value.toString();
 
                         if (name.isNotEmpty &&
                             !name1.toLowerCase().contains(name.toLowerCase()) &&
@@ -309,7 +311,23 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                                                           10), // Adjust the radius as needed
                                                 ),
                                               ),
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            EditOrgChartPage(
+                                                                empName: name1,
+                                                                empPos1:
+                                                                    position1,
+                                                                empPos2:
+                                                                    position2,
+                                                                empPos3:
+                                                                    position3,
+                                                                empFaculty:
+                                                                    faculty,
+                                                                empID: id)));
+                                              },
                                               child: const Text(
                                                 'Edit',
                                                 style: TextStyle(
