@@ -325,12 +325,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                           fixedSize: MaterialStatePropertyAll(
                                               Size(90, 10))),
                                       onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ProfilePage()),
-                                        );
+                                        Navigator.pop(context);
                                         _phone.clear();
                                         _section.clear();
                                       },
