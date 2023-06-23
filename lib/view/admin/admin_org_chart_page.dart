@@ -198,7 +198,7 @@ class _OrgChartPage extends State<OrgChartPage> {
               stream: ref.orderByChild("rank").onValue,
               builder: (context, AsyncSnapshot snapshot) {
                 dynamic values;
-                String latestRank = "";
+             
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasData) {
@@ -279,7 +279,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                     }
                   }
                   var edges = schoolOrg["edges"]!;
-                  print("titi: $edges");
+           
 
                   for (var element in edges) {
                     var fromNodeId = element["from"];
@@ -400,7 +400,7 @@ class _OrgChartPage extends State<OrgChartPage> {
   void initState() {
     super.initState();
     // var edges = schoolOrg["edges"]!;
-    // print("titi: $edges");
+
 
     // for (var element in edges) {
     //   var fromNodeId = element["from"];
