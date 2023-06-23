@@ -157,7 +157,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                             left: 30,
                             right: 30,
                           ),
-                          color: const Color(0xFFDCDAD8),
+                          color: Colors.white,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
