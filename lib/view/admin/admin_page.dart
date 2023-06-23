@@ -40,6 +40,7 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
                   style: TextStyle(fontFamily: "GothamRnd"),
                 ),
                 selectedColor: Colors.white,
+                unselectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.list_alt),
@@ -48,6 +49,7 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
                   style: TextStyle(fontFamily: "GothamRnd"),
                 ),
                 selectedColor: Colors.white,
+                unselectedColor: Colors.white,
               ),
               SalomonBottomBarItem(
                 icon: const Icon(Icons.people),
@@ -56,6 +58,7 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
                   style: TextStyle(fontFamily: "GothamRnd"),
                 ),
                 selectedColor: Colors.white,
+                unselectedColor: Colors.white,
               ),
             ],
             onTap: (index) {
