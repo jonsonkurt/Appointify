@@ -219,8 +219,7 @@ class OnBoarding extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity, // Set the width of the container
-                  height: MediaQuery.of(context).size.height /
-                      1.5, // Set the height of the container
+                  height: 500, // Set the height of the container
                   decoration: const BoxDecoration(
                     color: Color(
                         0xFF274C77), // Set the background color of the box
@@ -252,12 +251,12 @@ class OnBoarding extends StatelessWidget {
         speed: 1.8,
         pageBodies: [
           Container(
-            padding: const EdgeInsets.only(top: 520, left: 30, right: 30),
+            padding: const EdgeInsets.only(top: 550, left: 30, right: 30),
             child: const Column(
               children: <Widget>[
-                // SizedBox(
-                //   height: 10,
-                // ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   "Seamlessly Connect with Professors,",
                   style: TextStyle(
@@ -275,12 +274,12 @@ class OnBoarding extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 520, left: 30, right: 30),
+            padding: const EdgeInsets.only(top: 550, left: 30, right: 30),
             child: const Column(
               children: <Widget>[
-                // SizedBox(
-                //   height: 10,
-                // ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   "Your Passport to Hassle-Free",
                   style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
@@ -295,12 +294,12 @@ class OnBoarding extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 520, left: 30, right: 30),
+            padding: const EdgeInsets.only(top: 550, left: 30, right: 30),
             child: const Column(
               children: <Widget>[
-                // SizedBox(
-                //   height: 10,
-                // ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   "Bridge the Gap and Book",
                   style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
