@@ -44,7 +44,7 @@ class _BottomNavigationStateAdmin extends State<BottomNavigationAdmin> {
               SalomonBottomBarItem(
                 icon: const Icon(Icons.list_alt),
                 title: const Text(
-                  "Organization chart",
+                  "Org chart",
                   style: TextStyle(fontFamily: "GothamRnd"),
                 ),
                 selectedColor: Colors.white,
