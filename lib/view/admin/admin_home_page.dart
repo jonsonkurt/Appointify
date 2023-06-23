@@ -125,6 +125,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
             const SizedBox(height: 15),
             Expanded(
                 child: FirebaseAnimatedList(
+                    padding: const EdgeInsets.only(bottom: 60),
                     query: professorRef,
                     itemBuilder: (context, snapshot, animation, index) {
                       String profFirstName =
