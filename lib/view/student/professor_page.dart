@@ -158,17 +158,6 @@ class _ProfessorPageState extends State<ProfessorPage> {
                   endIndent: 20,
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF274C77),
-                  border: Border.all(
-                    color: Colors.transparent,
-                  ),
-                  // Set the background color of the box
-                  // Set the border radius of the box
-                ),
-                height: 10,
-              ),
               SearchBox(onSearch: _handleSearch),
               const SizedBox(
                 height: 10,
@@ -466,6 +455,7 @@ class _SearchBoxState extends State<SearchBox> {
       ),
       child: Padding(
         padding: EdgeInsets.only(
+            top: 10,
             left: MediaQuery.of(context).size.width / 20,
             right: MediaQuery.of(context).size.width / 20),
         child: TextField(

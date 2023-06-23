@@ -156,6 +156,8 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         provider.pickImage(context);
                                       },
                                       child: const CircleAvatar(
+                                        backgroundColor: Color(0xFF274C77),
+                                        foregroundColor: Colors.white,
                                         radius: 15,
                                         child: Icon(Icons.edit, size: 15),
                                       ),
@@ -288,12 +290,15 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                     ),
                                     const SizedBox(height: 25.0),
                                     ElevatedButton(
-                                      style: const ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStatePropertyAll(
-                                                  Color(0xFF6096BA)),
-                                          fixedSize: MaterialStatePropertyAll(
-                                              Size(90, 10))),
+                                      style: ElevatedButton.styleFrom(
+                                        fixedSize: const Size(130, 10),
+                                        backgroundColor:
+                                            const Color(0xFF274C77),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              10), // Adjust the radius as needed
+                                        ),
+                                      ),
                                       onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
                                           await provider.updloadImage();
@@ -313,17 +318,25 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                           _section.clear();
                                         }
                                       },
-                                      child: const Text('Confirm',
-                                          style: TextStyle(
-                                              fontFamily: "GothamRnd")),
+                                      child: const Text(
+                                        'Confirm',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: "GothamRnd",
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
                                     ),
                                     ElevatedButton(
-                                      style: const ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStatePropertyAll(
-                                                  Color(0xFF6096BA)),
-                                          fixedSize: MaterialStatePropertyAll(
-                                              Size(90, 10))),
+                                      style: ElevatedButton.styleFrom(
+                                        fixedSize: const Size(130, 10),
+                                        backgroundColor:
+                                            const Color(0xFF6096BA),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              10), // Adjust the radius as needed
+                                        ),
+                                      ),
                                       onPressed: () {
                                         Navigator.push(
                                           context,
@@ -336,8 +349,11 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                       },
                                       child: const Text(
                                         'Cancel',
-                                        style:
-                                            TextStyle(fontFamily: "GothamRnd"),
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: "GothamRnd",
+                                          fontWeight: FontWeight.normal,
+                                        ),
                                       ),
                                     ),
                                   ],
