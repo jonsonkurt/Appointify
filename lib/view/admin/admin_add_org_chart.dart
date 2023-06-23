@@ -13,11 +13,7 @@ class AddOrgChartPage extends StatefulWidget {
 
 class _AddOrgChartPageState extends State<AddOrgChartPage> {
   var logger = Logger();
-  var nameTECs = <TextEditingController>[];
-  var position1 = <TextEditingController>[];
-  var facultyTECs = <TextEditingController>[]; // List for faculty controllers
-  var position2 = <TextEditingController>[]; // List for position controllers
-  var position3 = <TextEditingController>[];
+
   int? index;
 
   StreamSubscription<DatabaseEvent>? orgChartSubscription;
