@@ -233,6 +233,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                     tabBarProperties: TabBarProperties(
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width / 30,
+                          right: MediaQuery.of(context).size.width / 30),
                       width: 360,
                       height: 50,
                       indicator: const ContainerTabIndicator(
@@ -562,16 +565,21 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             Column(
-                                              mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.all(
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          130),
+                                                  padding: EdgeInsets.only(
+                                                    left: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        40,
+                                                    right:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            40,
+                                                  ),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
