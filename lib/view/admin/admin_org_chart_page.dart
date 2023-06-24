@@ -1,3 +1,4 @@
+import 'package:appointify/image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -16,6 +17,8 @@ class _OrgChartPage extends State<OrgChartPage> {
   Map<String, List<Map<String, Object>>> schoolOrg = {"nodes": [], "edges": []};
   TransformationController transformationController =
       TransformationController();
+
+  // List imagesURL = [];
 
   // // nodes
   List<Map<String, Object>> nodes = [];
@@ -215,6 +218,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                         String pos2 = values[id.toString()]["position2"];
                         String pos3 = values[id.toString()]["position3"];
                         String faculty = values[id.toString()]["faculty"];
+                        String imageURL = values[id.toString()]["imageURL"];
                         int intRank = int.parse(rank);
                         var newNode = {
                           "id": id,
@@ -224,6 +228,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                           "position2": pos2,
                           "position3": pos3,
                           "faculty": faculty,
+                          "imageURL": imageURL,
                         };
                         schoolOrg["nodes"]!.add(newNode);
                         nodes.add(newNode);
@@ -340,18 +345,22 @@ class _OrgChartPage extends State<OrgChartPage> {
                                   builder: (Node node) {
                                     // I can decide what widget should be shown here based on the id
                                     var a = node.key!.value as int?;
-                                    List<Map<String, Object>> nodes =
+                                    List<Map<String, dynamic>> nodes =
                                         schoolOrg['nodes']!;
 
                                     var nodeValue = nodes.firstWhere(
                                         (element) => element["id"] == a);
-
+                                    int index = a! - 1;
+                                    print(index);
+                                    // print(imagesURL[index]);
                                     return rectangleWidget(
                                       nodeValue["label"] as String?,
                                       nodeValue["position1"] as String?,
                                       nodeValue["position2"] as String?,
                                       nodeValue["position3"] as String?,
                                       nodeValue["faculty"] as String?,
+                                      nodeValue["imageURL"] as String?,
+                                      nodeValue["id"].toString(),
                                     );
                                   },
                                 )),
@@ -374,21 +383,61 @@ class _OrgChartPage extends State<OrgChartPage> {
     String? position2,
     String? position3,
     String? faculty,
+    String? image,
+    String? id,
   ) {
     return InkWell(
       onTap: () {
         print('clicked');
       },
-      child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            boxShadow: [
-              BoxShadow(color: Colors.blue[100]!, spreadRadius: 2),
-            ],
+      child: Column(
+        children: [
+          Container(
+            height: 130,
+            width: 130,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2,
+                )),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: image == ""
+                    ? const Icon(
+                        Icons.person,
+                        size: 35,
+                      )
+                    : Image(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(image!),
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                          return const CircularProgressIndicator();
+                        },
+                        errorBuilder: (context, object, stack) {
+                          return const Icon(
+                            Icons.error_outline,
+                            color: Color.fromARGB(255, 35, 35, 35),
+                          );
+                        },
+                      )),
           ),
-          child:
-              Text('${a}\n${position1}\n${position2}\n$position3\n$faculty')),
+          Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                boxShadow: [
+                  BoxShadow(color: Colors.blue[100]!, spreadRadius: 2),
+                ],
+              ),
+              child: Text(
+                  '${a}\n${position1}\n${position2}\n$position3\n$faculty')),
+        ],
+      ),
     );
   }
 
