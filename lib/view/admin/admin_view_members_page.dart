@@ -355,7 +355,50 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                                                           10), // Adjust the radius as needed
                                                 ),
                                               ),
-                                              onPressed: () {},
+                                              onPressed: () async {
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: const Text(
+                                                          'Are you sure you want to remove this member?'),
+                                                      actions: [
+                                                        TextButton(
+                                                          child: const Text(
+                                                            'Confirm',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                          onPressed: () async {
+                                                            await professorRef
+                                                                .child(id)
+                                                                .remove();
+                                                            // ignore: use_build_context_synchronously
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                        TextButton(
+                                                          child: const Text(
+                                                            'Cancel',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              },
                                               child: const Text(
                                                 'Remove',
                                                 style: TextStyle(
