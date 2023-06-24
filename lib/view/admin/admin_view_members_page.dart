@@ -287,62 +287,49 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                                         const SizedBox(height: 10.0),
                                         Row(
                                           children: [
-                                            // IconButton(
-                                            //     onPressed: () {
-                                            //       print("this is edit button");
-                                            //     },
-                                            //     icon: const CircleAvatar(
-                                            //         backgroundColor:
-                                            //             const Color(0xFF274C77),
-                                            //         foregroundColor:
-                                            //             Colors.white,
-                                            //         child: Icon(
-                                            //           Icons.edit,
-                                            //           size: 20,
-                                            //         ))),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                fixedSize: const Size(100, 20),
-                                                backgroundColor:
-                                                    const Color(0xFF274C77),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10), // Adjust the radius as needed
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            EditOrgChartPage(
-                                                                empName: name1,
-                                                                empPos1:
-                                                                    position1,
-                                                                empPos2:
-                                                                    position2,
-                                                                empPos3:
-                                                                    position3,
-                                                                empFaculty:
-                                                                    faculty,
-                                                                empID: id)));
-                                              },
-                                              child: const Text(
-                                                'Edit',
-                                                style: TextStyle(
-                                                  fontFamily: "GothamRnd",
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  25,
-                                            ),
+                                            // ElevatedButton(
+                                            //   style: ElevatedButton.styleFrom(
+                                            //     fixedSize: const Size(100, 20),
+                                            //     backgroundColor:
+                                            //         const Color(0xFF274C77),
+                                            //     shape: RoundedRectangleBorder(
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(
+                                            //               10), // Adjust the radius as needed
+                                            //     ),
+                                            //   ),
+                                            //   onPressed: () {
+                                            //     Navigator.push(
+                                            //         context,
+                                            //         MaterialPageRoute(
+                                            //             builder: (context) =>
+                                            //                 EditOrgChartPage(
+                                            //                     empName: name1,
+                                            //                     empPos1:
+                                            //                         position1,
+                                            //                     empPos2:
+                                            //                         position2,
+                                            //                     empPos3:
+                                            //                         position3,
+                                            //                     empFaculty:
+                                            //                         faculty,
+                                            //                     empID: id)));
+                                            //   },
+                                            //   child: const Text(
+                                            //     'Edit',
+                                            //     style: TextStyle(
+                                            //       fontFamily: "GothamRnd",
+                                            //       color: Colors.white,
+                                            //       fontSize: 15,
+                                            //     ),
+                                            //   ),
+                                            // ),
+                                            // SizedBox(
+                                            //   width: MediaQuery.of(context)
+                                            //           .size
+                                            //           .width /
+                                            //       25,
+                                            // ),
 
                                             ElevatedButton(
                                               style: ElevatedButton.styleFrom(
