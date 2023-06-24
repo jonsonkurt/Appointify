@@ -25,6 +25,7 @@ class EditOrgChartPage extends StatefulWidget {
       : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _EditOrgChartPageState createState() => _EditOrgChartPageState();
 }
 
@@ -114,7 +115,7 @@ class _EditOrgChartPageState extends State<EditOrgChartPage> {
     var pos2 = selectedPosition2 ?? '';
     var pos3 = selectedPosition3 ?? '';
 
-    print("NAME - - - -$name");
+    // print("NAME - - - -$name");
     String highestRank = "6";
     List<String> positions = [pos1, pos2, pos3, faculty];
     for (String position in positions) {

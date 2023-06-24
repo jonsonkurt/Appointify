@@ -378,7 +378,7 @@ class _RequestPageState extends State<RequestPage> {
                                       height: 30,
                                       decoration: BoxDecoration(
                                         border: Border.all(width: 1),
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(10)),
                                         color: Colors.white,
                                       ),
@@ -397,7 +397,7 @@ class _RequestPageState extends State<RequestPage> {
                                                     .child('date')
                                                     .value
                                                     .toString(),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontFamily: "GothamRnd"),
                                               ),
                                             ],
@@ -413,7 +413,7 @@ class _RequestPageState extends State<RequestPage> {
                                                     .child('time')
                                                     .value
                                                     .toString(),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontFamily: "GothamRnd"),
                                               ),
                                             ],
@@ -454,16 +454,56 @@ class _RequestPageState extends State<RequestPage> {
                                               style: TextStyle(fontSize: 9),
                                             ),
                                             onPressed: () async {
-                                              await appointmentsRef
-                                                  .child(appointID)
-                                                  .update({
-                                                'requestStatusProfessor':
-                                                    "$profID-UPCOMING-$outputDate:$outputTime",
-                                                'status':
-                                                    "$studID-UPCOMING-$outputDate:$outputTime",
-                                                'requestStatus': "UPCOMING",
-                                                // 'profilePicStatus':
-                                              });
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: const Text(
+                                                          'Are you sure you want to accept this appointment?'),
+                                                      actions: [
+                                                        TextButton(
+                                                          child: const Text(
+                                                            'Confirm',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                          onPressed: () async {
+                                                            await appointmentsRef
+                                                                .child(
+                                                                    appointID)
+                                                                .update({
+                                                              'requestStatusProfessor':
+                                                                  "$profID-UPCOMING-$outputDate:$outputTime",
+                                                              'status':
+                                                                  "$studID-UPCOMING-$outputDate:$outputTime",
+                                                              'requestStatus':
+                                                                  "UPCOMING",
+                                                              // 'profilePicStatus':
+                                                            });
+                                                            // ignore: use_build_context_synchronously
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                        TextButton(
+                                                          child: const Text(
+                                                            'Cancel',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  });
                                             },
                                           ),
                                           // Reschedule button
@@ -501,11 +541,13 @@ class _RequestPageState extends State<RequestPage> {
                                                     key: formKey,
                                                     child: AlertDialog(
                                                       titlePadding:
-                                                          EdgeInsets.all(0),
+                                                          const EdgeInsets.all(
+                                                              0),
                                                       title: Container(
                                                         height: 70,
                                                         padding:
-                                                            EdgeInsets.all(20),
+                                                            const EdgeInsets
+                                                                .all(20),
                                                         color: const Color(
                                                             0xFF274C77),
                                                         child: const Text(
@@ -621,7 +663,8 @@ class _RequestPageState extends State<RequestPage> {
                                                               ),
                                                             ),
                                                           ),
-                                                          SizedBox(height: 5),
+                                                          const SizedBox(
+                                                              height: 5),
                                                           Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -768,12 +811,13 @@ class _RequestPageState extends State<RequestPage> {
                                                       key: formKey,
                                                       child: AlertDialog(
                                                         titlePadding:
-                                                            EdgeInsets.all(0),
+                                                            const EdgeInsets
+                                                                .all(0),
                                                         title: Container(
                                                           height: 70,
                                                           padding:
-                                                              EdgeInsets.all(
-                                                                  20),
+                                                              const EdgeInsets
+                                                                  .all(20),
                                                           color: const Color(
                                                               0xFF274C77),
                                                           child: const Text(

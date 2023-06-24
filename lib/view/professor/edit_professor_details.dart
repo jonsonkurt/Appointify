@@ -228,7 +228,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
 
                     return Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: MediaQuery.of(context).size.height / 2.5,
                           child: Stack(
                               alignment: Alignment.topCenter,
@@ -316,7 +316,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 ),
 
                                 Center(
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 125,
                                     width: 120,
                                     child: Align(
@@ -549,7 +549,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                             onChanged:
                                                                 (newValue) {
                                                               setState(() {
-                                                                print(newValue);
+                                                                // print(newValue);
                                                                 if (schedStartTime[
                                                                         index] !=
                                                                     '-') {
@@ -795,7 +795,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   ),
                                   onPressed: () async {
                                     await provider.updloadImage();
-                                    print(_selectedFromTimes[0]);
+                                    // print(_selectedFromTimes[0]);
                                     if (_formKey.currentState!.validate()) {
                                       await ref
                                           .child(userID.toString())

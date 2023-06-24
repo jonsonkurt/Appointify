@@ -490,7 +490,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                                 child: Text(
                                                   "${entry.value.split(' to ').join('\nto\n')}",
                                                   textAlign: TextAlign.center,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontFamily: 'GothamRnd',
                                                   ),
                                                 ),

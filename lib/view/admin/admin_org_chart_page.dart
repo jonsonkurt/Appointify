@@ -1,4 +1,3 @@
-import 'package:appointify/image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -157,7 +156,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AddOrgChartPage(),
+                            builder: (context) => const AddOrgChartPage(),
                           ),
                         );
                       }
@@ -364,7 +363,7 @@ class _OrgChartPage extends State<OrgChartPage> {
 
                                     var nodeValue = nodes.firstWhere(
                                         (element) => element["id"] == a);
-                                    int index = a! - 1;
+                                    // int index = a! - 1;
 
                                     // print(imagesURL[index]);
                                     return rectangleWidget(

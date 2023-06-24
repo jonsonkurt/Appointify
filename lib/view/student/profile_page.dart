@@ -474,12 +474,12 @@ class ReuseableRow extends StatelessWidget {
         ListTile(
           title: Text(
             title,
-            style: TextStyle(fontFamily: "GothamRnd"),
+            style: const TextStyle(fontFamily: "GothamRnd"),
           ),
           leading: Icon(iconData),
           trailing: Text(
             value,
-            style: TextStyle(fontFamily: "GothamRnd"),
+            style: const TextStyle(fontFamily: "GothamRnd"),
           ),
         ),
         const Divider(

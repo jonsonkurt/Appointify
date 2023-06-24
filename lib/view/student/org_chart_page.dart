@@ -15,6 +15,8 @@ class _OrgChartPage extends State<OrgChartPage> {
   TransformationController transformationController =
       TransformationController();
 
+  // List imagesURL = [];
+
   // // nodes
   List<Map<String, Object>> nodes = [];
   // var json = {
@@ -125,14 +127,23 @@ class _OrgChartPage extends State<OrgChartPage> {
         },
         child: Scaffold(
             appBar: AppBar(
-              title: const Text("Org Chart"),
-              backgroundColor: Colors.orange,
+              elevation: 0,
+              backgroundColor: const Color(0xFF274C77),
+              title: const Text(
+                "Org Chart",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: "GothamRnd",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             body: StreamBuilder(
               stream: ref.orderByChild("rank").onValue,
               builder: (context, AsyncSnapshot snapshot) {
                 dynamic values;
-                String latestRank = "";
+
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasData) {
@@ -149,6 +160,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                         String pos2 = values[id.toString()]["position2"];
                         String pos3 = values[id.toString()]["position3"];
                         String faculty = values[id.toString()]["faculty"];
+                        String imageURL = values[id.toString()]["imageURL"];
                         int intRank = int.parse(rank);
                         var newNode = {
                           "id": id,
@@ -158,6 +170,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                           "position2": pos2,
                           "position3": pos3,
                           "faculty": faculty,
+                          "imageURL": imageURL,
                         };
                         schoolOrg["nodes"]!.add(newNode);
                         nodes.add(newNode);
@@ -196,7 +209,12 @@ class _OrgChartPage extends State<OrgChartPage> {
                               "from": entry1["id"],
                               "to": entry2["id"]
                             };
-                            if (entry1["label"] == "Ar. Kenn") {
+
+                            if (entry1["position1"] == "Program Coordinator, BS Archi" ||
+                                entry1["position2"] ==
+                                    "Program Coordinator, BS Archi" ||
+                                entry1["position3"] ==
+                                    "Program Coordinator, BS Archi") {
                               schoolOrg["edges"]!
                                   .add(newEdges.cast<String, Object>());
                             }
@@ -213,7 +231,6 @@ class _OrgChartPage extends State<OrgChartPage> {
                     }
                   }
                   var edges = schoolOrg["edges"]!;
-                  print("titi: $edges");
 
                   for (var element in edges) {
                     var fromNodeId = element["from"];
@@ -259,9 +276,9 @@ class _OrgChartPage extends State<OrgChartPage> {
                                     TransformationController(
                                         transformationController.value =
                                             Matrix4.identity()
-                                              ..translate(-350.0, 0, -100)
+                                              ..translate(-760.0, 0, -100)
                                               ..scale(0.5)),
-                                boundaryMargin: const EdgeInsets.all(100),
+                                boundaryMargin: const EdgeInsets.all(500),
                                 minScale: 0.1,
                                 maxScale: 5.6,
                                 child: GraphView(
@@ -275,18 +292,22 @@ class _OrgChartPage extends State<OrgChartPage> {
                                   builder: (Node node) {
                                     // I can decide what widget should be shown here based on the id
                                     var a = node.key!.value as int?;
-                                    List<Map<String, Object>> nodes =
+                                    List<Map<String, dynamic>> nodes =
                                         schoolOrg['nodes']!;
 
                                     var nodeValue = nodes.firstWhere(
                                         (element) => element["id"] == a);
+                                    // int index = a! - 1;
 
+                                    // print(imagesURL[index]);
                                     return rectangleWidget(
                                       nodeValue["label"] as String?,
                                       nodeValue["position1"] as String?,
                                       nodeValue["position2"] as String?,
                                       nodeValue["position3"] as String?,
                                       nodeValue["faculty"] as String?,
+                                      nodeValue["imageURL"] as String?,
+                                      nodeValue["id"].toString(),
                                     );
                                   },
                                 )),
@@ -309,21 +330,169 @@ class _OrgChartPage extends State<OrgChartPage> {
     String? position2,
     String? position3,
     String? faculty,
+    String? image,
+    String? id,
   ) {
-    return InkWell(
-      onTap: () {
-        print('clicked');
-      },
-      child: Container(
-          padding: const EdgeInsets.all(16),
+    return Column(
+      children: [
+        Container(
+          height: 130,
+          width: 130,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            boxShadow: [
-              BoxShadow(color: Colors.blue[100]!, spreadRadius: 2),
+              color: Colors.white,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
+              )),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: image == ""
+                  ? const Card(
+                      elevation: 5.0,
+                      shape: CircleBorder(),
+                      clipBehavior: Clip.antiAlias,
+                      child: Icon(
+                        Icons.person,
+                        size: 35,
+                      ),
+                    )
+                  : Card(
+                      elevation: 5.0,
+                      shape: const CircleBorder(),
+                      clipBehavior: Clip.antiAlias,
+                      child: Image(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(image!),
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                          return const CircularProgressIndicator();
+                        },
+                        errorBuilder: (context, object, stack) {
+                          return const Icon(
+                            Icons.error_outline,
+                            color: Color.fromARGB(255, 35, 35, 35),
+                          );
+                        },
+                      ),
+                    )),
+        ),
+        Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width / 18,
+              right: MediaQuery.of(context).size.width / 18,
+              top: MediaQuery.of(context).size.width / 30),
+          child: Column(
+            children: [
+              Container(
+                width: 350,
+                alignment: Alignment.centerLeft,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  color: Color(0xFF6096BA),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      a!,
+                      style: const TextStyle(
+                          fontFamily: 'GothamRnd',
+                          fontSize: 15,
+                          color: Colors.white,
+                          decoration: TextDecoration.none),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (position1 != "-")
+                        Text(
+                          position1!,
+                          style: const TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontSize: 15,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        ),
+                      if (position2 != "-")
+                        Text(
+                          position2!,
+                          style: const TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontSize: 15,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        ),
+                      if (position3 != "-")
+                        Text(
+                          position3!,
+                          style: const TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontSize: 15,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        ),
+                      if (faculty != "-")
+                        Text(
+                          faculty!,
+                          style: const TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontSize: 15,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        ),
+                      // Text(
+                      //   '$position1\n$position2\n$position3\n$faculty',
+                      //   style: const TextStyle(
+                      //       fontFamily: 'GothamRnd',
+                      //       fontSize: 15,
+                      //       color: Colors.black,
+                      //       decoration: TextDecoration.none),
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
-          child:
-              Text('${a}\n${position1}\n${position2}\n$position3\n$faculty')),
+        ),
+        // Column(
+        //   children: [
+        //     Container(
+        //         padding: const EdgeInsets.all(16),
+        //         decoration: BoxDecoration(
+        //           borderRadius: BorderRadius.circular(4),
+        //           boxShadow: [
+        //             BoxShadow(color: Colors.blue[100]!, spreadRadius: 2),
+        //           ],
+        //         ),
+        //         child: SizedBox(
+        //           child: Column(
+        //             children: [
+        //               Container(
+        //                 color: const Color(0xFF274C77),
+        //               ),
+        //               Text(
+        //                   '${a}\n${position1}\n${position2}\n$position3\n$faculty'),
+        //             ],
+        //           ),
+        //         )),
+        //   ],
+        // ),
+      ],
     );
   }
 
@@ -334,7 +503,6 @@ class _OrgChartPage extends State<OrgChartPage> {
   void initState() {
     super.initState();
     // var edges = schoolOrg["edges"]!;
-    // print("titi: $edges");
 
     // for (var element in edges) {
     //   var fromNodeId = element["from"];

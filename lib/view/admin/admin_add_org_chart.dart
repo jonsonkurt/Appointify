@@ -11,6 +11,7 @@ class AddOrgChartPage extends StatefulWidget {
   const AddOrgChartPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddOrgChartPageState createState() => _AddOrgChartPageState();
 }
 

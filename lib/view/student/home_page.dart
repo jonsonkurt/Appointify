@@ -628,7 +628,7 @@ class _HomePageState extends State<HomePage> {
                                             .white, // Replace with the desired color
                                       ),
                                     Container(
-                                      margin: EdgeInsets.only(top: 10),
+                                      margin: const EdgeInsets.only(top: 10),
                                       alignment: Alignment.center,
                                       height:
                                           MediaQuery.of(context).size.height /
