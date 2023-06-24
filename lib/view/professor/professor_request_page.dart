@@ -109,41 +109,23 @@ class _RequestPageState extends State<RequestPage> {
           return false; // Disable back button
         },
         child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: const Color(0xFF274C77),
+            title: const Text(
+              "Requests",
+              style: TextStyle(
+                fontSize: 30,
+                fontFamily: 'GothamRnd',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           body: SafeArea(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Stack(children: [
-                    Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Color(
-                            0xFF274C77), // Set the background color of the box
-                        // Set the border radius of the box
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 50,
-                          bottom: MediaQuery.of(context).size.width / 100,
-                          left: MediaQuery.of(context).size.width / 15,
-                          right: MediaQuery.of(context).size.width / 30,
-                        ),
-                        child: const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Requests',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontFamily: 'GothamRnd',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ]),
                   Container(
                     width: double.infinity,
                     height: 20,
