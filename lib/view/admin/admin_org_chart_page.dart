@@ -130,8 +130,17 @@ class _OrgChartPage extends State<OrgChartPage> {
         },
         child: Scaffold(
             appBar: AppBar(
-              title: const Text("Org Chart"),
-              backgroundColor: Colors.orange,
+              elevation: 0,
+              backgroundColor: const Color(0xFF274C77),
+              title: const Text(
+                "Org Chart",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: "GothamRnd",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               actions: [
                 PopupMenuButton<String>(
                     icon: const Icon(Icons.more_vert), // Set the icon
@@ -386,30 +395,35 @@ class _OrgChartPage extends State<OrgChartPage> {
     String? image,
     String? id,
   ) {
-    return InkWell(
-      onTap: () {
-        print('clicked');
-      },
-      child: Column(
-        children: [
-          Container(
-            height: 130,
-            width: 130,
-            decoration: BoxDecoration(
+    return Column(
+      children: [
+        Container(
+          height: 130,
+          width: 130,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              border: Border.all(
                 color: Colors.white,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
-                )),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: image == ""
-                    ? const Icon(
+                width: 2,
+              )),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: image == ""
+                  ? const Card(
+                      elevation: 5.0,
+                      shape: CircleBorder(),
+                      clipBehavior: Clip.antiAlias,
+                      child: Icon(
                         Icons.person,
                         size: 35,
-                      )
-                    : Image(
+                      ),
+                    )
+                  : Card(
+                      elevation: 5.0,
+                      shape: const CircleBorder(),
+                      clipBehavior: Clip.antiAlias,
+                      child: Image(
                         fit: BoxFit.cover,
                         image: NetworkImage(image!),
                         loadingBuilder: (context, child, loadingProgress) {
@@ -424,20 +438,123 @@ class _OrgChartPage extends State<OrgChartPage> {
                             color: Color.fromARGB(255, 35, 35, 35),
                           );
                         },
-                      )),
-          ),
-          Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                boxShadow: [
-                  BoxShadow(color: Colors.blue[100]!, spreadRadius: 2),
-                ],
+                      ),
+                    )),
+        ),
+        Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width / 18,
+              right: MediaQuery.of(context).size.width / 18,
+              top: MediaQuery.of(context).size.width / 30),
+          child: Column(
+            children: [
+              Container(
+                width: 350,
+                alignment: Alignment.centerLeft,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  color: Color(0xFF6096BA),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      a!,
+                      style: const TextStyle(
+                          fontFamily: 'GothamRnd',
+                          fontSize: 15,
+                          color: Colors.white,
+                          decoration: TextDecoration.none),
+                    ),
+                  ),
+                ),
               ),
-              child: Text(
-                  '${a}\n${position1}\n${position2}\n$position3\n$faculty')),
-        ],
-      ),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (position1 != "-")
+                        Text(
+                          position1!,
+                          style: const TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontSize: 15,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        ),
+                      if (position2 != "-")
+                        Text(
+                          position2!,
+                          style: const TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontSize: 15,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        ),
+                      if (position3 != "-")
+                        Text(
+                          position3!,
+                          style: const TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontSize: 15,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        ),
+                      if (faculty != "-")
+                        Text(
+                          faculty!,
+                          style: const TextStyle(
+                              fontFamily: 'GothamRnd',
+                              fontSize: 15,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        ),
+                      // Text(
+                      //   '$position1\n$position2\n$position3\n$faculty',
+                      //   style: const TextStyle(
+                      //       fontFamily: 'GothamRnd',
+                      //       fontSize: 15,
+                      //       color: Colors.black,
+                      //       decoration: TextDecoration.none),
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Column(
+        //   children: [
+        //     Container(
+        //         padding: const EdgeInsets.all(16),
+        //         decoration: BoxDecoration(
+        //           borderRadius: BorderRadius.circular(4),
+        //           boxShadow: [
+        //             BoxShadow(color: Colors.blue[100]!, spreadRadius: 2),
+        //           ],
+        //         ),
+        //         child: SizedBox(
+        //           child: Column(
+        //             children: [
+        //               Container(
+        //                 color: const Color(0xFF274C77),
+        //               ),
+        //               Text(
+        //                   '${a}\n${position1}\n${position2}\n$position3\n$faculty'),
+        //             ],
+        //           ),
+        //         )),
+        //   ],
+        // ),
+      ],
     );
   }
 

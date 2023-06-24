@@ -44,7 +44,7 @@ class _AdminViewMembers extends State<AdminViewMembers> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Color(0xFF274C77),
+          backgroundColor: const Color(0xFF274C77),
           title: const Text(
             "Members",
             style: TextStyle(
@@ -76,14 +76,6 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                   indent: 25,
                   endIndent: 25,
                 ),
-                // child: Padding(
-                //   padding: EdgeInsets.only(
-                //     top: MediaQuery.of(context).size.height / 50,
-                //     bottom: MediaQuery.of(context).size.width / 100,
-                //     left: MediaQuery.of(context).size.width / 20,
-                //     right: MediaQuery.of(context).size.width / 30,
-                //   ),
-                // ),
               ),
               SearchBox(
                 onSearch: _handleSearch,

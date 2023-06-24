@@ -33,6 +33,10 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
 
   @override
   void initState() {
+    selectedPosition1 = "-";
+    selectedFaculty = "-";
+    selectedPosition2 = "-";
+    selectedPosition3 = "-";
     super.initState();
   }
 
@@ -141,12 +145,20 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: const Color(0xFF274C77),
-              title: const Text(" "),
+              title: const Text(
+                "Add Employee",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: "GothamRnd",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               leading: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back_ios)),
+                  icon: const Icon(Icons.arrow_back_rounded)),
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -154,31 +166,20 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Stack(alignment: Alignment.bottomCenter, children: [
-                        Container(
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height / 4.5,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF274C77),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(30.0),
-                              bottomRight: Radius.circular(30.0),
-                            ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Color(
+                              0xFF274C77), // Set the background color of the box
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
                           ),
-                          child: const Align(
-                            alignment: Alignment.topCenter,
-                            child: Text(
-                              "Add Employee",
-                              style: TextStyle(
-                                  fontFamily: "GothamRnd",
-                                  fontSize: 30,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          // Set the border radius of the box
                         ),
-                        //image
-                        GestureDetector(
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: GestureDetector(
                           onTap: () {
                             provider.pickImage(context);
                           },
@@ -189,8 +190,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                 shape: BoxShape.rectangle,
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
-                                  color:
-                                      const Color.fromARGB(255, 255, 255, 255),
+                                  color: const Color(0xFF274C77),
                                   width: 2,
                                 )),
                             child: ClipRRect(
@@ -199,7 +199,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                   ? const Icon(
                                       Icons.add_circle,
                                       size: 35,
-                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      color: Color(0xFF274C77),
                                     )
                                   : Image.file(
                                       fit: BoxFit.cover,
@@ -207,7 +207,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                             ),
                           ),
                         ),
-                      ]),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Column(

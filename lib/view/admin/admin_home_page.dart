@@ -104,7 +104,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                 child: const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "List Employees",
+                    "List of Employees",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
@@ -113,12 +113,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                     ),
                   ),
                 )),
-            const Divider(
-              color: Colors.black,
-              thickness: 1.5,
-              indent: 20,
-              endIndent: 20,
-            ),
+            const SizedBox(height: 10),
+            Container(width: 350, height: 1, color: Colors.black),
+            const SizedBox(height: 10),
             SearchBox(
               onSearch: _handleSearch,
             ),
