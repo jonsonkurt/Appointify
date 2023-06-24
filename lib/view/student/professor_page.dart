@@ -105,41 +105,24 @@ class _ProfessorPageState extends State<ProfessorPage> {
           return false; // Disable back button
         },
         child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: const Color(0xFF274C77),
+            title: const Text(
+              "Employees",
+              style: TextStyle(
+                fontSize: 30,
+                fontFamily: 'GothamRnd',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           body: SafeArea(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               const SizedBox(
                 width: 350,
               ),
-              Stack(children: [
-                Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Color(
-                        0xFF274C77), // Set the background color of the box
-                    // Set the border radius of the box
-                  ),
-                  child: Padding(
-                      padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 50,
-                        bottom: MediaQuery.of(context).size.width / 100,
-                        left: MediaQuery.of(context).size.width / 20,
-                        right: MediaQuery.of(context).size.width / 30,
-                      ),
-                      child: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Employees",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontFamily: "GothamRnd",
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )),
-                ),
-              ]),
               Container(
                 width: double.infinity,
                 height: 20,
