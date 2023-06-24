@@ -44,10 +44,26 @@ class _EditOrgChartPageState extends State<EditOrgChartPage> {
   @override
   void initState() {
     nameController.text = widget.empName;
-    position1Controller.text = widget.empPos1;
-    position2Controller.text = widget.empPos2;
-    position3Controller.text = widget.empPos3;
-    facultyController.text = widget.empFaculty;
+    if (widget.empPos1 != "") {
+      selectedPosition1 = widget.empPos1;
+    } else {
+      position1Controller.text = widget.empPos1;
+    }
+    if (widget.empPos2 != "") {
+      selectedPosition2 = widget.empPos2;
+    } else {
+      position2Controller.text = widget.empPos2;
+    }
+    if (widget.empPos3 != "") {
+      selectedPosition3 = widget.empPos3;
+    } else {
+      position3Controller.text = widget.empPos3;
+    }
+    if (widget.empFaculty != "") {
+      selectedFaculty = widget.empFaculty;
+    } else {
+      position3Controller.text = widget.empFaculty;
+    }
     super.initState();
   }
 
