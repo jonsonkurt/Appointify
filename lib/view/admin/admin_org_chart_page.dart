@@ -343,7 +343,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                                     TransformationController(
                                         transformationController.value =
                                             Matrix4.identity()
-                                              ..translate(-350.0, 0, -100)
+                                              ..translate(-760.0, 0, -100)
                                               ..scale(0.5)),
                                 boundaryMargin: const EdgeInsets.all(500),
                                 minScale: 0.1,
