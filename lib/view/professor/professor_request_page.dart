@@ -454,16 +454,56 @@ class _RequestPageState extends State<RequestPage> {
                                               style: TextStyle(fontSize: 9),
                                             ),
                                             onPressed: () async {
-                                              await appointmentsRef
-                                                  .child(appointID)
-                                                  .update({
-                                                'requestStatusProfessor':
-                                                    "$profID-UPCOMING-$outputDate:$outputTime",
-                                                'status':
-                                                    "$studID-UPCOMING-$outputDate:$outputTime",
-                                                'requestStatus': "UPCOMING",
-                                                // 'profilePicStatus':
-                                              });
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: const Text(
+                                                          'Are you sure you want to accept this appointment?'),
+                                                      actions: [
+                                                        TextButton(
+                                                          child: const Text(
+                                                            'Confirm',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                          onPressed: () async {
+                                                            await appointmentsRef
+                                                                .child(
+                                                                    appointID)
+                                                                .update({
+                                                              'requestStatusProfessor':
+                                                                  "$profID-UPCOMING-$outputDate:$outputTime",
+                                                              'status':
+                                                                  "$studID-UPCOMING-$outputDate:$outputTime",
+                                                              'requestStatus':
+                                                                  "UPCOMING",
+                                                              // 'profilePicStatus':
+                                                            });
+                                                            // ignore: use_build_context_synchronously
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                        TextButton(
+                                                          child: const Text(
+                                                            'Cancel',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  });
                                             },
                                           ),
                                           // Reschedule button
