@@ -250,12 +250,12 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                   ],
                                 ),
                               ]),
-                              Container(
-                                  padding: const EdgeInsets.only(bottom: 15),
-                                  child: const Text(
-                                    "Designation: Employee",
-                                    style: TextStyle(fontFamily: "GothamRnd"),
-                                  )),
+                              // Container(
+                              //     padding: const EdgeInsets.only(bottom: 15),
+                              //     child: const Text(
+                              //       "Designation: Employee",
+                              //       style: TextStyle(fontFamily: "GothamRnd"),
+                              //     )),
                             ],
                           ),
                         ),
