@@ -176,12 +176,12 @@ class _OrgChartPage extends State<OrgChartPage> {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.manage_accounts,
+                                Icons.person_add_alt_1_rounded,
                                 color: Colors.black,
                               ), // Icon for Option 2
                               SizedBox(width: 8), // Add some spacing
                               Text(
-                                'Edit org chart',
+                                'Add a member',
                                 style: TextStyle(
                                   fontFamily: 'GothamRnd',
                                   fontWeight: FontWeight.bold,
@@ -198,7 +198,7 @@ class _OrgChartPage extends State<OrgChartPage> {
               stream: ref.orderByChild("rank").onValue,
               builder: (context, AsyncSnapshot snapshot) {
                 dynamic values;
-             
+
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasData) {
@@ -279,7 +279,6 @@ class _OrgChartPage extends State<OrgChartPage> {
                     }
                   }
                   var edges = schoolOrg["edges"]!;
-           
 
                   for (var element in edges) {
                     var fromNodeId = element["from"];
@@ -327,7 +326,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                                             Matrix4.identity()
                                               ..translate(-350.0, 0, -100)
                                               ..scale(0.5)),
-                                boundaryMargin: const EdgeInsets.all(100),
+                                boundaryMargin: const EdgeInsets.all(500),
                                 minScale: 0.1,
                                 maxScale: 5.6,
                                 child: GraphView(
@@ -400,7 +399,6 @@ class _OrgChartPage extends State<OrgChartPage> {
   void initState() {
     super.initState();
     // var edges = schoolOrg["edges"]!;
-
 
     // for (var element in edges) {
     //   var fromNodeId = element["from"];
