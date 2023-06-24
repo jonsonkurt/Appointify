@@ -276,7 +276,12 @@ class _OrgChartPage extends State<OrgChartPage> {
                               "from": entry1["id"],
                               "to": entry2["id"]
                             };
-                            if (entry1["label"] == "Ar. Kenn") {
+
+                            if (entry1["position1"] == "Program Coordinator, BS Archi" ||
+                                entry1["position2"] ==
+                                    "Program Coordinator, BS Archi" ||
+                                entry1["position3"] ==
+                                    "Program Coordinator, BS Archi") {
                               schoolOrg["edges"]!
                                   .add(newEdges.cast<String, Object>());
                             }
@@ -360,7 +365,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                                     var nodeValue = nodes.firstWhere(
                                         (element) => element["id"] == a);
                                     int index = a! - 1;
-                                    print(index);
+
                                     // print(imagesURL[index]);
                                     return rectangleWidget(
                                       nodeValue["label"] as String?,
