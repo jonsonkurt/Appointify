@@ -378,7 +378,7 @@ class _RequestPageState extends State<RequestPage> {
                                       height: 30,
                                       decoration: BoxDecoration(
                                         border: Border.all(width: 1),
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(10)),
                                         color: Colors.white,
                                       ),
@@ -397,7 +397,7 @@ class _RequestPageState extends State<RequestPage> {
                                                     .child('date')
                                                     .value
                                                     .toString(),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontFamily: "GothamRnd"),
                                               ),
                                             ],
@@ -413,7 +413,7 @@ class _RequestPageState extends State<RequestPage> {
                                                     .child('time')
                                                     .value
                                                     .toString(),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontFamily: "GothamRnd"),
                                               ),
                                             ],
@@ -501,11 +501,13 @@ class _RequestPageState extends State<RequestPage> {
                                                     key: formKey,
                                                     child: AlertDialog(
                                                       titlePadding:
-                                                          EdgeInsets.all(0),
+                                                          const EdgeInsets.all(
+                                                              0),
                                                       title: Container(
                                                         height: 70,
                                                         padding:
-                                                            EdgeInsets.all(20),
+                                                            const EdgeInsets
+                                                                .all(20),
                                                         color: const Color(
                                                             0xFF274C77),
                                                         child: const Text(
@@ -621,7 +623,8 @@ class _RequestPageState extends State<RequestPage> {
                                                               ),
                                                             ),
                                                           ),
-                                                          SizedBox(height: 5),
+                                                          const SizedBox(
+                                                              height: 5),
                                                           Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -768,12 +771,13 @@ class _RequestPageState extends State<RequestPage> {
                                                       key: formKey,
                                                       child: AlertDialog(
                                                         titlePadding:
-                                                            EdgeInsets.all(0),
+                                                            const EdgeInsets
+                                                                .all(0),
                                                         title: Container(
                                                           height: 70,
                                                           padding:
-                                                              EdgeInsets.all(
-                                                                  20),
+                                                              const EdgeInsets
+                                                                  .all(20),
                                                           color: const Color(
                                                               0xFF274C77),
                                                           child: const Text(

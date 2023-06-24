@@ -156,7 +156,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AddOrgChartPage(),
+                            builder: (context) => const AddOrgChartPage(),
                           ),
                         );
                       }
