@@ -1,4 +1,3 @@
-import 'package:appointify/image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:firebase_database/firebase_database.dart';

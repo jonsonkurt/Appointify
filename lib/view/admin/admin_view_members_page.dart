@@ -82,323 +82,322 @@ class _AdminViewMembers extends State<AdminViewMembers> {
               ),
               const SizedBox(height: 15),
               Expanded(
-                  child: FirebaseAnimatedList(
-                      query: professorRef,
-                      itemBuilder: (context, snapshot, animation, index) {
-                        String name1 = snapshot.child('name').value.toString();
-                        String? position1 =
-                            snapshot.child('position1').value.toString();
-                        String position2 =
-                            snapshot.child('position2').value.toString();
-                        String position3 =
-                            snapshot.child('position3').value.toString();
-                        String faculty =
-                            snapshot.child('faculty').value.toString();
-                        String id = snapshot.child('id').value.toString();
+                child: FirebaseAnimatedList(
+                  query: professorRef,
+                  itemBuilder: (context, snapshot, animation, index) {
+                    String name1 = snapshot.child('name').value.toString();
+                    String? position1 =
+                        snapshot.child('position1').value.toString();
+                    String position2 =
+                        snapshot.child('position2').value.toString();
+                    String position3 =
+                        snapshot.child('position3').value.toString();
+                    String faculty = snapshot.child('faculty').value.toString();
+                    String id = snapshot.child('id').value.toString();
 
-                        if (name.isNotEmpty &&
-                            !name1.toLowerCase().contains(name.toLowerCase()) &&
-                            !name1.toLowerCase().contains(name.toLowerCase())) {
-                          return Container(); // Hide the professor card if it doesn't match the search criteria
-                        }
+                    if (name.isNotEmpty &&
+                        !name1.toLowerCase().contains(name.toLowerCase()) &&
+                        !name1.toLowerCase().contains(name.toLowerCase())) {
+                      return Container(); // Hide the professor card if it doesn't match the search criteria
+                    }
 
-                        if (position1 != "test") {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).size.height / 90,
-                            ),
-                            child: Card(
-                              elevation: 5.0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              margin: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height / 90,
-                                left: MediaQuery.of(context).size.width / 20,
-                                right: MediaQuery.of(context).size.width / 20,
-                              ),
-                              color: const Color(0xFFDCDAD8),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(children: [
-                                    Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 20,
-                                            vertical: 15,
-                                          ),
-                                          child: Container(
-                                            margin:
-                                                const EdgeInsets.only(top: 10),
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
+                    if (position1 != "test") {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height / 90,
+                        ),
+                        child: Card(
+                          elevation: 5.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          margin: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height / 90,
+                            left: MediaQuery.of(context).size.width / 20,
+                            right: MediaQuery.of(context).size.width / 20,
+                          ),
+                          color: const Color(0xFFDCDAD8),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(children: [
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 15,
+                                      ),
+                                      child: Container(
+                                        margin: const EdgeInsets.only(top: 10),
+                                        height:
+                                            MediaQuery.of(context).size.height /
                                                 9,
-                                            width: MediaQuery.of(context)
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFA2C2FF),
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: ProfileController().image ==
+                                                    null
+                                                ? snapshot
+                                                            .child('imageURL')
+                                                            .value
+                                                            .toString() ==
+                                                        ""
+                                                    ? const Icon(
+                                                        Icons.person,
+                                                        size: 35,
+                                                      )
+                                                    : Image(
+                                                        fit: BoxFit.cover,
+                                                        image: NetworkImage(
+                                                            snapshot
+                                                                .child(
+                                                                    'imageURL')
+                                                                .value
+                                                                .toString()),
+                                                        loadingBuilder: (context,
+                                                            child,
+                                                            loadingProgress) {
+                                                          if (loadingProgress ==
+                                                              null) {
+                                                            return child;
+                                                          }
+                                                          return const CircularProgressIndicator();
+                                                        },
+                                                        errorBuilder: (context,
+                                                            object, stack) {
+                                                          return const Icon(
+                                                            Icons.error_outline,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    35,
+                                                                    35,
+                                                                    35),
+                                                          );
+                                                        },
+                                                      )
+                                                : Image.file(File(
+                                                        ProfileController()
+                                                            .image!
+                                                            .path)
+                                                    .absolute)),
+                                      ),
+                                    ),
+                                    if (faculty.isNotEmpty)
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 5.0),
+                                        child: Text(
+                                          faculty,
+                                          style: TextStyle(
+                                            fontFamily: "GothamRnd-Light",
+                                            fontSize: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                5,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFFA2C2FF),
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                child: ProfileController()
-                                                            .image ==
-                                                        null
-                                                    ? snapshot
-                                                                .child(
-                                                                    'profilePicStatus')
-                                                                .value
-                                                                .toString() ==
-                                                            "None"
-                                                        ? const Icon(
-                                                            Icons.person,
-                                                            size: 35,
-                                                          )
-                                                        : Image(
-                                                            fit: BoxFit.cover,
-                                                            image: NetworkImage(
-                                                                snapshot
-                                                                    .child(
-                                                                        'profilePicStatus')
-                                                                    .value
-                                                                    .toString()),
-                                                            loadingBuilder:
-                                                                (context, child,
-                                                                    loadingProgress) {
-                                                              if (loadingProgress ==
-                                                                  null) {
-                                                                return child;
-                                                              }
-                                                              return const CircularProgressIndicator();
-                                                            },
-                                                            errorBuilder:
-                                                                (context,
-                                                                    object,
-                                                                    stack) {
-                                                              return const Icon(
-                                                                Icons
-                                                                    .error_outline,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        35,
-                                                                        35,
-                                                                        35),
-                                                              );
-                                                            },
-                                                          )
-                                                    : Image.file(File(
-                                                            ProfileController()
-                                                                .image!
-                                                                .path)
-                                                        .absolute)),
+                                                35,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        if (faculty.isNotEmpty)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0),
-                                            child: Text(
-                                              faculty,
-                                              style: TextStyle(
-                                                fontFamily: "GothamRnd-Light",
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    35,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        const SizedBox(height: 10),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.only(
-                                              top: 10, bottom: 5),
+                                      ),
+                                    const SizedBox(height: 10),
+                                  ],
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, bottom: 5),
+                                        child: Opacity(
+                                          opacity:
+                                              0.9, // Adjust the opacity value as desired
                                           child: Text(
                                             name1,
                                             style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                                fontFamily: "GothamRnd",
-                                                fontWeight: FontWeight.bold),
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25,
+                                              fontFamily: "GothamRnd",
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.fade,
+                                            softWrap: false,
                                           ),
                                         ),
-                                        if (position1.isNotEmpty)
-                                          Text(
-                                            position1,
-                                            style: TextStyle(
-                                              fontFamily: "GothamRnd-Light",
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  35,
-                                              fontWeight: FontWeight.normal,
-                                            ),
+                                      ),
+                                      if (position1.isNotEmpty)
+                                        Text(
+                                          position1,
+                                          style: TextStyle(
+                                            fontFamily: "GothamRnd-Light",
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                35,
+                                            fontWeight: FontWeight.normal,
                                           ),
-                                        if (position2.isNotEmpty)
-                                          Text(
-                                            position2,
-                                            style: TextStyle(
-                                              fontFamily: "GothamRnd-Light",
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  35,
-                                              fontWeight: FontWeight.normal,
-                                            ),
+                                        ),
+                                      if (position2.isNotEmpty)
+                                        Text(
+                                          position2,
+                                          style: TextStyle(
+                                            fontFamily: "GothamRnd-Light",
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                35,
+                                            fontWeight: FontWeight.normal,
                                           ),
-                                        if (position3.isNotEmpty)
-                                          Text(
-                                            position3,
-                                            style: TextStyle(
-                                              fontFamily: "GothamRnd-Light",
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  35,
-                                              fontWeight: FontWeight.normal,
-                                            ),
+                                        ),
+                                      if (position3.isNotEmpty)
+                                        Text(
+                                          position3,
+                                          style: TextStyle(
+                                            fontFamily: "GothamRnd-Light",
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                35,
+                                            fontWeight: FontWeight.normal,
                                           ),
-                                        const SizedBox(height: 10.0),
-                                        Row(
-                                          children: [
-                                            // ElevatedButton(
-                                            //   style: ElevatedButton.styleFrom(
-                                            //     fixedSize: const Size(100, 20),
-                                            //     backgroundColor:
-                                            //         const Color(0xFF274C77),
-                                            //     shape: RoundedRectangleBorder(
-                                            //       borderRadius:
-                                            //           BorderRadius.circular(
-                                            //               10), // Adjust the radius as needed
-                                            //     ),
-                                            //   ),
-                                            //   onPressed: () {
-                                            //     Navigator.push(
-                                            //         context,
-                                            //         MaterialPageRoute(
-                                            //             builder: (context) =>
-                                            //                 EditOrgChartPage(
-                                            //                     empName: name1,
-                                            //                     empPos1:
-                                            //                         position1,
-                                            //                     empPos2:
-                                            //                         position2,
-                                            //                     empPos3:
-                                            //                         position3,
-                                            //                     empFaculty:
-                                            //                         faculty,
-                                            //                     empID: id)));
-                                            //   },
-                                            //   child: const Text(
-                                            //     'Edit',
-                                            //     style: TextStyle(
-                                            //       fontFamily: "GothamRnd",
-                                            //       color: Colors.white,
-                                            //       fontSize: 15,
-                                            //     ),
-                                            //   ),
-                                            // ),
-                                            // SizedBox(
-                                            //   width: MediaQuery.of(context)
-                                            //           .size
-                                            //           .width /
-                                            //       25,
-                                            // ),
+                                        ),
+                                      const SizedBox(height: 10.0),
+                                      Row(
+                                        children: [
+                                          // ElevatedButton(
+                                          //   style: ElevatedButton.styleFrom(
+                                          //     fixedSize: const Size(100, 20),
+                                          //     backgroundColor:
+                                          //         const Color(0xFF274C77),
+                                          //     shape: RoundedRectangleBorder(
+                                          //       borderRadius:
+                                          //           BorderRadius.circular(
+                                          //               10), // Adjust the radius as needed
+                                          //     ),
+                                          //   ),
+                                          //   onPressed: () {
+                                          //     Navigator.push(
+                                          //         context,
+                                          //         MaterialPageRoute(
+                                          //             builder: (context) =>
+                                          //                 EditOrgChartPage(
+                                          //                     empName: name1,
+                                          //                     empPos1:
+                                          //                         position1,
+                                          //                     empPos2:
+                                          //                         position2,
+                                          //                     empPos3:
+                                          //                         position3,
+                                          //                     empFaculty:
+                                          //                         faculty,
+                                          //                     empID: id)));
+                                          //   },
+                                          //   child: const Text(
+                                          //     'Edit',
+                                          //     style: TextStyle(
+                                          //       fontFamily: "GothamRnd",
+                                          //       color: Colors.white,
+                                          //       fontSize: 15,
+                                          //     ),
+                                          //   ),
+                                          // ),
+                                          // SizedBox(
+                                          //   width: MediaQuery.of(context)
+                                          //           .size
+                                          //           .width /
+                                          //       25,
+                                          // ),
 
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                fixedSize: const Size(100, 20),
-                                                backgroundColor:
-                                                    const Color(0xFF274C77),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10), // Adjust the radius as needed
-                                                ),
-                                              ),
-                                              onPressed: () async {
-                                                showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: const Text(
-                                                          'Are you sure you want to remove this member?'),
-                                                      actions: [
-                                                        TextButton(
-                                                          child: const Text(
-                                                            'Confirm',
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "GothamRnd"),
-                                                          ),
-                                                          onPressed: () async {
-                                                            await professorRef
-                                                                .child(id)
-                                                                .remove();
-                                                            // ignore: use_build_context_synchronously
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                        ),
-                                                        TextButton(
-                                                          child: const Text(
-                                                            'Cancel',
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "GothamRnd"),
-                                                          ),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              child: const Text(
-                                                'Remove',
-                                                style: TextStyle(
-                                                  fontFamily: "GothamRnd",
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                ),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              fixedSize: const Size(100, 20),
+                                              backgroundColor:
+                                                  const Color(0xFF274C77),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(
+                                                    10), // Adjust the radius as needed
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ]),
-                                ],
-                              ),
-                            ),
-                          );
-                        }
-                        return Text("");
-                      }))
+                                            onPressed: () async {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Are you sure you want to remove this member?'),
+                                                    actions: [
+                                                      TextButton(
+                                                        child: const Text(
+                                                          'Confirm',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "GothamRnd"),
+                                                        ),
+                                                        onPressed: () async {
+                                                          await professorRef
+                                                              .child(id)
+                                                              .remove();
+                                                          // ignore: use_build_context_synchronously
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                      TextButton(
+                                                        child: const Text(
+                                                          'Cancel',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "GothamRnd"),
+                                                        ),
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: const Text(
+                                              'Remove',
+                                              style: TextStyle(
+                                                fontFamily: "GothamRnd",
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ]),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                    return const Text("");
+                  },
+                ),
+              )
             ],
           ),
         ),
