@@ -363,7 +363,7 @@ class _OrgChartPage extends State<OrgChartPage> {
 
                                     var nodeValue = nodes.firstWhere(
                                         (element) => element["id"] == a);
-                                    int index = a! - 1;
+                                    // int index = a! - 1;
 
                                     // print(imagesURL[index]);
                                     return rectangleWidget(
