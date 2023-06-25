@@ -417,7 +417,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                     padding: const EdgeInsets.all(10),
                                     child: const Text(
-                                      "Contact Number:",
+                                      "Mobile Number:",
                                       style: TextStyle(
                                         fontFamily: "GothamRnd",
                                         fontSize: 15,

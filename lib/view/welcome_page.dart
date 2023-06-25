@@ -219,7 +219,8 @@ class OnBoarding extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity, // Set the width of the container
-                  height: 500, // Set the height of the container
+                  height: MediaQuery.of(context).size.height /
+                      1.5, // Set the height of the container
                   decoration: const BoxDecoration(
                     color: Color(
                         0xFF274C77), // Set the background color of the box
@@ -236,9 +237,10 @@ class OnBoarding extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Image.asset('assets/images/welcome_logo3.png'),
-                          const SizedBox(
-                            height: 30,
-                          ),
+                          const Padding(
+                              padding: const EdgeInsets.only(
+                            top: 30,
+                          )),
                           Image.asset('assets/images/Appointify.png'),
                         ],
                       )),

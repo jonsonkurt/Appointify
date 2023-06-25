@@ -164,8 +164,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                     _firstNameController.text = map['firstName'];
                     _lastNameController.text = map['lastName'];
                     _phoneController.text = map['mobileNumber'];
-                    _emailController.text = userEmail!;
-                    _professionController.text = map['designation'];
+                    _professionController.text = map['professorRole'];
                     Map<dynamic, dynamic> availability = map['availability'];
 
                     String dayOne = availability["Monday"];
@@ -374,7 +373,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 const Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "Name",
+                                    "First Name",
                                     style: TextStyle(
                                       fontFamily: "GothamRnd",
                                       color: Color(0xFF393838),
@@ -384,32 +383,71 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   ),
                                 ),
                                 const SizedBox(height: 8.0),
-                                Material(
-                                  elevation: 5,
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: TextFormField(
-                                    controller: _firstNameController,
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: "GothamRnd"),
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.all(20.0),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
+                                TextFormField(
+                                  controller: _firstNameController,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "GothamRnd"),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(20.0),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10.0),
                                     ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter your Name';
-                                      }
-                                      return null; // Return null if there is no error
-                                    },
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFF274C77), width: 2.0),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
                                   ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your first name';
+                                    }
+                                    return null; // Return null if there is no error
+                                  },
+                                ),
+                                const SizedBox(height: 8.0),
+                                const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Last Name",
+                                    style: TextStyle(
+                                      fontFamily: "GothamRnd",
+                                      color: Color(0xFF393838),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                TextFormField(
+                                  controller: _lastNameController,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "GothamRnd"),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(20.0),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFF274C77), width: 2.0),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your last name';
+                                    }
+                                    return null; // Return null if there is no error
+                                  },
                                 ),
                                 const SizedBox(height: 8.0),
                                 const Align(
@@ -425,34 +463,37 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   ),
                                 ),
                                 const SizedBox(height: 8.0),
-                                Material(
-                                  elevation: 5,
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: TextFormField(
-                                    controller: _professionController,
-                                    style: const TextStyle(color: Colors.black),
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
+                                TextFormField(
+                                  controller: _professionController,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "GothamRnd"),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(20.0),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10.0),
                                     ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter your profession name';
-                                      }
-                                      return null; // Return null if there is no error
-                                    },
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFF274C77), width: 2.0),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
                                   ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your profession';
+                                    }
+                                    return null; // Return null if there is no error
+                                  },
                                 ),
                                 const SizedBox(height: 8.0),
                                 const Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "Email Address",
+                                    "Mobile Number",
                                     style: TextStyle(
                                       fontFamily: "GothamRnd",
                                       color: Color(0xFF393838),
@@ -462,28 +503,31 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   ),
                                 ),
                                 const SizedBox(height: 8.0),
-                                Material(
-                                  elevation: 5,
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: TextFormField(
-                                    controller: _emailController,
-                                    style: const TextStyle(color: Colors.black),
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
+                                TextFormField(
+                                  controller: _phoneController,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "GothamRnd"),
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(20.0),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(10.0),
                                     ),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter your Profession';
-                                      }
-                                      return null; // Return null if there is no error
-                                    },
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Color(0xFF274C77), width: 2.0),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
                                   ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter your mobile number';
+                                    }
+                                    return null; // Return null if there is no error
+                                  },
                                 ),
                                 const SizedBox(height: 20.0),
                                 const Align(
@@ -807,6 +851,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                       await ref
                                           .child(userID.toString())
                                           .update({
+                                        'firstName': _firstNameController,
+                                        'lastName': _lastNameController,
                                         "mobileNumber": _phoneController.text,
                                         "availability": {
                                           "Monday": _checkboxValues[0] == true
@@ -849,7 +895,6 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                       _lastNameController.clear();
                                       _phoneController.clear();
                                       _professionController.clear();
-                                      _emailController.clear();
                                     }
                                   },
                                   child: const Text('Confirm'),
