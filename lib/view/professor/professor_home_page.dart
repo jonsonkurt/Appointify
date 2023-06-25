@@ -380,7 +380,7 @@ class _HomePageState extends State<HomePage> {
                                                                   border: Border
                                                                       .all(
                                                                     color: const Color
-                                                                            .fromARGB(
+                                                                        .fromARGB(
                                                                         255,
                                                                         35,
                                                                         35,
@@ -585,304 +585,57 @@ class _HomePageState extends State<HomePage> {
                                                         MainAxisAlignment
                                                             .spaceEvenly,
                                                     children: [
-                                                      ElevatedButton.icon(
-                                                        icon: const Icon(
-                                                            Icons
-                                                                .calendar_month,
-                                                            size: 15,
-                                                            color:
-                                                                Colors.white),
-                                                        label: const Text(
-                                                          'Reschedule',
-                                                          style: TextStyle(
-                                                              fontSize: 8,
-                                                              fontFamily:
-                                                                  "GothamRnd"),
-                                                        ),
-                                                        style:
-                                                            const ButtonStyle(
-                                                          fixedSize:
-                                                              MaterialStatePropertyAll(
-                                                                  Size(
-                                                                      100, 20)),
-                                                          shape: MaterialStatePropertyAll(
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            20)),
-                                                          )),
-                                                          backgroundColor:
-                                                              MaterialStatePropertyAll(
-                                                            Color(
-                                                                0xFF6096BA), // card button color
+                                                      Expanded(
+                                                        child: ElevatedButton(
+                                                          style: ButtonStyle(
+                                                            fixedSize: MaterialStatePropertyAll(Size(
+                                                                MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4,
+                                                                20)),
+                                                            shape: const MaterialStatePropertyAll(
+                                                                RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          20)),
+                                                            )),
+                                                            backgroundColor:
+                                                                const MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF6096BA), // card button color
+                                                            ),
                                                           ),
-                                                        ),
-                                                        onPressed: () {
-                                                          // Handle button press
-                                                          // Add your desired functionality here
-                                                          showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              return Form(
-                                                                key: formKey,
-                                                                child:
-                                                                    AlertDialog(
-                                                                  titlePadding:
-                                                                      const EdgeInsets
-                                                                          .all(0),
-                                                                  title:
-                                                                      Container(
-                                                                    height: 70,
-                                                                    padding:
-                                                                        const EdgeInsets.all(
-                                                                            20),
-                                                                    color: const Color(
-                                                                        0xFF274C77),
-                                                                    child:
-                                                                        const Text(
-                                                                      'Reschedule',
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              20,
-                                                                          fontFamily:
-                                                                              "GothamRnd",
-                                                                          color:
-                                                                              Colors.white),
-                                                                    ),
-                                                                  ),
-                                                                  content:
-                                                                      Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .min,
-                                                                    children: [
-                                                                      const SizedBox(
-                                                                          height:
-                                                                              10),
-                                                                      Column(
-                                                                        children: [
-                                                                          const Align(
-                                                                            alignment:
-                                                                                Alignment.centerLeft,
-                                                                            child:
-                                                                                Text(
-                                                                              "Appointment Date:",
-                                                                              style: TextStyle(
-                                                                                fontFamily: "GothamRnd",
-                                                                                color: Color(0xFF393838),
-                                                                                fontSize: 15,
-                                                                                fontWeight: FontWeight.bold,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          const SizedBox(
-                                                                              height: 5),
-                                                                          Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.spaceAround,
-                                                                            children: [
-                                                                              Expanded(
-                                                                                child: TextFormField(
-                                                                                  controller: _dateController,
-                                                                                  onTap: _showDatePicker,
-                                                                                  readOnly: true,
-                                                                                  decoration: const InputDecoration(
-                                                                                      enabledBorder: OutlineInputBorder(
-                                                                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                                                                        borderSide: BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
-                                                                                      ),
-                                                                                      hintText: 'Select appointment date',
-                                                                                      hintStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 12),
-                                                                                      helperStyle: TextStyle(fontFamily: "GothamRnd")),
-                                                                                  validator: (value) {
-                                                                                    if (value == null || value.isEmpty) {
-                                                                                      return 'Please enter a date';
-                                                                                    }
-                                                                                    return null; // Return null if there is no error
-                                                                                  },
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                          const SizedBox(
-                                                                              height: 10),
-                                                                          const Align(
-                                                                            alignment:
-                                                                                Alignment.centerLeft,
-                                                                            child:
-                                                                                Text(
-                                                                              "Appointment Time:",
-                                                                              style: TextStyle(
-                                                                                fontFamily: "GothamRnd",
-                                                                                color: Color(0xFF393838),
-                                                                                fontSize: 15,
-                                                                                fontWeight: FontWeight.bold,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                          const SizedBox(
-                                                                              height: 5),
-                                                                        ],
-                                                                      ),
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceAround,
-                                                                        children: [
-                                                                          Expanded(
-                                                                            child:
-                                                                                TextFormField(
-                                                                              controller: _timeController,
-                                                                              onTap: _showTimePicker,
-                                                                              readOnly: true,
-                                                                              decoration: const InputDecoration(
-                                                                                  enabledBorder: OutlineInputBorder(
-                                                                                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                                                                                    borderSide: BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
-                                                                                  ),
-                                                                                  hintText: 'Select appointment time',
-                                                                                  hintStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 12),
-                                                                                  helperStyle: TextStyle(fontFamily: "GothamRnd")),
-                                                                              validator: (value) {
-                                                                                if (value == null || value.isEmpty) {
-                                                                                  return 'Please enter a time';
-                                                                                }
-                                                                                return null; // Return null if there is no error
-                                                                              },
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  actions: [
-                                                                    TextButton(
-                                                                      child:
-                                                                          const Text(
-                                                                        'OK',
-                                                                        style: TextStyle(
-                                                                            fontFamily:
-                                                                                "GothamRnd"),
-                                                                      ),
-                                                                      onPressed:
-                                                                          () async {
-                                                                        if (formKey
-                                                                            .currentState!
-                                                                            .validate()) {
-                                                                          await appointmentsRef
-                                                                              .child(appointID.toString())
-                                                                              .update({
-                                                                            "countered":
-                                                                                "yes",
-                                                                            "requestStatusProfessor":
-                                                                                "$professorID-RESCHEDULE",
-                                                                            "counteredDate":
-                                                                                _dateController.text,
-                                                                            "counteredTime":
-                                                                                _timeController.text,
-                                                                            "status":
-                                                                                '$studentID-PENDING-$outputDate:$outputTime',
-                                                                            "requestStatus":
-                                                                                'PENDING'
-                                                                          });
-
-                                                                          // ignore: use_build_context_synchronously
-                                                                          Navigator.of(context)
-                                                                              .pop();
-                                                                        }
-                                                                      },
-                                                                    ),
-                                                                    TextButton(
-                                                                      child:
-                                                                          const Text(
-                                                                        'Cancel',
-                                                                        style: TextStyle(
-                                                                            fontFamily:
-                                                                                "GothamRnd"),
-                                                                      ),
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                      },
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                        },
-                                                        // child: const Text('Reschedule'),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 20,
-                                                        height:
-                                                            75, // gap between the button and the info
-                                                      ),
-                                                      ElevatedButton.icon(
-                                                        icon: const Icon(
-                                                            Icons
-                                                                .cancel_outlined,
-                                                            size: 15,
-                                                            color:
-                                                                Colors.white),
-                                                        label: const Text(
-                                                            'Cancel',
-                                                            style: TextStyle(
-                                                                fontSize: 9,
-                                                                fontFamily:
-                                                                    "GothamRnd")),
-                                                        style:
-                                                            const ButtonStyle(
-                                                          fixedSize:
-                                                              MaterialStatePropertyAll(
-                                                                  Size(90, 20)),
-                                                          shape: MaterialStatePropertyAll(
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            20)),
-                                                          )),
-                                                          backgroundColor:
-                                                              MaterialStatePropertyAll(
-                                                            Color(
-                                                                0xFF6096BA), // card button color
-                                                          ),
-                                                        ),
-                                                        onPressed: () {
-                                                          showDialog(
+                                                          onPressed: () {
+                                                            // Handle button press
+                                                            // Add your desired functionality here
+                                                            showDialog(
                                                               context: context,
                                                               builder:
                                                                   (BuildContext
                                                                       context) {
-                                                                String
-                                                                    profNotes =
-                                                                    '';
-
                                                                 return Form(
                                                                   key: formKey,
                                                                   child:
                                                                       AlertDialog(
                                                                     titlePadding:
                                                                         const EdgeInsets
-                                                                            .all(0),
+                                                                            .all(
+                                                                            0),
                                                                     title:
                                                                         Container(
                                                                       height:
                                                                           70,
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              20),
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          20),
                                                                       color: const Color(
                                                                           0xFF274C77),
                                                                       child:
                                                                           const Text(
-                                                                        'State your reason.',
+                                                                        'Reschedule',
                                                                         style: TextStyle(
                                                                             fontSize:
                                                                                 20,
@@ -901,38 +654,89 @@ class _HomePageState extends State<HomePage> {
                                                                         const SizedBox(
                                                                             height:
                                                                                 10),
-                                                                        TextFormField(
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            profNotes =
-                                                                                value;
-                                                                          },
-                                                                          maxLines:
-                                                                              null,
-                                                                          keyboardType:
-                                                                              TextInputType.multiline,
-                                                                          decoration:
-                                                                              const InputDecoration(
-                                                                            enabledBorder:
-                                                                                OutlineInputBorder(
-                                                                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                                                                              borderSide: BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
+                                                                        Column(
+                                                                          children: [
+                                                                            const Align(
+                                                                              alignment: Alignment.centerLeft,
+                                                                              child: Text(
+                                                                                "Appointment Date:",
+                                                                                style: TextStyle(
+                                                                                  fontFamily: "GothamRnd",
+                                                                                  color: Color(0xFF393838),
+                                                                                  fontSize: 15,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                ),
+                                                                              ),
                                                                             ),
-                                                                            hintText:
-                                                                                'Enter your reason',
-                                                                            hintStyle:
-                                                                                TextStyle(fontFamily: "GothamRnd", fontSize: 12),
-                                                                            helperStyle:
-                                                                                TextStyle(fontFamily: "GothamRnd"),
-                                                                          ),
-                                                                          validator:
-                                                                              (value) {
-                                                                            if (value == null ||
-                                                                                value.isEmpty) {
-                                                                              return 'Please enter a reason';
-                                                                            }
-                                                                            return null; // Return null if there is no error
-                                                                          },
+                                                                            const SizedBox(height: 5),
+                                                                            Row(
+                                                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: TextFormField(
+                                                                                    controller: _dateController,
+                                                                                    onTap: _showDatePicker,
+                                                                                    readOnly: true,
+                                                                                    decoration: const InputDecoration(
+                                                                                        enabledBorder: OutlineInputBorder(
+                                                                                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                          borderSide: BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
+                                                                                        ),
+                                                                                        hintText: 'Select appointment date',
+                                                                                        hintStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 12),
+                                                                                        helperStyle: TextStyle(fontFamily: "GothamRnd")),
+                                                                                    validator: (value) {
+                                                                                      if (value == null || value.isEmpty) {
+                                                                                        return 'Please enter a date';
+                                                                                      }
+                                                                                      return null; // Return null if there is no error
+                                                                                    },
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                            const SizedBox(height: 10),
+                                                                            const Align(
+                                                                              alignment: Alignment.centerLeft,
+                                                                              child: Text(
+                                                                                "Appointment Time:",
+                                                                                style: TextStyle(
+                                                                                  fontFamily: "GothamRnd",
+                                                                                  color: Color(0xFF393838),
+                                                                                  fontSize: 15,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(height: 5),
+                                                                          ],
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceAround,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: TextFormField(
+                                                                                controller: _timeController,
+                                                                                onTap: _showTimePicker,
+                                                                                readOnly: true,
+                                                                                decoration: const InputDecoration(
+                                                                                    enabledBorder: OutlineInputBorder(
+                                                                                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                      borderSide: BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
+                                                                                    ),
+                                                                                    hintText: 'Select appointment time',
+                                                                                    hintStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 12),
+                                                                                    helperStyle: TextStyle(fontFamily: "GothamRnd")),
+                                                                                validator: (value) {
+                                                                                  if (value == null || value.isEmpty) {
+                                                                                    return 'Please enter a time';
+                                                                                  }
+                                                                                  return null; // Return null if there is no error
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ],
                                                                     ),
@@ -950,11 +754,14 @@ class _HomePageState extends State<HomePage> {
                                                                               .currentState!
                                                                               .validate()) {
                                                                             await appointmentsRef.child(appointID.toString()).update({
-                                                                              'notes': profNotes,
-                                                                              'requestStatusProfessor': "$professorID-CANCELED-$outputDate:$outputTime",
-                                                                              'status': "$studentID-CANCELED-$outputDate:$outputTime",
-                                                                              'requestStatus': "CANCELED",
+                                                                              "countered": "yes",
+                                                                              "requestStatusProfessor": "$professorID-RESCHEDULE",
+                                                                              "counteredDate": _dateController.text,
+                                                                              "counteredTime": _timeController.text,
+                                                                              "status": '$studentID-PENDING-$outputDate:$outputTime',
+                                                                              "requestStatus": 'PENDING'
                                                                             });
+
                                                                             // ignore: use_build_context_synchronously
                                                                             Navigator.of(context).pop();
                                                                           }
@@ -976,101 +783,257 @@ class _HomePageState extends State<HomePage> {
                                                                     ],
                                                                   ),
                                                                 );
-                                                              });
-                                                        },
-                                                        // child: const Text('Cancel'),
+                                                              },
+                                                            );
+                                                          },
+                                                          child: const Text(
+                                                            'Reschedule',
+                                                            style: TextStyle(
+                                                                fontSize: 11,
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                          // child: const Text('Reschedule'),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 20,
+                                                        height:
+                                                            90, // gap between the button and the info
+                                                      ),
+                                                      Expanded(
+                                                        child: ElevatedButton(
+                                                          style: ButtonStyle(
+                                                            fixedSize: MaterialStatePropertyAll(Size(
+                                                                MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4,
+                                                                20)),
+                                                            shape: const MaterialStatePropertyAll(
+                                                                RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          20)),
+                                                            )),
+                                                            backgroundColor:
+                                                                const MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF6096BA), // card button color
+                                                            ),
+                                                          ),
+                                                          onPressed: () {
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  String
+                                                                      profNotes =
+                                                                      '';
+
+                                                                  return Form(
+                                                                    key:
+                                                                        formKey,
+                                                                    child:
+                                                                        AlertDialog(
+                                                                      titlePadding:
+                                                                          const EdgeInsets
+                                                                              .all(
+                                                                              0),
+                                                                      title:
+                                                                          Container(
+                                                                        height:
+                                                                            70,
+                                                                        padding: const EdgeInsets
+                                                                            .all(
+                                                                            20),
+                                                                        color: const Color(
+                                                                            0xFF274C77),
+                                                                        child:
+                                                                            const Text(
+                                                                          'State your reason.',
+                                                                          style: TextStyle(
+                                                                              fontSize: 20,
+                                                                              fontFamily: "GothamRnd",
+                                                                              color: Colors.white),
+                                                                        ),
+                                                                      ),
+                                                                      content:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.min,
+                                                                        children: [
+                                                                          const SizedBox(
+                                                                              height: 10),
+                                                                          TextFormField(
+                                                                            onChanged:
+                                                                                (value) {
+                                                                              profNotes = value;
+                                                                            },
+                                                                            maxLines:
+                                                                                null,
+                                                                            keyboardType:
+                                                                                TextInputType.multiline,
+                                                                            decoration:
+                                                                                const InputDecoration(
+                                                                              enabledBorder: OutlineInputBorder(
+                                                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                borderSide: BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
+                                                                              ),
+                                                                              hintText: 'Enter your reason',
+                                                                              hintStyle: TextStyle(fontFamily: "GothamRnd", fontSize: 12),
+                                                                              helperStyle: TextStyle(fontFamily: "GothamRnd"),
+                                                                            ),
+                                                                            validator:
+                                                                                (value) {
+                                                                              if (value == null || value.isEmpty) {
+                                                                                return 'Please enter a reason';
+                                                                              }
+                                                                              return null; // Return null if there is no error
+                                                                            },
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      actions: [
+                                                                        TextButton(
+                                                                          child:
+                                                                              const Text(
+                                                                            'OK',
+                                                                            style:
+                                                                                TextStyle(fontFamily: "GothamRnd"),
+                                                                          ),
+                                                                          onPressed:
+                                                                              () async {
+                                                                            if (formKey.currentState!.validate()) {
+                                                                              await appointmentsRef.child(appointID.toString()).update({
+                                                                                'notes': profNotes,
+                                                                                'requestStatusProfessor': "$professorID-CANCELED-$outputDate:$outputTime",
+                                                                                'status': "$studentID-CANCELED-$outputDate:$outputTime",
+                                                                                'requestStatus': "CANCELED",
+                                                                              });
+                                                                              // ignore: use_build_context_synchronously
+                                                                              Navigator.of(context).pop();
+                                                                            }
+                                                                          },
+                                                                        ),
+                                                                        TextButton(
+                                                                          child:
+                                                                              const Text(
+                                                                            'Cancel',
+                                                                            style:
+                                                                                TextStyle(fontFamily: "GothamRnd"),
+                                                                          ),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  );
+                                                                });
+                                                          },
+                                                          child: const Text(
+                                                              'Cancel',
+                                                              style: TextStyle(
+                                                                  fontSize: 11,
+                                                                  fontFamily:
+                                                                      "GothamRnd")),
+                                                          // child: const Text('Cancel'),
+                                                        ),
                                                       ),
                                                       const SizedBox(
                                                         width: 20,
                                                       ),
-                                                      ElevatedButton.icon(
-                                                        icon: const Icon(
-                                                            Icons.check,
-                                                            size: 15,
-                                                            color:
-                                                                Colors.white),
-                                                        label: const Text(
-                                                            'Complete',
-                                                            style: TextStyle(
-                                                                fontSize: 9,
-                                                                fontFamily:
-                                                                    "GothamRnd")),
-                                                        style:
-                                                            const ButtonStyle(
-                                                          fixedSize:
-                                                              MaterialStatePropertyAll(
-                                                                  Size(
-                                                                      100, 20)),
-                                                          shape: MaterialStatePropertyAll(
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            20)),
-                                                          )),
-                                                          backgroundColor:
-                                                              MaterialStatePropertyAll(
-                                                            Color(
-                                                                0xFF6096BA), // card button color
+                                                      Expanded(
+                                                        child: ElevatedButton(
+                                                          style: ButtonStyle(
+                                                            fixedSize: MaterialStatePropertyAll(Size(
+                                                                MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4,
+                                                                20)),
+                                                            shape: const MaterialStatePropertyAll(
+                                                                RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          20)),
+                                                            )),
+                                                            backgroundColor:
+                                                                const MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF6096BA), // card button color
+                                                            ),
                                                           ),
+                                                          onPressed: () {
+                                                            // Handle button press
+                                                            // Add your desired functionality here
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return AlertDialog(
+                                                                    title: const Text(
+                                                                        'Are you sure you want to mark this appointment as completed?'),
+                                                                    actions: [
+                                                                      TextButton(
+                                                                        child:
+                                                                            const Text(
+                                                                          'Confirm',
+                                                                          style:
+                                                                              TextStyle(fontFamily: "GothamRnd"),
+                                                                        ),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          await appointmentsRef
+                                                                              .child(appointID.toString())
+                                                                              .update({
+                                                                            'requestStatusProfessor':
+                                                                                "$professorID-COMPLETED-$outputDate:$outputTime",
+                                                                            'status':
+                                                                                "$studentID-COMPLETED-$outputDate:$outputTime",
+                                                                            'requestStatus':
+                                                                                "COMPLETED",
+                                                                          });
+                                                                          // ignore: use_build_context_synchronously
+                                                                          Navigator.of(context)
+                                                                              .pop();
+                                                                        },
+                                                                      ),
+                                                                      TextButton(
+                                                                        child:
+                                                                            const Text(
+                                                                          'Cancel',
+                                                                          style:
+                                                                              TextStyle(fontFamily: "GothamRnd"),
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          Navigator.of(context)
+                                                                              .pop();
+                                                                        },
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                });
+                                                          },
+                                                          child: const Text(
+                                                              'Complete',
+                                                              style: TextStyle(
+                                                                  fontSize: 11,
+                                                                  fontFamily:
+                                                                      "GothamRnd")),
+                                                          // child: const Text('Completed'),
                                                         ),
-                                                        onPressed: () {
-                                                          // Handle button press
-                                                          // Add your desired functionality here
-                                                          showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (BuildContext
-                                                                      context) {
-                                                                return AlertDialog(
-                                                                  title: const Text(
-                                                                      'Are you sure you want to mark this appointment as completed?'),
-                                                                  actions: [
-                                                                    TextButton(
-                                                                      child:
-                                                                          const Text(
-                                                                        'Confirm',
-                                                                        style: TextStyle(
-                                                                            fontFamily:
-                                                                                "GothamRnd"),
-                                                                      ),
-                                                                      onPressed:
-                                                                          () async {
-                                                                        await appointmentsRef
-                                                                            .child(appointID.toString())
-                                                                            .update({
-                                                                          'requestStatusProfessor':
-                                                                              "$professorID-COMPLETED-$outputDate:$outputTime",
-                                                                          'status':
-                                                                              "$studentID-COMPLETED-$outputDate:$outputTime",
-                                                                          'requestStatus':
-                                                                              "COMPLETED",
-                                                                        });
-                                                                        // ignore: use_build_context_synchronously
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                      },
-                                                                    ),
-                                                                    TextButton(
-                                                                      child:
-                                                                          const Text(
-                                                                        'Cancel',
-                                                                        style: TextStyle(
-                                                                            fontFamily:
-                                                                                "GothamRnd"),
-                                                                      ),
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                      },
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              });
-                                                        },
-                                                        // child: const Text('Completed'),
                                                       ),
                                                     ],
                                                   ),
@@ -1177,7 +1140,7 @@ class _HomePageState extends State<HomePage> {
                                                                   border: Border
                                                                       .all(
                                                                     color: const Color
-                                                                            .fromARGB(
+                                                                        .fromARGB(
                                                                         255,
                                                                         35,
                                                                         35,
@@ -1441,7 +1404,7 @@ class _HomePageState extends State<HomePage> {
                                                                   border: Border
                                                                       .all(
                                                                     color: const Color
-                                                                            .fromARGB(
+                                                                        .fromARGB(
                                                                         255,
                                                                         35,
                                                                         35,
