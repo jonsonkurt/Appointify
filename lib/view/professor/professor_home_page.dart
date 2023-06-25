@@ -472,96 +472,96 @@ class _HomePageState extends State<HomePage> {
                                                 },
                                               ),
                                             ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  0.5,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  25,
-                                              margin: EdgeInsets.only(
-                                                  left: MediaQuery.of(context)
+                                            Expanded(
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    0.5,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    25,
+                                                margin: EdgeInsets.all(
+                                                  MediaQuery.of(context)
                                                           .size
                                                           .width /
-                                                      15,
-                                                  right: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      15),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  color: Colors.white,
-                                                  border: Border.all(
-                                                    width: 2,
-                                                  )),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    padding: EdgeInsets.only(
-                                                        right: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            20,
-                                                        left: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            20),
-                                                    child: Row(
-                                                      children: [
-                                                        const Icon(
-                                                          Icons
-                                                              .calendar_month_outlined,
-                                                          color: Colors.black,
-                                                        ),
-                                                        Text(
-                                                          snapshot
-                                                              .child('date')
-                                                              .value
-                                                              .toString(),
-                                                          style: const TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontFamily:
-                                                                  "GothamRnd"),
-                                                        ),
-                                                      ],
+                                                      30,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                    color: Colors.white,
+                                                    border: Border.all(
+                                                      width: 2,
+                                                    )),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                          right: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              20,
+                                                          left: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              20),
+                                                      child: Row(
+                                                        children: [
+                                                          const Icon(
+                                                            Icons
+                                                                .calendar_month_outlined,
+                                                            color: Colors.black,
+                                                          ),
+                                                          Text(
+                                                            snapshot
+                                                                .child('date')
+                                                                .value
+                                                                .toString(),
+                                                            style: const TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 30,
-                                                            left: 20),
-                                                    child: Row(
-                                                      children: [
-                                                        const Icon(
-                                                          Icons
-                                                              .watch_later_outlined,
-                                                          color: Colors.black,
-                                                        ),
-                                                        Text(
-                                                          snapshot
-                                                              .child('time')
-                                                              .value
-                                                              .toString(),
-                                                          style: const TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontFamily:
-                                                                  "GothamRnd"),
-                                                        ),
-                                                      ],
+                                                    Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 30,
+                                                              left: 20),
+                                                      child: Row(
+                                                        children: [
+                                                          const Icon(
+                                                            Icons
+                                                                .watch_later_outlined,
+                                                            color: Colors.black,
+                                                          ),
+                                                          Text(
+                                                            snapshot
+                                                                .child('time')
+                                                                .value
+                                                                .toString(),
+                                                            style: const TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                             Column(
@@ -786,10 +786,14 @@ class _HomePageState extends State<HomePage> {
                                                               },
                                                             );
                                                           },
-                                                          child: const Text(
+                                                          child: Text(
                                                             'Reschedule',
                                                             style: TextStyle(
-                                                                fontSize: 11,
+                                                                fontSize: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    35,
                                                                 fontFamily:
                                                                     "GothamRnd"),
                                                           ),
@@ -1353,7 +1357,7 @@ class _HomePageState extends State<HomePage> {
                                 String studentSection =
                                     snapshot.child('section').value.toString();
                                 return SizedBox(
-                                    height: 140,
+                                    height: 180,
                                     child: Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 20),
@@ -1494,100 +1498,100 @@ class _HomePageState extends State<HomePage> {
                                                 },
                                               ),
                                             ),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  bottom: MediaQuery.of(context)
-                                                          .size
-                                                          .height /
-                                                      100,
-                                                  left: MediaQuery.of(context)
+                                            Expanded(
+                                              child: Container(
+                                                margin: EdgeInsets.all(
+                                                  MediaQuery.of(context)
                                                           .size
                                                           .width /
-                                                      15,
-                                                  right: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      15),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  0.5,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  25,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(10)),
-                                                color: Colors.white,
-                                                border: Border.all(width: 2),
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    padding: EdgeInsets.only(
-                                                        right: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            20,
-                                                        left: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            20),
-                                                    child: Row(
-                                                      children: [
-                                                        const Icon(
-                                                          Icons
-                                                              .calendar_month_outlined,
-                                                          color: Colors.black,
-                                                        ),
-                                                        Text(
-                                                          snapshot
-                                                              .child('date')
-                                                              .value
-                                                              .toString(),
-                                                          style: const TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontFamily:
-                                                                  "GothamRnd"),
-                                                        ),
-                                                      ],
+                                                      20,
+                                                  // right: MediaQuery.of(context)
+                                                  //         .size
+                                                  //         .width /
+                                                  //     15
+                                                ),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    0.5,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    25,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  color: Colors.white,
+                                                  border: Border.all(width: 2),
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                          right: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              20,
+                                                          left: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              20),
+                                                      child: Row(
+                                                        children: [
+                                                          const Icon(
+                                                            Icons
+                                                                .calendar_month_outlined,
+                                                            color: Colors.black,
+                                                          ),
+                                                          Text(
+                                                            snapshot
+                                                                .child('date')
+                                                                .value
+                                                                .toString(),
+                                                            style: const TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Container(
-                                                    alignment: Alignment.center,
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 30,
-                                                            left: 20),
-                                                    child: Row(
-                                                      children: [
-                                                        const Icon(
-                                                          Icons
-                                                              .watch_later_outlined,
-                                                          color: Colors.black,
-                                                        ),
-                                                        Text(
-                                                          snapshot
-                                                              .child('time')
-                                                              .value
-                                                              .toString(),
-                                                          style: const TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontFamily:
-                                                                  "GothamRnd"),
-                                                        ),
-                                                      ],
+                                                    Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 30,
+                                                              left: 20),
+                                                      child: Row(
+                                                        children: [
+                                                          const Icon(
+                                                            Icons
+                                                                .watch_later_outlined,
+                                                            color: Colors.black,
+                                                          ),
+                                                          Text(
+                                                            snapshot
+                                                                .child('time')
+                                                                .value
+                                                                .toString(),
+                                                            style: const TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontFamily:
+                                                                    "GothamRnd"),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ],

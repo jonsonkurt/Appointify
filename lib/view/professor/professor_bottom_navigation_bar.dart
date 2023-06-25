@@ -25,49 +25,46 @@ class _ProfessorBottomNavigationState extends State<ProfessorBottomNavigation> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: SafeArea(
-          child: SalomonBottomBar(
-            selectedColorOpacity: 0,
-            margin: const EdgeInsets.only(left: 50, right: 60),
-            itemPadding:
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            currentIndex: currentIndex,
-            backgroundColor: const Color(0xFF274C77),
-            items: [
-              SalomonBottomBarItem(
-                icon: const Icon(Icons.home),
-                title: const Text(
-                  "Home",
-                  style: TextStyle(fontFamily: "GothamRnd"),
-                ),
-                selectedColor: Colors.white,
-                unselectedColor: Colors.white,
+        bottomNavigationBar: SalomonBottomBar(
+          selectedColorOpacity: 0,
+          margin: const EdgeInsets.only(left: 50, right: 60),
+          itemPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          currentIndex: currentIndex,
+          backgroundColor: const Color(0xFF274C77),
+          items: [
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.home),
+              title: const Text(
+                "Home",
+                style: TextStyle(fontFamily: "GothamRnd"),
               ),
-              SalomonBottomBarItem(
-                icon: const Icon(Icons.inbox),
-                title: const Text(
-                  "Requests",
-                  style: TextStyle(fontFamily: "GothamRnd"),
-                ),
-                selectedColor: Colors.white,
-                unselectedColor: Colors.white,
+              selectedColor: Colors.white,
+              unselectedColor: Colors.white,
+            ),
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.inbox),
+              title: const Text(
+                "Requests",
+                style: TextStyle(fontFamily: "GothamRnd"),
               ),
-              SalomonBottomBarItem(
-                icon: const Icon(Icons.person),
-                title: const Text(
-                  "Profile",
-                  style: TextStyle(fontFamily: "GothamRnd"),
-                ),
-                selectedColor: Colors.white,
-                unselectedColor: Colors.white,
+              selectedColor: Colors.white,
+              unselectedColor: Colors.white,
+            ),
+            SalomonBottomBarItem(
+              icon: const Icon(Icons.person),
+              title: const Text(
+                "Profile",
+                style: TextStyle(fontFamily: "GothamRnd"),
               ),
-            ],
-            onTap: (index) {
-              setState(() {
-                currentIndex = index;
-              });
-            },
-          ),
+              selectedColor: Colors.white,
+              unselectedColor: Colors.white,
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
         ),
         body: pages[currentIndex],
       ),
