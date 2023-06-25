@@ -164,7 +164,6 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                     _firstNameController.text = map['firstName'];
                     _lastNameController.text = map['lastName'];
                     _phoneController.text = map['mobileNumber'];
-                    _emailController.text = userEmail!;
                     _professionController.text = map['designation'];
                     Map<dynamic, dynamic> availability = map['availability'];
 
@@ -374,7 +373,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 const Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "Name",
+                                    "First Name",
                                     style: TextStyle(
                                       fontFamily: "GothamRnd",
                                       color: Color(0xFF393838),
@@ -405,7 +404,48 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your Name';
+                                        return 'Please enter your first name';
+                                      }
+                                      return null; // Return null if there is no error
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Last Name",
+                                    style: TextStyle(
+                                      fontFamily: "GothamRnd",
+                                      color: Color(0xFF393838),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                Material(
+                                  elevation: 5,
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: TextFormField(
+                                    controller: _lastNameController,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "GothamRnd"),
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(20.0),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your last name';
                                       }
                                       return null; // Return null if there is no error
                                     },
@@ -430,8 +470,12 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   borderRadius: BorderRadius.circular(30),
                                   child: TextFormField(
                                     controller: _professionController,
-                                    style: const TextStyle(color: Colors.black),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "GothamRnd"),
                                     decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(20.0),
                                       filled: true,
                                       fillColor: Colors.white,
                                       border: OutlineInputBorder(
@@ -442,7 +486,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your profession name';
+                                        return 'Please enter your profession';
                                       }
                                       return null; // Return null if there is no error
                                     },
@@ -452,7 +496,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 const Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "Email Address",
+                                    "Mobile Number",
                                     style: TextStyle(
                                       fontFamily: "GothamRnd",
                                       color: Color(0xFF393838),
@@ -466,9 +510,13 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                   elevation: 5,
                                   borderRadius: BorderRadius.circular(30),
                                   child: TextFormField(
-                                    controller: _emailController,
-                                    style: const TextStyle(color: Colors.black),
+                                    controller: _phoneController,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "GothamRnd"),
                                     decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.all(20.0),
                                       filled: true,
                                       fillColor: Colors.white,
                                       border: OutlineInputBorder(
@@ -479,7 +527,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your Profession';
+                                        return 'Please enter your mobile number';
                                       }
                                       return null; // Return null if there is no error
                                     },
@@ -800,6 +848,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                       await ref
                                           .child(userID.toString())
                                           .update({
+                                        'firstName': _firstNameController,
+                                        'lastName': _lastNameController,
                                         'profilePicStatus': provider.imgURL,
                                         "mobileNumber": _phoneController.text,
                                         "availability": {
@@ -843,7 +893,6 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                       _lastNameController.clear();
                                       _phoneController.clear();
                                       _professionController.clear();
-                                      _emailController.clear();
                                     }
                                   },
                                   child: const Text('Confirm'),
