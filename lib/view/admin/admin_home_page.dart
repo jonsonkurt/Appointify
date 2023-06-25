@@ -523,6 +523,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                               "profUserID": userID,
                                               "mobileNumber": "-",
                                               "professorRole": "Employee",
+                                              "employmentStatus": "Employed",
                                               "salutation": "",
                                               "status": "accepting",
                                               "designation": "Professor",
