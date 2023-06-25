@@ -253,13 +253,13 @@ class OnBoarding extends StatelessWidget {
         speed: 1.8,
         pageBodies: [
           Container(
-            padding: const EdgeInsets.only(top: 550, left: 30, right: 30),
-            child: const Column(
+            padding: EdgeInsets.only(),
+            child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 10,
+                  height: MediaQuery.of(context).size.height / 1.3,
                 ),
-                Text(
+                const Text(
                   "Seamlessly Connect with Professors,",
                   style: TextStyle(
                     fontFamily: 'GothamRnd',
@@ -267,7 +267,7 @@ class OnBoarding extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                Text(
+                const Text(
                   "One Appointment at a Time",
                   style: TextStyle(fontFamily: 'GothamRnd', fontSize: 18),
                   textAlign: TextAlign.center,
