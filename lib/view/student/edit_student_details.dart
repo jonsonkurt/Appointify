@@ -306,8 +306,15 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                               .update({
                                             'mobileNumber': _phone.text,
                                             'section': _section.text,
-                                            'profilePicStatus': provider.imgURL
                                           });
+                                          if (provider.imgURL != "") {
+                                            await ref
+                                                .child(userID.toString())
+                                                .update({
+                                              'profilePicStatus':
+                                                  provider.imgURL
+                                            });
+                                          }
 
                                           // ignore: use_build_context_synchronously
                                           Navigator.pop(

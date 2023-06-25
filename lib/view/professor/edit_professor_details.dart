@@ -797,10 +797,16 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                     await provider.updloadImage();
                                     // print(_selectedFromTimes[0]);
                                     if (_formKey.currentState!.validate()) {
+                                      if (provider.imgURL != "") {
+                                        await ref
+                                            .child(userID.toString())
+                                            .update({
+                                          'profilePicStatus': provider.imgURL,
+                                        });
+                                      }
                                       await ref
                                           .child(userID.toString())
                                           .update({
-                                        'profilePicStatus': provider.imgURL,
                                         "mobileNumber": _phoneController.text,
                                         "availability": {
                                           "Monday": _checkboxValues[0] == true
