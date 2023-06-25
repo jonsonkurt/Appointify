@@ -238,7 +238,7 @@ class OnBoarding extends StatelessWidget {
                         children: [
                           Image.asset('assets/images/welcome_logo3.png'),
                           const Padding(
-                              padding: const EdgeInsets.only(
+                              padding: EdgeInsets.only(
                             top: 30,
                           )),
                           Image.asset('assets/images/Appointify.png'),
@@ -253,7 +253,7 @@ class OnBoarding extends StatelessWidget {
         speed: 1.8,
         pageBodies: [
           Container(
-            padding: EdgeInsets.only(),
+            padding: const EdgeInsets.only(),
             child: Column(
               children: <Widget>[
                 SizedBox(
@@ -303,7 +303,7 @@ class OnBoarding extends StatelessWidget {
                   style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
-                Text(
+                const Text(
                   "Your Success",
                   style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
                   textAlign: TextAlign.center,

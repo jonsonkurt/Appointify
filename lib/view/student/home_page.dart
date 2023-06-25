@@ -446,6 +446,7 @@ class _HomePageState extends State<HomePage> {
                                                         "$userID-UPCOMING-$outputDate:$outputTime",
                                                     "countered": "no",
                                                   });
+                                                  // ignore: use_build_context_synchronously
                                                   Navigator.of(context).pop();
                                                 }),
                                           if (snapshot
@@ -476,6 +477,7 @@ class _HomePageState extends State<HomePage> {
                                                     "status":
                                                         "$userID-CANCELED-$outputDate:$outputTime",
                                                   });
+                                                  // ignore: use_build_context_synchronously
                                                   Navigator.of(context).pop();
                                                 })
                                         ],
