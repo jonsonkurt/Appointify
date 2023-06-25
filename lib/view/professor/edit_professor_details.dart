@@ -574,7 +574,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                     ),
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           horizontal: 1.0),
                                                       child: Row(
                                                         children: [
@@ -696,7 +696,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                           child: Container(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .symmetric(
+                                                                    .symmetric(
                                                                     vertical:
                                                                         10,
                                                                     horizontal:
@@ -779,7 +779,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                                           child: Container(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .symmetric(
+                                                                    .symmetric(
                                                                     vertical:
                                                                         10,
                                                                     horizontal:
@@ -851,8 +851,8 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                       await ref
                                           .child(userID.toString())
                                           .update({
-                                        'firstName': _firstNameController,
-                                        'lastName': _lastNameController,
+                                        'firstName': _firstNameController.text,
+                                        'lastName': _lastNameController.text,
                                         "mobileNumber": _phoneController.text,
                                         "availability": {
                                           "Monday": _checkboxValues[0] == true

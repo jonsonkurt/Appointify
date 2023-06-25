@@ -181,7 +181,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                       String firstName = map['firstName'];
                       String lastName = map['lastName'];
                       String mobileNumber = map['mobileNumber'];
-                      String designation = map['designation'];
+                      String professorRole = map['professorRole'];
                       String profilePicStatus =
                           map['profilePicStatus'].toString();
                       String profSched = map['availability'].toString();
@@ -287,7 +287,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                               Container(
                                 padding: const EdgeInsets.all(5),
                                 child: Text(
-                                  designation,
+                                  professorRole,
                                   style: const TextStyle(
                                       fontFamily: 'GothamRnd',
                                       color: Colors.grey,
