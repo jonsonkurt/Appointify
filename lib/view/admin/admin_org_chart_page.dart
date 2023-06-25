@@ -21,101 +21,6 @@ class _OrgChartPage extends State<OrgChartPage> {
 
   // // nodes
   List<Map<String, Object>> nodes = [];
-  // var json = {
-  //   'nodes': [
-  //     {
-  //       "id": 11,
-  //       "label": "Ar. Brian",
-  //       "rank": 6,
-  //     },
-  //     {
-  //       "id": 12,
-  //       "label": "Engr. Alvin",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 13,
-  //       "label": "Engr. Marcelino",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 14,
-  //       "label": "Engr. Ralph",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 15,
-  //       "label": "Prof. William",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 1,
-  //       "label": "Robles",
-  //       "rank": 1,
-  //     },
-  //     {
-  //       "id": 2,
-  //       "label": "Dr. Ma. Agnes",
-  //       "rank": 2,
-  //     },
-  //     {
-  //       "id": 3,
-  //       "label": "Dr. Willie",
-  //       "rank": 3,
-  //     },
-  //     {
-  //       "id": 4,
-  //       "label": "Engr. Roslyn",
-  //       "rank": 4,
-  //     },
-  //     {
-  //       "id": 5,
-  //       "label": "Engr. Larry",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 6,
-  //       "label": "Engr. Cene",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 7,
-  //       "label": "Engr. Renato",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 8,
-  //       "label": "Ar. Kenn",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 9,
-  //       "label": "Ar. Christian",
-  //       "rank": 6,
-  //     },
-  //     {
-  //       "id": 10,
-  //       "label": "Ar. Dan",
-  //       "rank": 6,
-  //     },
-  //   ],
-  //   'edges': [
-  //     {"from": 1, "to": 2},
-  //     {"from": 2, "to": 3},
-  //     {"from": 3, "to": 4},
-  //     {"from": 4, "to": 12},
-  //     {"from": 4, "to": 13},
-  //     {"from": 4, "to": 14},
-  //     {"from": 4, "to": 15},
-  //     {"from": 4, "to": 5},
-  //     {"from": 4, "to": 6},
-  //     {"from": 4, "to": 7},
-  //     {"from": 4, "to": 8},
-  //     {"from": 8, "to": 11},
-  //     {"from": 8, "to": 9},
-  //     {"from": 8, "to": 10}
-  //   ]
-  // };
 
   @override
   Widget build(BuildContext context) {
@@ -342,7 +247,13 @@ class _OrgChartPage extends State<OrgChartPage> {
                                     TransformationController(
                                         transformationController.value =
                                             Matrix4.identity()
-                                              ..translate(-760.0, 0, -100)
+                                              ..translate(
+                                                  -MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      0.52,
+                                                  0,
+                                                  -100)
                                               ..scale(0.5)),
                                 boundaryMargin: const EdgeInsets.all(500),
                                 minScale: 0.1,
