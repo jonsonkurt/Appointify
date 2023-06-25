@@ -488,6 +488,7 @@ class _HomePageState extends State<HomePage> {
                             // Status of request list
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width / 2.5,
+
                               // height: MediaQuery.of(context).size.height / 2,
                               child: Card(
                                 elevation: 5,
@@ -498,6 +499,7 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Flexible(
+                                      fit: FlexFit.tight,
                                       child: StreamBuilder(
                                         stream: employees2Ref.onValue,
                                         builder:
@@ -516,7 +518,7 @@ class _HomePageState extends State<HomePage> {
                                                     .toString();
                                             return Padding(
                                               padding:
-                                                  const EdgeInsets.only(top: 5),
+                                                  const EdgeInsets.only(top: 0),
                                               child: Center(
                                                 child: Container(
                                                   height: 70,
@@ -525,7 +527,7 @@ class _HomePageState extends State<HomePage> {
                                                       shape: BoxShape.circle,
                                                       border: Border.all(
                                                         color: const Color
-                                                                .fromARGB(
+                                                            .fromARGB(
                                                             255, 35, 35, 35),
                                                         width: 2,
                                                       )),
@@ -611,22 +613,6 @@ class _HomePageState extends State<HomePage> {
                                           .value
                                           .toString(),
                                     ),
-                                    if (snapshot.child('countered').value ==
-                                        "yes")
-                                      const Icon(
-                                        Icons
-                                            .info_outline, // Replace with the desired icon
-                                        color: Colors
-                                            .red, // Replace with the desired color
-                                      ),
-                                    if (snapshot.child('countered').value ==
-                                        "no")
-                                      const Icon(
-                                        Icons
-                                            .info_outline, // Replace with the desired icon
-                                        color: Colors
-                                            .white, // Replace with the desired color
-                                      ),
                                     Container(
                                       margin: const EdgeInsets.only(top: 10),
                                       alignment: Alignment.center,
@@ -810,7 +796,7 @@ class _HomePageState extends State<HomePage> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 15,
                                                                     top: 15),
                                                             child: Container(
@@ -823,7 +809,8 @@ class _HomePageState extends State<HomePage> {
                                                                       border:
                                                                           Border
                                                                               .all(
-                                                                        color: const Color.fromARGB(
+                                                                        color: const Color
+                                                                            .fromARGB(
                                                                             255,
                                                                             35,
                                                                             35,
@@ -913,7 +900,7 @@ class _HomePageState extends State<HomePage> {
                                                                     1.8,
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             20),
                                                                 decoration:
@@ -1045,7 +1032,7 @@ class _HomePageState extends State<HomePage> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 15,
                                                                     top: 15),
                                                             child: Container(
@@ -1058,7 +1045,8 @@ class _HomePageState extends State<HomePage> {
                                                                       border:
                                                                           Border
                                                                               .all(
-                                                                        color: const Color.fromARGB(
+                                                                        color: const Color
+                                                                            .fromARGB(
                                                                             255,
                                                                             35,
                                                                             35,
@@ -1143,7 +1131,7 @@ class _HomePageState extends State<HomePage> {
                                                                     1.8,
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             20),
                                                                 decoration:
@@ -1314,7 +1302,7 @@ class _HomePageState extends State<HomePage> {
                                                             Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       left: 15,
                                                                       top: 15),
                                                               child: Container(
@@ -1326,7 +1314,8 @@ class _HomePageState extends State<HomePage> {
                                                                             .circle,
                                                                         border:
                                                                             Border.all(
-                                                                          color: const Color.fromARGB(
+                                                                          color: const Color
+                                                                              .fromARGB(
                                                                               255,
                                                                               35,
                                                                               35,
@@ -1428,7 +1417,7 @@ class _HomePageState extends State<HomePage> {
                                                                             .width /
                                                                         1.8,
                                                                     padding: const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             20),
                                                                     decoration:
