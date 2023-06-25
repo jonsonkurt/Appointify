@@ -257,7 +257,7 @@ class OnBoarding extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 1.3,
+                  height: MediaQuery.of(context).size.height / 1.4,
                 ),
                 const Text(
                   "Seamlessly Connect with Professors,",
@@ -276,18 +276,16 @@ class OnBoarding extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 550, left: 30, right: 30),
-            child: const Column(
+            padding: const EdgeInsets.only(),
+            child: Column(
               children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
+                SizedBox(height: MediaQuery.of(context).size.height / 1.4),
+                const Text(
                   "Your Passport to Hassle-Free",
                   style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
-                Text(
+                const Text(
                   "Appointments",
                   style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
                   textAlign: TextAlign.center,
@@ -296,13 +294,11 @@ class OnBoarding extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 550, left: 30, right: 30),
-            child: const Column(
+            padding: const EdgeInsets.only(),
+            child: Column(
               children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
+                SizedBox(height: MediaQuery.of(context).size.height / 1.4),
+                const Text(
                   "Bridge the Gap and Book",
                   style: TextStyle(fontFamily: 'GothamRnd', fontSize: 20),
                   textAlign: TextAlign.center,
