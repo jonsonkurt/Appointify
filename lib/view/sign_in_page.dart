@@ -1,6 +1,7 @@
 import 'package:appointify/view/forgot_password_page.dart';
 import 'package:appointify/view/welcome_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'loading_page.dart';
 import 'sign_up_page.dart';
@@ -283,12 +284,45 @@ class _SignInPageState extends State<SignInPage> {
                                       _emailController.clear();
                                       _passwordController.clear();
 
-                                      // ignore: use_build_context_synchronously
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const LoadingPage()));
+                                      String? userID = FirebaseAuth
+                                          .instance.currentUser?.uid;
+
+                                      DatabaseReference checkEmploymentRef =
+                                          FirebaseDatabase.instance
+                                              .ref("professors/$userID");
+
+                                      final event = await checkEmploymentRef
+                                          .once(DatabaseEventType.value);
+
+                                      String employmentStatus = event.snapshot
+                                          .child("employmentStatus")
+                                          .value
+                                          .toString();
+
+                                      if (employmentStatus == "Resigned") {
+                                        await FirebaseAuth.instance.signOut();
+                                        // ignore: use_build_context_synchronously
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                                'Account is disabled. Contact admin.'),
+                                          ),
+                                        );
+                                      } else {
+                                        // ignore: use_build_context_synchronously
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const LoadingPage()));
+                                      }
+                                      // // ignore: use_build_context_synchronously
+                                      // Navigator.pushReplacement(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             const LoadingPage()));
                                     } on FirebaseAuthException catch (e) {
                                       if (e.code == 'user-not-found') {
                                         // ignore: use_build_context_synchronously

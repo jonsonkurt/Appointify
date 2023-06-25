@@ -62,30 +62,8 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
 
   @override
   Widget build(BuildContext context) {
-    final firebaseApp = Firebase.app();
-    final rtdb = FirebaseDatabase.instanceFor(
-      app: firebaseApp,
-      databaseURL:
-          'https://appointify-388715-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    );
-
-    // DatabaseReference nameRef = rtdb.ref().child('students/$userID/firstName');
-    // nameSubscription = nameRef.onValue.listen((event) {
-    //   try {
-    //     if (mounted) {
-    //       setState(() {
-    //         name = event.snapshot.value.toString();
-    //         isLoading = false;
-    //       });
-    //     }
-    //   } catch (error, stackTrace) {
-    //     logger.d('Error occurred: $error');
-    //     logger.d('Stack trace: $stackTrace');
-    //   }
-    // });
-
-    // DatabaseReference appointmentsRef = rtdb.ref('appointments/');
-    DatabaseReference professorRef = rtdb.ref('professors/');
+    DatabaseReference professorRef =
+        FirebaseDatabase.instance.ref('professors/');
 
     return WillPopScope(
       onWillPop: () async {
@@ -125,6 +103,8 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                     padding: const EdgeInsets.only(bottom: 60),
                     query: professorRef,
                     itemBuilder: (context, snapshot, animation, index) {
+                      String profUserID =
+                          snapshot.child('profUserID').value.toString();
                       String profFirstName =
                           snapshot.child('firstName').value.toString();
                       String profLastName =
@@ -218,41 +198,95 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                                 .absolute)),
                                   ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                          top: 10, bottom: 5),
-                                      child: Text(
-                                        "$profFirstName $profLastName",
-                                        style: const TextStyle(
-                                            fontSize: 17,
-                                            fontFamily: "GothamRnd",
-                                            fontWeight: FontWeight.bold),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, bottom: 5),
+                                        child: Text(
+                                          "$profFirstName $profLastName",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.fade,
+                                          softWrap: false,
+                                          style: const TextStyle(
+                                              fontSize: 17,
+                                              fontFamily: "GothamRnd",
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      snapshot
-                                          .child('professorRole')
-                                          .value
-                                          .toString(),
-                                      style: const TextStyle(
-                                          fontFamily: "GothamRnd-Light",
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.normal),
+                                      Text(
+                                        snapshot
+                                            .child('professorRole')
+                                            .value
+                                            .toString(),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.fade,
+                                        softWrap: false,
+                                        style: const TextStyle(
+                                            fontFamily: "GothamRnd-Light",
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.normal),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () async {
+                                        // Show a confirmation dialog before deleting the employee
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title:
+                                                  const Text('Confirm Delete'),
+                                              content: const Text(
+                                                  'Are you sure you want to delete this employee?'),
+                                              actions: [
+                                                TextButton(
+                                                  child: const Text('Cancel'),
+                                                  onPressed: () {
+                                                    Navigator.of(context)
+                                                        .pop(); // Close the dialog
+                                                  },
+                                                ),
+                                                TextButton(
+                                                  child: const Text('Delete'),
+                                                  onPressed: () async {
+                                                    // Perform the deletion logic here
+                                                    // TODO: Add your logic for deleting the employee
+
+                                                    await professorRef
+                                                        .child(profUserID)
+                                                        .update({
+                                                      "employmentStatus":
+                                                          "Resigned",
+                                                    });
+
+                                                    // ignore: use_build_context_synchronously
+                                                    Navigator.of(context)
+                                                        .pop(); // Close the dialog after deleting
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: const Icon(Icons.delete),
                                     ),
                                   ],
                                 ),
+                                const SizedBox(
+                                  width: 15,
+                                )
                               ]),
-                              // Container(
-                              //     padding: const EdgeInsets.only(bottom: 15),
-                              //     child: const Text(
-                              //       "Designation: Employee",
-                              //       style: TextStyle(fontFamily: "GothamRnd"),
-                              //     )),
                             ],
                           ),
                         ),
@@ -515,8 +549,8 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                             String? userID = FirebaseAuth
                                                 .instance.currentUser?.uid;
 
-                                            await rtdb
-                                                .ref("professors/$userID")
+                                            await professorRef
+                                                .child("/$userID")
                                                 .set({
                                               "firstName": firstName,
                                               "lastName": lastName,
