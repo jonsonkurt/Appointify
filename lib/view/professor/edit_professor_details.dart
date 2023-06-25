@@ -164,7 +164,7 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                     _firstNameController.text = map['firstName'];
                     _lastNameController.text = map['lastName'];
                     _phoneController.text = map['mobileNumber'];
-                    _professionController.text = map['designation'];
+                    _professionController.text = map['professorRole'];
                     Map<dynamic, dynamic> availability = map['availability'];
 
                     String dayOne = availability["Monday"];
