@@ -103,8 +103,12 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
       'position2': pos2,
       'position3': pos3,
       'rank': highestRank,
-      'imageURL': getLink,
     });
+    if (getLink != "") {
+      await FirebaseDatabase.instance.ref('organizationChart/$index').set({
+        'imageURL': getLink,
+      });
+    }
 
     setState(() {
       nameController.clear();

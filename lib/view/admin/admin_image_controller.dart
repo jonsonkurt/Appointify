@@ -11,7 +11,8 @@ class AdminProfileController with ChangeNotifier {
   final picker = ImagePicker();
 
   // String? userID = FirebaseAuth.instance.currentUser?.uid;
-  DatabaseReference ref = FirebaseDatabase.instance.ref().child('organizationChart');
+  DatabaseReference ref =
+      FirebaseDatabase.instance.ref().child('organizationChart');
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
@@ -100,14 +101,14 @@ class AdminProfileController with ChangeNotifier {
   }
 
   updloadImage(id) async {
-    firebase_storage.Reference storageRef = firebase_storage
-        .FirebaseStorage.instance
-        .ref('organizationChart/$id');
-    firebase_storage.UploadTask uploadTask =
-        storageRef.putFile(File(image!.path).absolute);
-    await Future.value(uploadTask);
+    firebase_storage.Reference storageRef =
+        firebase_storage.FirebaseStorage.instance.ref('organizationChart/$id');
+    if (image != null) {
+      firebase_storage.UploadTask uploadTask =
+          storageRef.putFile(File(image!.path).absolute);
+      await Future.value(uploadTask);
 
-    imgURL = await storageRef.getDownloadURL();
-
+      imgURL = await storageRef.getDownloadURL();
+    }
   }
 }
