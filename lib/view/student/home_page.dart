@@ -425,7 +425,7 @@ class _HomePageState extends State<HomePage> {
                                                   String outputTime =
                                                       DateFormat('HH:mm')
                                                           .format(time);
-                                                  appointmentsRef
+                                                  await appointmentsRef
                                                       .child(snapshot
                                                           .child('appointID')
                                                           .value
@@ -463,8 +463,8 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                                 child: const Text("Reject"),
-                                                onPressed: () {
-                                                  appointmentsRef
+                                                onPressed: () async {
+                                                  await appointmentsRef
                                                       .child(snapshot
                                                           .child('appointID')
                                                           .value
@@ -527,7 +527,7 @@ class _HomePageState extends State<HomePage> {
                                                       shape: BoxShape.circle,
                                                       border: Border.all(
                                                         color: const Color
-                                                            .fromARGB(
+                                                                .fromARGB(
                                                             255, 35, 35, 35),
                                                         width: 2,
                                                       )),
@@ -796,7 +796,7 @@ class _HomePageState extends State<HomePage> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     left: 15,
                                                                     top: 15),
                                                             child: Container(
@@ -809,8 +809,7 @@ class _HomePageState extends State<HomePage> {
                                                                       border:
                                                                           Border
                                                                               .all(
-                                                                        color: const Color
-                                                                            .fromARGB(
+                                                                        color: const Color.fromARGB(
                                                                             255,
                                                                             35,
                                                                             35,
@@ -900,7 +899,7 @@ class _HomePageState extends State<HomePage> {
                                                                     1.8,
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         left:
                                                                             20),
                                                                 decoration:
@@ -1032,7 +1031,7 @@ class _HomePageState extends State<HomePage> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     left: 15,
                                                                     top: 15),
                                                             child: Container(
@@ -1045,8 +1044,7 @@ class _HomePageState extends State<HomePage> {
                                                                       border:
                                                                           Border
                                                                               .all(
-                                                                        color: const Color
-                                                                            .fromARGB(
+                                                                        color: const Color.fromARGB(
                                                                             255,
                                                                             35,
                                                                             35,
@@ -1131,7 +1129,7 @@ class _HomePageState extends State<HomePage> {
                                                                     1.8,
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         left:
                                                                             20),
                                                                 decoration:
@@ -1302,7 +1300,7 @@ class _HomePageState extends State<HomePage> {
                                                             Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                      .only(
+                                                                          .only(
                                                                       left: 15,
                                                                       top: 15),
                                                               child: Container(
@@ -1314,8 +1312,7 @@ class _HomePageState extends State<HomePage> {
                                                                             .circle,
                                                                         border:
                                                                             Border.all(
-                                                                          color: const Color
-                                                                              .fromARGB(
+                                                                          color: const Color.fromARGB(
                                                                               255,
                                                                               35,
                                                                               35,
@@ -1417,7 +1414,7 @@ class _HomePageState extends State<HomePage> {
                                                                             .width /
                                                                         1.8,
                                                                     padding: const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         left:
                                                                             20),
                                                                     decoration:
