@@ -98,6 +98,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                       height: 110,
                                       width: 110,
                                       decoration: BoxDecoration(
+                                          color: Color(0xFF6096BA),
                                           shape: BoxShape.circle,
                                           border: Border.all(
                                             color: Colors.white,
@@ -112,6 +113,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                                       "None"
                                                   ? const Icon(
                                                       Icons.person,
+                                                      color: Colors.white,
                                                       size: 35,
                                                     )
                                                   : Image(
