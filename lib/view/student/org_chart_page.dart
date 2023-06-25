@@ -276,7 +276,13 @@ class _OrgChartPage extends State<OrgChartPage> {
                                     TransformationController(
                                         transformationController.value =
                                             Matrix4.identity()
-                                              ..translate(-760.0, 0, -100)
+                                              ..translate(
+                                                  -MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      0.52,
+                                                  0,
+                                                  -100)
                                               ..scale(0.5)),
                                 boundaryMargin: const EdgeInsets.all(500),
                                 minScale: 0.1,
