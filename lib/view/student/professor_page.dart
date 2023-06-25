@@ -200,7 +200,7 @@ class _ProfessorPageState extends State<ProfessorPage> {
                           elevation: 5.0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
-                          color: const Color(0xFFDCDAD8),
+                          color: Colors.white,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
