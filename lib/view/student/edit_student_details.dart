@@ -185,7 +185,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                           child: Align(
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              "Phone Number",
+                                              "Mobile Number",
                                               style: TextStyle(
                                                 fontFamily: "GothamRnd",
                                                 color: Color(0xFF393838),
@@ -199,35 +199,36 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 15.0),
-                                          child: Material(
-                                            elevation: 5,
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            child: TextFormField(
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: "GothamRnd"),
-                                              controller: _phone,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    const EdgeInsets.all(20.0),
-                                                filled: true,
-                                                fillColor: Colors.white,
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
+                                          child: TextFormField(
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: "GothamRnd"),
+                                            controller: _phone,
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  const EdgeInsets.all(20.0),
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
                                               ),
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Please enter your phone';
-                                                }
-                                                return null; // Return null if there is no error
-                                              },
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                    color: Color(0xFF274C77),
+                                                    width: 2.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                              ),
                                             ),
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return 'Please enter your mobile number';
+                                              }
+                                              return null; // Return null if there is no error
+                                            },
                                           ),
                                         ),
                                       ],
@@ -254,35 +255,36 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 15.0),
-                                          child: Material(
-                                            elevation: 5,
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            child: TextFormField(
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: "GothamRnd"),
-                                              controller: _section,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    const EdgeInsets.all(20.0),
-                                                filled: true,
-                                                fillColor: Colors.white,
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
+                                          child: TextFormField(
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: "GothamRnd"),
+                                            controller: _section,
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  const EdgeInsets.all(20.0),
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
                                               ),
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Please enter your section';
-                                                }
-                                                return null; // Return null if there is no error
-                                              },
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                    color: Color(0xFF274C77),
+                                                    width: 2.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                              ),
                                             ),
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return 'Please enter your section';
+                                              }
+                                              return null; // Return null if there is no error
+                                            },
                                           ),
                                         ),
                                       ],
