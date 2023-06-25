@@ -260,7 +260,6 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                                   child: const Text('Delete'),
                                                   onPressed: () async {
                                                     // Perform the deletion logic here
-                                                    // TODO: Add your logic for deleting the employee
 
                                                     await professorRef
                                                         .child(profUserID)

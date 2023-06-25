@@ -98,7 +98,7 @@ class _EditStudentProfileState extends State<EditStudentProfile> {
                                       height: 110,
                                       width: 110,
                                       decoration: BoxDecoration(
-                                          color: Color(0xFF6096BA),
+                                          color: const Color(0xFF6096BA),
                                           shape: BoxShape.circle,
                                           border: Border.all(
                                             color: Colors.white,

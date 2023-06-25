@@ -380,7 +380,7 @@ class _HomePageState extends State<HomePage> {
                                                                   border: Border
                                                                       .all(
                                                                     color: const Color
-                                                                        .fromARGB(
+                                                                            .fromARGB(
                                                                         255,
                                                                         35,
                                                                         35,
@@ -657,7 +657,7 @@ class _HomePageState extends State<HomePage> {
                                                       child: Ink(
                                                           decoration:
                                                               const ShapeDecoration(
-                                                                  color: const Color(
+                                                                  color: Color(
                                                                       0xFF274C77),
                                                                   shape:
                                                                       RoundedRectangleBorder(
@@ -684,16 +684,14 @@ class _HomePageState extends State<HomePage> {
                                                                     child:
                                                                         AlertDialog(
                                                                       titlePadding:
-                                                                          const EdgeInsets
-                                                                              .all(
+                                                                          const EdgeInsets.all(
                                                                               0),
                                                                       title:
                                                                           Container(
                                                                         height:
                                                                             70,
-                                                                        padding: const EdgeInsets
-                                                                            .all(
-                                                                            20),
+                                                                        padding:
+                                                                            const EdgeInsets.all(20),
                                                                         color: const Color(
                                                                             0xFF274C77),
                                                                         child:
@@ -889,16 +887,14 @@ class _HomePageState extends State<HomePage> {
                                                                           formKey,
                                                                       child:
                                                                           AlertDialog(
-                                                                        titlePadding: const EdgeInsets
-                                                                            .all(
-                                                                            0),
+                                                                        titlePadding:
+                                                                            const EdgeInsets.all(0),
                                                                         title:
                                                                             Container(
                                                                           height:
                                                                               70,
-                                                                          padding: const EdgeInsets
-                                                                              .all(
-                                                                              20),
+                                                                          padding:
+                                                                              const EdgeInsets.all(20),
                                                                           color:
                                                                               const Color(0xFF274C77),
                                                                           child:
@@ -981,7 +977,7 @@ class _HomePageState extends State<HomePage> {
                                                     ),
                                                   ],
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 20,
                                                 )
                                               ],
@@ -1086,7 +1082,7 @@ class _HomePageState extends State<HomePage> {
                                                                   border: Border
                                                                       .all(
                                                                     color: const Color
-                                                                        .fromARGB(
+                                                                            .fromARGB(
                                                                         255,
                                                                         35,
                                                                         35,
@@ -1350,7 +1346,7 @@ class _HomePageState extends State<HomePage> {
                                                                   border: Border
                                                                       .all(
                                                                     color: const Color
-                                                                        .fromARGB(
+                                                                            .fromARGB(
                                                                         255,
                                                                         35,
                                                                         35,
