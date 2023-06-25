@@ -179,6 +179,8 @@ class _ProfessorPageState extends State<ProfessorPage> {
                     String profLastName =
                         snapshot.child('lastName').value.toString();
                     String status = snapshot.child('status').value.toString();
+                    String employmentStatus =
+                        snapshot.child('employmentStatus').value.toString();
                     // Filter professors based on the entered name
 
                     if (name.isNotEmpty &&
@@ -189,6 +191,9 @@ class _ProfessorPageState extends State<ProfessorPage> {
                             .toLowerCase()
                             .contains(name.toLowerCase())) {
                       return Container(); // Hide the professor card if it doesn't match the search criteria
+                    }
+                    if (employmentStatus == "Resigned") {
+                      return Container();
                     }
                     return Padding(
                       padding: const EdgeInsets.only(

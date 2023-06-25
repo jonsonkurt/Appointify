@@ -109,6 +109,8 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                           snapshot.child('firstName').value.toString();
                       String profLastName =
                           snapshot.child('lastName').value.toString();
+                      String employmentStatus =
+                          snapshot.child('employmentStatus').value.toString();
 
                       // Filter professors based on the entered name
 
@@ -120,6 +122,9 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                               .toLowerCase()
                               .contains(name.toLowerCase())) {
                         return Container(); // Hide the professor card if it doesn't match the search criteria
+                      }
+                      if (employmentStatus == "Resigned") {
+                        return Container();
                       }
                       return Padding(
                         padding: const EdgeInsets.only(
