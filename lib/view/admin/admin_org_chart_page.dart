@@ -26,6 +26,8 @@ class _OrgChartPage extends State<OrgChartPage> {
   Widget build(BuildContext context) {
     DatabaseReference ref =
         FirebaseDatabase.instance.ref().child('organizationChart');
+    int highestRank = 1;
+    int highestRankForSix = 4;
 
     return SafeArea(
       child: WillPopScope(
@@ -165,12 +167,35 @@ class _OrgChartPage extends State<OrgChartPage> {
 
                   // Print the ranks and corresponding IDs and labels
                   for (int rank = 1; rank <= 5; rank++) {
-                    if (groupedData.containsKey(rank) &&
+                    if (groupedData.containsKey(rank) == false) {
+                      if (groupedData.containsKey(rank - 1)) {
+                        highestRank = rank;
+                      }
+                      List<Map<String, dynamic>> rankData1 =
+                          groupedData[highestRank - 1]!;
+                      if (groupedData.containsKey(rank + 1)) {
+                        List<Map<String, dynamic>> rankData2 =
+                            groupedData[rank + 1]!;
+
+                        for (var entry1 in rankData1) {
+                          for (var entry2 in rankData2) {
+                            var newEdges = {
+                              "from": entry1["id"],
+                              "to": entry2["id"]
+                            };
+                            schoolOrg["edges"]!
+                                .add(newEdges.cast<String, Object>());
+                          }
+                        }
+                      }
+                    } else if (groupedData.containsKey(rank) &&
                         groupedData.containsKey(rank + 1)) {
+                      print("ELSE IF $rank");
                       List<Map<String, dynamic>> rankData1 = groupedData[rank]!;
                       List<Map<String, dynamic>> rankData2 =
                           groupedData[rank + 1]!;
-
+                      // print("RANK DATA 1:  $rankData1");
+                      // print("RANK DATA 2:  $rankData2");
                       // List<String> entries = [];
 
                       for (var entry1 in rankData1) {
@@ -194,6 +219,8 @@ class _OrgChartPage extends State<OrgChartPage> {
                               "from": entry1["id"],
                               "to": entry2["id"]
                             };
+                            print(
+                                "ID:${entry1["id"]} ${entry1["rank"]} - ID:${entry2["id"]} ${entry2["rank"]}");
                             schoolOrg["edges"]!
                                 .add(newEdges.cast<String, Object>());
                           }
