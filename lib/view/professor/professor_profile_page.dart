@@ -185,6 +185,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                       String profilePicStatus =
                           map['profilePicStatus'].toString();
                       String profSched = map['availability'].toString();
+                      String profStatus = map['status'].toString();
                       profFullSched = parseStringToMap(profSched);
 
                       return Column(
@@ -312,7 +313,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                   ),
                                   FlutterSwitch(
                                     activeColor: const Color(0xFF6096BA),
-                                    value: status1,
+                                    value: status1 = profStatus == "accepting"
+                                        ? true
+                                        : false,
                                     height: 30.0,
                                     width: 55,
                                     borderRadius: 30.0,
