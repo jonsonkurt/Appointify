@@ -46,7 +46,7 @@ class _RequestPageState extends State<RequestPage> {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     ).then((selectedDate) {
       if (selectedDate != null) {
@@ -258,7 +258,7 @@ class _RequestPageState extends State<RequestPage> {
                                                       shape: BoxShape.circle,
                                                       border: Border.all(
                                                         color: const Color
-                                                                .fromARGB(
+                                                            .fromARGB(
                                                             255, 35, 35, 35),
                                                         width: 2,
                                                       )),
