@@ -105,9 +105,10 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
       'position2': pos2,
       'position3': pos3,
       'rank': highestRank,
+      'imageURL': "",
     });
     if (getLink != "") {
-      await FirebaseDatabase.instance.ref('organizationChart/$index').set({
+      await FirebaseDatabase.instance.ref('organizationChart/$index').update({
         'imageURL': getLink,
       });
     }
