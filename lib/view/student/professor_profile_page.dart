@@ -106,9 +106,9 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
       lastDate: DateTime(2100),
       builder: (BuildContext context, Widget? child) => Theme(
         data: ThemeData().copyWith(
-          colorScheme: const ColorScheme.dark(
+          colorScheme: const ColorScheme.light(
             primary: Color(0xFF274C77),
-            onPrimary: Colors.grey,
+            onPrimary: Colors.white,
             surface: Color(0xFF6096BA),
             onSurface: Colors.black,
           ),
