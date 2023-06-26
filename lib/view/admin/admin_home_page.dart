@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:appointify/view/student/profile_controller.dart';
 
@@ -64,6 +65,8 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
   Widget build(BuildContext context) {
     DatabaseReference professorRef =
         FirebaseDatabase.instance.ref('professors/');
+    DatabaseReference appointments =
+        FirebaseDatabase.instance.ref('appoinments');
 
     return WillPopScope(
       onWillPop: () async {
@@ -265,6 +268,32 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                                   child: const Text('Delete'),
                                                   onPressed: () async {
                                                     // Perform the deletion logic here
+                                                    // !!!
+                                                    fetchData(profUserID)
+                                                        .then((dataList) async {
+                                                      // Handle the fetched data here
+
+                                                      for (var data
+                                                          in dataList) {
+                                                        if (data["requestStatus"] ==
+                                                                "PENDING" ||
+                                                            data["requestStatus"] ==
+                                                                "UPCOMING") {
+                                                          String appointID =
+                                                              data['appointID'];
+                                                          await updateRequestStatus(
+                                                              data[
+                                                                  'professorID'],
+                                                              appointID,
+                                                              data['studentID'],
+                                                              data['date'],
+                                                              data['time']);
+                                                        }
+                                                      }
+                                                    }).catchError((error) {
+                                                      // Handle any errors during the data retrieval
+                                                      print('Error: $error');
+                                                    });
 
                                                     await professorRef
                                                         .child(profUserID)
@@ -1068,4 +1097,46 @@ class _SearchBoxState extends State<SearchBox> {
       ),
     );
   }
+}
+
+// Data retrieval of appointments of the professor resigning !!!
+Future<List<Map<String, dynamic>>> fetchData(String professorID) async {
+  DatabaseReference databaseReference =
+      FirebaseDatabase.instance.ref().child('appointments');
+
+  DatabaseEvent event = await databaseReference
+      .orderByChild('professorID')
+      .equalTo(professorID)
+      .once();
+
+  List<Map<String, dynamic>> dataList = [];
+
+  if (event.snapshot.value != null) {
+    Map<dynamic, dynamic>? values =
+        event.snapshot.value as Map<dynamic, dynamic>?;
+    values?.forEach((key, value) {
+      dataList.add(Map<String, dynamic>.from(value));
+    });
+  }
+
+  return dataList;
+}
+
+// udpate functions to cancel appointments !!!
+Future<void> updateRequestStatus(String professorID, String appointID,
+    String studentID, String inputDate, String inputTime) async {
+  DatabaseReference databaseReference =
+      FirebaseDatabase.instance.ref().child('appointments');
+  DateTime dateTime = DateFormat('MMM dd, yyyy').parse(inputDate);
+  String outputDate = DateFormat('MM-dd-yyyy').format(dateTime);
+  DateTime time = DateFormat('h:mm a').parse(inputTime);
+  String outputTime = DateFormat('HH:mm').format(time);
+
+  await databaseReference.child(appointID).update({
+    'notes':
+        "We regret to inform you that this employee has officially resigned from their position.",
+    'requestStatusProfessor': "$professorID-CANCELED-$outputDate:$outputTime",
+    'status': "$studentID-CANCELED-$outputDate:$outputTime",
+    'requestStatus': "CANCELED",
+  });
 }

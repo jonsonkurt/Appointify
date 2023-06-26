@@ -244,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       background: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white54,
+                          color: Colors.white,
                           borderRadius:
                               const BorderRadius.all(Radius.circular(20.0)),
                           boxShadow: [
@@ -380,7 +380,7 @@ class _HomePageState extends State<HomePage> {
                                                                   border: Border
                                                                       .all(
                                                                     color: const Color
-                                                                        .fromARGB(
+                                                                            .fromARGB(
                                                                         255,
                                                                         35,
                                                                         35,
@@ -684,16 +684,14 @@ class _HomePageState extends State<HomePage> {
                                                                     child:
                                                                         AlertDialog(
                                                                       titlePadding:
-                                                                          const EdgeInsets
-                                                                              .all(
+                                                                          const EdgeInsets.all(
                                                                               0),
                                                                       title:
                                                                           Container(
                                                                         height:
                                                                             70,
-                                                                        padding: const EdgeInsets
-                                                                            .all(
-                                                                            20),
+                                                                        padding:
+                                                                            const EdgeInsets.all(20),
                                                                         color: const Color(
                                                                             0xFF274C77),
                                                                         child:
@@ -889,16 +887,14 @@ class _HomePageState extends State<HomePage> {
                                                                           formKey,
                                                                       child:
                                                                           AlertDialog(
-                                                                        titlePadding: const EdgeInsets
-                                                                            .all(
-                                                                            0),
+                                                                        titlePadding:
+                                                                            const EdgeInsets.all(0),
                                                                         title:
                                                                             Container(
                                                                           height:
                                                                               70,
-                                                                          padding: const EdgeInsets
-                                                                              .all(
-                                                                              20),
+                                                                          padding:
+                                                                              const EdgeInsets.all(20),
                                                                           color:
                                                                               const Color(0xFF274C77),
                                                                           child:
@@ -1087,7 +1083,7 @@ class _HomePageState extends State<HomePage> {
                                                                   border: Border
                                                                       .all(
                                                                     color: const Color
-                                                                        .fromARGB(
+                                                                            .fromARGB(
                                                                         255,
                                                                         35,
                                                                         35,
@@ -1352,7 +1348,7 @@ class _HomePageState extends State<HomePage> {
                                                                   border: Border
                                                                       .all(
                                                                     color: const Color
-                                                                        .fromARGB(
+                                                                            .fromARGB(
                                                                         255,
                                                                         35,
                                                                         35,
