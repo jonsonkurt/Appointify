@@ -292,10 +292,11 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     selectedPosition1 = value;
-                                    if (selectedPosition2 == value ||
-                                        selectedPosition3 == value) {
-                                      selectedPosition2 =
-                                          '-'; // Reset Position 2 if it has the same value as Position 1
+                                    if (selectedPosition2 == value) {
+                                      selectedPosition2 = '-';
+                                    }
+
+                                    if (selectedPosition3 == value) {
                                       selectedPosition3 = '-';
                                     }
                                   });
@@ -305,6 +306,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                     value: '-',
                                     child: Text('-'),
                                   ),
+                                  //
                                   if (selectedPosition2 !=
                                           'University President' ||
                                       selectedPosition3 !=
@@ -313,6 +315,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'University President',
                                       child: Text('University President'),
                                     ),
+                                  //
                                   if (selectedPosition2 !=
                                           'Vice President for Academic Affairs' ||
                                       selectedPosition3 !=
@@ -323,12 +326,14 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       child: Text(
                                           'Vice President for Academic Affairs'),
                                     ),
+                                  //
                                   if (selectedPosition2 != 'Dean' ||
                                       selectedPosition3 != 'Dean')
                                     const DropdownMenuItem<String>(
                                       value: 'Dean',
                                       child: Text('Dean'),
                                     ),
+                                  //
                                   if (selectedPosition2 !=
                                           'Department Chairperson' ||
                                       selectedPosition3 !=
@@ -337,6 +342,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'Department Chairperson',
                                       child: Text('Department Chairperson'),
                                     ),
+                                  //
                                   if (selectedPosition2 !=
                                           'BSCE Program Coordinator' ||
                                       selectedPosition3 !=
@@ -345,6 +351,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'BSCE Program Coordinator',
                                       child: Text('BSCE Program Coordinator'),
                                     ),
+                                  //
                                   if (selectedPosition2 !=
                                           'Department Secretary' ||
                                       selectedPosition3 !=
@@ -353,6 +360,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'Department Secretary',
                                       child: Text('Department Secretary'),
                                     ),
+                                  //
                                   if (selectedPosition2 !=
                                           'Job Placement Officer' ||
                                       selectedPosition3 !=
@@ -361,12 +369,14 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'Job Placement Officer',
                                       child: Text('Job Placement Officer'),
                                     ),
+                                  //
                                   if (selectedPosition2 != 'OJT Coordinator' ||
                                       selectedPosition3 != 'OJT Coordinator')
                                     const DropdownMenuItem<String>(
                                       value: 'OJT Coordinator',
                                       child: Text('OJT Coordinator'),
                                     ),
+                                  //
                                   if (selectedPosition2 !=
                                           'Department Extension Coordinator' ||
                                       selectedPosition3 !=
@@ -376,6 +386,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       child: Text(
                                           'Department Extension Coordinator'),
                                     ),
+                                  //
                                   if (selectedPosition2 !=
                                           'Budget Officer/Property Custodian' ||
                                       selectedPosition3 !=
@@ -386,6 +397,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       child: Text(
                                           'Budget Officer/Property Custodian'),
                                     ),
+                                  //
                                   if (selectedPosition2 !=
                                           'Department BSCE Research Coordinator' ||
                                       selectedPosition3 !=
@@ -396,12 +408,14 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       child: Text(
                                           'Department BSCE Research Coordinator'),
                                     ),
+                                  //
                                   if (selectedPosition2 != 'GAD Coordinator' ||
                                       selectedPosition3 != 'GAD Coordinator')
                                     const DropdownMenuItem<String>(
                                       value: 'GAD Coordinator',
                                       child: Text('GAD Coordinator'),
                                     ),
+                                  //
                                   if (selectedPosition2 !=
                                           'In-Charge Knowledge Management Unit' ||
                                       selectedPosition3 !=
@@ -412,16 +426,26 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       child: Text(
                                           'In-Charge Knowledge Management Unit'),
                                     ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Program Coordinator, BS Archi',
-                                    child:
-                                        Text('Program Coordinator, BS Archi'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Research Coordinator, BS Archi',
-                                    child:
-                                        Text('Research Coordinator, BS Archi'),
-                                  ),
+                                  //
+                                  if (selectedPosition2 !=
+                                          'Program Coordinator, BS Archi' ||
+                                      selectedPosition3 !=
+                                          'Program Coordinator, BS Archi')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Program Coordinator, BS Archi',
+                                      child:
+                                          Text('Program Coordinator, BS Archi'),
+                                    ),
+                                  //
+                                  if (selectedPosition2 !=
+                                          'Research Coordinator, BS Archi' ||
+                                      selectedPosition3 !=
+                                          'Research Coordinator, BS Archi')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Research Coordinator, BS Archi',
+                                      child: Text(
+                                          'Research Coordinator, BS Archi'),
+                                    ),
                                 ],
                               ),
                             ),
@@ -462,10 +486,11 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     selectedPosition2 = value;
-                                    if (selectedPosition1 == value ||
-                                        selectedPosition3 == value) {
-                                      selectedPosition2 =
-                                          '-'; // Reset Position 2 if it has the same value as Position 1
+                                    if (selectedPosition1 == value) {
+                                      selectedPosition1 = '-';
+                                    }
+
+                                    if (selectedPosition3 == value) {
                                       selectedPosition3 = '-';
                                     }
                                   });
@@ -475,6 +500,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                     value: '-',
                                     child: Text('-'),
                                   ),
+
                                   if (selectedPosition1 !=
                                           'University President' ||
                                       selectedPosition3 !=
@@ -483,6 +509,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'University President',
                                       child: Text('University President'),
                                     ),
+                                  //
                                   if (selectedPosition1 !=
                                           'Vice President for Academic Affairs' ||
                                       selectedPosition3 !=
@@ -493,12 +520,14 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       child: Text(
                                           'Vice President for Academic Affairs'),
                                     ),
+                                  //
                                   if (selectedPosition1 != 'Dean' ||
                                       selectedPosition3 != 'Dean')
                                     const DropdownMenuItem<String>(
                                       value: 'Dean',
                                       child: Text('Dean'),
                                     ),
+                                  //
                                   if (selectedPosition1 !=
                                           'Department Chairperson' ||
                                       selectedPosition3 !=
@@ -507,58 +536,110 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'Department Chairperson',
                                       child: Text('Department Chairperson'),
                                     ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'BSCE Program Coordinator',
-                                    child: Text('BSCE Program Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Department Secretary',
-                                    child: Text('Department Secretary'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Job Placement Officer',
-                                    child: Text('Job Placement Officer'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'OJT Coordinator',
-                                    child: Text('OJT Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Department Extension Coordinator',
-                                    child: Text(
-                                        'Department Extension Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Budget Officer/Property Custodian',
-                                    child: Text(
-                                        'Budget Officer/Property Custodian'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value:
-                                        'Department BSCE Research Coordinator',
-                                    child: Text(
-                                        'Department BSCE Research Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'GAD Coordinator',
-                                    child: Text('GAD Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value:
-                                        'In-Charge Knowledge Management Unit',
-                                    child: Text(
-                                        'In-Charge Knowledge Management Unit'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Program Coordinator, BS Archi',
-                                    child:
-                                        Text('Program Coordinator, BS Archi'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Research Coordinator, BS Archi',
-                                    child:
-                                        Text('Research Coordinator, BS Archi'),
-                                  ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'BSCE Program Coordinator' ||
+                                      selectedPosition3 !=
+                                          'BSCE Program Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'BSCE Program Coordinator',
+                                      child: Text('BSCE Program Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Department Secretary' ||
+                                      selectedPosition3 !=
+                                          'Department Secretary')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Department Secretary',
+                                      child: Text('Department Secretary'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Job Placement Officer' ||
+                                      selectedPosition3 !=
+                                          'Job Placement Officer')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Job Placement Officer',
+                                      child: Text('Job Placement Officer'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 != 'OJT Coordinator' ||
+                                      selectedPosition3 != 'OJT Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'OJT Coordinator',
+                                      child: Text('OJT Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Department Extension Coordinator' ||
+                                      selectedPosition3 !=
+                                          'Department Extension Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Department Extension Coordinator',
+                                      child: Text(
+                                          'Department Extension Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Budget Officer/Property Custodian' ||
+                                      selectedPosition3 !=
+                                          'Budget Officer/Property Custodian')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'Budget Officer/Property Custodian',
+                                      child: Text(
+                                          'Budget Officer/Property Custodian'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Department BSCE Research Coordinator' ||
+                                      selectedPosition3 !=
+                                          'Department BSCE Research Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'Department BSCE Research Coordinator',
+                                      child: Text(
+                                          'Department BSCE Research Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 != 'GAD Coordinator' ||
+                                      selectedPosition3 != 'GAD Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'GAD Coordinator',
+                                      child: Text('GAD Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'In-Charge Knowledge Management Unit' ||
+                                      selectedPosition3 !=
+                                          'In-Charge Knowledge Management Unit')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'In-Charge Knowledge Management Unit',
+                                      child: Text(
+                                          'In-Charge Knowledge Management Unit'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Program Coordinator, BS Archi' ||
+                                      selectedPosition3 !=
+                                          'Program Coordinator, BS Archi')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Program Coordinator, BS Archi',
+                                      child:
+                                          Text('Program Coordinator, BS Archi'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Research Coordinator, BS Archi' ||
+                                      selectedPosition3 !=
+                                          'Research Coordinator, BS Archi')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Research Coordinator, BS Archi',
+                                      child: Text(
+                                          'Research Coordinator, BS Archi'),
+                                    ),
                                 ],
                               ),
                             ),
@@ -599,10 +680,11 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     selectedPosition3 = value;
-                                    if (selectedPosition1 == value ||
-                                        selectedPosition2 == value) {
-                                      selectedPosition1 =
-                                          '-'; // Reset Position 2 if it has the same value as Position 1
+                                    if (selectedPosition1 == value) {
+                                      selectedPosition1 = '-';
+                                    }
+
+                                    if (selectedPosition2 == value) {
                                       selectedPosition2 = '-';
                                     }
                                   });
@@ -612,6 +694,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                     value: '-',
                                     child: Text('-'),
                                   ),
+                                  //
                                   if (selectedPosition1 !=
                                           'University President' ||
                                       selectedPosition2 !=
@@ -620,6 +703,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'University President',
                                       child: Text('University President'),
                                     ),
+                                  //
                                   if (selectedPosition1 !=
                                           'Vice President for Academic Affairs' ||
                                       selectedPosition2 !=
@@ -630,12 +714,14 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       child: Text(
                                           'Vice President for Academic Affairs'),
                                     ),
+                                  //
                                   if (selectedPosition1 != 'Dean' ||
                                       selectedPosition2 != 'Dean')
                                     const DropdownMenuItem<String>(
                                       value: 'Dean',
                                       child: Text('Dean'),
                                     ),
+                                  //
                                   if (selectedPosition1 !=
                                           'Department Chairperson' ||
                                       selectedPosition2 !=
@@ -644,58 +730,110 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'Department Chairperson',
                                       child: Text('Department Chairperson'),
                                     ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'BSCE Program Coordinator',
-                                    child: Text('BSCE Program Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Department Secretary',
-                                    child: Text('Department Secretary'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Job Placement Officer',
-                                    child: Text('Job Placement Officer'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'OJT Coordinator',
-                                    child: Text('OJT Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Department Extension Coordinator',
-                                    child: Text(
-                                        'Department Extension Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Budget Officer/Property Custodian',
-                                    child: Text(
-                                        'Budget Officer/Property Custodian'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value:
-                                        'Department BSCE Research Coordinator',
-                                    child: Text(
-                                        'Department BSCE Research Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'GAD Coordinator',
-                                    child: Text('GAD Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value:
-                                        'In-Charge Knowledge Management Unit',
-                                    child: Text(
-                                        'In-Charge Knowledge Management Unit'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Program Coordinator, BS Archi',
-                                    child:
-                                        Text('Program Coordinator, BS Archi'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Research Coordinator, BS Archi',
-                                    child:
-                                        Text('Research Coordinator, BS Archi'),
-                                  ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'BSCE Program Coordinator' ||
+                                      selectedPosition2 !=
+                                          'BSCE Program Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'BSCE Program Coordinator',
+                                      child: Text('BSCE Program Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Department Secretary' ||
+                                      selectedPosition2 !=
+                                          'Department Secretary')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Department Secretary',
+                                      child: Text('Department Secretary'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Job Placement Officer' ||
+                                      selectedPosition2 !=
+                                          'Job Placement Officer')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Job Placement Officer',
+                                      child: Text('Job Placement Officer'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 != 'OJT Coordinator' ||
+                                      selectedPosition2 != 'OJT Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'OJT Coordinator',
+                                      child: Text('OJT Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Department Extension Coordinator' ||
+                                      selectedPosition2 !=
+                                          'Department Extension Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Department Extension Coordinator',
+                                      child: Text(
+                                          'Department Extension Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Budget Officer/Property Custodian' ||
+                                      selectedPosition2 !=
+                                          'Budget Officer/Property Custodian')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'Budget Officer/Property Custodian',
+                                      child: Text(
+                                          'Budget Officer/Property Custodian'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Department BSCE Research Coordinator' ||
+                                      selectedPosition2 !=
+                                          'Department BSCE Research Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'Department BSCE Research Coordinator',
+                                      child: Text(
+                                          'Department BSCE Research Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 != 'GAD Coordinator' ||
+                                      selectedPosition2 != 'GAD Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'GAD Coordinator',
+                                      child: Text('GAD Coordinator'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'In-Charge Knowledge Management Unit' ||
+                                      selectedPosition2 !=
+                                          'In-Charge Knowledge Management Unit')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'In-Charge Knowledge Management Unit',
+                                      child: Text(
+                                          'In-Charge Knowledge Management Unit'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Program Coordinator, BS Archi' ||
+                                      selectedPosition2 !=
+                                          'Program Coordinator, BS Archi')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Program Coordinator, BS Archi',
+                                      child:
+                                          Text('Program Coordinator, BS Archi'),
+                                    ),
+                                  //
+                                  if (selectedPosition1 !=
+                                          'Research Coordinator, BS Archi' ||
+                                      selectedPosition2 !=
+                                          'Research Coordinator, BS Archi')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Research Coordinator, BS Archi',
+                                      child: Text(
+                                          'Research Coordinator, BS Archi'),
+                                    ),
                                 ],
                               ),
                             ),
