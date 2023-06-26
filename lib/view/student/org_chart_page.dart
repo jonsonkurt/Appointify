@@ -19,106 +19,13 @@ class _OrgChartPage extends State<OrgChartPage> {
 
   // // nodes
   List<Map<String, Object>> nodes = [];
-  // var json = {
-  //   'nodes': [
-  //     {
-  //       "id": 11,
-  //       "label": "Ar. Brian",
-  //       "rank": 6,
-  //     },
-  //     {
-  //       "id": 12,
-  //       "label": "Engr. Alvin",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 13,
-  //       "label": "Engr. Marcelino",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 14,
-  //       "label": "Engr. Ralph",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 15,
-  //       "label": "Prof. William",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 1,
-  //       "label": "Robles",
-  //       "rank": 1,
-  //     },
-  //     {
-  //       "id": 2,
-  //       "label": "Dr. Ma. Agnes",
-  //       "rank": 2,
-  //     },
-  //     {
-  //       "id": 3,
-  //       "label": "Dr. Willie",
-  //       "rank": 3,
-  //     },
-  //     {
-  //       "id": 4,
-  //       "label": "Engr. Roslyn",
-  //       "rank": 4,
-  //     },
-  //     {
-  //       "id": 5,
-  //       "label": "Engr. Larry",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 6,
-  //       "label": "Engr. Cene",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 7,
-  //       "label": "Engr. Renato",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 8,
-  //       "label": "Ar. Kenn",
-  //       "rank": 5,
-  //     },
-  //     {
-  //       "id": 9,
-  //       "label": "Ar. Christian",
-  //       "rank": 6,
-  //     },
-  //     {
-  //       "id": 10,
-  //       "label": "Ar. Dan",
-  //       "rank": 6,
-  //     },
-  //   ],
-  //   'edges': [
-  //     {"from": 1, "to": 2},
-  //     {"from": 2, "to": 3},
-  //     {"from": 3, "to": 4},
-  //     {"from": 4, "to": 12},
-  //     {"from": 4, "to": 13},
-  //     {"from": 4, "to": 14},
-  //     {"from": 4, "to": 15},
-  //     {"from": 4, "to": 5},
-  //     {"from": 4, "to": 6},
-  //     {"from": 4, "to": 7},
-  //     {"from": 4, "to": 8},
-  //     {"from": 8, "to": 11},
-  //     {"from": 8, "to": 9},
-  //     {"from": 8, "to": 10}
-  //   ]
-  // };
 
   @override
   Widget build(BuildContext context) {
     DatabaseReference ref =
         FirebaseDatabase.instance.ref().child('organizationChart');
+    int highestRank = 1;
+    int highestRankForSix = 4;
 
     return SafeArea(
       child: WillPopScope(
@@ -194,12 +101,35 @@ class _OrgChartPage extends State<OrgChartPage> {
 
                   // Print the ranks and corresponding IDs and labels
                   for (int rank = 1; rank <= 5; rank++) {
-                    if (groupedData.containsKey(rank) &&
+                    if (groupedData.containsKey(rank) == false) {
+                      if (groupedData.containsKey(rank - 1)) {
+                        highestRank = rank;
+                      }
+                      List<Map<String, dynamic>> rankData1 =
+                          groupedData[highestRank - 1]!;
+                      if (groupedData.containsKey(rank + 1)) {
+                        List<Map<String, dynamic>> rankData2 =
+                            groupedData[rank + 1]!;
+
+                        for (var entry1 in rankData1) {
+                          for (var entry2 in rankData2) {
+                            var newEdges = {
+                              "from": entry1["id"],
+                              "to": entry2["id"]
+                            };
+                            schoolOrg["edges"]!
+                                .add(newEdges.cast<String, Object>());
+                          }
+                        }
+                      }
+                    } else if (groupedData.containsKey(rank) &&
                         groupedData.containsKey(rank + 1)) {
+                      print("ELSE IF $rank");
                       List<Map<String, dynamic>> rankData1 = groupedData[rank]!;
                       List<Map<String, dynamic>> rankData2 =
                           groupedData[rank + 1]!;
-
+                      // print("RANK DATA 1:  $rankData1");
+                      // print("RANK DATA 2:  $rankData2");
                       // List<String> entries = [];
 
                       for (var entry1 in rankData1) {
@@ -223,6 +153,8 @@ class _OrgChartPage extends State<OrgChartPage> {
                               "from": entry1["id"],
                               "to": entry2["id"]
                             };
+                            print(
+                                "ID:${entry1["id"]} ${entry1["rank"]} - ID:${entry2["id"]} ${entry2["rank"]}");
                             schoolOrg["edges"]!
                                 .add(newEdges.cast<String, Object>());
                           }
