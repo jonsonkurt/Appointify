@@ -1031,7 +1031,8 @@ class _HomePageState extends State<HomePage> {
                                 String studentSection =
                                     snapshot.child('section').value.toString();
                                 return SizedBox(
-                                    height: 140,
+                                    height:
+                                        MediaQuery.of(context).size.height / 5,
                                     child: Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 20),
@@ -1295,7 +1296,8 @@ class _HomePageState extends State<HomePage> {
                                 String studentSection =
                                     snapshot.child('section').value.toString();
                                 return SizedBox(
-                                    height: 180,
+                                    height:
+                                        MediaQuery.of(context).size.height / 5,
                                     child: Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 20),
@@ -1436,100 +1438,78 @@ class _HomePageState extends State<HomePage> {
                                                 },
                                               ),
                                             ),
-                                            Expanded(
-                                              child: Container(
-                                                margin: EdgeInsets.all(
-                                                  MediaQuery.of(context)
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  bottom: MediaQuery.of(context)
+                                                          .size
+                                                          .height /
+                                                      100,
+                                                  left: MediaQuery.of(context)
                                                           .size
                                                           .width /
-                                                      20,
-                                                  // right: MediaQuery.of(context)
-                                                  //         .size
-                                                  //         .width /
-                                                  //     15
-                                                ),
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    0.5,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    25,
-                                                decoration: BoxDecoration(
+                                                      15,
+                                                  right: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      15),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  0.5,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  25,
+                                              decoration: BoxDecoration(
                                                   borderRadius:
                                                       const BorderRadius.all(
                                                           Radius.circular(10)),
                                                   color: Colors.white,
-                                                  border: Border.all(width: 2),
-                                                ),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Container(
-                                                      padding: EdgeInsets.only(
-                                                          right: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              20,
-                                                          left: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              20),
-                                                      child: Row(
-                                                        children: [
-                                                          const Icon(
-                                                            Icons
-                                                                .calendar_month_outlined,
-                                                            color: Colors.black,
-                                                          ),
-                                                          Text(
-                                                            snapshot
-                                                                .child('date')
-                                                                .value
-                                                                .toString(),
-                                                            style: const TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontFamily:
-                                                                    "GothamRnd"),
-                                                          ),
-                                                        ],
+                                                  border: Border.all(width: 2)),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons
+                                                            .calendar_month_outlined,
+                                                        color: Colors.black,
                                                       ),
-                                                    ),
-                                                    Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 30,
-                                                              left: 20),
-                                                      child: Row(
-                                                        children: [
-                                                          const Icon(
-                                                            Icons
-                                                                .watch_later_outlined,
+                                                      Text(
+                                                        snapshot
+                                                            .child('date')
+                                                            .value
+                                                            .toString(),
+                                                        style: const TextStyle(
                                                             color: Colors.black,
-                                                          ),
-                                                          Text(
-                                                            snapshot
-                                                                .child('time')
-                                                                .value
-                                                                .toString(),
-                                                            style: const TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontFamily:
-                                                                    "GothamRnd"),
-                                                          ),
-                                                        ],
+                                                            fontFamily:
+                                                                "GothamRnd"),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons
+                                                            .watch_later_outlined,
+                                                        color: Colors.black,
+                                                      ),
+                                                      Text(
+                                                        snapshot
+                                                            .child('time')
+                                                            .value
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.black,
+                                                            fontFamily:
+                                                                "GothamRnd"),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ],
