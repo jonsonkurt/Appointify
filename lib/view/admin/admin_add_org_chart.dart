@@ -353,40 +353,65 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                       value: 'Department Secretary',
                                       child: Text('Department Secretary'),
                                     ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Job Placement Officer',
-                                    child: Text('Job Placement Officer'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'OJT Coordinator',
-                                    child: Text('OJT Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Department Extension Coordinator',
-                                    child: Text(
-                                        'Department Extension Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'Budget Officer/Property Custodian',
-                                    child: Text(
-                                        'Budget Officer/Property Custodian'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value:
-                                        'Department BSCE Research Coordinator',
-                                    child: Text(
-                                        'Department BSCE Research Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value: 'GAD Coordinator',
-                                    child: Text('GAD Coordinator'),
-                                  ),
-                                  const DropdownMenuItem<String>(
-                                    value:
-                                        'In-Charge Knowledge Management Unit',
-                                    child: Text(
-                                        'In-Charge Knowledge Management Unit'),
-                                  ),
+                                  if (selectedPosition2 !=
+                                          'Job Placement Officer' ||
+                                      selectedPosition3 !=
+                                          'Job Placement Officer')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Job Placement Officer',
+                                      child: Text('Job Placement Officer'),
+                                    ),
+                                  if (selectedPosition2 != 'OJT Coordinator' ||
+                                      selectedPosition3 != 'OJT Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'OJT Coordinator',
+                                      child: Text('OJT Coordinator'),
+                                    ),
+                                  if (selectedPosition2 !=
+                                          'Department Extension Coordinator' ||
+                                      selectedPosition3 !=
+                                          'Department Extension Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Department Extension Coordinator',
+                                      child: Text(
+                                          'Department Extension Coordinator'),
+                                    ),
+                                  if (selectedPosition2 !=
+                                          'Budget Officer/Property Custodian' ||
+                                      selectedPosition3 !=
+                                          'Budget Officer/Property Custodian')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'Budget Officer/Property Custodian',
+                                      child: Text(
+                                          'Budget Officer/Property Custodian'),
+                                    ),
+                                  if (selectedPosition2 !=
+                                          'Department BSCE Research Coordinator' ||
+                                      selectedPosition3 !=
+                                          'Department BSCE Research Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'Department BSCE Research Coordinator',
+                                      child: Text(
+                                          'Department BSCE Research Coordinator'),
+                                    ),
+                                  if (selectedPosition2 != 'GAD Coordinator' ||
+                                      selectedPosition3 != 'GAD Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'GAD Coordinator',
+                                      child: Text('GAD Coordinator'),
+                                    ),
+                                  if (selectedPosition2 !=
+                                          'In-Charge Knowledge Management Unit' ||
+                                      selectedPosition3 !=
+                                          'In-Charge Knowledge Management Unit')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'In-Charge Knowledge Management Unit',
+                                      child: Text(
+                                          'In-Charge Knowledge Management Unit'),
+                                    ),
                                   const DropdownMenuItem<String>(
                                     value: 'Program Coordinator, BS Archi',
                                     child:
