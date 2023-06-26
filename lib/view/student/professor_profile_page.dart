@@ -714,7 +714,7 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                   ),
                 ),
                 child: const Text(
-                  'Confirm Schedule',
+                  'Confirm',
                   style: TextStyle(
                     fontFamily: "GothamRnd-Medium",
                     color: Colors.white,
