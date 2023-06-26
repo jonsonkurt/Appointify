@@ -329,7 +329,7 @@ class _HomePageState extends State<HomePage> {
 
                                 return SizedBox(
                                     height: MediaQuery.of(context).size.height /
-                                        3.8,
+                                        3.6,
                                     child: Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 20),
