@@ -266,6 +266,14 @@ class _HomePageState extends State<HomePage> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
+                                  String counteredInputDate = snapshot
+                                      .child("counteredDate")
+                                      .value
+                                      .toString();
+                                  String counteredInputTime = snapshot
+                                      .child("counteredTime")
+                                      .value
+                                      .toString();
                                   return AlertDialog(
                                     titlePadding: const EdgeInsets.all(0),
                                     title: Container(
@@ -405,23 +413,25 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                                 child: const Text("Accept"),
                                                 onPressed: () async {
-                                                  String inputDate = snapshot
-                                                      .child("counteredDate")
-                                                      .value
-                                                      .toString();
-                                                  DateTime dateTime =
-                                                      DateFormat('MMM dd, yyyy')
-                                                          .parse(inputDate);
+                                                  // String inputDate = snapshot
+                                                  //     .child("counteredDate")
+                                                  //     .value
+                                                  //     .toString();
+                                                  DateTime dateTime = DateFormat(
+                                                          'MMM dd, yyyy')
+                                                      .parse(
+                                                          counteredInputDate);
                                                   String outputDate =
                                                       DateFormat('MM-dd-yyyy')
                                                           .format(dateTime);
-                                                  String inputTime = snapshot
-                                                      .child("counteredTime")
-                                                      .value
-                                                      .toString();
-                                                  DateTime time =
-                                                      DateFormat('h:mm a')
-                                                          .parse(inputTime);
+                                                  // String inputTime = snapshot
+                                                  //     .child("counteredTime")
+                                                  //     .value
+                                                  //     .toString();
+                                                  DateTime time = DateFormat(
+                                                          'h:mm a')
+                                                      .parse(
+                                                          counteredInputTime);
                                                   String outputTime =
                                                       DateFormat('HH:mm')
                                                           .format(time);
