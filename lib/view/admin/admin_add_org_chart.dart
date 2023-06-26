@@ -132,9 +132,17 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
     orgChartSubscription = orgChartRef.onValue.listen((event) {
       try {
         DataSnapshot snapshot = event.snapshot;
-        Map<dynamic, dynamic> data =
-            Map<dynamic, dynamic>.from(snapshot.value as Map<dynamic, dynamic>);
+        Map<dynamic, dynamic> data = snapshot.value as Map<dynamic, dynamic>;
+        List getIDs = [];
         index = data.length + 1;
+        data.forEach((key, value) {
+          if (value["id"] != null) {
+            getIDs.add(value["id"]);
+          }
+        });
+        int getLastIndex = getIDs
+            .reduce((value, element) => value > element ? value : element);
+        index = getLastIndex + 1;
       } catch (error, stackTrace) {
         logger.d('Error occurred: $error');
         logger.d('Stack trace: $stackTrace');
