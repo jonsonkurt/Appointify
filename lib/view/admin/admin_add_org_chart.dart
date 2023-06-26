@@ -17,7 +17,9 @@ class AddOrgChartPage extends StatefulWidget {
 
 class _AddOrgChartPageState extends State<AddOrgChartPage> {
   var logger = Logger();
-
+  String valPos1 = '-';
+  String valPos2 = '-';
+  String valPos3 = '-';
   int? index;
 
   StreamSubscription<DatabaseEvent>? orgChartSubscription;
@@ -290,94 +292,110 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     selectedPosition1 = value;
+                                    if (selectedPosition2 == value ||
+                                        selectedPosition3 == value) {
+                                      selectedPosition2 =
+                                          '-'; // Reset Position 2 if it has the same value as Position 1
+                                      selectedPosition3 = '-';
+                                    }
                                   });
                                 },
-                                items: const [
-                                  DropdownMenuItem<String>(
+                                items: [
+                                  const DropdownMenuItem<String>(
                                     value: '-',
                                     child: Text('-'),
                                   ),
-                                  DropdownMenuItem<String>(
-                                    value: 'University President',
-                                    child: Text('University President'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value:
-                                        'Vice President for Academic Affairs',
-                                    child: Text(
-                                        'Vice President for Academic Affairs'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Dean',
-                                    child: Text('Dean'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Department Chairperson',
-                                    child: Text('Department Chairperson'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'BSCE Program Coordinator',
-                                    child: Text('BSCE Program Coordinator'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Department Secretary',
-                                    child: Text('Department Secretary'),
-                                  ),
-                                  DropdownMenuItem<String>(
+                                  if (selectedPosition2 !=
+                                          'University President' ||
+                                      selectedPosition3 !=
+                                          'University President')
+                                    const DropdownMenuItem<String>(
+                                      value: 'University President',
+                                      child: Text('University President'),
+                                    ),
+                                  if (selectedPosition2 !=
+                                          'Vice President for Academic Affairs' ||
+                                      selectedPosition3 !=
+                                          'Vice President for Academic Affairs')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'Vice President for Academic Affairs',
+                                      child: Text(
+                                          'Vice President for Academic Affairs'),
+                                    ),
+                                  if (selectedPosition2 != 'Dean' ||
+                                      selectedPosition3 != 'Dean')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Dean',
+                                      child: Text('Dean'),
+                                    ),
+                                  if (selectedPosition2 !=
+                                          'Department Chairperson' ||
+                                      selectedPosition3 !=
+                                          'Department Chairperson')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Department Chairperson',
+                                      child: Text('Department Chairperson'),
+                                    ),
+                                  if (selectedPosition2 !=
+                                          'BSCE Program Coordinator' ||
+                                      selectedPosition3 !=
+                                          'BSCE Program Coordinator')
+                                    const DropdownMenuItem<String>(
+                                      value: 'BSCE Program Coordinator',
+                                      child: Text('BSCE Program Coordinator'),
+                                    ),
+                                  if (selectedPosition2 !=
+                                          'Department Secretary' ||
+                                      selectedPosition3 !=
+                                          'Department Secretary')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Department Secretary',
+                                      child: Text('Department Secretary'),
+                                    ),
+                                  const DropdownMenuItem<String>(
                                     value: 'Job Placement Officer',
                                     child: Text('Job Placement Officer'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'OJT Coordinator',
                                     child: Text('OJT Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Department Extension Coordinator',
                                     child: Text(
                                         'Department Extension Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Budget Officer/Property Custodian',
                                     child: Text(
                                         'Budget Officer/Property Custodian'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value:
                                         'Department BSCE Research Coordinator',
                                     child: Text(
                                         'Department BSCE Research Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'GAD Coordinator',
                                     child: Text('GAD Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value:
                                         'In-Charge Knowledge Management Unit',
                                     child: Text(
                                         'In-Charge Knowledge Management Unit'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Program Coordinator, BS Archi',
                                     child:
                                         Text('Program Coordinator, BS Archi'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Research Coordinator, BS Archi',
                                     child:
                                         Text('Research Coordinator, BS Archi'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'CE Faculty',
-                                    child: Text('CE Faculty'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'DRAW/CADD Faculty',
-                                    child: Text('DRAW/CADD Faculty'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Archi Faculty',
-                                    child: Text('Archi Faculty'),
                                   ),
                                 ],
                               ),
@@ -419,94 +437,102 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     selectedPosition2 = value;
+                                    if (selectedPosition1 == value ||
+                                        selectedPosition3 == value) {
+                                      selectedPosition2 =
+                                          '-'; // Reset Position 2 if it has the same value as Position 1
+                                      selectedPosition3 = '-';
+                                    }
                                   });
                                 },
-                                items: const [
-                                  DropdownMenuItem<String>(
+                                items: [
+                                  const DropdownMenuItem<String>(
                                     value: '-',
                                     child: Text('-'),
                                   ),
-                                  DropdownMenuItem<String>(
-                                    value: 'University President',
-                                    child: Text('University President'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value:
-                                        'Vice President for Academic Affairs',
-                                    child: Text(
-                                        'Vice President for Academic Affairs'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Dean',
-                                    child: Text('Dean'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Department Chairperson',
-                                    child: Text('Department Chairperson'),
-                                  ),
-                                  DropdownMenuItem<String>(
+                                  if (selectedPosition1 !=
+                                          'University President' ||
+                                      selectedPosition3 !=
+                                          'University President')
+                                    const DropdownMenuItem<String>(
+                                      value: 'University President',
+                                      child: Text('University President'),
+                                    ),
+                                  if (selectedPosition1 !=
+                                          'Vice President for Academic Affairs' ||
+                                      selectedPosition3 !=
+                                          'Vice President for Academic Affairs')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'Vice President for Academic Affairs',
+                                      child: Text(
+                                          'Vice President for Academic Affairs'),
+                                    ),
+                                  if (selectedPosition1 != 'Dean' ||
+                                      selectedPosition3 != 'Dean')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Dean',
+                                      child: Text('Dean'),
+                                    ),
+                                  if (selectedPosition1 !=
+                                          'Department Chairperson' ||
+                                      selectedPosition3 !=
+                                          'Department Chairperson')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Department Chairperson',
+                                      child: Text('Department Chairperson'),
+                                    ),
+                                  const DropdownMenuItem<String>(
                                     value: 'BSCE Program Coordinator',
                                     child: Text('BSCE Program Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Department Secretary',
                                     child: Text('Department Secretary'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Job Placement Officer',
                                     child: Text('Job Placement Officer'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'OJT Coordinator',
                                     child: Text('OJT Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Department Extension Coordinator',
                                     child: Text(
                                         'Department Extension Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Budget Officer/Property Custodian',
                                     child: Text(
                                         'Budget Officer/Property Custodian'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value:
                                         'Department BSCE Research Coordinator',
                                     child: Text(
                                         'Department BSCE Research Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'GAD Coordinator',
                                     child: Text('GAD Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value:
                                         'In-Charge Knowledge Management Unit',
                                     child: Text(
                                         'In-Charge Knowledge Management Unit'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Program Coordinator, BS Archi',
                                     child:
                                         Text('Program Coordinator, BS Archi'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Research Coordinator, BS Archi',
                                     child:
                                         Text('Research Coordinator, BS Archi'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'CE Faculty',
-                                    child: Text('CE Faculty'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'DRAW/CADD Faculty',
-                                    child: Text('DRAW/CADD Faculty'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Archi Faculty',
-                                    child: Text('Archi Faculty'),
                                   ),
                                 ],
                               ),
@@ -548,94 +574,102 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     selectedPosition3 = value;
+                                    if (selectedPosition1 == value ||
+                                        selectedPosition2 == value) {
+                                      selectedPosition1 =
+                                          '-'; // Reset Position 2 if it has the same value as Position 1
+                                      selectedPosition2 = '-';
+                                    }
                                   });
                                 },
-                                items: const [
-                                  DropdownMenuItem<String>(
+                                items: [
+                                  const DropdownMenuItem<String>(
                                     value: '-',
                                     child: Text('-'),
                                   ),
-                                  DropdownMenuItem<String>(
-                                    value: 'University President',
-                                    child: Text('University President'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value:
-                                        'Vice President for Academic Affairs',
-                                    child: Text(
-                                        'Vice President for Academic Affairs'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Dean',
-                                    child: Text('Dean'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Department Chairperson',
-                                    child: Text('Department Chairperson'),
-                                  ),
-                                  DropdownMenuItem<String>(
+                                  if (selectedPosition1 !=
+                                          'University President' ||
+                                      selectedPosition2 !=
+                                          'University President')
+                                    const DropdownMenuItem<String>(
+                                      value: 'University President',
+                                      child: Text('University President'),
+                                    ),
+                                  if (selectedPosition1 !=
+                                          'Vice President for Academic Affairs' ||
+                                      selectedPosition2 !=
+                                          'Vice President for Academic Affairs')
+                                    const DropdownMenuItem<String>(
+                                      value:
+                                          'Vice President for Academic Affairs',
+                                      child: Text(
+                                          'Vice President for Academic Affairs'),
+                                    ),
+                                  if (selectedPosition1 != 'Dean' ||
+                                      selectedPosition2 != 'Dean')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Dean',
+                                      child: Text('Dean'),
+                                    ),
+                                  if (selectedPosition1 !=
+                                          'Department Chairperson' ||
+                                      selectedPosition2 !=
+                                          'Department Chairperson')
+                                    const DropdownMenuItem<String>(
+                                      value: 'Department Chairperson',
+                                      child: Text('Department Chairperson'),
+                                    ),
+                                  const DropdownMenuItem<String>(
                                     value: 'BSCE Program Coordinator',
                                     child: Text('BSCE Program Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Department Secretary',
                                     child: Text('Department Secretary'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Job Placement Officer',
                                     child: Text('Job Placement Officer'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'OJT Coordinator',
                                     child: Text('OJT Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Department Extension Coordinator',
                                     child: Text(
                                         'Department Extension Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Budget Officer/Property Custodian',
                                     child: Text(
                                         'Budget Officer/Property Custodian'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value:
                                         'Department BSCE Research Coordinator',
                                     child: Text(
                                         'Department BSCE Research Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'GAD Coordinator',
                                     child: Text('GAD Coordinator'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value:
                                         'In-Charge Knowledge Management Unit',
                                     child: Text(
                                         'In-Charge Knowledge Management Unit'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Program Coordinator, BS Archi',
                                     child:
                                         Text('Program Coordinator, BS Archi'),
                                   ),
-                                  DropdownMenuItem<String>(
+                                  const DropdownMenuItem<String>(
                                     value: 'Research Coordinator, BS Archi',
                                     child:
                                         Text('Research Coordinator, BS Archi'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'CE Faculty',
-                                    child: Text('CE Faculty'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'DRAW/CADD Faculty',
-                                    child: Text('DRAW/CADD Faculty'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Archi Faculty',
-                                    child: Text('Archi Faculty'),
                                   ),
                                 ],
                               ),
