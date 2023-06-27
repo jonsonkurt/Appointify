@@ -14,8 +14,68 @@ class _OrgChartPage extends State<OrgChartPage> {
   Map<String, List<Map<String, Object>>> schoolOrg = {"nodes": [], "edges": []};
   TransformationController transformationController =
       TransformationController();
+  bool isOrgChartComplete = false;
+  List<String> neededPosition = [];
 
-  // List imagesURL = [];
+  Future<List<String>> checkPositions() async {
+    DatabaseReference databaseReference =
+        FirebaseDatabase.instance.ref().child('organizationChart');
+
+    DatabaseEvent event = await databaseReference.once();
+
+    List<String> positions = [
+      'University President',
+      'Vice President for Academic Affairs',
+      'Dean',
+      'Department Chairperson',
+      'BSCE Program Coordinator',
+      'Department Secretary',
+      'Job Placement Officer',
+      'OJT Coordinator',
+      'Department Extension Coordinator',
+      'Budget Officer/Property Custodian',
+      'Department BSCE Research Coordinator',
+      'GAD Coordinator',
+      'In-Charge Knowledge Management Unit',
+      'Program Coordinator, BS Archi',
+      'Research Coordinator, BS Archi'
+    ];
+
+    Set<String> takenPositions = <String>{};
+
+    if (event.snapshot.value != null) {
+      Map<dynamic, dynamic>? values =
+          event.snapshot.value as Map<dynamic, dynamic>?;
+      values?.forEach((key, value) {
+        Map<String, dynamic> childData = Map<String, dynamic>.from(value);
+        if (childData['position1'] != null) {
+          takenPositions.add(childData['position1']);
+        }
+        if (childData['position2'] != null) {
+          takenPositions.add(childData['position2']);
+        }
+        if (childData['position3'] != null) {
+          takenPositions.add(childData['position3']);
+        }
+      });
+    }
+
+    List<String> availablePositions = positions
+        .where((position) => !takenPositions.contains(position))
+        .toList();
+
+    if (availablePositions.isEmpty) {
+      print('None');
+      isOrgChartComplete = true;
+      return [];
+    } else {
+      print(availablePositions);
+      neededPosition = availablePositions;
+      return availablePositions;
+    }
+  }
+
+  // // List imagesURL = [];
 
   // // nodes
   List<Map<String, Object>> nodes = [];
@@ -24,8 +84,6 @@ class _OrgChartPage extends State<OrgChartPage> {
   Widget build(BuildContext context) {
     DatabaseReference ref =
         FirebaseDatabase.instance.ref().child('organizationChart');
-    int highestRank = 1;
-    int highestRankForSix = 4;
 
     return SafeArea(
       child: WillPopScope(
@@ -101,35 +159,12 @@ class _OrgChartPage extends State<OrgChartPage> {
 
                   // Print the ranks and corresponding IDs and labels
                   for (int rank = 1; rank <= 5; rank++) {
-                    if (groupedData.containsKey(rank) == false) {
-                      if (groupedData.containsKey(rank - 1)) {
-                        highestRank = rank;
-                      }
-                      List<Map<String, dynamic>> rankData1 =
-                          groupedData[highestRank - 1]!;
-                      if (groupedData.containsKey(rank + 1)) {
-                        List<Map<String, dynamic>> rankData2 =
-                            groupedData[rank + 1]!;
-
-                        for (var entry1 in rankData1) {
-                          for (var entry2 in rankData2) {
-                            var newEdges = {
-                              "from": entry1["id"],
-                              "to": entry2["id"]
-                            };
-                            schoolOrg["edges"]!
-                                .add(newEdges.cast<String, Object>());
-                          }
-                        }
-                      }
-                    } else if (groupedData.containsKey(rank) &&
+                    if (groupedData.containsKey(rank) &&
                         groupedData.containsKey(rank + 1)) {
-                      print("ELSE IF $rank");
                       List<Map<String, dynamic>> rankData1 = groupedData[rank]!;
                       List<Map<String, dynamic>> rankData2 =
                           groupedData[rank + 1]!;
-                      // print("RANK DATA 1:  $rankData1");
-                      // print("RANK DATA 2:  $rankData2");
+
                       // List<String> entries = [];
 
                       for (var entry1 in rankData1) {
@@ -153,8 +188,6 @@ class _OrgChartPage extends State<OrgChartPage> {
                               "from": entry1["id"],
                               "to": entry2["id"]
                             };
-                            print(
-                                "ID:${entry1["id"]} ${entry1["rank"]} - ID:${entry2["id"]} ${entry2["rank"]}");
                             schoolOrg["edges"]!
                                 .add(newEdges.cast<String, Object>());
                           }
@@ -177,85 +210,72 @@ class _OrgChartPage extends State<OrgChartPage> {
                     ..subtreeSeparation = (150)
                     ..orientation =
                         (BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM);
-                  // schoolOrg = {"nodes": nodes, "edges": edges};
 
-                  // print(json.runtimeType);
-                  // print(json);
-                  // print(schoolOrg.runtimeType);
-                  // print(schoolOrg);
-                  // var edges = schoolOrg["edges"]!
-                  //     .map((element) => element as Map<String, Object>)
-                  //     .toList();
+                  if (isOrgChartComplete) {
+                    return SafeArea(
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: InteractiveViewer(
+                                  constrained: false,
+                                  transformationController:
+                                      TransformationController(
+                                          transformationController.value =
+                                              Matrix4.identity()
+                                                ..translate(
+                                                    -MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        0.52,
+                                                    0,
+                                                    -100)
+                                                ..scale(0.5)),
+                                  boundaryMargin: const EdgeInsets.all(500),
+                                  minScale: 0.1,
+                                  maxScale: 5.6,
+                                  child: GraphView(
+                                    graph: graph,
+                                    algorithm: BuchheimWalkerAlgorithm(
+                                        builder, TreeEdgeRenderer(builder)),
+                                    paint: Paint()
+                                      ..color = Colors.black
+                                      ..strokeWidth = 2
+                                      ..style = PaintingStyle.stroke,
+                                    builder: (Node node) {
+                                      // I can decide what widget should be shown here based on the id
+                                      var a = node.key!.value as int?;
+                                      List<Map<String, dynamic>> nodes =
+                                          schoolOrg['nodes']!;
 
-                  // for (var element in edges) {
-                  //   var fromNodeId = element["from"];
-                  //   var toNodeId = element["to"];
-                  //   print("1::: ${fromNodeId}");
-                  //   print("2::: ${toNodeId}");
-                  // }
+                                      var nodeValue = nodes.firstWhere(
+                                          (element) => element["id"] == a);
+                                      // int index = a! - 1;
 
-                  // return Card();
-
-                  return SafeArea(
-                    child: Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: InteractiveViewer(
-                                constrained: false,
-                                transformationController:
-                                    TransformationController(
-                                        transformationController.value =
-                                            Matrix4.identity()
-                                              ..translate(
-                                                  -MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      0.52,
-                                                  0,
-                                                  -100)
-                                              ..scale(0.5)),
-                                boundaryMargin: const EdgeInsets.all(500),
-                                minScale: 0.1,
-                                maxScale: 5.6,
-                                child: GraphView(
-                                  graph: graph,
-                                  algorithm: BuchheimWalkerAlgorithm(
-                                      builder, TreeEdgeRenderer(builder)),
-                                  paint: Paint()
-                                    ..color = Colors.black
-                                    ..strokeWidth = 2
-                                    ..style = PaintingStyle.stroke,
-                                  builder: (Node node) {
-                                    // I can decide what widget should be shown here based on the id
-                                    var a = node.key!.value as int?;
-                                    List<Map<String, dynamic>> nodes =
-                                        schoolOrg['nodes']!;
-
-                                    var nodeValue = nodes.firstWhere(
-                                        (element) => element["id"] == a);
-                                    // int index = a! - 1;
-
-                                    // print(imagesURL[index]);
-                                    return rectangleWidget(
-                                      nodeValue["label"] as String?,
-                                      nodeValue["position1"] as String?,
-                                      nodeValue["position2"] as String?,
-                                      nodeValue["position3"] as String?,
-                                      nodeValue["faculty"] as String?,
-                                      nodeValue["imageURL"] as String?,
-                                      nodeValue["id"].toString(),
-                                    );
-                                  },
-                                )),
-                          ),
-                        ],
+                                      // print(imagesURL[index]);
+                                      return rectangleWidget(
+                                        nodeValue["label"] as String?,
+                                        nodeValue["position1"] as String?,
+                                        nodeValue["position2"] as String?,
+                                        nodeValue["position3"] as String?,
+                                        nodeValue["faculty"] as String?,
+                                        nodeValue["imageURL"] as String?,
+                                        nodeValue["id"].toString(),
+                                      );
+                                    },
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  }
                 }
-                return const Text("hello");
+                return const Center(
+                  child: Text(
+                      "Waiting for admin to complete the organizational chart"),
+                );
               },
             )),
       ),
@@ -392,14 +412,6 @@ class _OrgChartPage extends State<OrgChartPage> {
                               color: Colors.black,
                               decoration: TextDecoration.none),
                         ),
-                      // Text(
-                      //   '$position1\n$position2\n$position3\n$faculty',
-                      //   style: const TextStyle(
-                      //       fontFamily: 'GothamRnd',
-                      //       fontSize: 15,
-                      //       color: Colors.black,
-                      //       decoration: TextDecoration.none),
-                      // ),
                     ],
                   ),
                 ),
@@ -407,29 +419,6 @@ class _OrgChartPage extends State<OrgChartPage> {
             ],
           ),
         ),
-        // Column(
-        //   children: [
-        //     Container(
-        //         padding: const EdgeInsets.all(16),
-        //         decoration: BoxDecoration(
-        //           borderRadius: BorderRadius.circular(4),
-        //           boxShadow: [
-        //             BoxShadow(color: Colors.blue[100]!, spreadRadius: 2),
-        //           ],
-        //         ),
-        //         child: SizedBox(
-        //           child: Column(
-        //             children: [
-        //               Container(
-        //                 color: const Color(0xFF274C77),
-        //               ),
-        //               Text(
-        //                   '${a}\n${position1}\n${position2}\n$position3\n$faculty'),
-        //             ],
-        //           ),
-        //         )),
-        //   ],
-        // ),
       ],
     );
   }
@@ -439,20 +428,7 @@ class _OrgChartPage extends State<OrgChartPage> {
 
   @override
   void initState() {
+    checkPositions();
     super.initState();
-    // var edges = schoolOrg["edges"]!;
-
-    // for (var element in edges) {
-    //   var fromNodeId = element["from"];
-    //   var toNodeId = element["to"];
-
-    //   graph.addEdge(Node.Id(fromNodeId), Node.Id(toNodeId));
-    // }
-
-    // builder
-    //   ..siblingSeparation = (100)
-    //   ..levelSeparation = (150)
-    //   ..subtreeSeparation = (150)
-    //   ..orientation = (BuchheimWalkerConfiguration.ORIENTATION_LEFT_RIGHT);
   }
 }

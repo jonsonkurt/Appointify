@@ -614,146 +614,192 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                     value: '-',
                                     child: Text('-'),
                                   ),
-
-                                  if (selectedPosition1 !=
+                                  //
+                                  if (selectedPosition2 !=
                                           'University President' ||
                                       selectedPosition3 !=
                                           'University President')
-                                    const DropdownMenuItem<String>(
-                                      value: 'University President',
-                                      child: Text('University President'),
-                                    ),
+                                    if (widget.neededPosition
+                                            .contains("University President") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'University President',
+                                        child: Text('University President'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Vice President for Academic Affairs' ||
                                       selectedPosition3 !=
                                           'Vice President for Academic Affairs')
-                                    const DropdownMenuItem<String>(
-                                      value:
-                                          'Vice President for Academic Affairs',
-                                      child: Text(
-                                          'Vice President for Academic Affairs'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Vice President for Academic Affairs") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'Vice President for Academic Affairs',
+                                        child: Text(
+                                            'Vice President for Academic Affairs'),
+                                      ),
                                   //
-                                  if (selectedPosition1 != 'Dean' ||
+                                  if (selectedPosition2 != 'Dean' ||
                                       selectedPosition3 != 'Dean')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Dean',
-                                      child: Text('Dean'),
-                                    ),
+                                    if (widget.neededPosition
+                                            .contains("Dean") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Dean',
+                                        child: Text('Dean'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Department Chairperson' ||
                                       selectedPosition3 !=
                                           'Department Chairperson')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Department Chairperson',
-                                      child: Text('Department Chairperson'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Department Chairperson") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Department Chairperson',
+                                        child: Text('Department Chairperson'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'BSCE Program Coordinator' ||
                                       selectedPosition3 !=
                                           'BSCE Program Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value: 'BSCE Program Coordinator',
-                                      child: Text('BSCE Program Coordinator'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "BSCE Program Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'BSCE Program Coordinator',
+                                        child: Text('BSCE Program Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Department Secretary' ||
                                       selectedPosition3 !=
                                           'Department Secretary')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Department Secretary',
-                                      child: Text('Department Secretary'),
-                                    ),
+                                    if (widget.neededPosition
+                                            .contains("Department Secretary") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Department Secretary',
+                                        child: Text('Department Secretary'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Job Placement Officer' ||
                                       selectedPosition3 !=
                                           'Job Placement Officer')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Job Placement Officer',
-                                      child: Text('Job Placement Officer'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Job Placement Officer") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Job Placement Officer',
+                                        child: Text('Job Placement Officer'),
+                                      ),
                                   //
-                                  if (selectedPosition1 != 'OJT Coordinator' ||
+                                  if (selectedPosition2 != 'OJT Coordinator' ||
                                       selectedPosition3 != 'OJT Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value: 'OJT Coordinator',
-                                      child: Text('OJT Coordinator'),
-                                    ),
+                                    if (widget.neededPosition
+                                            .contains("OJT Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'OJT Coordinator',
+                                        child: Text('OJT Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Department Extension Coordinator' ||
                                       selectedPosition3 !=
                                           'Department Extension Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Department Extension Coordinator',
-                                      child: Text(
-                                          'Department Extension Coordinator'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Department Extension Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'Department Extension Coordinator',
+                                        child: Text(
+                                            'Department Extension Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Budget Officer/Property Custodian' ||
                                       selectedPosition3 !=
                                           'Budget Officer/Property Custodian')
-                                    const DropdownMenuItem<String>(
-                                      value:
-                                          'Budget Officer/Property Custodian',
-                                      child: Text(
-                                          'Budget Officer/Property Custodian'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Budget Officer/Property Custodian") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'Budget Officer/Property Custodian',
+                                        child: Text(
+                                            'Budget Officer/Property Custodian'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Department BSCE Research Coordinator' ||
                                       selectedPosition3 !=
                                           'Department BSCE Research Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value:
-                                          'Department BSCE Research Coordinator',
-                                      child: Text(
-                                          'Department BSCE Research Coordinator'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Department BSCE Research Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'Department BSCE Research Coordinator',
+                                        child: Text(
+                                            'Department BSCE Research Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 != 'GAD Coordinator' ||
+                                  if (selectedPosition2 != 'GAD Coordinator' ||
                                       selectedPosition3 != 'GAD Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value: 'GAD Coordinator',
-                                      child: Text('GAD Coordinator'),
-                                    ),
+                                    if (widget.neededPosition
+                                            .contains("GAD Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'GAD Coordinator',
+                                        child: Text('GAD Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'In-Charge Knowledge Management Unit' ||
                                       selectedPosition3 !=
                                           'In-Charge Knowledge Management Unit')
-                                    const DropdownMenuItem<String>(
-                                      value:
-                                          'In-Charge Knowledge Management Unit',
-                                      child: Text(
-                                          'In-Charge Knowledge Management Unit'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "In-Charge Knowledge Management Unit") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'In-Charge Knowledge Management Unit',
+                                        child: Text(
+                                            'In-Charge Knowledge Management Unit'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Program Coordinator, BS Archi' ||
                                       selectedPosition3 !=
                                           'Program Coordinator, BS Archi')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Program Coordinator, BS Archi',
-                                      child:
-                                          Text('Program Coordinator, BS Archi'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Program Coordinator, BS Archi") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Program Coordinator, BS Archi',
+                                        child: Text(
+                                            'Program Coordinator, BS Archi'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Research Coordinator, BS Archi' ||
                                       selectedPosition3 !=
                                           'Research Coordinator, BS Archi')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Research Coordinator, BS Archi',
-                                      child: Text(
-                                          'Research Coordinator, BS Archi'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Research Coordinator, BS Archi") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Research Coordinator, BS Archi',
+                                        child: Text(
+                                            'Research Coordinator, BS Archi'),
+                                      ),
                                 ],
                               ),
                             ),
@@ -809,145 +855,191 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                                     child: Text('-'),
                                   ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'University President' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'University President')
-                                    const DropdownMenuItem<String>(
-                                      value: 'University President',
-                                      child: Text('University President'),
-                                    ),
+                                    if (widget.neededPosition
+                                            .contains("University President") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'University President',
+                                        child: Text('University President'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Vice President for Academic Affairs' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'Vice President for Academic Affairs')
-                                    const DropdownMenuItem<String>(
-                                      value:
-                                          'Vice President for Academic Affairs',
-                                      child: Text(
-                                          'Vice President for Academic Affairs'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Vice President for Academic Affairs") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'Vice President for Academic Affairs',
+                                        child: Text(
+                                            'Vice President for Academic Affairs'),
+                                      ),
                                   //
-                                  if (selectedPosition1 != 'Dean' ||
-                                      selectedPosition2 != 'Dean')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Dean',
-                                      child: Text('Dean'),
-                                    ),
+                                  if (selectedPosition2 != 'Dean' ||
+                                      selectedPosition3 != 'Dean')
+                                    if (widget.neededPosition
+                                            .contains("Dean") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Dean',
+                                        child: Text('Dean'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Department Chairperson' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'Department Chairperson')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Department Chairperson',
-                                      child: Text('Department Chairperson'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Department Chairperson") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Department Chairperson',
+                                        child: Text('Department Chairperson'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'BSCE Program Coordinator' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'BSCE Program Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value: 'BSCE Program Coordinator',
-                                      child: Text('BSCE Program Coordinator'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "BSCE Program Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'BSCE Program Coordinator',
+                                        child: Text('BSCE Program Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Department Secretary' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'Department Secretary')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Department Secretary',
-                                      child: Text('Department Secretary'),
-                                    ),
+                                    if (widget.neededPosition
+                                            .contains("Department Secretary") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Department Secretary',
+                                        child: Text('Department Secretary'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Job Placement Officer' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'Job Placement Officer')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Job Placement Officer',
-                                      child: Text('Job Placement Officer'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Job Placement Officer") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Job Placement Officer',
+                                        child: Text('Job Placement Officer'),
+                                      ),
                                   //
-                                  if (selectedPosition1 != 'OJT Coordinator' ||
-                                      selectedPosition2 != 'OJT Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value: 'OJT Coordinator',
-                                      child: Text('OJT Coordinator'),
-                                    ),
+                                  if (selectedPosition2 != 'OJT Coordinator' ||
+                                      selectedPosition3 != 'OJT Coordinator')
+                                    if (widget.neededPosition
+                                            .contains("OJT Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'OJT Coordinator',
+                                        child: Text('OJT Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Department Extension Coordinator' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'Department Extension Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Department Extension Coordinator',
-                                      child: Text(
-                                          'Department Extension Coordinator'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Department Extension Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'Department Extension Coordinator',
+                                        child: Text(
+                                            'Department Extension Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Budget Officer/Property Custodian' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'Budget Officer/Property Custodian')
-                                    const DropdownMenuItem<String>(
-                                      value:
-                                          'Budget Officer/Property Custodian',
-                                      child: Text(
-                                          'Budget Officer/Property Custodian'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Budget Officer/Property Custodian") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'Budget Officer/Property Custodian',
+                                        child: Text(
+                                            'Budget Officer/Property Custodian'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Department BSCE Research Coordinator' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'Department BSCE Research Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value:
-                                          'Department BSCE Research Coordinator',
-                                      child: Text(
-                                          'Department BSCE Research Coordinator'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Department BSCE Research Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'Department BSCE Research Coordinator',
+                                        child: Text(
+                                            'Department BSCE Research Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 != 'GAD Coordinator' ||
-                                      selectedPosition2 != 'GAD Coordinator')
-                                    const DropdownMenuItem<String>(
-                                      value: 'GAD Coordinator',
-                                      child: Text('GAD Coordinator'),
-                                    ),
+                                  if (selectedPosition2 != 'GAD Coordinator' ||
+                                      selectedPosition3 != 'GAD Coordinator')
+                                    if (widget.neededPosition
+                                            .contains("GAD Coordinator") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'GAD Coordinator',
+                                        child: Text('GAD Coordinator'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'In-Charge Knowledge Management Unit' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'In-Charge Knowledge Management Unit')
-                                    const DropdownMenuItem<String>(
-                                      value:
-                                          'In-Charge Knowledge Management Unit',
-                                      child: Text(
-                                          'In-Charge Knowledge Management Unit'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "In-Charge Knowledge Management Unit") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value:
+                                            'In-Charge Knowledge Management Unit',
+                                        child: Text(
+                                            'In-Charge Knowledge Management Unit'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Program Coordinator, BS Archi' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'Program Coordinator, BS Archi')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Program Coordinator, BS Archi',
-                                      child:
-                                          Text('Program Coordinator, BS Archi'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Program Coordinator, BS Archi") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Program Coordinator, BS Archi',
+                                        child: Text(
+                                            'Program Coordinator, BS Archi'),
+                                      ),
                                   //
-                                  if (selectedPosition1 !=
+                                  if (selectedPosition2 !=
                                           'Research Coordinator, BS Archi' ||
-                                      selectedPosition2 !=
+                                      selectedPosition3 !=
                                           'Research Coordinator, BS Archi')
-                                    const DropdownMenuItem<String>(
-                                      value: 'Research Coordinator, BS Archi',
-                                      child: Text(
-                                          'Research Coordinator, BS Archi'),
-                                    ),
+                                    if (widget.neededPosition.contains(
+                                            "Research Coordinator, BS Archi") ==
+                                        true)
+                                      const DropdownMenuItem<String>(
+                                        value: 'Research Coordinator, BS Archi',
+                                        child: Text(
+                                            'Research Coordinator, BS Archi'),
+                                      ),
                                 ],
                               ),
                             ),
