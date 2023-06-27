@@ -228,7 +228,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                                                     -MediaQuery.of(context)
                                                             .size
                                                             .width /
-                                                        0.52,
+                                                        0.28,
                                                     0,
                                                     -100)
                                                 ..scale(0.5)),
