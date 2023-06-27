@@ -56,7 +56,7 @@ class _AdminViewMembers extends State<AdminViewMembers> {
           ),
           leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, true);
               },
               icon: const Icon(Icons.arrow_back_rounded)),
         ),
