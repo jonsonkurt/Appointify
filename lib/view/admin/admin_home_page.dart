@@ -18,11 +18,6 @@ class HomePageAdmin extends StatefulWidget {
 
 class _HomePageStateAdmin extends State<HomePageAdmin> {
   var logger = Logger();
-  // String realTimeValue = "";
-  // String? userID = FirebaseAuth.instance.currentUser?.uid;
-  // bool isLoading = true;
-  // String name = '';
-  // StreamSubscription<DatabaseEvent>? nameSubscription;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -65,8 +60,8 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
   Widget build(BuildContext context) {
     DatabaseReference professorRef =
         FirebaseDatabase.instance.ref('professors/');
-    DatabaseReference appointments =
-        FirebaseDatabase.instance.ref('appoinments');
+    // DatabaseReference appointments =
+    //     FirebaseDatabase.instance.ref('appoinments');
 
     return WillPopScope(
       onWillPop: () async {
@@ -292,7 +287,7 @@ class _HomePageStateAdmin extends State<HomePageAdmin> {
                                                       }
                                                     }).catchError((error) {
                                                       // Handle any errors during the data retrieval
-                                                      print('Error: $error');
+                                                      logger.d('Error: $error');
                                                     });
 
                                                     await professorRef
