@@ -21,6 +21,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
   String valPos2 = '-';
   String valPos3 = '-';
   int? index;
+  List<String> neededPosition = [];
 
   StreamSubscription<DatabaseEvent>? orgChartSubscription;
 
@@ -36,6 +37,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
 
   @override
   void initState() {
+    checkPositions();
     selectedPosition1 = "-";
     selectedFaculty = "-";
     selectedPosition2 = "-";
@@ -47,6 +49,61 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
   void dispose() {
     orgChartSubscription?.cancel();
     super.dispose();
+  }
+
+  Future<List<String>> checkPositions() async {
+    DatabaseReference databaseReference =
+        FirebaseDatabase.instance.ref().child('organizationChart');
+
+    DatabaseEvent event = await databaseReference.once();
+
+    List<String> positions = [
+      'University President',
+      'Vice President for Academic Affairs',
+      'Dean',
+      'Department Chairperson',
+      'BSCE Program Coordinator',
+      'Department Secretary',
+      'Job Placement Officer',
+      'OJT Coordinator',
+      'Department Extension Coordinator',
+      'Budget Officer/Property Custodian',
+      'Department BSCE Research Coordinator',
+      'GAD Coordinator',
+      'In-Charge Knowledge Management Unit',
+      'Program Coordinator, BS Archi',
+      'Research Coordinator, BS Archi'
+    ];
+
+    Set<String> takenPositions = <String>{};
+
+    if (event.snapshot.value != null) {
+      Map<dynamic, dynamic>? values =
+          event.snapshot.value as Map<dynamic, dynamic>?;
+      values?.forEach((key, value) {
+        Map<String, dynamic> childData = Map<String, dynamic>.from(value);
+        if (childData['position1'] != null) {
+          takenPositions.add(childData['position1']);
+        }
+        if (childData['position2'] != null) {
+          takenPositions.add(childData['position2']);
+        }
+        if (childData['position3'] != null) {
+          takenPositions.add(childData['position3']);
+        }
+      });
+    }
+
+    List<String> availablePositions = positions
+        .where((position) => !takenPositions.contains(position))
+        .toList();
+
+    if (availablePositions.isEmpty) {
+      return [];
+    } else {
+      neededPosition = availablePositions;
+      return availablePositions;
+    }
   }
 
   String getPositionRank(String position) {
@@ -64,7 +121,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
       case 'Job Placement Officer':
       case 'OJT Coordinator':
       case 'Department Extension Coordinator':
-      case 'Budget Officer/ Property Custodian':
+      case 'Budget Officer/Property Custodian':
       case 'Department BSCE Research Coordinator':
       case 'GAD Coordinator':
       case 'In-Charge Knowledge Management Unit':
