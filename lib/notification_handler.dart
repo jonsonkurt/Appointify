@@ -57,7 +57,7 @@ Future<void> initFcm(context) async {
   });
 
   var initializationSettingsAndroid =
-      const AndroidInitializationSettings('@mipmap/ic_notif');
+      const AndroidInitializationSettings('@drawable/ic_notif');
   var initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid,
   );
