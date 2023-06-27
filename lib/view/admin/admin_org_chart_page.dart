@@ -121,7 +121,9 @@ class _OrgChartPage extends State<OrgChartPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AddOrgChartPage(),
+                            builder: (context) => AddOrgChartPage(
+                              neededPosition: neededPosition,
+                            ),
                           ),
                         );
                       }
@@ -356,7 +358,9 @@ class _OrgChartPage extends State<OrgChartPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AddOrgChartPage(),
+                            builder: (context) => AddOrgChartPage(
+                              neededPosition: neededPosition,
+                            ),
                           ),
                         );
                       },
