@@ -115,7 +115,7 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                             left: MediaQuery.of(context).size.width / 20,
                             right: MediaQuery.of(context).size.width / 20,
                           ),
-                          color: const Color(0xFFDCDAD8),
+                          color: Colors.white,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [

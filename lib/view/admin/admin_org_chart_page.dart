@@ -391,23 +391,61 @@ class _OrgChartPage extends State<OrgChartPage> {
                 }
                 return Column(
                   children: [
-                    const Text("Please complete the Organization Chart"),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 60),
+                      child: Text(
+                        "Complete the Organization Chart",
+                        style: TextStyle(
+                            fontFamily: "GothamRnd",
+                            fontSize: MediaQuery.of(context).size.width / 20),
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height / 50),
                     Expanded(
                       child: ListView.builder(
                         itemCount: neededPosition.length,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(neededPosition[index]),
+                          return Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 30,
+                                right: MediaQuery.of(context).size.width / 30),
+                            child: Card(
+                              elevation: 5,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  neededPosition[index],
+                                  style: TextStyle(
+                                      fontFamily: "GothamRnd",
+                                      fontSize:
+                                          MediaQuery.of(context).size.width /
+                                              25),
+                                ),
+                              ),
+                            ),
                           );
                         },
                       ),
                     ),
                     ElevatedButton(
+                      style: const ButtonStyle(
+                          elevation: MaterialStatePropertyAll(5),
+                          backgroundColor:
+                              MaterialStatePropertyAll(Color(0xFF6096BA))),
                       onPressed: () {
                         navigateToSecondScreen();
                       },
-                      child: const Text('Add a Member'),
+                      child: const Text(
+                        'Add a Member',
+                        style: TextStyle(
+                            fontFamily: "GothamRnd",
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 70,
+                    )
                   ],
                 );
               },
