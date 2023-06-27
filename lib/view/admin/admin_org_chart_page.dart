@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -19,11 +21,69 @@ class _OrgChartPage extends State<OrgChartPage> {
   bool isOrgChartComplete = false;
   List<String> neededPosition = [];
 
+  @override
+  void initState() {
+    checkPositions();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  Future<void> viewMembers() async {
+    // Navigate to the second screen and wait for a result
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AdminViewMembers(),
+      ),
+    );
+
+    // Check if the result is true, indicating that a refresh is needed
+    if (result == true) {
+      // Trigger the refresh action
+      refreshList1();
+    }
+  }
+
+  void refreshList1() {
+    setState(() {
+      // Generate new items or update the existing ones
+      checkPositions();
+    });
+  }
+
+  Future<void> navigateToSecondScreen() async {
+    // Navigate to the second screen and wait for a result
+    final result1 = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddOrgChartPage(
+          neededPosition: neededPosition,
+        ),
+      ),
+    );
+
+    // Check if the result is true, indicating that a refresh is needed
+    if (result1 == true) {
+      // Trigger the refresh action
+      refreshList();
+    }
+  }
+
+  void refreshList() {
+    setState(() {
+      // Generate new items or update the existing ones
+      checkPositions();
+    });
+  }
+
   Future<List<String>> checkPositions() async {
     DatabaseReference databaseReference =
         FirebaseDatabase.instance.ref().child('organizationChart');
-
-    DatabaseEvent event = await databaseReference.once();
 
     List<String> positions = [
       'University President',
@@ -45,23 +105,27 @@ class _OrgChartPage extends State<OrgChartPage> {
 
     Set<String> takenPositions = <String>{};
 
-    if (event.snapshot.value != null) {
-      Map<dynamic, dynamic>? values =
-          event.snapshot.value as Map<dynamic, dynamic>?;
-      values?.forEach((key, value) {
-        Map<String, dynamic> childData = Map<String, dynamic>.from(value);
-        if (childData['position1'] != null) {
-          takenPositions.add(childData['position1']);
-        }
-        if (childData['position2'] != null) {
-          takenPositions.add(childData['position2']);
-        }
-        if (childData['position3'] != null) {
-          takenPositions.add(childData['position3']);
-        }
-      });
-    }
+    await databaseReference.onValue.first.then((event) {
+      if (event.snapshot.value != null) {
+        Map<dynamic, dynamic>? values =
+            event.snapshot.value as Map<dynamic, dynamic>?;
+        values?.forEach((key, value) {
+          Map<String, dynamic> childData = Map<String, dynamic>.from(value);
+          if (childData['position1'] != null) {
+            print(childData['position1']);
+            takenPositions.add(childData['position1'].toString());
+          }
+          if (childData['position2'] != null) {
+            takenPositions.add(childData['position2'].toString());
+          }
+          if (childData['position3'] != null) {
+            takenPositions.add(childData['position3'].toString());
+          }
+        });
+      }
+    });
 
+    print(takenPositions);
     List<String> availablePositions = positions
         .where((position) => !takenPositions.contains(position))
         .toList();
@@ -77,9 +141,6 @@ class _OrgChartPage extends State<OrgChartPage> {
     }
   }
 
-  // // List imagesURL = [];
-
-  // // nodes
   List<Map<String, Object>> nodes = [];
 
   @override
@@ -111,21 +172,9 @@ class _OrgChartPage extends State<OrgChartPage> {
                     onSelected: (value) {
                       // Handle menu item selection here
                       if (value == 'option1') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AdminViewMembers(),
-                          ),
-                        );
+                        viewMembers();
                       } else if (value == 'option2') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddOrgChartPage(
-                              neededPosition: neededPosition,
-                            ),
-                          ),
-                        );
+                        navigateToSecondScreen();
                       }
                     },
                     itemBuilder: (BuildContext context) {
@@ -355,14 +404,7 @@ class _OrgChartPage extends State<OrgChartPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddOrgChartPage(
-                              neededPosition: neededPosition,
-                            ),
-                          ),
-                        );
+                        navigateToSecondScreen();
                       },
                       child: const Text('Add a Member'),
                     ),
@@ -517,10 +559,4 @@ class _OrgChartPage extends State<OrgChartPage> {
 
   final Graph graph = Graph()..isTree = true;
   BuchheimWalkerConfiguration builder = BuchheimWalkerConfiguration();
-
-  @override
-  void initState() {
-    checkPositions();
-    super.initState();
-  }
 }
