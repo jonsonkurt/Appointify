@@ -112,7 +112,7 @@ class _OrgChartPage extends State<OrgChartPage> {
         values?.forEach((key, value) {
           Map<String, dynamic> childData = Map<String, dynamic>.from(value);
           if (childData['position1'] != null) {
-            print(childData['position1']);
+            // print(childData['position1']);
             takenPositions.add(childData['position1'].toString());
           }
           if (childData['position2'] != null) {
@@ -125,17 +125,17 @@ class _OrgChartPage extends State<OrgChartPage> {
       }
     });
 
-    print(takenPositions);
+    // print(takenPositions);
     List<String> availablePositions = positions
         .where((position) => !takenPositions.contains(position))
         .toList();
 
     if (availablePositions.isEmpty) {
-      print('None');
+      // print('None');
       isOrgChartComplete = true;
       return [];
     } else {
-      print(availablePositions);
+      // print(availablePositions);
       neededPosition = availablePositions;
       return availablePositions;
     }

@@ -65,11 +65,11 @@ class _OrgChartPage extends State<OrgChartPage> {
         .toList();
 
     if (availablePositions.isEmpty) {
-      print('None');
+      // print('None');
       isOrgChartComplete = true;
       return [];
     } else {
-      print(availablePositions);
+      // print(availablePositions);
       neededPosition = availablePositions;
       return availablePositions;
     }
