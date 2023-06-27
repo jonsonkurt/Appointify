@@ -339,9 +339,6 @@ class _EditProfessorProfileState extends State<EditProfessorProfile> {
                                 )
                               ]),
                         ),
-                        // const SizedBox(
-                        //   height: 50,
-                        // ),
                         const Padding(
                           padding: EdgeInsets.only(
                             left: 20,
