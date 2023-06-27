@@ -6,6 +6,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'admin_org_chart_page.dart';
 
 class AddOrgChartPage extends StatefulWidget {
   List<String> neededPosition;
@@ -163,20 +164,20 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
       'position2': pos2,
       'position3': pos3,
       'rank': highestRank,
-      'imageURL': "",
+      'imageURL': getLink,
     });
-    if (getLink != "") {
-      await FirebaseDatabase.instance.ref('organizationChart/$index').update({
-        'imageURL': getLink,
-      });
-    }
+    // if (getLink != "") {
+    //   await FirebaseDatabase.instance.ref('organizationChart/$index').update({
+    //     'imageURL': getLink,
+    //   });
+    // }
 
     setState(() {
       nameController.clear();
-      selectedPosition1 = null;
-      selectedFaculty = null;
-      selectedPosition2 = null;
-      selectedPosition3 = null;
+      selectedPosition1 = "-";
+      selectedFaculty = "-";
+      selectedPosition2 = "-";
+      selectedPosition3 = "-";
     });
   }
 
@@ -231,7 +232,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
               ),
               leading: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context, true);
                   },
                   icon: const Icon(Icons.arrow_back_rounded)),
             ),
@@ -1114,6 +1115,7 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
                 await provider.updloadImage(index);
                 getLink = provider.imgURL;
                 _onDone();
+                Navigator.pop(context, true);
               },
               child: const Icon(Icons.done),
             ),
