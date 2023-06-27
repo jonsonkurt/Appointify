@@ -609,6 +609,9 @@ class _HomePageState extends State<HomePage> {
                                           .child('professorName')
                                           .value
                                           .toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.fade,
+                                      softWrap: false,
                                       style: const TextStyle(
                                         color: Color(0xFF6096BA),
                                         fontWeight: FontWeight.bold,
