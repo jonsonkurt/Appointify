@@ -26,8 +26,6 @@ class ProfileController with ChangeNotifier {
     if (pickedFile != null) {
       _image = XFile(pickedFile.path);
       notifyListeners();
-      // ignore: use_build_context_synchronously
-      // updloadImage(context);
     }
   }
 
@@ -38,8 +36,6 @@ class ProfileController with ChangeNotifier {
     if (pickedFile != null) {
       _image = XFile(pickedFile.path);
       notifyListeners();
-      // ignore: use_build_context_synchronously
-      // updloadImage(context);
     }
   }
 

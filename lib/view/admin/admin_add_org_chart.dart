@@ -38,8 +38,6 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
 
   @override
   void initState() {
-    // checkPositions();
-
     selectedPosition1 = "-";
     selectedFaculty = "-";
     selectedPosition2 = "-";
@@ -52,61 +50,6 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
     orgChartSubscription?.cancel();
     super.dispose();
   }
-
-  // Future<List<String>> checkPositions() async {
-  //   DatabaseReference databaseReference =
-  //       FirebaseDatabase.instance.ref().child('organizationChart');
-
-  //   DatabaseEvent event = await databaseReference.once();
-
-  //   List<String> positions = [
-  //     'University President',
-  //     'Vice President for Academic Affairs',
-  //     'Dean',
-  //     'Department Chairperson',
-  //     'BSCE Program Coordinator',
-  //     'Department Secretary',
-  //     'Job Placement Officer',
-  //     'OJT Coordinator',
-  //     'Department Extension Coordinator',
-  //     'Budget Officer/Property Custodian',
-  //     'Department BSCE Research Coordinator',
-  //     'GAD Coordinator',
-  //     'In-Charge Knowledge Management Unit',
-  //     'Program Coordinator, BS Archi',
-  //     'Research Coordinator, BS Archi'
-  //   ];
-
-  //   Set<String> takenPositions = <String>{};
-
-  //   if (event.snapshot.value != null) {
-  //     Map<dynamic, dynamic>? values =
-  //         event.snapshot.value as Map<dynamic, dynamic>?;
-  //     values?.forEach((key, value) {
-  //       Map<String, dynamic> childData = Map<String, dynamic>.from(value);
-  //       if (childData['position1'] != null) {
-  //         takenPositions.add(childData['position1']);
-  //       }
-  //       if (childData['position2'] != null) {
-  //         takenPositions.add(childData['position2']);
-  //       }
-  //       if (childData['position3'] != null) {
-  //         takenPositions.add(childData['position3']);
-  //       }
-  //     });
-  //   }
-
-  //   List<String> availablePositions = positions
-  //       .where((position) => !takenPositions.contains(position))
-  //       .toList();
-
-  //   if (availablePositions.isEmpty) {
-  //     return [];
-  //   } else {
-  //     widget.neededPosition = availablePositions;
-  //     return availablePositions;
-  //   }
-  // }
 
   String getPositionRank(String position) {
     switch (position) {
@@ -166,11 +109,6 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
       'rank': highestRank,
       'imageURL': getLink,
     });
-    // if (getLink != "") {
-    //   await FirebaseDatabase.instance.ref('organizationChart/$index').update({
-    //     'imageURL': getLink,
-    //   });
-    // }
 
     setState(() {
       nameController.clear();
@@ -188,7 +126,6 @@ class _AddOrgChartPageState extends State<AddOrgChartPage> {
 
   @override
   Widget build(BuildContext context) {
-    // print("NEEDED POSITION $widget.neededPosition");
     orgChartSubscription = orgChartRef.onValue.listen((event) {
       try {
         DataSnapshot snapshot = event.snapshot;

@@ -1,13 +1,9 @@
-// import 'dart:async';
 import 'dart:io';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:logger/logger.dart';
 import 'package:appointify/view/student/profile_controller.dart';
-// import 'admin_edit_members.dart';
 
 class AdminViewMembers extends StatefulWidget {
   const AdminViewMembers({Key? key}) : super(key: key);
@@ -18,11 +14,6 @@ class AdminViewMembers extends StatefulWidget {
 
 class _AdminViewMembers extends State<AdminViewMembers> {
   var logger = Logger();
-  // String realTimeValue = "";
-  // String? userID = FirebaseAuth.instance.currentUser?.uid;
-  // bool isLoading = true;
-  // String name = '';
-  // StreamSubscription<DatabaseEvent>? nameSubscription;
 
   String name = '';
 
@@ -278,50 +269,6 @@ class _AdminViewMembers extends State<AdminViewMembers> {
                                       const SizedBox(height: 10.0),
                                       Row(
                                         children: [
-                                          // ElevatedButton(
-                                          //   style: ElevatedButton.styleFrom(
-                                          //     fixedSize: const Size(100, 20),
-                                          //     backgroundColor:
-                                          //         const Color(0xFF274C77),
-                                          //     shape: RoundedRectangleBorder(
-                                          //       borderRadius:
-                                          //           BorderRadius.circular(
-                                          //               10), // Adjust the radius as needed
-                                          //     ),
-                                          //   ),
-                                          //   onPressed: () {
-                                          //     Navigator.push(
-                                          //         context,
-                                          //         MaterialPageRoute(
-                                          //             builder: (context) =>
-                                          //                 EditOrgChartPage(
-                                          //                     empName: name1,
-                                          //                     empPos1:
-                                          //                         position1,
-                                          //                     empPos2:
-                                          //                         position2,
-                                          //                     empPos3:
-                                          //                         position3,
-                                          //                     empFaculty:
-                                          //                         faculty,
-                                          //                     empID: id)));
-                                          //   },
-                                          //   child: const Text(
-                                          //     'Edit',
-                                          //     style: TextStyle(
-                                          //       fontFamily: "GothamRnd",
-                                          //       color: Colors.white,
-                                          //       fontSize: 15,
-                                          //     ),
-                                          //   ),
-                                          // ),
-                                          // SizedBox(
-                                          //   width: MediaQuery.of(context)
-                                          //           .size
-                                          //           .width /
-                                          //       25,
-                                          // ),
-
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               fixedSize: const Size(100, 20),

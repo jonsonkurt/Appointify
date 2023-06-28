@@ -47,11 +47,8 @@ Future<bool> checkPassword(String enteredPassword) async {
   final snapshot = await adminRef.child('password').get();
   if (snapshot.exists) {
     String encryptedPassword = snapshot.value.toString();
-    // String decryptedPassword = encrypter.decrypt64(encryptedPassword, iv: iv);
-    String decryptedPassword = encrypter.decrypt64(encryptedPassword, iv: iv);
 
-    // String decryptedPassword =
-    //     encrypter.decrypt(Encrypted.fromBase64(encryptedPassword), iv: iv);
+    String decryptedPassword = encrypter.decrypt64(encryptedPassword, iv: iv);
 
     return decryptedPassword == enteredPassword;
   } else {

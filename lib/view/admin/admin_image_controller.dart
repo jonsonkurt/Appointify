@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:appointify/permission_handler.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,7 +9,6 @@ import 'package:permission_handler/permission_handler.dart';
 class AdminProfileController with ChangeNotifier {
   final picker = ImagePicker();
 
-  // String? userID = FirebaseAuth.instance.currentUser?.uid;
   DatabaseReference ref =
       FirebaseDatabase.instance.ref().child('organizationChart');
   firebase_storage.FirebaseStorage storage =
@@ -27,8 +25,6 @@ class AdminProfileController with ChangeNotifier {
     if (pickedFile != null) {
       _image = XFile(pickedFile.path);
       notifyListeners();
-      // ignore: use_build_context_synchronously
-      // updloadImage(context);
     }
   }
 
@@ -39,8 +35,6 @@ class AdminProfileController with ChangeNotifier {
     if (pickedFile != null) {
       _image = XFile(pickedFile.path);
       notifyListeners();
-      // ignore: use_build_context_synchronously
-      // updloadImage(context);
     }
   }
 

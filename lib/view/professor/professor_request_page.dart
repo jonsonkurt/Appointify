@@ -352,20 +352,6 @@ class _RequestPageState extends State<RequestPage> {
                                       ),
                                     ),
 
-                                    // Padding(
-                                    //   padding: const EdgeInsets.only(top: 10),
-                                    //   child: Column(
-                                    //     mainAxisAlignment: MainAxisAlignment.start,
-                                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                                    //     children: [
-                                    //       Text(snapshot
-                                    //           .child('studentName')
-                                    //           .value
-                                    //           .toString()),
-                                    //       Text(snapshot.child('section').value.toString()),
-                                    //     ],
-                                    //   ),
-                                    // ),
                                     Container(
                                       alignment: Alignment.center,
                                       margin: EdgeInsets.only(
@@ -686,7 +672,7 @@ class _RequestPageState extends State<RequestPage> {
                                                                             borderRadius:
                                                                                 BorderRadius.all(Radius.circular(10)),
                                                                             borderSide:
-                                                                                BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
+                                                                                BorderSide(width: 1, color: Colors.black),
                                                                           ),
                                                                           hintText:
                                                                               'Select appointment time',

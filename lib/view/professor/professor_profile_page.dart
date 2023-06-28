@@ -498,11 +498,6 @@ class _ProfessorProfilePageState extends State<ProfessorProfilePage> {
                                                   ),
                                                 ),
                                               ),
-                                              // Container(
-                                              //   padding: EdgeInsets.all(10),
-                                              //   alignment: Alignment.center,
-                                              //   child: Text("${entry.value}")
-                                              //   ),
                                             ],
                                           ),
                                         ),

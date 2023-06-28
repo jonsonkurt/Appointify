@@ -260,8 +260,6 @@ class _OrgChartPage extends State<OrgChartPage> {
                     }
                   }
 
-                  // print("Nodes sa taas: $nodes");
-                  // var jsonNodes = schoolOrg["nodes"];
                   Map<String, dynamic> entry;
 
                   Map<int, List<Map<String, Object>>> groupedData = {};
@@ -281,8 +279,6 @@ class _OrgChartPage extends State<OrgChartPage> {
                       List<Map<String, dynamic>> rankData1 = groupedData[rank]!;
                       List<Map<String, dynamic>> rankData2 =
                           groupedData[rank + 1]!;
-
-                      // List<String> entries = [];
 
                       for (var entry1 in rankData1) {
                         for (var entry2 in rankData2) {
@@ -361,16 +357,13 @@ class _OrgChartPage extends State<OrgChartPage> {
                                       ..strokeWidth = 2
                                       ..style = PaintingStyle.stroke,
                                     builder: (Node node) {
-                                      // I can decide what widget should be shown here based on the id
                                       var a = node.key!.value as int?;
                                       List<Map<String, dynamic>> nodes =
                                           schoolOrg['nodes']!;
 
                                       var nodeValue = nodes.firstWhere(
                                           (element) => element["id"] == a);
-                                      // int index = a! - 1;
 
-                                      // print(imagesURL[index]);
                                       return rectangleWidget(
                                         nodeValue["label"] as String?,
                                         nodeValue["position1"] as String?,

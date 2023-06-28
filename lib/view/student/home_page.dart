@@ -159,7 +159,6 @@ class _HomePageState extends State<HomePage> {
         FirebaseDatabase.instance.ref('appointments');
     DatabaseReference employeesRef =
         FirebaseDatabase.instance.ref('professors/');
-    // appointmentsRef.orderByChild('status').equalTo("$userID-PENDING");
 
     return WillPopScope(
       onWillPop: () async {
@@ -413,10 +412,6 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                                 child: const Text("Accept"),
                                                 onPressed: () async {
-                                                  // String inputDate = snapshot
-                                                  //     .child("counteredDate")
-                                                  //     .value
-                                                  //     .toString();
                                                   DateTime dateTime = DateFormat(
                                                           'MMM dd, yyyy')
                                                       .parse(
@@ -424,10 +419,7 @@ class _HomePageState extends State<HomePage> {
                                                   String outputDate =
                                                       DateFormat('MM-dd-yyyy')
                                                           .format(dateTime);
-                                                  // String inputTime = snapshot
-                                                  //     .child("counteredTime")
-                                                  //     .value
-                                                  //     .toString();
+
                                                   DateTime time = DateFormat(
                                                           'h:mm a')
                                                       .parse(
@@ -500,8 +492,6 @@ class _HomePageState extends State<HomePage> {
                             // Status of request list
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width / 2.5,
-
-                              // height: MediaQuery.of(context).size.height / 2,
                               child: Card(
                                 elevation: 5,
                                 shape: RoundedRectangleBorder(
@@ -539,7 +529,7 @@ class _HomePageState extends State<HomePage> {
                                                       shape: BoxShape.circle,
                                                       border: Border.all(
                                                         color: const Color
-                                                                .fromARGB(
+                                                            .fromARGB(
                                                             255, 35, 35, 35),
                                                         width: 2,
                                                       )),
@@ -811,7 +801,7 @@ class _HomePageState extends State<HomePage> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 15,
                                                                     top: 15),
                                                             child: Container(
@@ -824,7 +814,8 @@ class _HomePageState extends State<HomePage> {
                                                                       border:
                                                                           Border
                                                                               .all(
-                                                                        color: const Color.fromARGB(
+                                                                        color: const Color
+                                                                            .fromARGB(
                                                                             255,
                                                                             35,
                                                                             35,
@@ -914,7 +905,7 @@ class _HomePageState extends State<HomePage> {
                                                                     1.8,
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             20),
                                                                 decoration:
@@ -1046,7 +1037,7 @@ class _HomePageState extends State<HomePage> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 15,
                                                                     top: 15),
                                                             child: Container(
@@ -1059,7 +1050,8 @@ class _HomePageState extends State<HomePage> {
                                                                       border:
                                                                           Border
                                                                               .all(
-                                                                        color: const Color.fromARGB(
+                                                                        color: const Color
+                                                                            .fromARGB(
                                                                             255,
                                                                             35,
                                                                             35,
@@ -1144,7 +1136,7 @@ class _HomePageState extends State<HomePage> {
                                                                     1.8,
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             20),
                                                                 decoration:
@@ -1315,7 +1307,7 @@ class _HomePageState extends State<HomePage> {
                                                             Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       left: 15,
                                                                       top: 15),
                                                               child: Container(
@@ -1327,7 +1319,8 @@ class _HomePageState extends State<HomePage> {
                                                                             .circle,
                                                                         border:
                                                                             Border.all(
-                                                                          color: const Color.fromARGB(
+                                                                          color: const Color
+                                                                              .fromARGB(
                                                                               255,
                                                                               35,
                                                                               35,
@@ -1429,7 +1422,7 @@ class _HomePageState extends State<HomePage> {
                                                                             .width /
                                                                         1.8,
                                                                     padding: const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             20),
                                                                     decoration:

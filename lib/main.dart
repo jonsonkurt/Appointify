@@ -15,7 +15,6 @@ Future<void> main() async {
     }
   });
 
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(const MyApp());
 }
@@ -27,9 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
-    // notificationPermission();
-    // cameraPermission();
-    // storagePermission();
+
     initFcm(context);
 
     return MaterialApp(

@@ -115,7 +115,6 @@ class _EditOrgChartPageState extends State<EditOrgChartPage> {
     var pos2 = selectedPosition2 ?? '';
     var pos3 = selectedPosition3 ?? '';
 
-    // print("NAME - - - -$name");
     String highestRank = "6";
     List<String> positions = [pos1, pos2, pos3, faculty];
     for (String position in positions) {
@@ -218,9 +217,7 @@ class _EditOrgChartPageState extends State<EditOrgChartPage> {
 
                       // Image
                       GestureDetector(
-                        onTap: () {
-                          // provider.pickImage(context, widget.projectUpdatesID);
-                        },
+                        onTap: () {},
                         child: Container(
                           height: 130,
                           width: 130,
